@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  title: "mitchhenderson.dev"
+  site-url: https://www.mitchhenderson.dev
+  description: "Sport, data, and science"
+  navbar:
+    pinned: true
+    right:
+      - text: "Home"
+        icon: file-person
+        file: index.qmd
+      - text: "Posts"
+        icon: file-text
+        file: posts.qmd
+      - text: "RSS"
+        icon: rss
+        href: posts.xml
+format:
+  html:
+    theme: 
+      light: litera
+    css: styles.css
+    highlight-style: eiffel
+
+editor: visual
+

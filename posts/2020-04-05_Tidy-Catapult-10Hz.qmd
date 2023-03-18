@@ -131,7 +131,7 @@ Change the `folder_name` variable to the exact folder name (in double quotes lik
 
 Highlight the entire code and press Ctrl + Enter on PC or Cmd + Return on a Mac. This will run the code and produce the output `.csv` file in your working directory.
 
-# Done!
+**Done!**
 
 Now the data is in *tidy* format and is easy to manipulate and analyse!
 

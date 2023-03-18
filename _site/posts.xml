@@ -246,7 +246,9 @@
 <p>Mitch</p>
 <p><br></p>
 <p><em>Thumbnail from <a href="https://www.catapultsports.com/">Catapult</a></em></p>
-<p><strong>Full code:</strong></p>
+</section>
+<section id="full-code" class="level1">
+<h1>Full code</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;"># Load packages -----------------------------------------------------------</span></span>
 <span id="cb5-2"></span>
@@ -725,7 +727,6 @@ df_location &lt;- XML:::xmlAttrsToDataFrame(xml["//Location"])</code></pre>
 <p>📩 <a href="mailto:heidi.thornton@goldcoastfc.com.au">heidi.thornton@goldcoastfc.com.au</a></p>
 <p><br></p>
 <p><em>Thumbnail image from <a href="https://www.apple.com/au/ios/health/">Apple.com</a></em></p>
-<p><em>Cover image from <a href="https://unsplash.com/photos/UunT05a_nkA">Unsplash.com</a> by <a href="https://unsplash.com/@alvarordesign">Alvaro Reyes</a></em></p>
 <p><br></p>
 </section>
 <section id="full-code" class="level1">
@@ -1741,7 +1742,10 @@ font-style: italic;">### ONLY MODIFY FROM HERE DOWN</span></span>
 <p><strong>Keep up to date with anything new from me on <a href="https://twitter.com/mitchhendo_">my Twitter</a>.</strong></p>
 <p>Cheers,</p>
 <p>Mitch</p>
-<p><strong>Full code:</strong></p>
+</section>
+</section>
+<section id="full-code" class="level1">
+<h1><strong>Full code</strong></h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="fu" style="color: #4758AB;">library</span>(tidyverse)</span>
 <span id="cb18-2"><span class="fu" style="color: #4758AB;">library</span>(lubridate)</span>
@@ -1945,7 +1949,6 @@ font-style: italic;">### ONLY MODIFY FROM HERE DOWN</span></span>
 
 
 </section>
-</section>
 
  ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</guid>
@@ -1961,8 +1964,6 @@ font-style: italic;">### ONLY MODIFY FROM HERE DOWN</span></span>
 
 
 
-<p>The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.</p>
-<!--more-->
 <section id="youtube-tutorial" class="level1">
 <h1>YouTube tutorial</h1>
 <p>You can see me going through all the steps outlined here in this video with some dummy data (note that I’ve simplified the file structure in the post since recording this video so it will be a little different; both work though):</p>
@@ -2066,10 +2067,7 @@ font-style: italic;">### ONLY MODIFY FROM HERE DOWN</span></span>
 <h2 class="anchored" data-anchor-id="step-4">Step 4</h2>
 <p>Change the <code>folder_name</code> variable to the exact folder name (in double quotes like is currently in the code) containing the <code>.csv</code> files you would like to combine and tidy.</p>
 <p>Highlight the entire code and press Ctrl + Enter on PC or Cmd + Return on a Mac. This will run the code and produce the output <code>.csv</code> file in your working directory.</p>
-</section>
-</section>
-<section id="done" class="level1">
-<h1>Done!</h1>
+<p><strong>Done!</strong></p>
 <p>Now the data is in <em>tidy</em> format and is easy to manipulate and analyse!</p>
 <p><img src="https://www.mitchhenderson.dev/img/tidy_gps.png" class="img-fluid"></p>
 <p><img src="https://www.mitchhenderson.dev/img/batman_thumbsup.gif" class="img-fluid"></p>
@@ -2080,6 +2078,7 @@ font-style: italic;">### ONLY MODIFY FROM HERE DOWN</span></span>
 <p><em>Thumbnail from <a href="www.catapultsports.com">catapultsports.com</a>.</em></p>
 
 
+</section>
 </section>
 
  ]]></description>

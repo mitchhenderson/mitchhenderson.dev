@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link" href="../index.html"><i class="bi bi-file-person" role="img">
 </i> 
- <span class="menu-text">About</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../posts.html"><i class="bi bi-file-text" role="img">
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Visualising Apple Health data |<br>Guest post by Heidi Thornton</h1>
@@ -193,17 +193,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       
     </div>
     
-  <div>
-    <div class="abstract">
-      <div class="abstract-title">Abstract</div>
-      Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.
-    </div>
-  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#accessing-apple-health-data" id="toc-accessing-apple-health-data" class="nav-link active" data-scroll-target="#accessing-apple-health-data">Accessing Apple Health data</a>
+  <ul class="collapse">
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  </ul></li>
+  <li><a href="#opening-apple-health-data" id="toc-opening-apple-health-data" class="nav-link" data-scroll-target="#opening-apple-health-data">Opening Apple Health data</a></li>
+  <li><a href="#why-do-this-in-r" id="toc-why-do-this-in-r" class="nav-link" data-scroll-target="#why-do-this-in-r">Why do this in R?</a>
+  <ul class="collapse">
+  <li><a href="#r-is-reproducible-microsoft-excel-is-not" id="toc-r-is-reproducible-microsoft-excel-is-not" class="nav-link" data-scroll-target="#r-is-reproducible-microsoft-excel-is-not">R is reproducible | Microsoft Excel is not</a></li>
+  </ul></li>
+  <li><a href="#import-the-data-into-r" id="toc-import-the-data-into-r" class="nav-link" data-scroll-target="#import-the-data-into-r">Import the data into R</a></li>
+  <li><a href="#view-the-data" id="toc-view-the-data" class="nav-link" data-scroll-target="#view-the-data">View the data</a></li>
+  <li><a href="#plotting-data" id="toc-plotting-data" class="nav-link" data-scroll-target="#plotting-data">Plotting data</a>
+  <ul class="collapse">
+  <li><a href="#daily-running-sessions" id="toc-daily-running-sessions" class="nav-link" data-scroll-target="#daily-running-sessions">Daily running sessions</a></li>
+  <li><a href="#weekly-running-volume" id="toc-weekly-running-volume" class="nav-link" data-scroll-target="#weekly-running-volume">Weekly running volume</a></li>
+  <li><a href="#energy-consumption" id="toc-energy-consumption" class="nav-link" data-scroll-target="#energy-consumption">Energy consumption</a></li>
+  <li><a href="#general-activity-data" id="toc-general-activity-data" class="nav-link" data-scroll-target="#general-activity-data">General activity data</a></li>
+  <li><a href="#step-data-manipulation" id="toc-step-data-manipulation" class="nav-link" data-scroll-target="#step-data-manipulation">Step data manipulation</a></li>
+  <li><a href="#heart-rate-data" id="toc-heart-rate-data" class="nav-link" data-scroll-target="#heart-rate-data">Heart rate data</a></li>
+  </ul></li>
+  <li><a href="#access-more-apple-health-info" id="toc-access-more-apple-health-info" class="nav-link" data-scroll-target="#access-more-apple-health-info">Access more Apple Health info</a></li>
+  <li><a href="#thanks-for-looking" id="toc-thanks-for-looking" class="nav-link" data-scroll-target="#thanks-for-looking">Thanks for looking! 😊</a></li>
+  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">Full code</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -603,7 +631,6 @@ df_location &lt;- XML:::xmlAttrsToDataFrame(xml["//Location"])</code></pre>
 <p>📩 <a href="mailto:heidi.thornton@goldcoastfc.com.au">heidi.thornton@goldcoastfc.com.au</a></p>
 <p><br></p>
 <p><em>Thumbnail image from <a href="https://www.apple.com/au/ios/health/">Apple.com</a></em></p>
-<p><em>Cover image from <a href="https://unsplash.com/photos/UunT05a_nkA">Unsplash.com</a> by <a href="https://unsplash.com/@alvarordesign">Alvaro Reyes</a></em></p>
 <p><br></p>
 </section>
 <section id="full-code" class="level1">
@@ -955,6 +982,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="mitchhenderson/mitchhenderson.dev" data-repo-id="R_kgDOJLIMQQ" data-category="Announcements" data-category-id="DIC_kwDOJLIMQc4CU9Pb" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 

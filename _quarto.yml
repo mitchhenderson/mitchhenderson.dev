@@ -14,12 +14,9 @@ website:
       - text: "Posts"
         icon: file-text
         file: posts.qmd
-      - text: "RSS"
-        icon: rss
-        href: posts.xml
 format:
   html:
-    theme: 
+    theme:
       light: litera
     css: styles.css
     highlight-style: eiffel

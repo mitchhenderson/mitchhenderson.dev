@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -146,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link" href="../index.html"><i class="bi bi-file-person" role="img">
 </i> 
- <span class="menu-text">About</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../posts.html"><i class="bi bi-file-text" role="img">
@@ -160,7 +160,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Tidying Catapult 10Hz export data</h1>
@@ -195,16 +195,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#youtube-tutorial" id="toc-youtube-tutorial" class="nav-link active" data-scroll-target="#youtube-tutorial">YouTube tutorial</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data">Tidy data</a></li>
+  <li><a href="#catapult-data" id="toc-catapult-data" class="nav-link" data-scroll-target="#catapult-data">Catapult data</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a>
+  <ul class="collapse">
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<p>The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.</p>
-<!--more-->
 <section id="youtube-tutorial" class="level1">
 <h1>YouTube tutorial</h1>
 <p>You can see me going through all the steps outlined here in this video with some dummy data (note that I’ve simplified the file structure in the post since recording this video so it will be a little different; both work though):</p>
@@ -308,10 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="step-4">Step 4</h2>
 <p>Change the <code>folder_name</code> variable to the exact folder name (in double quotes like is currently in the code) containing the <code>.csv</code> files you would like to combine and tidy.</p>
 <p>Highlight the entire code and press Ctrl + Enter on PC or Cmd + Return on a Mac. This will run the code and produce the output <code>.csv</code> file in your working directory.</p>
-</section>
-</section>
-<section id="done" class="level1">
-<h1>Done!</h1>
+<p><strong>Done!</strong></p>
 <p>Now the data is in <em>tidy</em> format and is easy to manipulate and analyse!</p>
 <p><img src="..\img/tidy_gps.png" class="img-fluid"></p>
 <p><img src="..\img/batman_thumbsup.gif" class="img-fluid"></p>
@@ -322,6 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Thumbnail from <a href="www.catapultsports.com">catapultsports.com</a>.</em></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -457,6 +472,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="mitchhenderson/mitchhenderson.dev" data-repo-id="R_kgDOJLIMQQ" data-category="Announcements" data-category-id="DIC_kwDOJLIMQc4CU9Pb" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 

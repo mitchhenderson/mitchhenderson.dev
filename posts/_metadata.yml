@@ -6,3 +6,21 @@ freeze: true
 
 # Enable banner style title blocks
 title-block-banner: true
+
+# Default for table of contents
+toc: true
+toc-title: Table of contents
+toc-location: left
+
+# Giscus comments
+comments:
+  giscus:
+    repo:  mitchhenderson/mitchhenderson.dev
+    repo-id: "R_kgDOJLIMQQ"
+    category: "Announcements"
+    category-id: "DIC_kwDOJLIMQc4CU9Pb"
+    mapping: "pathname"
+    reactions-enabled: true
+    loading: lazy
+    input-position: "bottom"
+    theme: "light"

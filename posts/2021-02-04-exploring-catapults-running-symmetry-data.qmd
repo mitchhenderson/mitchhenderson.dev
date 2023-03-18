@@ -252,7 +252,7 @@ Mitch
 
 *Thumbnail from [Catapult](https://www.catapultsports.com/)*
 
-**Full code:**
+# Full code
 
 ```{r}
 #| eval = FALSE,

@@ -2,10 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.mitchhenderson.dev/index.html</loc>
-    <lastmod>2023-03-18T10:02:50.186Z</lastmod>
+    <lastmod>2023-03-18T10:57:03.165Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts.html</loc>
-    <lastmod>2023-03-18T10:02:55.941Z</lastmod>
+    <lastmod>2023-03-18T10:57:04.424Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</loc>
+    <lastmod>2023-03-18T10:54:35.141Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</loc>
+    <lastmod>2023-03-18T10:57:09.596Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</loc>
+    <lastmod>2023-03-18T10:56:47.559Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</loc>
+    <lastmod>2023-03-18T10:55:33.126Z</lastmod>
   </url>
 </urlset>

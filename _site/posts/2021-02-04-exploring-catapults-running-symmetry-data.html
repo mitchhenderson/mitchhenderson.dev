@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -149,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link" href="../index.html"><i class="bi bi-file-person" role="img">
 </i> 
- <span class="menu-text">About</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../posts.html"><i class="bi bi-file-text" role="img">
@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Exploring Catapult’s running imbalance data</h1>
@@ -198,8 +198,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#step-1-export-from-openfield-cloud" id="toc-step-1-export-from-openfield-cloud" class="nav-link active" data-scroll-target="#step-1-export-from-openfield-cloud">Step 1 | Export from Openfield Cloud</a>
+  <ul class="collapse">
+  <li><a href="#create-a-parameter-group" id="toc-create-a-parameter-group" class="nav-link" data-scroll-target="#create-a-parameter-group">Create a parameter group</a></li>
+  <li><a href="#select-sessions-to-export" id="toc-select-sessions-to-export" class="nav-link" data-scroll-target="#select-sessions-to-export">Select sessions to export</a></li>
+  <li><a href="#download-exports" id="toc-download-exports" class="nav-link" data-scroll-target="#download-exports">Download exports</a></li>
+  </ul></li>
+  <li><a href="#step-2-import-into-rstudio" id="toc-step-2-import-into-rstudio" class="nav-link" data-scroll-target="#step-2-import-into-rstudio">Step 2 | Import into RStudio</a>
+  <ul class="collapse">
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load packages</a></li>
+  <li><a href="#import-files" id="toc-import-files" class="nav-link" data-scroll-target="#import-files">Import files</a></li>
+  </ul></li>
+  <li><a href="#step-3-visualise-using-ggplot2" id="toc-step-3-visualise-using-ggplot2" class="nav-link" data-scroll-target="#step-3-visualise-using-ggplot2">Step 3 | Visualise using {ggplot2}</a></li>
+  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">Full code</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -432,7 +454,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Mitch</p>
 <p><br></p>
 <p><em>Thumbnail from <a href="https://www.catapultsports.com/">Catapult</a></em></p>
-<p><strong>Full code:</strong></p>
+</section>
+<section id="full-code" class="level1">
+<h1>Full code</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages -----------------------------------------------------------</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -637,6 +661,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="mitchhenderson/mitchhenderson.dev" data-repo-id="R_kgDOJLIMQQ" data-category="Announcements" data-category-id="DIC_kwDOJLIMQc4CU9Pb" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 

@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -149,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link" href="../index.html"><i class="bi bi-file-person" role="img">
 </i> 
- <span class="menu-text">About</span></a>
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../posts.html"><i class="bi bi-file-text" role="img">
@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Making better visualisations using ggplot2 in R</h1>
@@ -195,17 +195,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       
     </div>
     
-  <div>
-    <div class="abstract">
-      <div class="abstract-title">Abstract</div>
-      Great visualisations help communicate your message more clearly. This post shows you an example of my process.
-    </div>
-  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#step-1-data-prep" id="toc-step-1-data-prep" class="nav-link active" data-scroll-target="#step-1-data-prep">Step 1 | Data prep</a>
+  <ul class="collapse">
+  <li><a href="#collate-the-data" id="toc-collate-the-data" class="nav-link" data-scroll-target="#collate-the-data">Collate the data</a></li>
+  <li><a href="#find-a-logo" id="toc-find-a-logo" class="nav-link" data-scroll-target="#find-a-logo">Find a logo</a></li>
+  </ul></li>
+  <li><a href="#step-2-load-packages-and-import-data" id="toc-step-2-load-packages-and-import-data" class="nav-link" data-scroll-target="#step-2-load-packages-and-import-data">Step 2 | Load packages and import data</a>
+  <ul class="collapse">
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R packages</a></li>
+  <li><a href="#add-metadata" id="toc-add-metadata" class="nav-link" data-scroll-target="#add-metadata">Add metadata</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  </ul></li>
+  <li><a href="#step-3-create-plot" id="toc-step-3-create-plot" class="nav-link" data-scroll-target="#step-3-create-plot">Step 3 | Create plot</a>
+  <ul class="collapse">
+  <li><a href="#prep" id="toc-prep" class="nav-link" data-scroll-target="#prep">Prep</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
+  </ul></li>
+  <li><a href="#step-4-saving-and-adding-the-logo" id="toc-step-4-saving-and-adding-the-logo" class="nav-link" data-scroll-target="#step-4-saving-and-adding-the-logo">Step 4 | Saving and adding the logo</a>
+  <ul class="collapse">
+  <li><a href="#saving-the-plot" id="toc-saving-the-plot" class="nav-link" data-scroll-target="#saving-the-plot">Saving the plot</a></li>
+  <li><a href="#adding-the-logo" id="toc-adding-the-logo" class="nav-link" data-scroll-target="#adding-the-logo">Adding the logo</a></li>
+  </ul></li>
+  <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code"><strong>Full code</strong></a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -994,7 +1019,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Keep up to date with anything new from me on <a href="https://twitter.com/mitchhendo_">my Twitter</a>.</strong></p>
 <p>Cheers,</p>
 <p>Mitch</p>
-<p><strong>Full code:</strong></p>
+</section>
+</section>
+<section id="full-code" class="level1">
+<h1><strong>Full code</strong></h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
@@ -1198,7 +1226,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 </section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1333,6 +1360,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="mitchhenderson/mitchhenderson.dev" data-repo-id="R_kgDOJLIMQQ" data-category="Announcements" data-category-id="DIC_kwDOJLIMQc4CU9Pb" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 

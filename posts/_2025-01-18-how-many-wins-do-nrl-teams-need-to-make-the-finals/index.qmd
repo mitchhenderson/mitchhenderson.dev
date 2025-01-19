@@ -42,15 +42,13 @@ theme_set(theme_minimal() +
                   panel.grid.minor = element_blank()))
 ```
 
-I scraped 10 seasons of match result data from Wikipedia (excluding shortened 2020 season).[^2]
-
-[^2]: I might do a follow up post about how I did this. Let me know if you'd be interested.
+I scraped 10 seasons of match result data from Wikipedia (excluding shortened 2020 season).
 
 ```{r}
 #| output: false
 
 # Import match results for 10 seasons (up to 2024)
-import <- read_csv("2014-2024_nrl_match_results.csv")
+import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/_2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv")
 ```
 
 ```{r}

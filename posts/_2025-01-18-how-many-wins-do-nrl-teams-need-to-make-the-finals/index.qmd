@@ -10,7 +10,7 @@ format:
   code-tools: true
 ---
 
-It's pretty common for sports teams to set themselves a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal though, is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 13-win season (out of 24) is enough to qualify some years, but not enough in others. So how many wins do teams need to be sure? Confident? Possible?
+It's pretty common for sports teams to set themselves a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal though, is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 13-win season (out of 24) is enough to qualify some years, but not enough in others. So how many wins do teams need to be confident they'll qualify?
 
 [^1]: National Rugby League
 
@@ -42,7 +42,7 @@ theme_set(theme_minimal() +
                   panel.grid.minor = element_blank()))
 ```
 
-I scraped 10 seasons of match result data from Wikipedia.[^2]
+I scraped 10 seasons of match result data from Wikipedia (excluding shortened 2020 season).[^2]
 
 [^2]: I might do a follow up post about how I did this. Let me know if you'd be interested.
 
@@ -57,7 +57,7 @@ import <- read_csv("2014-2024_nrl_match_results.csv")
 DT::datatable(import)
 ```
 
-I calculated the points differential for each match and created binary indicator columns for the winning/losing team and draws. The distribution of points differentials is interesting.
+I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. The distribution of points differentials is *interesting*.
 
 ```{r}
 data <- import |>
@@ -65,6 +65,10 @@ data <- import |>
          home_win = if_else(points_differential > 0, 1, 0),
          away_win = if_else(points_differential < 0, 1, 0),
          draw = if_else(points_differential == 0, 1, 0))
+
+average_10yr_points_diff <- data |>
+  pull(points_differential) |> 
+  mean()
 
 data |>
   ggplot(aes(x = points_differential)) +
@@ -74,6 +78,18 @@ data |>
        subtitle = "This makes sense given tries (4) and goals (2) are by far the most common ways to score points",
        caption = socials) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  annotate("segment", 
+           y = 0, 
+           yend = 105, 
+           x = average_10yr_points_diff, 
+           xend = average_10yr_points_diff, 
+           linetype = "dashed",
+           colour = "grey50") +
+  geom_richtext(data = tibble(y = 100, 
+                              x = average_10yr_points_diff,
+                              label = glue::glue("**{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)")),
+                aes(x, y, label = label),
+                hjust = 0, fill = NA, label.color = NA, size = 2.5, colour = "grey40") +
   theme(panel.grid.major.x = element_blank(),
         axis.line.x = element_line(colour = "grey20"))
 ```

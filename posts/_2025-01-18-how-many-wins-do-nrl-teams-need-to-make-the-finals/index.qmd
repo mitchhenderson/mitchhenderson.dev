@@ -10,11 +10,9 @@ format:
   code-tools: true
 ---
 
-It's pretty common for sports teams to set themselves a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal though, is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 13-win season (out of 24) is enough to qualify some years, but not enough in others. So how many wins do teams need to be confident they'll qualify?
+It's pretty common for sports teams to set themselves a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal though, is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 13-win season (from 24 games) is enough to qualify some years, but not enough in others. So how many wins do teams need to be confident they'll qualify?
 
 [^1]: National Rugby League
-
-We can calculate the probability of a team making the finals based on how many games they won in a few ways.
 
 ```{r}
 #| output: false
@@ -28,7 +26,6 @@ library(ggdist)
 library(data.table)
 library(ggtext)
 library(gt)
-library(ggforce)
 
 colours <- c("#E31937", "#134A8E")
 
@@ -43,7 +40,7 @@ theme_set(theme_minimal() +
                   panel.grid.minor = element_blank()))
 ```
 
-I scraped 10 seasons of match result data from Wikipedia (excluding shortened 2020 season).
+To explore this, I scraped 10 seasons of match result data from Wikipedia (excluding the shortened 2020 season) and saved the results in a file.
 
 ```{r}
 #| output: false
@@ -56,7 +53,7 @@ import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhender
 DT::datatable(import)
 ```
 
-I then calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the dataset.
+I then calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season, for each year in the data set.
 
 ```{r}
 data <- import |>
@@ -94,6 +91,8 @@ observed_summary_results <- league_tables(data)
 
 DT::datatable(observed_summary_results)
 ```
+
+This can then be visualised as a dot plot. Notice how one team won 10 games and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games but didn't qualify (red circle at the bottom of the 13 wins column).
 
 ```{r}
 observed_summary_results |>
@@ -155,6 +154,8 @@ observed_summary_results |>
         axis.ticks = element_blank(),
         panel.grid = element_blank())
 ```
+
+The simplest approach to estimating
 
 ```{r}
 average_10yr_points_diff <- data |>

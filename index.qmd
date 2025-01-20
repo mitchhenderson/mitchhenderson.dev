@@ -4,12 +4,15 @@ image: headshot.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/mitchhendo_
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/mitch-henderson-9761b8114/
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/profile/mitchhenderson.bsky.social
+    - icon: github
+      text: Github
+      href: https://github.com/mitchhenderson
 ---
 
 Sport 🏅, data 💻, and science 👨‍🔬

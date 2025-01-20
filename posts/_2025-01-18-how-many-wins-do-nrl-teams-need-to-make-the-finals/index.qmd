@@ -28,6 +28,7 @@ library(ggdist)
 library(data.table)
 library(ggtext)
 library(gt)
+library(ggforce)
 
 colours <- c("#E31937", "#134A8E")
 
@@ -55,7 +56,7 @@ import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhender
 DT::datatable(import)
 ```
 
-I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. The distribution of points differentials is *interesting*.
+I then calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the dataset.
 
 ```{r}
 data <- import |>
@@ -64,6 +65,98 @@ data <- import |>
          away_win = if_else(points_differential < 0, 1, 0),
          draw = if_else(points_differential == 0, 1, 0))
 
+# Calculate final competition ladder for each season -------------------
+
+league_tables <- function(df){
+  df <- df |>
+    summarise(home_wins = sum(home_win),
+              home_for_and_against = sum(points_differential),
+              .by = c(season, home)) |>
+    left_join(df |> 
+                summarise(away_wins = sum(away_win),
+                          away_for_and_against = sum(points_differential) * -1,
+                          .by = c(season, away)),
+              by = join_by(season, home == away)) |>
+    left_join(df |> 
+                summarise(draw = sum(draw), 
+                          .by = c(season, home)),
+              by = join_by(season, home)) |>
+    mutate(total_wins = home_wins + away_wins + draw * 0.5,
+           for_and_against = home_for_and_against + away_for_and_against) |>
+    select(season, team = home, total_wins, for_and_against) |>
+    arrange(season, -total_wins, -for_and_against) |>
+    mutate(regular_season_position = row_number(),
+           made_finals = if_else(regular_season_position <= 8, 1, 0),
+           .by = season)
+}
+
+observed_summary_results <- league_tables(data)
+
+DT::datatable(observed_summary_results)
+```
+
+```{r}
+observed_summary_results |>
+  mutate(made_finals = factor(made_finals)) |>
+  arrange(made_finals) |>
+  ggplot(aes(x = total_wins, fill = made_finals, colour = made_finals)) +
+  geom_dotsinterval(group = NA) +
+  annotate("segment", 
+           x = 1.5, 
+           xend = 1.5, 
+           y = 0.075, 
+           yend = 0.5,
+           linewidth = 0.2,
+           colour = "grey60") +
+  geom_richtext(data = tibble(y = 0.5, 
+                              x = 1.5,
+                              label = glue::glue("**2016 Newcastle Knights**<br>1 win, 1 draw")),
+                aes(x, y, label = label),
+                family = "Myriad Pro",
+                hjust = 0, 
+                vjust = 1, 
+                fill = NA, 
+                label.color = NA, 
+                size = 3, 
+                colour = "grey40") +
+  annotate("segment", 
+           x = 21, 
+           xend = 21, 
+           y = 0.135, 
+           yend = 0.5,
+           linewidth = 0.2,
+           colour = "grey60") +
+  geom_richtext(data = tibble(y = 0.5, 
+                              x = 21,
+                              label = glue::glue("**2021 Melbourne Storm<br>& Penrith Panthers**<br>Both with 21 wins")),
+                aes(x, y, label = label),
+                family = "Myriad Pro",
+                hjust = 0, 
+                vjust = 1, 
+                fill = NA, 
+                label.color = NA, 
+                size = 3, 
+                colour = "grey40") +
+  labs(x = "Matches won",
+       title = "**NRL teams have needed as low as 10 and as high as 14 wins to make<br>the finals over the last 10 years**",
+       subtitle = glue::glue("Each circle is one team's season that either <span style='color: {colours[1]}; font-size:12pt'>**didn't make the finals**</span> or <span style='color: {colours[2]}; font-size:12pt'>**made the finals**</span>. 
+                             <br>Teams with the same number of wins are stacked on top of each other."),
+       caption = socials) +
+  scale_x_continuous(limits = c(1.5, 23.5),
+                     breaks = seq(1, 24, 1)) +
+  scale_y_continuous(limits = c(0, 1),
+                     expand = expansion(mult = c(0, 0.05))) +
+  scale_fill_manual(values = colours) +
+  scale_colour_manual(values = colours) +
+  theme(legend.position = "none",
+        axis.line.x = element_line(colour = "grey20"),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())
+```
+
+```{r}
 average_10yr_points_diff <- data |>
   pull(points_differential) |> 
   mean()

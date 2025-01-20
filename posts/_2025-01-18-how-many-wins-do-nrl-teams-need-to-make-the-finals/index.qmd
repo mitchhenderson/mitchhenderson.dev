@@ -155,7 +155,25 @@ observed_summary_results |>
         panel.grid = element_blank())
 ```
 
-The simplest approach to estimating
+There are thoretically a few ways to go about getting a probability for making the finals based on a given number of wins.
+
+### Analytically specify the probability
+
+If this is possible, god knows I don't know how to do it. Given the complexity of the competition structure with all its dependencies and constraints, specifying the true mathematical probability would be an extremely high-dimensional optimisation problem. Even if it is possible, it would require a very sophisticated and computationally intensive solution.[^2]
+
+[^2]: If anyone knows if / how this can be done, let me know!
+
+### Simply calculate the proportion of teams that qualified given each win total from the data set
+
+This is not a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. As an example, the data we have shows no teams with 11 wins qualifying for the finals (out of 8 times a team has won 11 games in our data). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e. random variability) that we happen to have observed in our sample. Evidence of this is that a team with only 10 wins qualified.
+
+### Fitting a linear model to the data
+
+This is also not a good idea. On the surface, a logistic regression model sounds okay given we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transfomed outcome. As a result, the model assigns non-zero probabilities for making the finals to win-loss records that are mathematically impossible for a team to qualify. These simpler statistical models that rely on assumptions to fit smooth curves through data don't have awareness of the competition constraints (like for one team to win, the other has to lose) to generate valid and accurate probability estimates.
+
+### Monte Carlo simulation
+
+These are a class of methods that basically use randomness to solve problems. They allow us to skip most of the hard maths and use computer simulation to get practically the same answers that could very painfully have been calculated analytically anyway. The idea is that we define a data generating process that mimics the way that data is generated in the real world, and then let the power of computers generate a huge amount of data. This lets us explore tens or hundreds of thousand (or more) of possible season outcomes to give us a more stable estimate of the probability of making the finals for each win-loss record. This is especially important for edge cases and unusual season results that are unlikely to have occurred in a small sample of historical data like ours. The beauty is that we can build in all the dependencies and constraints of the competition structure so we know the simulated data generated will adhere to it. It will capture the non-linear and threshold effects that exist as a result of the competition format. With enough simulated seasons, we can simply count the proportion of teams that qualify for a given number of wins to estimate the probability. The law of large numbers tells us this converges to the true probability.
 
 ```{r}
 average_10yr_points_diff <- data |>

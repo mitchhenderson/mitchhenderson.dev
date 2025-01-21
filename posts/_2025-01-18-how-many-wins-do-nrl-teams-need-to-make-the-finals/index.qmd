@@ -204,9 +204,67 @@ The output is one randomly simulated season draw.
 DT::datatable(simulate_season_draw())
 ```
 
-This draw now needs results for each match. To do this we need to make an assumption about how we can most realistically generate results for matches between these teams. The points differential between teams in a match determines who wins and loses
+Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
 
-I need a measure of each teams strength. This gives us a way to weight the probability of one team winning against another. There are many ways to approach this, but for simplicity I will just use the Sportsbet betting odds for winning the 2025 competition.
+```{r}
+average_10yr_points_diff <- data |>
+  pull(points_differential) |> 
+  mean()
+
+data |>
+  ggplot(aes(x = points_differential)) +
+  geom_histogram(binwidth = 1, colour = "white", fill = colours[2]) +
+  labs(y = "Number of games", x = "Points differential",
+       title = "**Most games end with an even  points differential**",
+       subtitle = "This makes sense given tries (4) and goals (2) are by far the most common ways to score points",
+       caption = socials) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05)),
+                     breaks = seq(0, 100, 25)) +
+  annotate("segment", 
+           y = 0, 
+           yend = 110, 
+           x = average_10yr_points_diff, 
+           xend = average_10yr_points_diff, 
+           linetype = "dashed",
+           linewidth = 0.4,
+           colour = "grey50") +
+  geom_richtext(data = tibble(y = 100, 
+                              x = average_10yr_points_diff,
+                              label = glue::glue("**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)")),
+                aes(x, y, label = label),
+                family = "Myriad Pro",
+                hjust = 0, 
+                fill = NA, 
+                label.color = NA, 
+                size = 3, 
+                colour = "grey40") +
+  geom_richtext(data = tibble(y = 61, 
+                              x = 45,
+                              label = glue::glue("Home team<br>win")),
+                aes(x, y, label = label),
+                family = "Myriad Pro",
+                hjust = 0.5, 
+                fill = NA, 
+                label.color = NA, 
+                size = 6, 
+                colour = "grey60") +
+  geom_richtext(data = tibble(y = 61, 
+                              x = -45,
+                              label = glue::glue("Away team<br>win")),
+                aes(x, y, label = label),
+                family = "Myriad Pro",
+                hjust = 0.5, 
+                fill = NA, 
+                label.color = NA, 
+                size = 6, 
+                colour = "grey60") +
+  theme(panel.grid.major.x = element_blank(),
+        axis.line.x = element_line(colour = "grey20"))
+```
+
+This is an *interesting* distribution. The points differentials on even numbers are **far** more frequently observed than odd numbered differentials. This is an influence of competition constraints. Tries (4) and goals (2) are far more common than field goals (1), so it's expected that even numbered point differences are more likely to occur. Out of interest, I also added the average points differential across the data set as an annotation in the visual (+2.4). This is the expected advantage of playing at home over the last \~10 years.
+
+Given this distribution of points differentials is so unique, I will randomly sample from it to fill the match results in my simulated season rather than trying to approximate it with a theoretical distribution to sample from. I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each teams strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet betting odds for winning the 2025 competition.
 
 ```{r}
 # Sportsbet odds for to win 2025 GF
@@ -246,31 +304,67 @@ sportsbet_implied_probabilities <- sportsbet_odds |>
   select(-sportsbet_odds)
 ```
 
-```{r}
-average_10yr_points_diff <- data |>
-  pull(points_differential) |> 
-  mean()
+Now with these relative team strength values, I can define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution.
 
-data |>
-  ggplot(aes(x = points_differential)) +
-  geom_histogram(binwidth = 1, colour = "white", fill = colours[2]) +
-  labs(y = "Number of games", x = "Points differential",
-       title = "**Most games end with an even  points differential**",
-       subtitle = "This makes sense given tries (4) and goals (2) are by far the most common ways to score points",
-       caption = socials) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
-  annotate("segment", 
-           y = 0, 
-           yend = 105, 
-           x = average_10yr_points_diff, 
-           xend = average_10yr_points_diff, 
-           linetype = "dashed",
-           colour = "grey50") +
-  geom_richtext(data = tibble(y = 100, 
-                              x = average_10yr_points_diff,
-                              label = glue::glue("**{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)")),
-                aes(x, y, label = label),
-                hjust = 0, fill = NA, label.color = NA, size = 2.5, colour = "grey40") +
-  theme(panel.grid.major.x = element_blank(),
-        axis.line.x = element_line(colour = "grey20"))
+There are some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). **Secondly, home/away advantage is not accounted for**. Thirdly, within home team wins or away team wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality. The winning amount is completely random within the positive points differentials in the data set. Only whether the home or away team wins considers the team strength values. I also don't think this threatens the validity of the results (only team for and against will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+
+```{r}
+# Function to simulate a single match
+simulate_match <- function(home_strength, away_strength, diff_vector) {
+ 
+   # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
+  home_win_prob <- home_strength / (home_strength + away_strength)
+  
+  # Compare to uniform distribution to determine if it's a home win or away win
+  is_home_win <- runif(1) < home_win_prob
+  
+  # Sample the differential
+  if (is_home_win) {
+    diff <- sample(diff_vector[diff_vector > 0], 1)
+  } else {
+    diff <- -sample(diff_vector[diff_vector > 0], 1)
+  }
+  
+  return(diff)
+}
+```
+
+An example showing how this works is here we generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance. Notice how
+
+```{r}
+map2(
+  .x = rep(0.05, 15), 
+  .y = rep(0.20, 15), 
+  ~simulate_match(.x, .y, data$points_differential)
+  ) |> 
+  unlist()
+```
+
+Now we have a function
+
+```{r}
+seasons_to_simulate <- 1000
+
+# Set up parallel processing
+plan(multisession, workers = detectCores())
+
+# Simulate full seasons with results
+simulated_seasons <- tibble(
+  season = 1:seasons_to_simulate,
+  results = future_map(season, ~ simulate_season_draw(),
+                       .options = furrr_options(seed = TRUE))) |>
+  unnest(results) |>
+  left_join(sportsbet_implied_probabilities, by = join_by(home == team)) |>
+  rename(home_implied_probability = implied_probabilities) |>
+  left_join(sportsbet_implied_probabilities, by = join_by(away == team)) |>
+  rename(away_implied_probability = implied_probabilities) |>
+  mutate(
+    points_differential = pmap_dbl(
+      list(home_implied_probability, away_implied_probability),
+      ~ simulate_match(..1, ..2, data$points_differential)
+    ),
+    home_win = if_else(points_differential > 0, 1, 0),
+    away_win = if_else(points_differential < 0, 1, 0),
+    draw = if_else(points_differential == 0, 1, 0)
+  )
 ```

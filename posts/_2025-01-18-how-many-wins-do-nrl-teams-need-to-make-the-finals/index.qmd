@@ -296,7 +296,7 @@ Then we can convert the odds to an implied probability of winning the competitio
 ```{r}
 # Get a team strength measure (based on Sportsbet odds to win premiership)
 odds_to_probabilities <- function(odds) {
-  probabilities <- 1 / odds
+  probabilities <- (1 / odds) / sum(1 / odds)
 }
 
 sportsbet_implied_probabilities <- sportsbet_odds |>
@@ -307,6 +307,38 @@ sportsbet_implied_probabilities <- sportsbet_odds |>
 Now with these relative team strength values, I can define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution.
 
 There are some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). **Secondly, home/away advantage is not accounted for**. Thirdly, within home team wins or away team wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality. The winning amount is completely random within the positive points differentials in the data set. Only whether the home or away team wins considers the team strength values. I also don't think this threatens the validity of the results (only team for and against will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+
+```{r}
+# We know that for equally matched teams:
+# 1. Without home advantage, each team has 50% chance of winning
+# 2. Historical data shows home teams actually win 55.8% of the time
+# 3. We need a multiplier that turns 50-50 into 55.8-44.2
+
+# Function to calculate win probability for equal teams given a multiplier
+calc_win_prob <- function(multiplier) {
+  # Both teams start with equal strength
+  home_strength <- 0.5
+  away_strength <- 0.5
+  
+  # Apply multiplier to home team
+  adjusted_home <- home_strength * multiplier
+  
+  # Calculate resulting probability
+  prob <- adjusted_home / (adjusted_home + away_strength)
+  return(prob)
+}
+
+# Function to find multiplier that gives desired win probability
+find_optimal_multiplier <- function(target_prob) {
+  optimize(function(m) abs(calc_win_prob(m) - target_prob), 
+          interval = c(1, 2),  # Search between 1-2x multiplier 
+          maximum = FALSE)$minimum
+}
+
+# Find multiplier that produces observed 55.8% home win rate
+optimal_multiplier <- find_optimal_multiplier(0.5576132)
+print(optimal_multiplier)  # Returns ~1.26
+```
 
 ```{r}
 # Function to simulate a single match

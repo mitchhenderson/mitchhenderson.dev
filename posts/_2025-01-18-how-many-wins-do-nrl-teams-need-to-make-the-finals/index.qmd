@@ -25,17 +25,38 @@ library(igraph)
 library(ggdist)
 library(data.table)
 library(ggtext)
+library(gganimate)
+library(extrafont)
 library(gt)
 
 colours <- c("#E31937", "#134A8E")
 
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
+font_hoist <- function(family, silent = FALSE) {
+  font_specs <- systemfonts::system_fonts() %>%
+    dplyr::filter(family == .env[["family"]]) %>%
+    dplyr::mutate(family = paste(family, style)) %>% # Directly reference column names
+    dplyr::select(plain = path, name = family)       # Use direct column references
+  
+  purrr::pwalk(as.list(font_specs), systemfonts::register_font)
+  
+  if (!silent) {
+    message(paste0(
+      "Hoisted ", nrow(font_specs), " variants:\n",
+      paste(font_specs$name, collapse = "\n")
+    ))
+  }
+}
+
+font_hoist("Myriad Pro")
+
 theme_set(theme_minimal() +
-            theme(text = element_text(family = "Myriad Pro"),
+            theme(text = element_text(family = "Myriad Pro Regular"),
                   plot.caption = element_markdown(),
-                  plot.title = element_markdown(size = 18),
-                  plot.subtitle = element_markdown(),
+                  plot.title = element_markdown(family = "Myriad Pro Bold Condensed", 
+                                                size = 18),
+                  plot.subtitle = element_markdown(family = "Myriad Pro Regular"),
                   plot.title.position = "plot",
                   panel.grid.minor = element_blank()))
 ```
@@ -111,14 +132,14 @@ observed_summary_results |>
            colour = "grey60") +
   geom_richtext(data = tibble(y = 0.5, 
                               x = 1.5,
-                              label = glue::glue("**2016 Newcastle Knights**<br>1 win, 1 draw")),
+                              label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2016 Newcastle Knights</span><br>1 win, 1 draw")),
                 aes(x, y, label = label),
-                family = "Myriad Pro",
+                family = "Myriad Pro Regular",
                 hjust = 0, 
                 vjust = 1, 
                 fill = NA, 
                 label.color = NA, 
-                size = 3, 
+                size = 2.5, 
                 colour = "grey40") +
   annotate("segment", 
            x = 21, 
@@ -129,19 +150,18 @@ observed_summary_results |>
            colour = "grey60") +
   geom_richtext(data = tibble(y = 0.5, 
                               x = 21,
-                              label = glue::glue("**2021 Melbourne Storm<br>& Penrith Panthers**<br>Both with 21 wins")),
+                              label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2021 Melbourne<br>Storm & Penrith<br>Panthers</span><br>Both with 21 wins")),
                 aes(x, y, label = label),
-                family = "Myriad Pro",
+                family = "Myriad Pro Regular",
                 hjust = 0, 
                 vjust = 1, 
                 fill = NA, 
                 label.color = NA, 
-                size = 3, 
+                size = 2.5, 
                 colour = "grey40") +
   labs(x = "Matches won",
        title = "**NRL teams have needed as low as 10 and as high as 14 wins to make<br>the finals over the last 10 years**",
-       subtitle = glue::glue("Each circle is one team's season that either <span style='color: {colours[1]}; font-size:12pt'>**didn't make the finals**</span> or <span style='color: {colours[2]}; font-size:12pt'>**made the finals**</span>. 
-                             <br>Teams with the same number of wins are stacked on top of each other."),
+       subtitle = glue::glue("Each circle is one team's season that either <span style='color: {colours[1]}; font-size:11pt; font-family:Myriad Pro'>**didn't make the finals**</span> or <span style='color: {colours[2]}; font-size:11pt; font-family:Myriad Pro'>**made the finals**</span>.<br>Teams with the same number of wins are stacked on top of each other."),
        caption = socials) +
   scale_x_continuous(limits = c(1.5, 23.5),
                      breaks = seq(1, 24, 1)) +
@@ -234,9 +254,9 @@ data |>
            linetype = "dashed",
            linewidth = 0.4,
            colour = "grey50") +
-  geom_richtext(data = tibble(y = 100, 
+  geom_richtext(data = tibble(y = 102, 
                               x = average_10yr_points_diff,
-                              label = glue::glue("**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)")),
+                              label = glue::glue("<span style='font-family:Myriad Pro Regular'>**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)</span>")),
                 aes(x, y, label = label),
                 family = "Myriad Pro",
                 hjust = 0, 
@@ -400,7 +420,7 @@ There are again some simplifications at play here. Firstly, draws/ties are not c
 Now we have a function to simulate a match, we need to use it populate the random season draws that we learned how to create earlier with match results. We don't just want one or ten seasons simulated though. We want ten thousand.
 
 ```{r}
-seasons_to_simulate <- 10000
+seasons_to_simulate <- 1000
 
 # Set up parallel processing
 plan(multisession, workers = detectCores())
@@ -428,4 +448,86 @@ simulated_seasons <- tibble(
 DT::datatable(slice_head(n = 100, simulated_seasons))
 ```
 
-This takes a little bit of time to run because it's generating 10,000 random season draws and then simulating results for all 2,040,000 games.
+This takes a minute or two to run because it's generating 10,000 random season draws and then simulating results for all 2,040,000 games.
+
+### Exploring the results
+
+We can use the function we defined earlier to summarise the match level simulation results into an end-of-season ladder for each of the 10,000 seasons.
+
+```{r}
+simulation_summary_results <- competition_table(simulated_seasons)
+
+DT::datatable(slice_head(n = 100, simulation_summary_results))
+```
+
+```{r}
+probabilities_simulated <- simulation_summary_results |>
+  summarise(count_made_finals = sum(made_finals),
+            total_count = n(),
+            .by = total_wins) |>
+  mutate(percentage = round(count_made_finals / total_count, 3)) |>
+  arrange(-total_wins)
+```
+
+```{r}
+simulation_summary_results |>
+  filter(regular_season_position == 8) |>
+  mutate(expected_wins = cumsum(total_wins) / seq_along(total_wins)) |>
+  ggplot(aes(x = seq_along(expected_wins), y = expected_wins)) +
+  geom_line(color = "blue") +
+  labs(title = "**Cumulative Mean of Total Wins**",
+       x = "Number of Observations",
+       y = "Cumulative Mean of Total Wins",
+       caption = socials)
+```
+
+```{r}
+running_mean <- function(x) {
+  cumsum(x) / seq_along(x)
+}
+
+probs_animated_plot <- simulation_summary_results |>
+  filter(total_wins %in% c(10:15), 
+         season <= 1000) |>
+  mutate(total_wins = factor(
+    total_wins, 
+    levels = sort(unique(total_wins), 
+                  decreasing = TRUE)),
+    facets = glue::glue("{total_wins} win season")) |>
+  mutate(probs_made_finals = running_mean(made_finals),
+         label = glue::glue("Estimated finals<br>probability: **{scales::percent(probs_made_finals, accuracy = 0.1)}**"),
+         .by = total_wins) |>
+  ggplot(aes(x = season, y = probs_made_finals)) +
+  geom_hline(yintercept = 0, colour = "grey20", linewidth = 1) +
+  geom_line(colour = colours[1], linewidth = 1) +
+  geom_richtext(
+    aes(label = label),
+    family = "Myriad Pro",
+    x = 1000, y = 0.2,
+    hjust = 1, vjust = 0,
+    fill = NA, label.color = NA,
+    size = 5.5, color = "grey60"
+  ) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.2),
+                     limits = c(0, 1),
+                     labels = scales::percent_format()
+                     ) +
+  facet_wrap(~facets, nrow = 2) +
+  labs(x = "Simulated season number", 
+       y = "Probability of finals",
+       caption = str_replace_all(socials, "Brands", "Brands Regular")) +
+  theme(strip.text = element_text(size = 22, 
+                                  hjust = 0,
+                                  family = "Myriad Pro Semibold"),
+        text = element_text(size = 18, family = "Myriad Pro"),
+        panel.grid.major.x = element_blank(),
+        panel.spacing = unit(2, "lines")) +
+  transition_reveal(season)
+
+animate(probs_animated_plot, 
+        nframes = 100,
+        height = 650,
+        width = 1000,
+        fps = 10,
+        end_pause = 20)
+```

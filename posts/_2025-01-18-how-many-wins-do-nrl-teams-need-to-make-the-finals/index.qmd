@@ -22,7 +22,7 @@ library(tidyverse)
 library(furrr)
 library(parallel)
 library(igraph)
-library(ggdist)
+# library(ggdist)
 library(data.table)
 library(ggtext)
 library(gganimate)
@@ -33,23 +33,7 @@ colours <- c("#E31937", "#134A8E")
 
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
-font_hoist <- function(family, silent = FALSE) {
-  font_specs <- systemfonts::system_fonts() %>%
-    dplyr::filter(family == .env[["family"]]) %>%
-    dplyr::mutate(family = paste(family, style)) %>% # Directly reference column names
-    dplyr::select(plain = path, name = family)       # Use direct column references
-  
-  purrr::pwalk(as.list(font_specs), systemfonts::register_font)
-  
-  if (!silent) {
-    message(paste0(
-      "Hoisted ", nrow(font_specs), " variants:\n",
-      paste(font_specs$name, collapse = "\n")
-    ))
-  }
-}
-
-font_hoist("Myriad Pro")
+mitchhenderson::font_hoist("Myriad Pro")
 
 theme_set(theme_minimal() +
             theme(text = element_text(family = "Myriad Pro Regular"),

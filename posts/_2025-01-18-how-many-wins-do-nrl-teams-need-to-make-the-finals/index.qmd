@@ -53,7 +53,9 @@ import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhender
 DT::datatable(import)
 ```
 
-I then calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season, for each year in the data set.
+### Historical distribution of wins
+
+I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season, for each year in the data set.
 
 ```{r}
 data <- import |>
@@ -64,7 +66,7 @@ data <- import |>
 
 # Calculate final competition ladder for each season -------------------
 
-league_tables <- function(df){
+competition_table <- function(df){
   df <- df |>
     summarise(home_wins = sum(home_win),
               home_for_and_against = sum(points_differential),
@@ -87,7 +89,7 @@ league_tables <- function(df){
            .by = season)
 }
 
-observed_summary_results <- league_tables(data)
+observed_summary_results <- competition_table(data)
 
 DT::datatable(observed_summary_results)
 ```
@@ -175,6 +177,8 @@ This is also not a good idea. On the surface, a logistic regression model sounds
 
 These are a class of methods that basically use randomness to solve problems. They allow us to skip most of the hard maths and use computer simulations to get practically the same answers that could very painfully have been calculated analytically anyway. The idea is that we define a data generating process that mimics the way that data is generated in the real world, and then let the power of computers generate a huge amount of data. This lets us explore tens or hundreds of thousand (or more) possible season outcomes to give us a more stable estimate of the probability of making the finals for each win-loss record. This is especially important for edge cases and unusual season results that are unlikely to have occurred in a small sample of historical data like ours. The beauty is that we can build in all the dependencies and constraints of the competition structure so we know the simulated data generated will adhere to it. It will capture the non-linear and threshold effects that exist as a result of the competition format. With enough simulated seasons, we can simply count the proportion of teams that qualify for a given number of wins to estimate the probability. The law of large numbers tells us this converges to the true probability.
 
+#### Simulating a season draw
+
 To begin defining the data generating process, we need a way to randomly generate a season draw. This was tricky. 17 teams need to play 24 matches against other teams, 12 home and 12 away, where you play 8 teams twice and the other 8 teams only once (and of course accounting for the dependencies of head-to-head matches so one team's schedule can't be considered in isolation). I found a way to do it using network graph theory. Here I define a vector of team names and a function to create a random season draw that satisfies the constraints.
 
 ```{r}
@@ -203,6 +207,8 @@ The output is one randomly simulated season draw.
 ```{r}
 DT::datatable(simulate_season_draw())
 ```
+
+#### Populate fixtures with results
 
 Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
 
@@ -264,7 +270,9 @@ data |>
 
 This is an *interesting* distribution. The points differentials on even numbers are **far** more frequently observed than odd numbered differentials. This is an influence of competition constraints. Tries (4) and goals (2) are far more common than field goals (1), so it's expected that even numbered point differences are more likely to occur. Out of interest, I also added the average points differential across the data set as an annotation in the visual (+2.4). This is the expected advantage of playing at home over the last \~10 years.
 
-Given this distribution of points differentials is so unique, I will randomly sample from it to fill the match results in my simulated season rather than trying to approximate it with a theoretical distribution to sample from. I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each teams strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet betting odds for winning the 2025 competition.
+#### Accounting for team quality
+
+Given this distribution of points differentials is so unique, I will randomly sample from it to populate the match results in my simulated season (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each teams strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet betting odds for winning the 2025 competition.
 
 ```{r}
 # Sportsbet odds for to win 2025 GF
@@ -291,7 +299,7 @@ sportsbet_odds <- tibble::tribble(
                     )
 ```
 
-Then we can convert the odds to an implied probability of winning the competition.
+Then we can convert the odds to an implied probability of winning the competition. This will be my measure of relative team quality.
 
 ```{r}
 # Get a team strength measure (based on Sportsbet odds to win premiership)
@@ -304,15 +312,17 @@ sportsbet_implied_probabilities <- sportsbet_odds |>
   select(-sportsbet_odds)
 ```
 
-Now with these relative team strength values, I can define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution.
+#### Accounting for home field advantage
 
-There are some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). **Secondly, home/away advantage is not accounted for**. Thirdly, within home team wins or away team wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality. The winning amount is completely random within the positive points differentials in the data set. Only whether the home or away team wins considers the team strength values. I also don't think this threatens the validity of the results (only team for and against will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+Next I need to account for home field advantage. Home teams won \~55.8% of games in our data set (1,084/1,944). If two teams of **equal** quality play, I want to adjust the probability of winning for the home team from 50% (based only on relative team quality) to \~55.8% so it matches the proportion of home wins observed in the 10 seasons of data. I can do this by searching across all potential home advantage multipliers from 1 (no home advantage) to 2 (playing at home doubles team quality) to find the optimal value that returns \~55.8% home win probability against equally matched opponents.
 
 ```{r}
+perc_home_win <- mean(data$points_differential > 0)
+
 # We know that for equally matched teams:
 # 1. Without home advantage, each team has 50% chance of winning
 # 2. Historical data shows home teams actually win 55.8% of the time
-# 3. We need a multiplier that turns 50-50 into 55.8-44.2
+# 3. We need a multiplier that turns 50-50 into 55.8-44.2 (assuming no draws)
 
 # Function to calculate win probability for equal teams given a multiplier
 calc_win_prob <- function(multiplier) {
@@ -330,22 +340,31 @@ calc_win_prob <- function(multiplier) {
 
 # Function to find multiplier that gives desired win probability
 find_optimal_multiplier <- function(target_prob) {
-  optimize(function(m) abs(calc_win_prob(m) - target_prob), 
+  optimise(function(m) abs(calc_win_prob(m) - target_prob), 
           interval = c(1, 2),  # Search between 1-2x multiplier 
           maximum = FALSE)$minimum
 }
 
 # Find multiplier that produces observed 55.8% home win rate
-optimal_multiplier <- find_optimal_multiplier(0.5576132)
-print(optimal_multiplier)  # Returns ~1.26
+optimal_multiplier <- find_optimal_multiplier(perc_home_win)
 ```
+
+This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change given other differences in relative team quality (e.g., not equally matched teams).
+
+#### Simulate the match results
+
+Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability (after accounting for each teams quality and home field advantage), then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).
 
 ```{r}
 # Function to simulate a single match
 simulate_match <- function(home_strength, away_strength, diff_vector) {
+  home_advantage_multiplier <- optimal_multiplier
+  
+  # Apply home advantage to home team's strength
+  adjusted_home_strength <- home_strength * home_advantage_multiplier
  
-   # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
-  home_win_prob <- home_strength / (home_strength + away_strength)
+  # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
+  home_win_prob <- adjusted_home_strength / (adjusted_home_strength + away_strength)
   
   # Compare to uniform distribution to determine if it's a home win or away win
   is_home_win <- runif(1) < home_win_prob
@@ -361,7 +380,7 @@ simulate_match <- function(home_strength, away_strength, diff_vector) {
 }
 ```
 
-An example showing how this works is here we generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance. Notice how
+An example showing how this works is here we generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance.
 
 ```{r}
 map2(
@@ -372,10 +391,16 @@ map2(
   unlist()
 ```
 
-Now we have a function
+Notice how most of the values are negative (meaning the away team won). This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins in relation to total simulated results over a very large number of simulations gives us a probability of the away team winning this game that approaches the true value.
+
+There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home team wins or away team wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+
+#### Simulating many seasons
+
+Now we have a function to simulate a match, we need to use it populate the random season draws that we learned how to create earlier with match results. We don't just want one or ten seasons simulated though. We want ten thousand.
 
 ```{r}
-seasons_to_simulate <- 1000
+seasons_to_simulate <- 10000
 
 # Set up parallel processing
 plan(multisession, workers = detectCores())
@@ -399,4 +424,8 @@ simulated_seasons <- tibble(
     away_win = if_else(points_differential < 0, 1, 0),
     draw = if_else(points_differential == 0, 1, 0)
   )
+
+DT::datatable(slice_head(n = 100, simulated_seasons))
 ```
+
+This takes a little bit of time to run because it's generating 10,000 random season draws and then simulating results for all 2,040,000 games.

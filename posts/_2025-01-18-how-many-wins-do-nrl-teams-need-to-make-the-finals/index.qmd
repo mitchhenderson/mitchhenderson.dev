@@ -1,18 +1,31 @@
 ---
 title: "How many wins do NRL teams need to make the finals?"
 description: |
-  It depends, but we can get a pretty good idea with monte carlo simulations
+  It depends, but we can get a pretty good idea with Monte Carlo simulations
 author: Mitch Henderson
-date: 2025-01-18
+date: 2025-01-24
 draft: true
 format: 
-  code-fold: true
-  code-tools: true
+  html: 
+    code-fold: true
+    code-tools: true
+    html-table-processing: none
+knitr:
+    opts_chunk: 
+      dev: "ragg_png"
 ---
 
-It's pretty common for sports teams to set themselves a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal though, is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 13-win season (from 24 games) is enough to qualify some years, but not enough in others. So how many wins do teams need to be confident they'll qualify?
+### *tl;dr:* Probably 13.
+
+<br>
+
+Sounds like a simple problem, but it isn't.
+
+It's pretty common for sports teams to set a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 12-win season (from 24 games) is enough to qualify some years, but not enough in others.
 
 [^1]: National Rugby League
+
+So how many wins do teams need to be confident they'll qualify?
 
 ```{r}
 #| output: false
@@ -22,17 +35,15 @@ library(tidyverse)
 library(furrr)
 library(parallel)
 library(igraph)
-# library(ggdist)
+library(ggdist)
 library(data.table)
 library(ggtext)
 library(gganimate)
-library(extrafont)
 library(gt)
+library(gtExtras)
 
 colours <- c("#E31937", "#134A8E")
-
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
-
 mitchhenderson::font_hoist("Myriad Pro")
 
 theme_set(theme_minimal() +
@@ -45,22 +56,30 @@ theme_set(theme_minimal() +
                   panel.grid.minor = element_blank()))
 ```
 
-To explore this, I scraped 10 seasons of match result data from Wikipedia (excluding the shortened 2020 season) and saved the results in a file.
+To work it out, I scraped 10 seasons of match result data from Wikipedia (excluding the shortened 2020 season) and saved the results in a file.
 
 ```{r}
 #| output: false
+#| code-fold: false
 
 # Import match results for 10 seasons (up to 2024)
 import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/_2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv")
 ```
 
+The first 10 rows look like this:
+
 ```{r}
-DT::datatable(import)
+import |>
+  slice_head(n = 10) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
 ```
+
+<br>
 
 ### Historical distribution of wins
 
-I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season, for each year in the data set.
+I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season, for each year in the data set. The table below shows only 2014, but the final table has been calculated for all seasons in the data set.
 
 ```{r}
 data <- import |>
@@ -96,12 +115,20 @@ competition_table <- function(df){
 
 observed_summary_results <- competition_table(data)
 
-DT::datatable(observed_summary_results)
+observed_summary_results |>
+  slice_head(n = 16) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
 ```
 
-This can then be visualised as a dot plot. Notice how one team won 10 games and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games but didn't qualify (red circle at the bottom of the 13 wins column).
+<br>
+
+All 10 seasons can then be visualised together as a dot plot. Notice how one team won 10 games and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games but didn't qualify (red circle at the bottom of the 13 wins column).
 
 ```{r}
+#| fig-align: "center"
+#| out-width: "100%"
+
 observed_summary_results |>
   mutate(made_finals = factor(made_finals)) |>
   arrange(made_finals) |>
@@ -171,19 +198,19 @@ If this is possible, god knows I don't know how to do it. Given the complexity o
 
 ### Simply calculate the proportion of teams that qualified given each win total from the data set
 
-This is not a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. As an example, the data we have shows no teams with 11 wins qualifying for the finals (out of 8 times a team has won 11 games in our data). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e. random variability) that we happen to have observed in our sample. Evidence of this is that a team with only 10 wins qualified.
+This isn't a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games has qualified for the finals.
 
 ### Fitting a linear model to the data
 
-This is also not a good idea. On the surface, a logistic regression model sounds okay given we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transfomed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down because it doesn't have awareness of the fundamental competition constraints (like for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like sometimes making the finals with a win-loss record that is mathematically impossible for them to qualify.
+This also isn't a good idea. On the surface, a logistic regression model sounds okay given we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transfomed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here because it doesn't have awareness of the fundamental competition constraints (like for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.
 
 ### Monte Carlo simulation
 
-These are a class of methods that basically use randomness to solve problems. They allow us to skip most of the hard maths and use computer simulations to get practically the same answers that could very painfully have been calculated analytically anyway. The idea is that we define a data generating process that mimics the way that data is generated in the real world, and then let the power of computers generate a huge amount of data. This lets us explore tens or hundreds of thousand (or more) possible season outcomes to give us a more stable estimate of the probability of making the finals for each win-loss record. This is especially important for edge cases and unusual season results that are unlikely to have occurred in a small sample of historical data like ours. The beauty is that we can build in all the dependencies and constraints of the competition structure so we know the simulated data generated will adhere to it. It will capture the non-linear and threshold effects that exist as a result of the competition format. With enough simulated seasons, we can simply count the proportion of teams that qualify for a given number of wins to estimate the probability. The law of large numbers tells us this converges to the true probability.
+These are a class of methods that basically use randomness to solve problems. They allow us to skip most of the hard maths and use computer simulations to get practically the same answers that could very painfully have been calculated analytically anyway. The idea is that we define a data generating process that mimics the way that data is generated in the real world, and then let the power of computers generate a huge amount of data. This lets us explore tens or hundreds of thousand (or more) possible season outcomes to give us a more stable estimate of the probability of making the finals for each win-loss record. This is especially important for edge cases and unusual season results that are unlikely to have occurred in a small sample of historical data like ours. The beauty is that we can build in all the dependencies and constraints of the competition structure so we know the simulated data generated will adhere to it. It will capture the non-linear and threshold effects that exist as a result of the competition format. With enough simulated seasons, we can simply count the proportion of teams that qualify for a given number of wins to estimate the probability. The [law of large numbers](https://www.statology.org/law-of-large-numbers/) tells us this converges to the true probability.
 
 #### Simulating a season draw
 
-To begin defining the data generating process, we need a way to randomly generate a season draw. This was tricky. 17 teams need to play 24 matches against other teams, 12 home and 12 away, where you play 8 teams twice and the other 8 teams only once (and of course accounting for the dependencies of head-to-head matches so one team's schedule can't be considered in isolation). I found a way to do it using network graph theory. Here I define a vector of team names and a function to create a random season draw that satisfies the constraints.
+To begin defining the data generating process, we need a way to randomly generate a season draw. *This was tricky*. 17 teams need to play 24 matches against other teams, 12 home and 12 away, where you play 8 teams twice and the other 8 teams only once (and of course accounting for the dependencies of head-to-head matches so one team's schedule can't be considered in isolation). I found a way to do it using network graph theory.
 
 ```{r}
 # Define vector of team names
@@ -206,17 +233,25 @@ simulate_season_draw <- function(){
 }
 ```
 
-The output is one randomly simulated season draw.
+The output is one randomly simulated season draw. Here is 10 random match-ups from a simulated draw.
 
 ```{r}
-DT::datatable(simulate_season_draw())
+simulate_season_draw() |>
+  slice_sample(n = 10) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
 ```
+
+<br>
 
 #### Populate fixtures with results
 
 Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
 
 ```{r}
+#| fig-align: "center"
+#| out-width: "100%"
+
 average_10yr_points_diff <- data |>
   pull(points_differential) |> 
   mean()
@@ -276,7 +311,9 @@ This is an *interesting* distribution. The points differentials on even numbers 
 
 #### Accounting for team quality
 
-Given this distribution of points differentials is so unique, I will randomly sample from it to populate the match results in my simulated season (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each teams strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet betting odds for winning the 2025 competition.
+Because this distribution is so unique, I'll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each teams' strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet odds for winning the 2025 competition.
+
+The odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.
 
 ```{r}
 # Sportsbet odds for to win 2025 GF
@@ -301,11 +338,7 @@ sportsbet_odds <- tibble::tribble(
                                   "Sydney Roosters",              20,
                                      "Wests Tigers",              46
                     )
-```
 
-Then we can convert the odds to an implied probability of winning the competition. This will be my measure of relative team quality.
-
-```{r}
 # Get a team strength measure (based on Sportsbet odds to win premiership)
 odds_to_probabilities <- function(odds) {
   probabilities <- (1 / odds) / sum(1 / odds)
@@ -314,11 +347,17 @@ odds_to_probabilities <- function(odds) {
 sportsbet_implied_probabilities <- sportsbet_odds |>
   mutate(implied_probabilities = odds_to_probabilities(sportsbet_odds)) |>
   select(-sportsbet_odds)
+
+sportsbet_implied_probabilities  |>
+  arrange(-implied_probabilities) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE) |>
+  fmt_percent(implied_probabilities, decimals = 1)
 ```
 
 #### Accounting for home field advantage
 
-Next I need to account for home field advantage. Home teams won \~55.8% of games in our data set (1,084/1,944). If two teams of **equal** quality play, I want to adjust the probability of winning for the home team from 50% (based only on relative team quality) to \~55.8% so it matches the proportion of home wins observed in the 10 seasons of data. I can do this by searching across all potential home advantage multipliers from 1 (no home advantage) to 2 (playing at home doubles team quality) to find the optimal value that returns \~55.8% home win probability against equally matched opponents.
+Next I need to account for home field advantage. Home teams won \~55.8% of games in the data set (1,084/1,944). If two teams of **equal** quality play, I want to adjust the probability of winning for the home team from 50% (based only on relative team quality) to \~55.8% so it matches the proportion of home wins observed in the 10 seasons of data. I can do this by searching across all potential home advantage multipliers from 1 (no home advantage) to 2 (playing at home doubles team quality) to find the optimal value that returns \~55.8% home win probability against equally matched opponents.
 
 ```{r}
 perc_home_win <- mean(data$points_differential > 0)
@@ -353,7 +392,7 @@ find_optimal_multiplier <- function(target_prob) {
 optimal_multiplier <- find_optimal_multiplier(perc_home_win)
 ```
 
-This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change given other differences in relative team quality (e.g., not equally matched teams).
+This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each differences in relative team quality (e.g., unequally matched teams).
 
 #### Simulate the match results
 
@@ -384,7 +423,7 @@ simulate_match <- function(home_strength, away_strength, diff_vector) {
 }
 ```
 
-An example showing how this works is here we generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance.
+To demonstrate, here I generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance.
 
 ```{r}
 map2(
@@ -395,19 +434,28 @@ map2(
   unlist()
 ```
 
-Notice how most of the values are negative (meaning the away team won). This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins in relation to total simulated results over a very large number of simulations gives us a probability of the away team winning this game that approaches the true value.
+Notice how most of the values are negative (meaning the away team won).
 
-There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home team wins or away team wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins over a very large number of simulations gives us an estimated probability of the away team winning this game that approaches the true value.
+
+There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
 
 #### Simulating many seasons
 
-Now we have a function to simulate a match, we need to use it populate the random season draws that we learned how to create earlier with match results. We don't just want one or ten seasons simulated though. We want ten thousand.
+Now we have a function to simulate a match, we need to use it populate the random season draws with match results. We don't just want one or ten seasons simulated though.
+
+**We want ten thousand**.
+
+This is where the actual work gets done. To demonstrate what this looks like, I'll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.
 
 ```{r}
-seasons_to_simulate <- 1000
+seasons_to_simulate <- 10000
 
 # Set up parallel processing
 plan(multisession, workers = detectCores())
+
+# For reproducibility
+set.seed(2025)
 
 # Simulate full seasons with results
 simulated_seasons <- tibble(
@@ -429,64 +477,139 @@ simulated_seasons <- tibble(
     draw = if_else(points_differential == 0, 1, 0)
   )
 
-DT::datatable(slice_head(n = 100, simulated_seasons))
+simulated_seasons |>
+  select(-ends_with("probability"), -draw) |>
+  slice_sample(n = 10) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
 ```
+
+<br>
 
 This takes a minute or two to run because it's generating 10,000 random season draws and then simulating results for all 2,040,000 games.
 
 ### Exploring the results
 
-We can use the function we defined earlier to summarise the match level simulation results into an end-of-season ladder for each of the 10,000 seasons.
+We can use the function we defined earlier to summarise the match level simulation results into an end-of-season ladder for each of the 10,000 seasons. Here is one of those seasons final standings (for season number 2534 out of 10,000).
 
 ```{r}
 simulation_summary_results <- competition_table(simulated_seasons)
 
-DT::datatable(slice_head(n = 100, simulation_summary_results))
+simulation_summary_results |>
+  filter(season == 2534) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
 ```
 
+<br>
+
+What we're really after though is the proportion of teams that make the finals for each given win total across each of the 10,000 simulated seasons.
+
 ```{r}
+# Calculate proportions ----------------------------
 probabilities_simulated <- simulation_summary_results |>
   summarise(count_made_finals = sum(made_finals),
             total_count = n(),
             .by = total_wins) |>
   mutate(percentage = round(count_made_finals / total_count, 3)) |>
   arrange(-total_wins)
+
+# Create table --------------------------------------
+probabilities_simulated |>
+  mutate(perc_no_finals = 1 - percentage,
+         total_wins = glue::glue("{total_wins} wins")) |>
+  pivot_longer(starts_with("perc"), names_to = "metric", values_to = "perc") |>
+  summarise(
+    total = total_count[1],
+    made_finals = count_made_finals[1],
+    list_data = list(perc),
+    .by = total_wins) |>
+  gt(rowname_col = "total_wins") |>
+  gt_theme_538(quiet = TRUE) |>
+  fmt_number(columns = c("total", "made_finals"),
+             decimals = 0) |>
+  tab_header(
+    title = html("NRL teams need to win 13 games to be confident of playing finals"),
+    subtitle = "Finals probabilities based on results from 10,000 simulated seasons"
+  ) |>
+  tab_source_note(
+    source_note = html(socials)
+  ) |>
+  gt_plt_bar_stack(list_data, width = 70,
+                   labels = c("Qualify", "Fail to qualify"),
+                   palette = rev(colours),
+                   font = "Segoe UI",
+                   fmt_fn = function(x) {
+                     case_when(
+                       x < 0.03 ~ "", 
+                       x == 1 ~ scales::label_percent()(x),
+                       .default = scales::label_percent(accuracy = 0.1)(x)
+                     )
+                   }) |>
+  cols_label(
+    total = html("Simulated<br>occurrences"),
+    made_finals = html("Times<br>qualified")
+  ) |>
+  cols_label_with(columns = list_data, 
+                  fn = function(label) {
+                    full_label <- glue::glue("Finals probabilities<br>{label}")
+                    sprintf("<span>%s</span>", full_label) |> 
+                      html()
+    }) |>
+  tab_style(
+    style = cell_text(font = "Myriad Pro"),
+    locations = cells_body()
+  ) |>
+  tab_style(
+    style = cell_text( 
+      font = "Myriad Pro Condensed", 
+      weight = "bold"),
+    locations = cells_title(groups = "title")
+  ) |>
+  tab_style(style = cell_text(align = "right"),
+            locations = cells_source_notes()) |>
+  tab_options(heading.title.font.size = 36,
+              heading.subtitle.font.size = 18,
+              table.width = 700,
+              source_notes.font.size = 15)
 ```
 
-```{r}
-simulation_summary_results |>
-  filter(regular_season_position == 8) |>
-  mutate(expected_wins = cumsum(total_wins) / seq_along(total_wins)) |>
-  ggplot(aes(x = seq_along(expected_wins), y = expected_wins)) +
-  geom_line(color = "blue") +
-  labs(title = "**Cumulative Mean of Total Wins**",
-       x = "Number of Observations",
-       y = "Cumulative Mean of Total Wins",
-       caption = socials)
-```
+Winning 15 or more games in a season was enough to make the finals in every one of the 10,000 simulations. Winning 8 or less wasn't enough to qualify in any. No real surprises there. In many of those cases it would be mathematically impossible for a different result. These simulations don't prove that though (maybe a team could qualify with 8 wins in circumstances that didn't occur in my 10,000 simulations), but the law of large numbers tells us these results are close enough to be correct for all practical purposes. To demonstrate, only one team made the finals with 9 wins (out of 12,996 teams that finished with 9 wins across the simulations). Finishing in the top 8 with only 9 wins is clearly mathematically possible, but it's so unlikely that it'll probably not happen in 10 lifetimes. So for all practical purposes, more wins are needed.
+
+The big movements happen between 11 and 13 wins:
+
+-   With 11, it's unlikely but realistically possible
+
+-   With 12, it's a toss up
+
+-   With 13, it's likely
+
+This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulations to show the law of large numbers at work.
 
 ```{r}
+#| warning: false
+
 running_mean <- function(x) {
   cumsum(x) / seq_along(x)
 }
 
 probs_animated_plot <- simulation_summary_results |>
-  filter(total_wins %in% c(10:15), 
+  filter(total_wins %in% c(10:15),
          season <= 1000) |>
   mutate(total_wins = factor(
-    total_wins, 
-    levels = sort(unique(total_wins), 
+    total_wins,
+    levels = sort(unique(total_wins),
                   decreasing = TRUE)),
     facets = glue::glue("{total_wins} win season")) |>
   mutate(probs_made_finals = running_mean(made_finals),
-         label = glue::glue("Estimated finals<br>probability: **{scales::percent(probs_made_finals, accuracy = 0.1)}**"),
+         label = glue::glue("Estimated finals<br>probability: {scales::percent(probs_made_finals, accuracy = 0.1)}"),
          .by = total_wins) |>
   ggplot(aes(x = season, y = probs_made_finals)) +
-  geom_hline(yintercept = 0, colour = "grey20", linewidth = 1) +
+  geom_hline(yintercept = 0, colour = "grey30", linewidth = 1) +
   geom_line(colour = colours[1], linewidth = 1) +
   geom_richtext(
     aes(label = label),
-    family = "Myriad Pro",
+    family = "Myriad Pro Regular",
     x = 1000, y = 0.2,
     hjust = 1, vjust = 0,
     fill = NA, label.color = NA,
@@ -497,21 +620,27 @@ probs_animated_plot <- simulation_summary_results |>
                      labels = scales::percent_format()
                      ) +
   facet_wrap(~facets, nrow = 2) +
-  labs(x = "Simulated season number", 
+  labs(x = "Simulated season number",
        y = "Probability of finals",
-       caption = str_replace_all(socials, "Brands", "Brands Regular")) +
-  theme(strip.text = element_text(size = 22, 
+       caption = socials) +
+  theme(strip.text = element_text(size = 22,
                                   hjust = 0,
-                                  family = "Myriad Pro Semibold"),
-        text = element_text(size = 18, family = "Myriad Pro"),
+                                  family = "Myriad Pro Regular"),
+        text = element_text(size = 18, family = "Myriad Pro Regular"),
+        plot.caption = element_markdown(size = 16),
         panel.grid.major.x = element_blank(),
         panel.spacing = unit(2, "lines")) +
   transition_reveal(season)
 
-animate(probs_animated_plot, 
+animate(probs_animated_plot,
         nframes = 100,
-        height = 650,
-        width = 1000,
+        height = 8.6,
+        width = 12,
         fps = 10,
+        device = "ragg_png",
         end_pause = 20)
 ```
+
+If you've taken statistics classes at uni you'll probably have come across a similar idea to this with coin flips or finding pi. Basically, the average of a small group of numbers varies a lot, but stabilises as the sample gets larger. This is why we generally don't want to infer things about a population based only on a small sample, we might just be interpreting the early variation before the stable number (that converges on the true value) is found. The finals probability for each win count in the animation doesn't really become stable until around 250 seasons. Making inferences after only 10 seasons (like using the data we had) would have given us an unreliable estimate.
+
+In summary, Monte Carlo simulations offer a practical way to estimate things (like finals probabilities in the NRL), especially when the calculations become mathematically complex or the sample of available data is relatively small.

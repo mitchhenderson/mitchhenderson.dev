@@ -1,7 +1,7 @@
 ---
 title: "How many wins do NRL teams need to make the finals?"
 description: |
-  It depends, but we can get a pretty good idea with Monte Carlo simulations
+  It depends, but Monte Carlo simulations give us a pretty good idea
 author: Mitch Henderson
 date: 2025-01-24
 draft: true
@@ -56,7 +56,7 @@ theme_set(theme_minimal() +
                   panel.grid.minor = element_blank()))
 ```
 
-To work it out, I scraped 10 seasons of match result data from Wikipedia (excluding the shortened 2020 season) and saved the results in a file.
+To work it out, I scraped 10 seasons of match result data from Wikipedia (2014-2024 excluding the shortened 2020 season) and saved the results in a file.
 
 ```{r}
 #| output: false
@@ -123,7 +123,7 @@ observed_summary_results |>
 
 <br>
 
-All 10 seasons can then be visualised together as a dot plot. Notice how one team won 10 games and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games but didn't qualify (red circle at the bottom of the 13 wins column).
+All 10 seasons can then be visualised together as a dot plot. Notice how one team won 10 games one season and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games in a different season but didn't qualify (red circle at the bottom of the 13 wins column).
 
 ```{r}
 #| fig-align: "center"
@@ -188,7 +188,7 @@ observed_summary_results |>
         panel.grid = element_blank())
 ```
 
-There are thoretically a few ways to go about getting a probability for making the finals based on a given number of wins.
+There are a few ways to go about calculating a probability for making the finals based on a given number of wins. To do this requires a shift in mindset from thinking only about the outcome of a single event (qualify vs not) to considering the expected frequency of an outcome occurring over a large number of events involving uncertainty and randomness.
 
 ### Analytically specify the probability
 

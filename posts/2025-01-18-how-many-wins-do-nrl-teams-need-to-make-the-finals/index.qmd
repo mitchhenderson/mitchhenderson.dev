@@ -80,7 +80,7 @@ import |>
 
 ### Historical distribution of wins
 
-I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.
+I calculated the points differential for each game and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.
 
 ```{r}
 data <- import |>

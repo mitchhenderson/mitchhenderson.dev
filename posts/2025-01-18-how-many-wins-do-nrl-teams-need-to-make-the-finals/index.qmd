@@ -197,13 +197,13 @@ If this is possible, god knows I don't know how to do it. Given the complexity o
 
 [^2]: If anyone knows if / how this can be done, let me know!
 
-### Simply calculate the proportion of teams that qualified given each win total from the data set
+### Simply calculate the proportion of teams that qualified for each number of wins the data set
 
-This isn't a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.
+This isn't a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons of data; a tiny fraction of all the possible combinations of win-loss records and finals standings to use in our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.
 
 ### Fitting a linear model to the data
 
-This also isn't a good idea. On the surface, a logistic regression model sounds okay given we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.
+This also isn't a good idea. On the surface, a logistic regression model sounds okay as we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.
 
 ### Monte Carlo simulation
 
@@ -247,7 +247,7 @@ simulate_season_draw() |>
 
 #### Populate fixtures with results
 
-Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
+Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams in a match determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
 
 ```{r}
 #| fig-align: "center"
@@ -312,9 +312,9 @@ This is an *interesting* distribution. The points differentials on even numbers 
 
 #### Accounting for team quality
 
-Because this distribution is so unique, I'll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team's strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet odds for winning the 2025 competition.
+Because this distribution is so unique, I'll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team's strength. There are many ways to approach this, but for simplicity I'll just use the Sportsbet odds for winning the 2025 competition.
 
-The odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.
+The bookmaker odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.
 
 ```{r}
 # Sportsbet odds for to win 2025 GF
@@ -393,11 +393,11 @@ find_optimal_multiplier <- function(target_prob) {
 optimal_multiplier <- find_optimal_multiplier(perc_home_win)
 ```
 
-This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each differences in relative team quality (e.g., unequally matched teams).
+This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each difference in relative team quality (e.g., unequally matched teams).
 
 #### Simulate the match results
 
-Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability (after accounting for each teams quality and home field advantage), then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).
+Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition after accounting for home field advantage to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).
 
 ```{r}
 # Function to simulate a single match
@@ -439,13 +439,13 @@ Notice how most of the values are negative (meaning the away team won).
 
 This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins over a very large number of simulations gives us an estimated probability of the away team winning this game that approaches the true value.
 
-There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Team strength values and home field advantage only influence who wins. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
 
 #### Simulating many seasons
 
 Now we have a function to simulate a match, we need to use it populate the random season draws with match results. We don't just want one or ten seasons simulated though.
 
-**We want ten thousand**.
+***We want ten thousand.***
 
 This is where the actual work gets done. To demonstrate what this looks like, I'll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.
 
@@ -586,7 +586,7 @@ The big movements happen between 11 and 13 wins:
 
 -   With 13, it's likely
 
-This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulations to show the law of large numbers at work.
+This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulated seasons to show the law of large numbers at work.
 
 ```{r}
 #| warning: false

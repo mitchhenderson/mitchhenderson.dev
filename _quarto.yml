@@ -4,7 +4,7 @@ project:
 website:
   title: "mitchhenderson.dev"
   site-url: https://www.mitchhenderson.dev
-  description: "Sport, data, and science"
+  description: "Sport, science, data"
   navbar:
     pinned: true
     right:
@@ -19,7 +19,7 @@ format:
     theme:
       light: litera
     css: styles.css
-    highlight-style: eiffel
+    highlight-style: arrow
 
 editor: visual
 

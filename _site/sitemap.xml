@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.mitchhenderson.dev/index.html</loc>
-    <lastmod>2025-01-20T22:21:21.200Z</lastmod>
+    <lastmod>2025-01-27T03:52:34.533Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts.html</loc>
@@ -23,5 +23,9 @@
   <url>
     <loc>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</loc>
     <lastmod>2025-01-18T05:40:19.845Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html</loc>
+    <lastmod>2025-01-27T03:48:30.068Z</lastmod>
   </url>
 </urlset>

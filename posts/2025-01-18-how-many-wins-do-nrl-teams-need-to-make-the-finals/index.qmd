@@ -4,6 +4,7 @@ description: |
   It depends, but Monte Carlo simulations give us a pretty good idea
 author: Mitch Henderson
 date: 2025-01-27
+thumbnailImage: /img/nrl_finals_probs.png
 draft: false
 format: 
   html: 
@@ -63,7 +64,7 @@ To work it out, I scraped 10 seasons of match result data from Wikipedia (2014-2
 #| code-fold: false
 
 # Import match results for 10 seasons (up to 2024)
-import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/_2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv")
+import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv")
 ```
 
 The first 10 rows look like this:

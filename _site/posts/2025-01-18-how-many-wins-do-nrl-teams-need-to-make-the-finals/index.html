@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tldr-probably-13." id="toc-tldr-probably-13." class="nav-link active" data-scroll-target="#tldr-probably-13."><em>tl;dr:</em> Probably 13.</a></li>
   <li><a href="#historical-distribution-of-wins" id="toc-historical-distribution-of-wins" class="nav-link" data-scroll-target="#historical-distribution-of-wins">Historical distribution of wins</a></li>
   <li><a href="#analytically-specify-the-probability" id="toc-analytically-specify-the-probability" class="nav-link" data-scroll-target="#analytically-specify-the-probability">Analytically specify the probability</a></li>
-  <li><a href="#simply-calculate-the-proportion-of-teams-that-qualified-given-each-win-total-from-the-data-set" id="toc-simply-calculate-the-proportion-of-teams-that-qualified-given-each-win-total-from-the-data-set" class="nav-link" data-scroll-target="#simply-calculate-the-proportion-of-teams-that-qualified-given-each-win-total-from-the-data-set">Simply calculate the proportion of teams that qualified given each win total from the data set</a></li>
+  <li><a href="#simply-calculate-the-proportion-of-teams-that-qualified-for-each-number-of-wins-the-data-set" id="toc-simply-calculate-the-proportion-of-teams-that-qualified-for-each-number-of-wins-the-data-set" class="nav-link" data-scroll-target="#simply-calculate-the-proportion-of-teams-that-qualified-for-each-number-of-wins-the-data-set">Simply calculate the proportion of teams that qualified for each number of wins the data set</a></li>
   <li><a href="#fitting-a-linear-model-to-the-data" id="toc-fitting-a-linear-model-to-the-data" class="nav-link" data-scroll-target="#fitting-a-linear-model-to-the-data">Fitting a linear model to the data</a></li>
   <li><a href="#monte-carlo-simulation" id="toc-monte-carlo-simulation" class="nav-link" data-scroll-target="#monte-carlo-simulation">Monte Carlo simulation</a></li>
   <li><a href="#exploring-the-results" id="toc-exploring-the-results" class="nav-link" data-scroll-target="#exploring-the-results">Exploring the results</a></li>
@@ -253,27 +253,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="zrefyalpro" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jkdmaikxtd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#zrefyalpro table {
+#jkdmaikxtd table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zrefyalpro thead, #zrefyalpro tbody, #zrefyalpro tfoot, #zrefyalpro tr, #zrefyalpro td, #zrefyalpro th {
+#jkdmaikxtd thead, #jkdmaikxtd tbody, #jkdmaikxtd tfoot, #jkdmaikxtd tr, #jkdmaikxtd td, #jkdmaikxtd th {
   border-style: none;
 }
 
-#zrefyalpro p {
+#jkdmaikxtd p {
   margin: 0;
   padding: 0;
 }
 
-#zrefyalpro .gt_table {
+#jkdmaikxtd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -299,12 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_caption {
+#jkdmaikxtd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zrefyalpro .gt_title {
+#jkdmaikxtd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#zrefyalpro .gt_subtitle {
+#jkdmaikxtd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -328,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#zrefyalpro .gt_heading {
+#jkdmaikxtd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -340,13 +340,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_bottom_border {
+#jkdmaikxtd .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_col_headings {
+#jkdmaikxtd .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_col_heading {
+#jkdmaikxtd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -381,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zrefyalpro .gt_column_spanner_outer {
+#jkdmaikxtd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,15 +393,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#zrefyalpro .gt_column_spanner_outer:first-child {
+#jkdmaikxtd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zrefyalpro .gt_column_spanner_outer:last-child {
+#jkdmaikxtd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zrefyalpro .gt_column_spanner {
+#jkdmaikxtd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -413,11 +413,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#zrefyalpro .gt_spanner_row {
+#jkdmaikxtd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zrefyalpro .gt_group_heading {
+#jkdmaikxtd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#zrefyalpro .gt_empty_group_heading {
+#jkdmaikxtd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -458,15 +458,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#zrefyalpro .gt_from_md > :first-child {
+#jkdmaikxtd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zrefyalpro .gt_from_md > :last-child {
+#jkdmaikxtd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zrefyalpro .gt_row {
+#jkdmaikxtd .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -485,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#zrefyalpro .gt_stub {
+#jkdmaikxtd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,7 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrefyalpro .gt_stub_row_group {
+#jkdmaikxtd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,15 +512,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#zrefyalpro .gt_row_group_first td {
+#jkdmaikxtd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zrefyalpro .gt_row_group_first th {
+#jkdmaikxtd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zrefyalpro .gt_summary_row {
+#jkdmaikxtd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -530,16 +530,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrefyalpro .gt_first_summary_row {
+#jkdmaikxtd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_first_summary_row.thick {
+#jkdmaikxtd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zrefyalpro .gt_last_summary_row {
+#jkdmaikxtd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -549,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_grand_summary_row {
+#jkdmaikxtd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -559,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrefyalpro .gt_first_grand_summary_row {
+#jkdmaikxtd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -569,7 +569,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_last_grand_summary_row_top {
+#jkdmaikxtd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,11 +579,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_striped {
+#jkdmaikxtd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zrefyalpro .gt_table_body {
+#jkdmaikxtd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -592,7 +592,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_footnotes {
+#jkdmaikxtd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -606,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_footnote {
+#jkdmaikxtd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -615,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrefyalpro .gt_sourcenotes {
+#jkdmaikxtd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -629,7 +629,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#zrefyalpro .gt_sourcenote {
+#jkdmaikxtd .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -637,76 +637,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#zrefyalpro .gt_left {
+#jkdmaikxtd .gt_left {
   text-align: left;
 }
 
-#zrefyalpro .gt_center {
+#jkdmaikxtd .gt_center {
   text-align: center;
 }
 
-#zrefyalpro .gt_right {
+#jkdmaikxtd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zrefyalpro .gt_font_normal {
+#jkdmaikxtd .gt_font_normal {
   font-weight: normal;
 }
 
-#zrefyalpro .gt_font_bold {
+#jkdmaikxtd .gt_font_bold {
   font-weight: bold;
 }
 
-#zrefyalpro .gt_font_italic {
+#jkdmaikxtd .gt_font_italic {
   font-style: italic;
 }
 
-#zrefyalpro .gt_super {
+#jkdmaikxtd .gt_super {
   font-size: 65%;
 }
 
-#zrefyalpro .gt_footnote_marks {
+#jkdmaikxtd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zrefyalpro .gt_asterisk {
+#jkdmaikxtd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zrefyalpro .gt_indent_1 {
+#jkdmaikxtd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zrefyalpro .gt_indent_2 {
+#jkdmaikxtd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zrefyalpro .gt_indent_3 {
+#jkdmaikxtd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zrefyalpro .gt_indent_4 {
+#jkdmaikxtd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zrefyalpro .gt_indent_5 {
+#jkdmaikxtd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zrefyalpro .katex-display {
+#jkdmaikxtd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zrefyalpro div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jkdmaikxtd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#zrefyalpro tbody tr:last-child {
+#jkdmaikxtd tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -804,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="historical-distribution-of-wins" class="level3">
 <h3 class="anchored" data-anchor-id="historical-distribution-of-wins">Historical distribution of wins</h3>
-<p>I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.</p>
+<p>I calculated the points differential for each game and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -847,27 +847,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="djzmibnull" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mzawhydspp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#djzmibnull table {
+#mzawhydspp table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#djzmibnull thead, #djzmibnull tbody, #djzmibnull tfoot, #djzmibnull tr, #djzmibnull td, #djzmibnull th {
+#mzawhydspp thead, #mzawhydspp tbody, #mzawhydspp tfoot, #mzawhydspp tr, #mzawhydspp td, #mzawhydspp th {
   border-style: none;
 }
 
-#djzmibnull p {
+#mzawhydspp p {
   margin: 0;
   padding: 0;
 }
 
-#djzmibnull .gt_table {
+#mzawhydspp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -893,12 +893,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#djzmibnull .gt_caption {
+#mzawhydspp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#djzmibnull .gt_title {
+#mzawhydspp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -910,7 +910,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#djzmibnull .gt_subtitle {
+#mzawhydspp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -922,7 +922,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#djzmibnull .gt_heading {
+#mzawhydspp .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -934,13 +934,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#djzmibnull .gt_bottom_border {
+#mzawhydspp .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#djzmibnull .gt_col_headings {
+#mzawhydspp .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -955,7 +955,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#djzmibnull .gt_col_heading {
+#mzawhydspp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -975,7 +975,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#djzmibnull .gt_column_spanner_outer {
+#mzawhydspp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -987,15 +987,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#djzmibnull .gt_column_spanner_outer:first-child {
+#mzawhydspp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#djzmibnull .gt_column_spanner_outer:last-child {
+#mzawhydspp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#djzmibnull .gt_column_spanner {
+#mzawhydspp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1007,11 +1007,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#djzmibnull .gt_spanner_row {
+#mzawhydspp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#djzmibnull .gt_group_heading {
+#mzawhydspp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1037,7 +1037,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#djzmibnull .gt_empty_group_heading {
+#mzawhydspp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1052,15 +1052,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#djzmibnull .gt_from_md > :first-child {
+#mzawhydspp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#djzmibnull .gt_from_md > :last-child {
+#mzawhydspp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#djzmibnull .gt_row {
+#mzawhydspp .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1079,7 +1079,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#djzmibnull .gt_stub {
+#mzawhydspp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1092,7 +1092,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#djzmibnull .gt_stub_row_group {
+#mzawhydspp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1106,15 +1106,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#djzmibnull .gt_row_group_first td {
+#mzawhydspp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#djzmibnull .gt_row_group_first th {
+#mzawhydspp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#djzmibnull .gt_summary_row {
+#mzawhydspp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1124,16 +1124,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#djzmibnull .gt_first_summary_row {
+#mzawhydspp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#djzmibnull .gt_first_summary_row.thick {
+#mzawhydspp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#djzmibnull .gt_last_summary_row {
+#mzawhydspp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1143,7 +1143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#djzmibnull .gt_grand_summary_row {
+#mzawhydspp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1153,7 +1153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#djzmibnull .gt_first_grand_summary_row {
+#mzawhydspp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1163,7 +1163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#djzmibnull .gt_last_grand_summary_row_top {
+#mzawhydspp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1173,11 +1173,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#djzmibnull .gt_striped {
+#mzawhydspp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#djzmibnull .gt_table_body {
+#mzawhydspp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1186,7 +1186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#djzmibnull .gt_footnotes {
+#mzawhydspp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1200,7 +1200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#djzmibnull .gt_footnote {
+#mzawhydspp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1209,7 +1209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#djzmibnull .gt_sourcenotes {
+#mzawhydspp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1223,7 +1223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#djzmibnull .gt_sourcenote {
+#mzawhydspp .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1231,76 +1231,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#djzmibnull .gt_left {
+#mzawhydspp .gt_left {
   text-align: left;
 }
 
-#djzmibnull .gt_center {
+#mzawhydspp .gt_center {
   text-align: center;
 }
 
-#djzmibnull .gt_right {
+#mzawhydspp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#djzmibnull .gt_font_normal {
+#mzawhydspp .gt_font_normal {
   font-weight: normal;
 }
 
-#djzmibnull .gt_font_bold {
+#mzawhydspp .gt_font_bold {
   font-weight: bold;
 }
 
-#djzmibnull .gt_font_italic {
+#mzawhydspp .gt_font_italic {
   font-style: italic;
 }
 
-#djzmibnull .gt_super {
+#mzawhydspp .gt_super {
   font-size: 65%;
 }
 
-#djzmibnull .gt_footnote_marks {
+#mzawhydspp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#djzmibnull .gt_asterisk {
+#mzawhydspp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#djzmibnull .gt_indent_1 {
+#mzawhydspp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#djzmibnull .gt_indent_2 {
+#mzawhydspp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#djzmibnull .gt_indent_3 {
+#mzawhydspp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#djzmibnull .gt_indent_4 {
+#mzawhydspp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#djzmibnull .gt_indent_5 {
+#mzawhydspp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#djzmibnull .katex-display {
+#mzawhydspp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#djzmibnull div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mzawhydspp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#djzmibnull tbody tr:last-child {
+#mzawhydspp tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -1496,13 +1496,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="analytically-specify-the-probability">Analytically specify the probability</h3>
 <p>If this is possible, god knows I don’t know how to do it. Given the complexity of the competition structure with all its dependencies and constraints, specifying the true mathematical probability would be an extremely high-dimensional optimisation problem. Even if it is possible, it would require a very sophisticated and computationally intensive solution.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </section>
-<section id="simply-calculate-the-proportion-of-teams-that-qualified-given-each-win-total-from-the-data-set" class="level3">
-<h3 class="anchored" data-anchor-id="simply-calculate-the-proportion-of-teams-that-qualified-given-each-win-total-from-the-data-set">Simply calculate the proportion of teams that qualified given each win total from the data set</h3>
-<p>This isn’t a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can’t be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No.&nbsp;This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.</p>
+<section id="simply-calculate-the-proportion-of-teams-that-qualified-for-each-number-of-wins-the-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="simply-calculate-the-proportion-of-teams-that-qualified-for-each-number-of-wins-the-data-set">Simply calculate the proportion of teams that qualified for each number of wins the data set</h3>
+<p>This isn’t a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons of data; a tiny fraction of all the possible combinations of win-loss records and finals standings to use in our calculation. The true probability of making the finals can’t be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No.&nbsp;This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.</p>
 </section>
 <section id="fitting-a-linear-model-to-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="fitting-a-linear-model-to-the-data">Fitting a linear model to the data</h3>
-<p>This also isn’t a good idea. On the surface, a logistic regression model sounds okay given we’re trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren’t a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.</p>
+<p>This also isn’t a good idea. On the surface, a logistic regression model sounds okay as we’re trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren’t a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.</p>
 </section>
 <section id="monte-carlo-simulation" class="level3">
 <h3 class="anchored" data-anchor-id="monte-carlo-simulation">Monte Carlo simulation</h3>
@@ -1543,27 +1543,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_theme_538</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ymiejhdiyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nyqalbtkgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ymiejhdiyu table {
+#nyqalbtkgb table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ymiejhdiyu thead, #ymiejhdiyu tbody, #ymiejhdiyu tfoot, #ymiejhdiyu tr, #ymiejhdiyu td, #ymiejhdiyu th {
+#nyqalbtkgb thead, #nyqalbtkgb tbody, #nyqalbtkgb tfoot, #nyqalbtkgb tr, #nyqalbtkgb td, #nyqalbtkgb th {
   border-style: none;
 }
 
-#ymiejhdiyu p {
+#nyqalbtkgb p {
   margin: 0;
   padding: 0;
 }
 
-#ymiejhdiyu .gt_table {
+#nyqalbtkgb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1589,12 +1589,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_caption {
+#nyqalbtkgb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ymiejhdiyu .gt_title {
+#nyqalbtkgb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1606,7 +1606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ymiejhdiyu .gt_subtitle {
+#nyqalbtkgb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1618,7 +1618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ymiejhdiyu .gt_heading {
+#nyqalbtkgb .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1630,13 +1630,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_bottom_border {
+#nyqalbtkgb .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_col_headings {
+#nyqalbtkgb .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1651,7 +1651,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_col_heading {
+#nyqalbtkgb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1671,7 +1671,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ymiejhdiyu .gt_column_spanner_outer {
+#nyqalbtkgb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1683,15 +1683,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ymiejhdiyu .gt_column_spanner_outer:first-child {
+#nyqalbtkgb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ymiejhdiyu .gt_column_spanner_outer:last-child {
+#nyqalbtkgb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ymiejhdiyu .gt_column_spanner {
+#nyqalbtkgb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1703,11 +1703,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ymiejhdiyu .gt_spanner_row {
+#nyqalbtkgb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ymiejhdiyu .gt_group_heading {
+#nyqalbtkgb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1733,7 +1733,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ymiejhdiyu .gt_empty_group_heading {
+#nyqalbtkgb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1748,15 +1748,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ymiejhdiyu .gt_from_md > :first-child {
+#nyqalbtkgb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ymiejhdiyu .gt_from_md > :last-child {
+#nyqalbtkgb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ymiejhdiyu .gt_row {
+#nyqalbtkgb .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1775,7 +1775,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ymiejhdiyu .gt_stub {
+#nyqalbtkgb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1788,7 +1788,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ymiejhdiyu .gt_stub_row_group {
+#nyqalbtkgb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1802,15 +1802,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ymiejhdiyu .gt_row_group_first td {
+#nyqalbtkgb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ymiejhdiyu .gt_row_group_first th {
+#nyqalbtkgb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ymiejhdiyu .gt_summary_row {
+#nyqalbtkgb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1820,16 +1820,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ymiejhdiyu .gt_first_summary_row {
+#nyqalbtkgb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_first_summary_row.thick {
+#nyqalbtkgb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ymiejhdiyu .gt_last_summary_row {
+#nyqalbtkgb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1839,7 +1839,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_grand_summary_row {
+#nyqalbtkgb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1849,7 +1849,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ymiejhdiyu .gt_first_grand_summary_row {
+#nyqalbtkgb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1859,7 +1859,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_last_grand_summary_row_top {
+#nyqalbtkgb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1869,11 +1869,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_striped {
+#nyqalbtkgb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ymiejhdiyu .gt_table_body {
+#nyqalbtkgb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1882,7 +1882,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_footnotes {
+#nyqalbtkgb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1896,7 +1896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_footnote {
+#nyqalbtkgb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1905,7 +1905,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ymiejhdiyu .gt_sourcenotes {
+#nyqalbtkgb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1919,7 +1919,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ymiejhdiyu .gt_sourcenote {
+#nyqalbtkgb .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1927,76 +1927,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ymiejhdiyu .gt_left {
+#nyqalbtkgb .gt_left {
   text-align: left;
 }
 
-#ymiejhdiyu .gt_center {
+#nyqalbtkgb .gt_center {
   text-align: center;
 }
 
-#ymiejhdiyu .gt_right {
+#nyqalbtkgb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ymiejhdiyu .gt_font_normal {
+#nyqalbtkgb .gt_font_normal {
   font-weight: normal;
 }
 
-#ymiejhdiyu .gt_font_bold {
+#nyqalbtkgb .gt_font_bold {
   font-weight: bold;
 }
 
-#ymiejhdiyu .gt_font_italic {
+#nyqalbtkgb .gt_font_italic {
   font-style: italic;
 }
 
-#ymiejhdiyu .gt_super {
+#nyqalbtkgb .gt_super {
   font-size: 65%;
 }
 
-#ymiejhdiyu .gt_footnote_marks {
+#nyqalbtkgb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ymiejhdiyu .gt_asterisk {
+#nyqalbtkgb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ymiejhdiyu .gt_indent_1 {
+#nyqalbtkgb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ymiejhdiyu .gt_indent_2 {
+#nyqalbtkgb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ymiejhdiyu .gt_indent_3 {
+#nyqalbtkgb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ymiejhdiyu .gt_indent_4 {
+#nyqalbtkgb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ymiejhdiyu .gt_indent_5 {
+#nyqalbtkgb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ymiejhdiyu .katex-display {
+#nyqalbtkgb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ymiejhdiyu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nyqalbtkgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#ymiejhdiyu tbody tr:last-child {
+#nyqalbtkgb tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -2008,26 +2008,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="home" class="gt_row gt_left">Penrith Panthers</td>
-<td headers="away" class="gt_row gt_left">Manly Warringah Sea Eagles</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">North Queensland Cowboys</td>
-<td headers="away" class="gt_row gt_left">Brisbane Broncos</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Canberra Raiders</td>
-<td headers="away" class="gt_row gt_left">North Queensland Cowboys</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">North Queensland Cowboys</td>
-<td headers="away" class="gt_row gt_left">Dolphins</td></tr>
     <tr><td headers="home" class="gt_row gt_left">Cronulla Sutherland Sharks</td>
-<td headers="away" class="gt_row gt_left">Melbourne Storm</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Penrith Panthers</td>
-<td headers="away" class="gt_row gt_left">New Zealand Warriors</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">South Sydney Rabbitohs</td>
-<td headers="away" class="gt_row gt_left">Sydney Roosters</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">New Zealand Warriors</td>
-<td headers="away" class="gt_row gt_left">North Queensland Cowboys</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Brisbane Broncos</td>
-<td headers="away" class="gt_row gt_left">Melbourne Storm</td></tr>
+<td headers="away" class="gt_row gt_left">Penrith Panthers</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Sydney Roosters</td>
+<td headers="away" class="gt_row gt_left">Cronulla Sutherland Sharks</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
+<td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
+<td headers="away" class="gt_row gt_left">Gold Coast Titans</td></tr>
     <tr><td headers="home" class="gt_row gt_left">St George Illawarra Dragons</td>
-<td headers="away" class="gt_row gt_left">Parramatta Eels</td></tr>
+<td headers="away" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td>
+<td headers="away" class="gt_row gt_left">Gold Coast Titans</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Brisbane Broncos</td>
+<td headers="away" class="gt_row gt_left">Penrith Panthers</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Cronulla Sutherland Sharks</td>
+<td headers="away" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Manly Warringah Sea Eagles</td>
+<td headers="away" class="gt_row gt_left">Sydney Roosters</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Penrith Panthers</td>
+<td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
   </tbody>
   
   
@@ -2039,7 +2039,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="populate-fixtures-with-results" class="level4">
 <h4 class="anchored" data-anchor-id="populate-fixtures-with-results">Populate fixtures with results</h4>
-<p>Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they’re distributed in the 2014-2024 data set we have.</p>
+<p>Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams in a match determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they’re distributed in the 2014-2024 data set we have.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2109,8 +2109,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="accounting-for-team-quality" class="level4">
 <h4 class="anchored" data-anchor-id="accounting-for-team-quality">Accounting for team quality</h4>
-<p>Because this distribution is so unique, I’ll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don’t want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team’s strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet odds for winning the 2025 competition.</p>
-<p>The odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.</p>
+<p>Because this distribution is so unique, I’ll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don’t want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team’s strength. There are many ways to approach this, but for simplicity I’ll just use the Sportsbet odds for winning the 2025 competition.</p>
+<p>The bookmaker odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2153,27 +2153,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_percent</span>(implied_probabilities, <span class="at">decimals =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="igwvolrehz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qcbwaboaqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#igwvolrehz table {
+#qcbwaboaqs table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#igwvolrehz thead, #igwvolrehz tbody, #igwvolrehz tfoot, #igwvolrehz tr, #igwvolrehz td, #igwvolrehz th {
+#qcbwaboaqs thead, #qcbwaboaqs tbody, #qcbwaboaqs tfoot, #qcbwaboaqs tr, #qcbwaboaqs td, #qcbwaboaqs th {
   border-style: none;
 }
 
-#igwvolrehz p {
+#qcbwaboaqs p {
   margin: 0;
   padding: 0;
 }
 
-#igwvolrehz .gt_table {
+#qcbwaboaqs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2199,12 +2199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_caption {
+#qcbwaboaqs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#igwvolrehz .gt_title {
+#qcbwaboaqs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2216,7 +2216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#igwvolrehz .gt_subtitle {
+#qcbwaboaqs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2228,7 +2228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#igwvolrehz .gt_heading {
+#qcbwaboaqs .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2240,13 +2240,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_bottom_border {
+#qcbwaboaqs .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_col_headings {
+#qcbwaboaqs .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2261,7 +2261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_col_heading {
+#qcbwaboaqs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2281,7 +2281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#igwvolrehz .gt_column_spanner_outer {
+#qcbwaboaqs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2293,15 +2293,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#igwvolrehz .gt_column_spanner_outer:first-child {
+#qcbwaboaqs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#igwvolrehz .gt_column_spanner_outer:last-child {
+#qcbwaboaqs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#igwvolrehz .gt_column_spanner {
+#qcbwaboaqs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -2313,11 +2313,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#igwvolrehz .gt_spanner_row {
+#qcbwaboaqs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#igwvolrehz .gt_group_heading {
+#qcbwaboaqs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2343,7 +2343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#igwvolrehz .gt_empty_group_heading {
+#qcbwaboaqs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2358,15 +2358,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#igwvolrehz .gt_from_md > :first-child {
+#qcbwaboaqs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#igwvolrehz .gt_from_md > :last-child {
+#qcbwaboaqs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#igwvolrehz .gt_row {
+#qcbwaboaqs .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2385,7 +2385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#igwvolrehz .gt_stub {
+#qcbwaboaqs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2398,7 +2398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#igwvolrehz .gt_stub_row_group {
+#qcbwaboaqs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2412,15 +2412,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#igwvolrehz .gt_row_group_first td {
+#qcbwaboaqs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#igwvolrehz .gt_row_group_first th {
+#qcbwaboaqs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#igwvolrehz .gt_summary_row {
+#qcbwaboaqs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2430,16 +2430,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#igwvolrehz .gt_first_summary_row {
+#qcbwaboaqs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_first_summary_row.thick {
+#qcbwaboaqs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#igwvolrehz .gt_last_summary_row {
+#qcbwaboaqs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2449,7 +2449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_grand_summary_row {
+#qcbwaboaqs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2459,7 +2459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#igwvolrehz .gt_first_grand_summary_row {
+#qcbwaboaqs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2469,7 +2469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_last_grand_summary_row_top {
+#qcbwaboaqs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2479,11 +2479,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_striped {
+#qcbwaboaqs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#igwvolrehz .gt_table_body {
+#qcbwaboaqs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2492,7 +2492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_footnotes {
+#qcbwaboaqs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2506,7 +2506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_footnote {
+#qcbwaboaqs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2515,7 +2515,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#igwvolrehz .gt_sourcenotes {
+#qcbwaboaqs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2529,7 +2529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#igwvolrehz .gt_sourcenote {
+#qcbwaboaqs .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2537,76 +2537,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#igwvolrehz .gt_left {
+#qcbwaboaqs .gt_left {
   text-align: left;
 }
 
-#igwvolrehz .gt_center {
+#qcbwaboaqs .gt_center {
   text-align: center;
 }
 
-#igwvolrehz .gt_right {
+#qcbwaboaqs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#igwvolrehz .gt_font_normal {
+#qcbwaboaqs .gt_font_normal {
   font-weight: normal;
 }
 
-#igwvolrehz .gt_font_bold {
+#qcbwaboaqs .gt_font_bold {
   font-weight: bold;
 }
 
-#igwvolrehz .gt_font_italic {
+#qcbwaboaqs .gt_font_italic {
   font-style: italic;
 }
 
-#igwvolrehz .gt_super {
+#qcbwaboaqs .gt_super {
   font-size: 65%;
 }
 
-#igwvolrehz .gt_footnote_marks {
+#qcbwaboaqs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#igwvolrehz .gt_asterisk {
+#qcbwaboaqs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#igwvolrehz .gt_indent_1 {
+#qcbwaboaqs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#igwvolrehz .gt_indent_2 {
+#qcbwaboaqs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#igwvolrehz .gt_indent_3 {
+#qcbwaboaqs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#igwvolrehz .gt_indent_4 {
+#qcbwaboaqs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#igwvolrehz .gt_indent_5 {
+#qcbwaboaqs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#igwvolrehz .katex-display {
+#qcbwaboaqs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#igwvolrehz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qcbwaboaqs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#igwvolrehz tbody tr:last-child {
+#qcbwaboaqs tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -2698,11 +2698,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>optimal_multiplier <span class="ot">&lt;-</span> <span class="fu">find_optimal_multiplier</span>(perc_home_win)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn’t accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each differences in relative team quality (e.g., unequally matched teams).</p>
+<p>This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn’t accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each difference in relative team quality (e.g., unequally matched teams).</p>
 </section>
 <section id="simulate-the-match-results" class="level4">
 <h4 class="anchored" data-anchor-id="simulate-the-match-results">Simulate the match results</h4>
-<p>Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability (after accounting for each teams quality and home field advantage), then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).</p>
+<p>Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition after accounting for home field advantage to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2742,17 +2742,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -24  -8 -14 -10  -4 -14 -16  -6  24 -28  -6  -6   4  20  -4</code></pre>
+<pre><code> [1]  42 -20 -23  -6 -20 -16  -1   2 -16  38 -12  30  -4   6  12</code></pre>
 </div>
 </div>
 <p>Notice how most of the values are negative (meaning the away team won).</p>
 <p>This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins over a very large number of simulations gives us an estimated probability of the away team winning this game that approaches the true value.</p>
-<p>There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn’t consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don’t think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.</p>
+<p>There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn’t consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Team strength values and home field advantage only influence who wins. I also don’t think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.</p>
 </section>
 <section id="simulating-many-seasons" class="level4">
 <h4 class="anchored" data-anchor-id="simulating-many-seasons">Simulating many seasons</h4>
 <p>Now we have a function to simulate a match, we need to use it populate the random season draws with match results. We don’t just want one or ten seasons simulated though.</p>
-<p><strong>We want ten thousand</strong>.</p>
+<p><strong><em>We want ten thousand.</em></strong></p>
 <p>This is where the actual work gets done. To demonstrate what this looks like, I’ll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4591,7 +4591,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>With 12, it’s a toss up</p></li>
 <li><p>With 13, it’s likely</p></li>
 </ul>
-<p>This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I’ve created an animation with the first 1,000 simulations to show the law of large numbers at work.</p>
+<p>This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I’ve created an animation with the first 1,000 simulated seasons to show the law of large numbers at work.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -5227,7 +5227,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Historical distribution of wins</span></span>
 <span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>I calculated the points differential for each match and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>I calculated the points differential for each game and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.</span>
 <span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> import <span class="sc">|&gt;</span></span>
@@ -5344,13 +5344,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>If anyone knows if / how this can be done, let me know!</span>
 <span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simply calculate the proportion of teams that qualified given each win total from the data set</span></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### Simply calculate the proportion of teams that qualified for each number of wins the data set</span></span>
 <span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>This isn't a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons worth of data, a tiny fraction of all the possible combinations of win-loss records and finals standings to use for our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.</span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>This isn't a good idea. With 17 teams and each of them playing 24 games in a season, the number of ways a season could play out to determine the final competition ladder is astronomically large. We only have 10 seasons of data; a tiny fraction of all the possible combinations of win-loss records and finals standings to use in our calculation. The true probability of making the finals can't be estimated with acceptable accuracy based on such a small sample of data. To demonstrate, the data we have shows no teams with 11 wins qualifying for the finals (from 8 times this has occurred). Does that mean the probability of qualifying is 0%? No. This is just noise (i.e., random variability) that we happen to have observed in our sample. Evidence of this is a team that only won 10 games qualified for the finals in a different season.</span>
 <span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fitting a linear model to the data</span></span>
 <span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>This also isn't a good idea. On the surface, a logistic regression model sounds okay given we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.</span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>This also isn't a good idea. On the surface, a logistic regression model sounds okay as we're trying to estimate the probability of a binary outcome (making the finals or not), but the assumptions baked into these models aren't a great fit for this problem. Statistical models need to make assumptions so the complexity of the world can be simplified into something quantifiable and useful. In the case of generalised linear models like logistic regression, one of those assumptions is a linear relationship between the predictors and the transformed outcome. This is often useful because as it allows a smooth curve to be fit through the data, but it breaks down here without awareness of the fundamental competition constraints (e.g., for one team to win, the other has to lose). This means that they can (and do in this case) predict impossible scenarios like making the finals with a win-loss record that is mathematically impossible for them to qualify.</span>
 <span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Monte Carlo simulation</span></span>
 <span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
@@ -5394,7 +5394,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Populate fixtures with results</span></span>
 <span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.</span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams in a match determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.</span>
 <span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: "center"</span></span>
@@ -5459,9 +5459,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Accounting for team quality</span></span>
 <span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a>Because this distribution is so unique, I'll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team's strength. There are many ways to approach this, but for simplicity I will just use the Sportsbet odds for winning the 2025 competition.</span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a>Because this distribution is so unique, I'll randomly sample directly from it to populate the match results in my simulated seasons (instead of sampling from a theoretical distribution). I don't want to sample completely at random though, because the teams are not of equal quality. I want the better teams to have a higher probability of winning against the worse teams, weighted by how much better / worse they are. To do this, we need a measure of each team's strength. There are many ways to approach this, but for simplicity I'll just use the Sportsbet odds for winning the 2025 competition.</span>
 <span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>The odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.</span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>The bookmaker odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.</span>
 <span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a><span class="co"># Sportsbet odds for to win 2025 GF</span></span>
@@ -5540,11 +5540,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a>optimal_multiplier <span class="ot">&lt;-</span> <span class="fu">find_optimal_multiplier</span>(perc_home_win)</span>
 <span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a>This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each differences in relative team quality (e.g., unequally matched teams).</span>
+<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a>This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each difference in relative team quality (e.g., unequally matched teams).</span>
 <span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Simulate the match results</span></span>
 <span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition between the home and away team to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability (after accounting for each teams quality and home field advantage), then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).</span>
+<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition after accounting for home field advantage to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).</span>
 <span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to simulate a single match</span></span>
@@ -5586,13 +5586,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a>This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins over a very large number of simulations gives us an estimated probability of the away team winning this game that approaches the true value.</span>
 <span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Only who the winning team is considers the team strength values and home field advantage. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.</span>
+<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Team strength values and home field advantage only influence who wins. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.</span>
 <span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Simulating many seasons</span></span>
 <span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a>Now we have a function to simulate a match, we need to use it populate the random season draws with match results. We don't just want one or ten seasons simulated though.</span>
 <span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>**We want ten thousand**.</span>
+<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>***We want ten thousand.***</span>
 <span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a>This is where the actual work gets done. To demonstrate what this looks like, I'll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.</span>
 <span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a></span>
@@ -5733,7 +5733,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-616"><a href="#cb18-616" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-617"><a href="#cb18-617" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>With 13, it's likely</span>
 <span id="cb18-618"><a href="#cb18-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-619"><a href="#cb18-619" aria-hidden="true" tabindex="-1"></a>This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulations to show the law of large numbers at work.</span>
+<span id="cb18-619"><a href="#cb18-619" aria-hidden="true" tabindex="-1"></a>This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulated seasons to show the law of large numbers at work.</span>
 <span id="cb18-620"><a href="#cb18-620" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-623"><a href="#cb18-623" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-624"><a href="#cb18-624" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>

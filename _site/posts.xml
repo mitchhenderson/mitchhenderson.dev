@@ -193,27 +193,27 @@ background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="jkdmaikxtd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="msiykvjejp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#jkdmaikxtd table {
+#msiykvjejp table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jkdmaikxtd thead, #jkdmaikxtd tbody, #jkdmaikxtd tfoot, #jkdmaikxtd tr, #jkdmaikxtd td, #jkdmaikxtd th {
+#msiykvjejp thead, #msiykvjejp tbody, #msiykvjejp tfoot, #msiykvjejp tr, #msiykvjejp td, #msiykvjejp th {
   border-style: none;
 }
 
-#jkdmaikxtd p {
+#msiykvjejp p {
   margin: 0;
   padding: 0;
 }
 
-#jkdmaikxtd .gt_table {
+#msiykvjejp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -239,12 +239,12 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-left-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_caption {
+#msiykvjejp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jkdmaikxtd .gt_title {
+#msiykvjejp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -256,7 +256,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#jkdmaikxtd .gt_subtitle {
+#msiykvjejp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -268,7 +268,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-width: 0;
 }
 
-#jkdmaikxtd .gt_heading {
+#msiykvjejp .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -280,13 +280,13 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_bottom_border {
+#msiykvjejp .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_col_headings {
+#msiykvjejp .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -301,7 +301,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_col_heading {
+#msiykvjejp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -321,7 +321,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#jkdmaikxtd .gt_column_spanner_outer {
+#msiykvjejp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -333,15 +333,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 4px;
 }
 
-#jkdmaikxtd .gt_column_spanner_outer:first-child {
+#msiykvjejp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jkdmaikxtd .gt_column_spanner_outer:last-child {
+#msiykvjejp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jkdmaikxtd .gt_column_spanner {
+#msiykvjejp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -353,11 +353,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   width: 100%;
 }
 
-#jkdmaikxtd .gt_spanner_row {
+#msiykvjejp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jkdmaikxtd .gt_group_heading {
+#msiykvjejp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -383,7 +383,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   text-align: left;
 }
 
-#jkdmaikxtd .gt_empty_group_heading {
+#msiykvjejp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -398,15 +398,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: middle;
 }
 
-#jkdmaikxtd .gt_from_md > :first-child {
+#msiykvjejp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jkdmaikxtd .gt_from_md > :last-child {
+#msiykvjejp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jkdmaikxtd .gt_row {
+#msiykvjejp .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -425,7 +425,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#jkdmaikxtd .gt_stub {
+#msiykvjejp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -438,7 +438,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#jkdmaikxtd .gt_stub_row_group {
+#msiykvjejp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -452,15 +452,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: top;
 }
 
-#jkdmaikxtd .gt_row_group_first td {
+#msiykvjejp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jkdmaikxtd .gt_row_group_first th {
+#msiykvjejp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jkdmaikxtd .gt_summary_row {
+#msiykvjejp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -470,16 +470,16 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#jkdmaikxtd .gt_first_summary_row {
+#msiykvjejp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_first_summary_row.thick {
+#msiykvjejp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jkdmaikxtd .gt_last_summary_row {
+#msiykvjejp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,7 +489,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_grand_summary_row {
+#msiykvjejp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -499,7 +499,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#jkdmaikxtd .gt_first_grand_summary_row {
+#msiykvjejp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +509,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_last_grand_summary_row_top {
+#msiykvjejp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -519,11 +519,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_striped {
+#msiykvjejp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jkdmaikxtd .gt_table_body {
+#msiykvjejp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -532,7 +532,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_footnotes {
+#msiykvjejp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -546,7 +546,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_footnote {
+#msiykvjejp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -555,7 +555,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#jkdmaikxtd .gt_sourcenotes {
+#msiykvjejp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -569,7 +569,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#jkdmaikxtd .gt_sourcenote {
+#msiykvjejp .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -577,76 +577,76 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#jkdmaikxtd .gt_left {
+#msiykvjejp .gt_left {
   text-align: left;
 }
 
-#jkdmaikxtd .gt_center {
+#msiykvjejp .gt_center {
   text-align: center;
 }
 
-#jkdmaikxtd .gt_right {
+#msiykvjejp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jkdmaikxtd .gt_font_normal {
+#msiykvjejp .gt_font_normal {
   font-weight: normal;
 }
 
-#jkdmaikxtd .gt_font_bold {
+#msiykvjejp .gt_font_bold {
   font-weight: bold;
 }
 
-#jkdmaikxtd .gt_font_italic {
+#msiykvjejp .gt_font_italic {
   font-style: italic;
 }
 
-#jkdmaikxtd .gt_super {
+#msiykvjejp .gt_super {
   font-size: 65%;
 }
 
-#jkdmaikxtd .gt_footnote_marks {
+#msiykvjejp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jkdmaikxtd .gt_asterisk {
+#msiykvjejp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jkdmaikxtd .gt_indent_1 {
+#msiykvjejp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jkdmaikxtd .gt_indent_2 {
+#msiykvjejp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jkdmaikxtd .gt_indent_3 {
+#msiykvjejp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jkdmaikxtd .gt_indent_4 {
+#msiykvjejp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jkdmaikxtd .gt_indent_5 {
+#msiykvjejp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jkdmaikxtd .katex-display {
+#msiykvjejp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jkdmaikxtd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#msiykvjejp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#jkdmaikxtd tbody tr:last-child {
+#msiykvjejp tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -988,27 +988,27 @@ background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="mzawhydspp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bslsitehyt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mzawhydspp table {
+#bslsitehyt table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mzawhydspp thead, #mzawhydspp tbody, #mzawhydspp tfoot, #mzawhydspp tr, #mzawhydspp td, #mzawhydspp th {
+#bslsitehyt thead, #bslsitehyt tbody, #bslsitehyt tfoot, #bslsitehyt tr, #bslsitehyt td, #bslsitehyt th {
   border-style: none;
 }
 
-#mzawhydspp p {
+#bslsitehyt p {
   margin: 0;
   padding: 0;
 }
 
-#mzawhydspp .gt_table {
+#bslsitehyt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1034,12 +1034,12 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-left-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_caption {
+#bslsitehyt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mzawhydspp .gt_title {
+#bslsitehyt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1051,7 +1051,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#mzawhydspp .gt_subtitle {
+#bslsitehyt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1063,7 +1063,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-width: 0;
 }
 
-#mzawhydspp .gt_heading {
+#bslsitehyt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1075,13 +1075,13 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_bottom_border {
+#bslsitehyt .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_col_headings {
+#bslsitehyt .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1096,7 +1096,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_col_heading {
+#bslsitehyt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1116,7 +1116,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#mzawhydspp .gt_column_spanner_outer {
+#bslsitehyt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1128,15 +1128,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 4px;
 }
 
-#mzawhydspp .gt_column_spanner_outer:first-child {
+#bslsitehyt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mzawhydspp .gt_column_spanner_outer:last-child {
+#bslsitehyt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mzawhydspp .gt_column_spanner {
+#bslsitehyt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1148,11 +1148,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   width: 100%;
 }
 
-#mzawhydspp .gt_spanner_row {
+#bslsitehyt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mzawhydspp .gt_group_heading {
+#bslsitehyt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1178,7 +1178,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   text-align: left;
 }
 
-#mzawhydspp .gt_empty_group_heading {
+#bslsitehyt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1193,15 +1193,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: middle;
 }
 
-#mzawhydspp .gt_from_md > :first-child {
+#bslsitehyt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mzawhydspp .gt_from_md > :last-child {
+#bslsitehyt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mzawhydspp .gt_row {
+#bslsitehyt .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1220,7 +1220,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#mzawhydspp .gt_stub {
+#bslsitehyt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1233,7 +1233,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#mzawhydspp .gt_stub_row_group {
+#bslsitehyt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1247,15 +1247,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: top;
 }
 
-#mzawhydspp .gt_row_group_first td {
+#bslsitehyt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mzawhydspp .gt_row_group_first th {
+#bslsitehyt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mzawhydspp .gt_summary_row {
+#bslsitehyt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1265,16 +1265,16 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#mzawhydspp .gt_first_summary_row {
+#bslsitehyt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_first_summary_row.thick {
+#bslsitehyt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mzawhydspp .gt_last_summary_row {
+#bslsitehyt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1284,7 +1284,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_grand_summary_row {
+#bslsitehyt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1294,7 +1294,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#mzawhydspp .gt_first_grand_summary_row {
+#bslsitehyt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1304,7 +1304,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_last_grand_summary_row_top {
+#bslsitehyt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1314,11 +1314,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_striped {
+#bslsitehyt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mzawhydspp .gt_table_body {
+#bslsitehyt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1327,7 +1327,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_footnotes {
+#bslsitehyt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1341,7 +1341,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_footnote {
+#bslsitehyt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1350,7 +1350,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#mzawhydspp .gt_sourcenotes {
+#bslsitehyt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1364,7 +1364,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#mzawhydspp .gt_sourcenote {
+#bslsitehyt .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1372,76 +1372,76 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#mzawhydspp .gt_left {
+#bslsitehyt .gt_left {
   text-align: left;
 }
 
-#mzawhydspp .gt_center {
+#bslsitehyt .gt_center {
   text-align: center;
 }
 
-#mzawhydspp .gt_right {
+#bslsitehyt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mzawhydspp .gt_font_normal {
+#bslsitehyt .gt_font_normal {
   font-weight: normal;
 }
 
-#mzawhydspp .gt_font_bold {
+#bslsitehyt .gt_font_bold {
   font-weight: bold;
 }
 
-#mzawhydspp .gt_font_italic {
+#bslsitehyt .gt_font_italic {
   font-style: italic;
 }
 
-#mzawhydspp .gt_super {
+#bslsitehyt .gt_super {
   font-size: 65%;
 }
 
-#mzawhydspp .gt_footnote_marks {
+#bslsitehyt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mzawhydspp .gt_asterisk {
+#bslsitehyt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mzawhydspp .gt_indent_1 {
+#bslsitehyt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mzawhydspp .gt_indent_2 {
+#bslsitehyt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mzawhydspp .gt_indent_3 {
+#bslsitehyt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mzawhydspp .gt_indent_4 {
+#bslsitehyt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mzawhydspp .gt_indent_5 {
+#bslsitehyt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mzawhydspp .katex-display {
+#bslsitehyt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mzawhydspp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bslsitehyt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#mzawhydspp tbody tr:last-child {
+#bslsitehyt tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -1601,47 +1601,57 @@ font-style: inherit;">geom_dotsinterval</span>(<span class="at" style="color: #6
 background-color: null;
 font-style: inherit;">group =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">NA</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">NA</span>,</span>
+<span id="cb5-6">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">binwidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>,</span>
+<span id="cb5-7">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">overflow =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"compress"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-6">  <span class="fu" style="color: #4758AB;
+<span id="cb5-8">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"segment"</span>, </span>
-<span id="cb5-7">           <span class="at" style="color: #657422;
+<span id="cb5-9">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1.5</span>, </span>
-<span id="cb5-8">           <span class="at" style="color: #657422;
+<span id="cb5-10">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">xend =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1.5</span>, </span>
-<span id="cb5-9">           <span class="at" style="color: #657422;
+<span id="cb5-11">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.075</span>, </span>
-<span id="cb5-10">           <span class="at" style="color: #657422;
+<span id="cb5-12">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">yend =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.5</span>,</span>
-<span id="cb5-11">           <span class="at" style="color: #657422;
+<span id="cb5-13">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.2</span>,</span>
-<span id="cb5-12">           <span class="at" style="color: #657422;
+<span id="cb5-14">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"grey60"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-13">  <span class="fu" style="color: #4758AB;
+<span id="cb5-15">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_richtext</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1652,12 +1662,12 @@ background-color: null;
 font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.5</span>, </span>
-<span id="cb5-14">                              <span class="at" style="color: #657422;
+<span id="cb5-16">                              <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1.5</span>,</span>
-<span id="cb5-15">                              <span class="at" style="color: #657422;
+<span id="cb5-17">                              <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label =</span> glue<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1674,86 +1684,86 @@ background-color: null;
 font-style: inherit;">\"</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">&gt;2016 Newcastle Knights&lt;/span&gt;&lt;br&gt;1 win, 1 draw"</span>)),</span>
-<span id="cb5-16">                <span class="fu" style="color: #4758AB;
+<span id="cb5-18">                <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label =</span> label),</span>
-<span id="cb5-17">                <span class="at" style="color: #657422;
+<span id="cb5-19">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Myriad Pro Regular"</span>,</span>
-<span id="cb5-18">                <span class="at" style="color: #657422;
+<span id="cb5-20">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, </span>
-<span id="cb5-19">                <span class="at" style="color: #657422;
+<span id="cb5-21">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">vjust =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, </span>
-<span id="cb5-20">                <span class="at" style="color: #657422;
+<span id="cb5-22">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">fill =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>, </span>
-<span id="cb5-21">                <span class="at" style="color: #657422;
+<span id="cb5-23">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label.color =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>, </span>
-<span id="cb5-22">                <span class="at" style="color: #657422;
+<span id="cb5-24">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2.5</span>, </span>
-<span id="cb5-23">                <span class="at" style="color: #657422;
+<span id="cb5-25">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"grey40"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-24">  <span class="fu" style="color: #4758AB;
+<span id="cb5-26">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"segment"</span>, </span>
-<span id="cb5-25">           <span class="at" style="color: #657422;
+<span id="cb5-27">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">21</span>, </span>
-<span id="cb5-26">           <span class="at" style="color: #657422;
+<span id="cb5-28">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">xend =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">21</span>, </span>
-<span id="cb5-27">           <span class="at" style="color: #657422;
+<span id="cb5-29">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.135</span>, </span>
-<span id="cb5-28">           <span class="at" style="color: #657422;
+<span id="cb5-30">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">yend =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.5</span>,</span>
-<span id="cb5-29">           <span class="at" style="color: #657422;
+<span id="cb5-31">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.2</span>,</span>
-<span id="cb5-30">           <span class="at" style="color: #657422;
+<span id="cb5-32">           <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"grey60"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-31">  <span class="fu" style="color: #4758AB;
+<span id="cb5-33">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">geom_richtext</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1764,12 +1774,12 @@ background-color: null;
 font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.5</span>, </span>
-<span id="cb5-32">                              <span class="at" style="color: #657422;
+<span id="cb5-34">                              <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">21</span>,</span>
-<span id="cb5-33">                              <span class="at" style="color: #657422;
+<span id="cb5-35">                              <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label =</span> glue<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1786,61 +1796,61 @@ background-color: null;
 font-style: inherit;">\"</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">&gt;2021 Melbourne&lt;br&gt;Storm &amp; Penrith&lt;br&gt;Panthers&lt;/span&gt;&lt;br&gt;Both with 21 wins"</span>)),</span>
-<span id="cb5-34">                <span class="fu" style="color: #4758AB;
+<span id="cb5-36">                <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">aes</span>(x, y, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label =</span> label),</span>
-<span id="cb5-35">                <span class="at" style="color: #657422;
+<span id="cb5-37">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Myriad Pro Regular"</span>,</span>
-<span id="cb5-36">                <span class="at" style="color: #657422;
+<span id="cb5-38">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, </span>
-<span id="cb5-37">                <span class="at" style="color: #657422;
+<span id="cb5-39">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">vjust =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, </span>
-<span id="cb5-38">                <span class="at" style="color: #657422;
+<span id="cb5-40">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">fill =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>, </span>
-<span id="cb5-39">                <span class="at" style="color: #657422;
+<span id="cb5-41">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">label.color =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">NA</span>, </span>
-<span id="cb5-40">                <span class="at" style="color: #657422;
+<span id="cb5-42">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2.5</span>, </span>
-<span id="cb5-41">                <span class="at" style="color: #657422;
+<span id="cb5-43">                <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"grey40"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-42">  <span class="fu" style="color: #4758AB;
+<span id="cb5-44">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Matches won"</span>,</span>
-<span id="cb5-43">       <span class="at" style="color: #657422;
+<span id="cb5-45">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"**NRL teams have needed as low as 10 and as high as 14 wins to make&lt;br&gt;the finals over the last 10 years**"</span>,</span>
-<span id="cb5-44">       <span class="at" style="color: #657422;
+<span id="cb5-46">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">subtitle =</span> glue<span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1849,12 +1859,12 @@ background-color: null;
 font-style: inherit;">glue</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Each circle is one team's season that either &lt;span style='color: {colours[1]}; font-size:11pt; font-family:Myriad Pro'&gt;**didn't make the finals**&lt;/span&gt; or &lt;span style='color: {colours[2]}; font-size:11pt; font-family:Myriad Pro'&gt;**made the finals**&lt;/span&gt;.&lt;br&gt;Teams with the same number of wins are stacked on top of each other."</span>),</span>
-<span id="cb5-45">       <span class="at" style="color: #657422;
+<span id="cb5-47">       <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">caption =</span> socials) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-46">  <span class="fu" style="color: #4758AB;
+<span id="cb5-48">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1865,7 +1875,7 @@ background-color: null;
 font-style: inherit;">1.5</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">23.5</span>),</span>
-<span id="cb5-47">                     <span class="at" style="color: #657422;
+<span id="cb5-49">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1878,7 +1888,7 @@ background-color: null;
 font-style: inherit;">1</span>)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-48">  <span class="fu" style="color: #4758AB;
+<span id="cb5-50">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1889,7 +1899,7 @@ background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>),</span>
-<span id="cb5-49">                     <span class="at" style="color: #657422;
+<span id="cb5-51">                     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">expand =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1904,28 +1914,28 @@ background-color: null;
 font-style: inherit;">0.05</span>))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-50">  <span class="fu" style="color: #4758AB;
+<span id="cb5-52">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">values =</span> colours) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-51">  <span class="fu" style="color: #4758AB;
+<span id="cb5-53">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">scale_colour_manual</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">values =</span> colours) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb5-52">  <span class="fu" style="color: #4758AB;
+<span id="cb5-54">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"none"</span>,</span>
-<span id="cb5-53">        <span class="at" style="color: #657422;
+<span id="cb5-55">        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">axis.line.x =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1934,22 +1944,22 @@ background-color: null;
 font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"grey20"</span>),</span>
-<span id="cb5-54">        <span class="at" style="color: #657422;
+<span id="cb5-56">        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_blank</span>(),</span>
-<span id="cb5-55">        <span class="at" style="color: #657422;
+<span id="cb5-57">        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">axis.text.y =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_blank</span>(),</span>
-<span id="cb5-56">        <span class="at" style="color: #657422;
+<span id="cb5-58">        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">axis.ticks =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_blank</span>(),</span>
-<span id="cb5-57">        <span class="at" style="color: #657422;
+<span id="cb5-59">        <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">panel.grid =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2091,27 +2101,27 @@ background-color: null;
 font-style: inherit;">TRUE</span>)</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="nyqalbtkgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="glocyppszr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nyqalbtkgb table {
+#glocyppszr table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nyqalbtkgb thead, #nyqalbtkgb tbody, #nyqalbtkgb tfoot, #nyqalbtkgb tr, #nyqalbtkgb td, #nyqalbtkgb th {
+#glocyppszr thead, #glocyppszr tbody, #glocyppszr tfoot, #glocyppszr tr, #glocyppszr td, #glocyppszr th {
   border-style: none;
 }
 
-#nyqalbtkgb p {
+#glocyppszr p {
   margin: 0;
   padding: 0;
 }
 
-#nyqalbtkgb .gt_table {
+#glocyppszr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2137,12 +2147,12 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-left-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_caption {
+#glocyppszr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nyqalbtkgb .gt_title {
+#glocyppszr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2154,7 +2164,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#nyqalbtkgb .gt_subtitle {
+#glocyppszr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2166,7 +2176,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-width: 0;
 }
 
-#nyqalbtkgb .gt_heading {
+#glocyppszr .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2178,13 +2188,13 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_bottom_border {
+#glocyppszr .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_col_headings {
+#glocyppszr .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2199,7 +2209,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_col_heading {
+#glocyppszr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2219,7 +2229,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#nyqalbtkgb .gt_column_spanner_outer {
+#glocyppszr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2231,15 +2241,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 4px;
 }
 
-#nyqalbtkgb .gt_column_spanner_outer:first-child {
+#glocyppszr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nyqalbtkgb .gt_column_spanner_outer:last-child {
+#glocyppszr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nyqalbtkgb .gt_column_spanner {
+#glocyppszr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -2251,11 +2261,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   width: 100%;
 }
 
-#nyqalbtkgb .gt_spanner_row {
+#glocyppszr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nyqalbtkgb .gt_group_heading {
+#glocyppszr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2281,7 +2291,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   text-align: left;
 }
 
-#nyqalbtkgb .gt_empty_group_heading {
+#glocyppszr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2296,15 +2306,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: middle;
 }
 
-#nyqalbtkgb .gt_from_md > :first-child {
+#glocyppszr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nyqalbtkgb .gt_from_md > :last-child {
+#glocyppszr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nyqalbtkgb .gt_row {
+#glocyppszr .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2323,7 +2333,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#nyqalbtkgb .gt_stub {
+#glocyppszr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2336,7 +2346,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#nyqalbtkgb .gt_stub_row_group {
+#glocyppszr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2350,15 +2360,15 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   vertical-align: top;
 }
 
-#nyqalbtkgb .gt_row_group_first td {
+#glocyppszr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nyqalbtkgb .gt_row_group_first th {
+#glocyppszr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nyqalbtkgb .gt_summary_row {
+#glocyppszr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2368,16 +2378,16 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#nyqalbtkgb .gt_first_summary_row {
+#glocyppszr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_first_summary_row.thick {
+#glocyppszr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nyqalbtkgb .gt_last_summary_row {
+#glocyppszr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2387,7 +2397,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_grand_summary_row {
+#glocyppszr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2397,7 +2407,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#nyqalbtkgb .gt_first_grand_summary_row {
+#glocyppszr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2407,7 +2417,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_last_grand_summary_row_top {
+#glocyppszr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2417,11 +2427,11 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_striped {
+#glocyppszr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nyqalbtkgb .gt_table_body {
+#glocyppszr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2430,7 +2440,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_footnotes {
+#glocyppszr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2444,7 +2454,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_footnote {
+#glocyppszr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2453,7 +2463,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#nyqalbtkgb .gt_sourcenotes {
+#glocyppszr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2467,7 +2477,7 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#nyqalbtkgb .gt_sourcenote {
+#glocyppszr .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2475,76 +2485,76 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#nyqalbtkgb .gt_left {
+#glocyppszr .gt_left {
   text-align: left;
 }
 
-#nyqalbtkgb .gt_center {
+#glocyppszr .gt_center {
   text-align: center;
 }
 
-#nyqalbtkgb .gt_right {
+#glocyppszr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nyqalbtkgb .gt_font_normal {
+#glocyppszr .gt_font_normal {
   font-weight: normal;
 }
 
-#nyqalbtkgb .gt_font_bold {
+#glocyppszr .gt_font_bold {
   font-weight: bold;
 }
 
-#nyqalbtkgb .gt_font_italic {
+#glocyppszr .gt_font_italic {
   font-style: italic;
 }
 
-#nyqalbtkgb .gt_super {
+#glocyppszr .gt_super {
   font-size: 65%;
 }
 
-#nyqalbtkgb .gt_footnote_marks {
+#glocyppszr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nyqalbtkgb .gt_asterisk {
+#glocyppszr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nyqalbtkgb .gt_indent_1 {
+#glocyppszr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nyqalbtkgb .gt_indent_2 {
+#glocyppszr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nyqalbtkgb .gt_indent_3 {
+#glocyppszr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nyqalbtkgb .gt_indent_4 {
+#glocyppszr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nyqalbtkgb .gt_indent_5 {
+#glocyppszr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nyqalbtkgb .katex-display {
+#glocyppszr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nyqalbtkgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#glocyppszr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#nyqalbtkgb tbody tr:last-child {
+#glocyppszr tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -2556,26 +2566,26 @@ font-style: inherit;">TRUE</span>)</span></code></pre></div>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="home" class="gt_row gt_left">Cronulla Sutherland Sharks</td>
-<td headers="away" class="gt_row gt_left">Penrith Panthers</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Sydney Roosters</td>
-<td headers="away" class="gt_row gt_left">Cronulla Sutherland Sharks</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
+    <tr><td headers="home" class="gt_row gt_left">North Queensland Cowboys</td>
+<td headers="away" class="gt_row gt_left">Manly Warringah Sea Eagles</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Newcastle Knights</td>
+<td headers="away" class="gt_row gt_left">Gold Coast Titans</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">New Zealand Warriors</td>
 <td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
-<td headers="away" class="gt_row gt_left">Gold Coast Titans</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">St George Illawarra Dragons</td>
-<td headers="away" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td>
-<td headers="away" class="gt_row gt_left">Gold Coast Titans</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Brisbane Broncos</td>
-<td headers="away" class="gt_row gt_left">Penrith Panthers</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Newcastle Knights</td>
+<td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
     <tr><td headers="home" class="gt_row gt_left">Cronulla Sutherland Sharks</td>
 <td headers="away" class="gt_row gt_left">Canterbury Bankstown Bulldogs</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Manly Warringah Sea Eagles</td>
-<td headers="away" class="gt_row gt_left">Sydney Roosters</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Penrith Panthers</td>
-<td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Wests Tigers</td>
+<td headers="away" class="gt_row gt_left">South Sydney Rabbitohs</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">North Queensland Cowboys</td>
+<td headers="away" class="gt_row gt_left">Wests Tigers</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
+<td headers="away" class="gt_row gt_left">Brisbane Broncos</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Newcastle Knights</td>
+<td headers="away" class="gt_row gt_left">South Sydney Rabbitohs</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Gold Coast Titans</td>
+<td headers="away" class="gt_row gt_left">Brisbane Broncos</td></tr>
   </tbody>
   
   
@@ -3130,27 +3140,27 @@ background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="qcbwaboaqs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="aauyuvrfwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qcbwaboaqs table {
+#aauyuvrfwl table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qcbwaboaqs thead, #qcbwaboaqs tbody, #qcbwaboaqs tfoot, #qcbwaboaqs tr, #qcbwaboaqs td, #qcbwaboaqs th {
+#aauyuvrfwl thead, #aauyuvrfwl tbody, #aauyuvrfwl tfoot, #aauyuvrfwl tr, #aauyuvrfwl td, #aauyuvrfwl th {
   border-style: none;
 }
 
-#qcbwaboaqs p {
+#aauyuvrfwl p {
   margin: 0;
   padding: 0;
 }
 
-#qcbwaboaqs .gt_table {
+#aauyuvrfwl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3176,12 +3186,12 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-left-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_caption {
+#aauyuvrfwl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qcbwaboaqs .gt_title {
+#aauyuvrfwl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3193,7 +3203,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#qcbwaboaqs .gt_subtitle {
+#aauyuvrfwl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3205,7 +3215,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-top-width: 0;
 }
 
-#qcbwaboaqs .gt_heading {
+#aauyuvrfwl .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3217,13 +3227,13 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_bottom_border {
+#aauyuvrfwl .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_col_headings {
+#aauyuvrfwl .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3238,7 +3248,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_col_heading {
+#aauyuvrfwl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3258,7 +3268,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#qcbwaboaqs .gt_column_spanner_outer {
+#aauyuvrfwl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3270,15 +3280,15 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 4px;
 }
 
-#qcbwaboaqs .gt_column_spanner_outer:first-child {
+#aauyuvrfwl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qcbwaboaqs .gt_column_spanner_outer:last-child {
+#aauyuvrfwl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qcbwaboaqs .gt_column_spanner {
+#aauyuvrfwl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -3290,11 +3300,11 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   width: 100%;
 }
 
-#qcbwaboaqs .gt_spanner_row {
+#aauyuvrfwl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qcbwaboaqs .gt_group_heading {
+#aauyuvrfwl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3320,7 +3330,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   text-align: left;
 }
 
-#qcbwaboaqs .gt_empty_group_heading {
+#aauyuvrfwl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3335,15 +3345,15 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   vertical-align: middle;
 }
 
-#qcbwaboaqs .gt_from_md > :first-child {
+#aauyuvrfwl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qcbwaboaqs .gt_from_md > :last-child {
+#aauyuvrfwl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qcbwaboaqs .gt_row {
+#aauyuvrfwl .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3362,7 +3372,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#qcbwaboaqs .gt_stub {
+#aauyuvrfwl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3375,7 +3385,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#qcbwaboaqs .gt_stub_row_group {
+#aauyuvrfwl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3389,15 +3399,15 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   vertical-align: top;
 }
 
-#qcbwaboaqs .gt_row_group_first td {
+#aauyuvrfwl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qcbwaboaqs .gt_row_group_first th {
+#aauyuvrfwl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qcbwaboaqs .gt_summary_row {
+#aauyuvrfwl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3407,16 +3417,16 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#qcbwaboaqs .gt_first_summary_row {
+#aauyuvrfwl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_first_summary_row.thick {
+#aauyuvrfwl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qcbwaboaqs .gt_last_summary_row {
+#aauyuvrfwl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3426,7 +3436,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_grand_summary_row {
+#aauyuvrfwl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3436,7 +3446,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#qcbwaboaqs .gt_first_grand_summary_row {
+#aauyuvrfwl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3446,7 +3456,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_last_grand_summary_row_top {
+#aauyuvrfwl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3456,11 +3466,11 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_striped {
+#aauyuvrfwl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qcbwaboaqs .gt_table_body {
+#aauyuvrfwl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3469,7 +3479,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_footnotes {
+#aauyuvrfwl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3483,7 +3493,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_footnote {
+#aauyuvrfwl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3492,7 +3502,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#qcbwaboaqs .gt_sourcenotes {
+#aauyuvrfwl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3506,7 +3516,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#qcbwaboaqs .gt_sourcenote {
+#aauyuvrfwl .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3514,76 +3524,76 @@ font-style: inherit;">1</span>)</span></code></pre></div>
   padding-right: 5px;
 }
 
-#qcbwaboaqs .gt_left {
+#aauyuvrfwl .gt_left {
   text-align: left;
 }
 
-#qcbwaboaqs .gt_center {
+#aauyuvrfwl .gt_center {
   text-align: center;
 }
 
-#qcbwaboaqs .gt_right {
+#aauyuvrfwl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qcbwaboaqs .gt_font_normal {
+#aauyuvrfwl .gt_font_normal {
   font-weight: normal;
 }
 
-#qcbwaboaqs .gt_font_bold {
+#aauyuvrfwl .gt_font_bold {
   font-weight: bold;
 }
 
-#qcbwaboaqs .gt_font_italic {
+#aauyuvrfwl .gt_font_italic {
   font-style: italic;
 }
 
-#qcbwaboaqs .gt_super {
+#aauyuvrfwl .gt_super {
   font-size: 65%;
 }
 
-#qcbwaboaqs .gt_footnote_marks {
+#aauyuvrfwl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qcbwaboaqs .gt_asterisk {
+#aauyuvrfwl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qcbwaboaqs .gt_indent_1 {
+#aauyuvrfwl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qcbwaboaqs .gt_indent_2 {
+#aauyuvrfwl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qcbwaboaqs .gt_indent_3 {
+#aauyuvrfwl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qcbwaboaqs .gt_indent_4 {
+#aauyuvrfwl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qcbwaboaqs .gt_indent_5 {
+#aauyuvrfwl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qcbwaboaqs .katex-display {
+#aauyuvrfwl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qcbwaboaqs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aauyuvrfwl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#qcbwaboaqs tbody tr:last-child {
+#aauyuvrfwl tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -3903,7 +3913,7 @@ background-color: null;
 font-style: inherit;">unlist</span>()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  42 -20 -23  -6 -20 -16  -1   2 -16  38 -12  30  -4   6  12</code></pre>
+<pre><code> [1]  -2  -6  24  -1  -2 -22  30  -2  -6 -28  -6 -32 -20 -16  -8</code></pre>
 </div>
 </div>
 <p>Notice how most of the values are negative (meaning the away team won).</p>
@@ -5562,7 +5572,7 @@ font-style: inherit;">|&gt;</span></span>
 background-color: null;
 font-style: inherit;">cols_label_with</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">columns =</span> list_data, </span>
+font-style: inherit;">columns =</span> list_data,</span>
 <span id="cb16-47">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">fn =</span> <span class="cf" style="color: #003B4F;
@@ -5584,7 +5594,7 @@ font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"&lt;span&gt;%s&lt;/span&gt;"</span>, full_label) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">|&gt;</span> </span>
+font-style: inherit;">|&gt;</span></span>
 <span id="cb16-50">                      <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">html</span>()</span>
@@ -5618,12 +5628,12 @@ font-style: inherit;">tab_style</span>(</span>
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">cell_text</span>( </span>
+font-style: inherit;">cell_text</span>(</span>
 <span id="cb16-58">      <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">font =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Myriad Pro Condensed"</span>, </span>
+font-style: inherit;">"Myriad Pro Condensed"</span>,</span>
 <span id="cb16-59">      <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">weight =</span> <span class="st" style="color: #20794D;

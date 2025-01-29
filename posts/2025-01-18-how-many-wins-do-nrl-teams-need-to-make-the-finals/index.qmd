@@ -134,7 +134,9 @@ observed_summary_results |>
   mutate(made_finals = factor(made_finals)) |>
   arrange(made_finals) |>
   ggplot(aes(x = total_wins, fill = made_finals, colour = made_finals)) +
-  geom_dotsinterval(group = NA) +
+  geom_dotsinterval(group = NA,
+                    binwidth = 0.5,
+                    overflow = "compress") +
   annotate("segment", 
            x = 1.5, 
            xend = 1.5, 
@@ -552,10 +554,10 @@ probabilities_simulated |>
     total = html("Simulated<br>occurrences"),
     made_finals = html("Times<br>qualified")
   ) |>
-  cols_label_with(columns = list_data, 
+  cols_label_with(columns = list_data,
                   fn = function(label) {
                     full_label <- glue::glue("Finals probability<br>{label}")
-                    sprintf("<span>%s</span>", full_label) |> 
+                    sprintf("<span>%s</span>", full_label) |>
                       html()
     }) |>
   tab_style(
@@ -563,8 +565,8 @@ probabilities_simulated |>
     locations = cells_body()
   ) |>
   tab_style(
-    style = cell_text( 
-      font = "Myriad Pro Condensed", 
+    style = cell_text(
+      font = "Myriad Pro Condensed",
       weight = "bold"),
     locations = cells_title(groups = "title")
   ) |>

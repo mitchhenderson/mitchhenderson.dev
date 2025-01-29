@@ -7,3 +7,7 @@ h1.title {
   font-family: "Raleway";
   font-size: 40px;
 }
+
+pre code {
+  font-size: 0.8em;  /* This makes the code 80% of the normal size */
+}

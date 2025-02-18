@@ -1,0 +1,219 @@
+---
+title: "Square up penalties"
+description: |
+  
+author: Mitch Henderson
+date: 2025-02-18
+draft: true
+format: 
+  html: 
+    code-fold: true
+    code-tools: true
+    html-table-processing: none
+knitr:
+    opts_chunk: 
+      dev: "ragg_png"
+---
+
+```{r}
+library(tidyverse)
+library(arrow)
+```
+
+```{r}
+pbp <- map(list.files("play_by_play/", full.names = T), read_parquet) |>
+  bind_rows()
+
+match_info <- map(
+  list.files("match_information/", full.names = T), 
+  read_parquet
+  ) |>
+  bind_rows() |>
+  select()
+
+referees <- map(list.files("player_list/", full.names = T), read_parquet) |>
+  bind_rows() |>
+  filter(position == "Referee",
+         str_detect(matchId, "^202"),
+         str_detect(matchId, "^2020", negate = T)) |>
+  mutate(referee = paste(firstName, lastName)) |>
+  select(matchId, referee)
+```
+
+```{r}
+penalties <- pbp |>
+  filter(type == "Penalty") |>
+  inner_join(referees, by = join_by(matchId)) |>
+  inner_join(match_info, by = join_by(matchId)) |>
+  select(-offPlayerId, -video)
+```
+
+```{r}
+df_bayes <- penalties |>
+  arrange(matchId, gameSeconds) |>
+  mutate(pre_team_penalty_count = cumsum(lag(rep(1, n()), default = 0)),
+         .by = c(matchId, teamId)) |>
+  mutate(opponentId = if_else(teamId == homeTeamId, awayTeamId, homeTeamId),
+         .by = c(matchId, gameSeconds)) |>
+  mutate(
+    pre_opponent_penalty_count = map_dbl(
+      1:n(), 
+      function(x) {
+        if (x == 1) return(0)
+        sum(teamId[1:(x - 1)] == opponentId[x])
+    }),
+  .by = matchId) |>
+  mutate(penalty_differential = pre_team_penalty_count - pre_opponent_penalty_count)
+```
+
+```{r}
+# First, let's identify both teams in each match
+match_teams <- df_bayes %>%
+  group_by(matchId) %>%
+  summarize(teams = list(unique(teamId)), 
+            n_teams = length(unique(teamId))) %>%
+  # Filter to only keep matches with exactly 2 teams
+  filter(n_teams == 2)
+
+# For each penalty event, identify which team was penalized and which wasn't
+penalties_paired <- df_bayes %>%
+  inner_join(match_teams, by = "matchId") %>%
+  rowwise() %>%
+  mutate(
+    # The team that wasn't penalized
+    other_team = setdiff(unlist(teams), teamId)[1],
+    # For the penalized team, the differential goes in one direction
+    # For the non-penalized team, it would be the opposite
+    is_penalized = 1
+  ) %>%
+  ungroup()
+
+# Now create paired data with one row per penalty event per team
+penalties_long <- penalties_paired %>%
+  select(matchId, referee, gameSeconds, penalty_differential, 
+         teamId, other_team, is_penalized) %>%
+  # Reshape to have one row per team per penalty event  
+  pivot_longer(
+    cols = c(teamId, other_team),
+    names_to = "team_role",
+    values_to = "team"
+  ) %>%
+  mutate(
+    # If this is the penalized team, is_penalized=1, otherwise 0
+    is_penalised = if_else(team_role == "teamId", 1, 0),
+    # The team-specific differential (positive if they've had more penalties)
+    team_differential = if_else(
+      team_role == "teamId", 
+      penalty_differential, 
+      -penalty_differential
+    )
+  )
+```
+
+```{r}
+library(rstanarm)
+library(tidybayes)
+
+penalties_model_prior <- stan_glm(is_penalised ~ team_differential,
+                                  data = penalties_long, family = binomial,
+                                  prior_intercept = normal(0, 1.5),
+                                  prior = normal(0, 0.5),
+                                  chains = 4, iter = 5000*2, seed = 2534,
+                                  prior_PD = TRUE)
+
+# Plot 100 prior models
+penalties_long %>% 
+  add_epred_draws(penalties_model_prior, ndraws = 100) %>%
+  ggplot(aes(x = team_differential, y = is_penalised)) +
+    geom_line(aes(y = .epred, group = .draw), linewidth = 0.1)
+```
+
+```{r}
+ggplot(penalties_long, aes(x = team_differential, y = is_penalised)) + 
+  geom_jitter(size = 0.2)
+
+penalties_long %>% 
+  mutate(penalty_bracket = 
+           cut(team_differential, breaks = seq(-20, 20, by = 2))) %>% 
+  group_by(penalty_bracket) %>% 
+  summarize(pen_rate = mean(is_penalised == 1)) %>% 
+  ggplot(aes(x = penalty_bracket, y = pen_rate)) + 
+    geom_point() + 
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5))
+```
+
+```{r}
+penalties_model <- update(penalties_model_prior, prior_PD = FALSE)
+
+# MCMC trace, density, & autocorrelation plots
+mcmc_trace(penalties_model)
+mcmc_dens_overlay(penalties_model)
+mcmc_acf(penalties_model)
+```
+
+```{r}
+# Posterior summaries on the odds scale
+exp(posterior_interval(penalties_model, prob = 0.80))
+
+# prob scale
+exp(posterior_interval(penalties_model, prob = 0.80)) / (1 + exp(posterior_interval(penalties_model, prob = 0.80)))
+
+penalties_long %>% 
+  add_epred_draws(penalties_model, ndraws = 100) %>%
+  ggplot(aes(x = team_differential, y = is_penalised)) +
+    geom_line(aes(y = .epred, group = .draw), linewidth = 0.1)
+
+binary_prediction <- posterior_predict(
+  penalties_model, newdata = data.frame(team_differential = -4))
+
+# From scratch
+
+penalties_model_df <- as.data.frame(penalties_model) %>% 
+  mutate(log_odds = `(Intercept)` + team_differential*-4,
+         odds = exp(log_odds),
+         prob = odds / (1 + odds),
+         Y = rbinom(20000, size = 1, prob = prob))
+
+ggplot(penalties_model_df, aes(x = Y)) + 
+  stat_count()
+```
+
+```{r}
+library(brms)
+
+model <- brm(
+  is_penalised ~ team_differential + (1 + team_differential | referee) + (1 | matchId),
+  family = bernoulli(),
+  data = penalties_long,
+  prior = c(
+    prior(normal(0, 1.5), class = "b"),
+    prior(normal(0, 0.5), class = "sd", group = "referee"),
+    prior(normal(0, 0.5), class = "sd", group = "matchId")
+  ),
+  cores = 4, chains = 4, iter = 2000, warmup = 1000, seed = 2534
+)
+
+
+
+
+```
+
+```{r}
+library(bayesplot)
+library(bayesrules)
+
+mcmc_trace(model, pars = c("b_Intercept", "b_team_differential"))
+
+# Effective sample sizes
+mcmc_neff(neff_ratio(model))
+```
+
+```{r}
+# Basic predictive check
+pp_check(model)
+
+# Customized PPC with bayesplot
+y <- penalties_long$was_penalised
+yrep <- posterior_predict(model, ndraws = 100)
+ppc_dens_overlay(y, yrep[1:50,])
+```

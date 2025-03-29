@@ -1,0 +1,191 @@
+---
+title: "How many games can we expect players to be available for as they age?"
+description: |
+  Description here
+author: Mitch Henderson
+date: 2025-03-29
+thumbnailImage: /img/nrl_finals_probs.png
+draft: true
+format: 
+  html: 
+    code-fold: true
+    code-tools: true
+    html-table-processing: none
+knitr:
+    opts_chunk: 
+      dev: "ragg_png"
+---
+
+```{r}
+library(tidyverse)
+library(brms)
+library(tidybayes) # For post-processing and visualization
+library(patchwork) # For combining plots
+```
+
+```{r}
+data <- read_csv("posts/_2025-03-29-how-many-games-can-we-expect-players-to-be-available-for-as-they-age/nrl_availability_and_ages_2014-2024.csv")
+```
+
+```{r}
+# --- Final Preparation ---
+player_data <- data |>
+  # Rename age column for easier use in formulas
+  rename(age = age_at_start_of_year) |>
+  # Create a factor variable for player ID (essential for random effects later)
+  # Convert playerId to character first in case it's read as numeric, 
+  # then factor to ensure levels are treated correctly.
+  mutate(player_id_factor = factor(as.character(playerId))) |>
+  # Select the core columns needed for modeling + IDs + raw counts if needed
+  select(
+    playerId, player_id_factor, season, age, 
+    matches_played, team_number_of_matches, 
+    availability_perc, availability_adjusted 
+  )
+
+# --- Quick Checks ---
+# Check the structure again
+glimpse(player_data)
+
+# Verify the range of the adjusted availability (should be > 0 and < 1)
+summary(player_data$availability_adjusted)
+
+# Check number of unique players
+n_distinct(player_data$player_id_factor) 
+
+# Check age range
+summary(player_data$age)
+```
+
+```{r}
+# Define Priors for Model 1
+priors_m1 <- c(
+  prior(normal(1, 1.5), class = Intercept),  # Prior for the overall intercept (logit scale)
+  prior(exponential(1), class = sds),       # Prior for the SD of the spline coefficients
+  prior(gamma(2, 0.1), class = phi)         # Prior for the Beta precision parameter
+)
+
+# --- Fit Model 1 ---
+# This might take a few minutes depending on your computer
+# Use options(mc.cores = parallel::detectCores()) to use all cores if desired
+options(mc.cores = parallel::detectCores())
+# For reproducibility
+set.seed(2534) 
+
+# Note: We use availability_adjusted as the outcome!
+m1_population <- brm(
+  formula = availability_adjusted ~ s(age),
+  data = player_data,
+  family = Beta(), # Specify Beta regression family
+  prior = priors_m1,
+  iter = 2000,     # Total iterations per chain
+  warmup = 1000,   # Burn-in iterations
+  chains = 4,      # Number of chains
+  cores = 4,       # Use 4 cores (adjust if needed, or set via options)
+  control = list(adapt_delta = 0.95), # May help with convergence if needed
+  backend = "cmdstanr" # Recommended backend if installed
+  # file = "m1_population_fit" # Optional: Save the fit object to avoid re-running
+)
+
+# --- Check Model Convergence and Diagnostics ---
+# Print summary - look at Rhat values (should be close to 1, e.g., < 1.01)
+# Look at Bulk_ESS and Tail_ESS (should ideally be > 400 per chain, so > 1600 total)
+summary(m1_population)
+
+# Plot model checks (trace plots, posterior distributions)
+# Look for "fuzzy caterpillar" trace plots indicating good mixing
+plot(m1_population) 
+
+# Check posterior predictive checks (does model-generated data look like real data?)
+pp_check(m1_population, ndraws = 100) # Density overlay
+pp_check(m1_population, type = "error_hist", ndraws = 10) # Distribution of residuals
+```
+
+```{r}
+# --- Visualize the Estimated Age Curve ---
+
+# Create a sequence of ages for prediction
+age_seq <- tibble(age = seq(min(player_data$age), max(player_data$age), length.out = 100))
+
+# Get posterior predictions for the mean availability (mu) on the response scale
+# This automatically handles the non-linear spline term and back-transforms from logit
+pred_m1 <- age_seq %>%
+  add_epred_draws(m1_population) # 'epred' gives expected value of the response
+
+# Calculate summary statistics (mean and credible intervals)
+pred_summary_m1 <- pred_m1 %>%
+  group_by(age) %>%
+  mean_qi(.epred) # mean_qi calculates mean and quantile intervals
+
+# Plot the curve
+plot_m1 <- ggplot(pred_summary_m1, aes(x = age)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.3, fill = "skyblue") +
+  geom_line(aes(y = .epred), color = "dodgerblue", size = 1) +
+  # Optional: Add raw data points for context (can be messy with lots of data)
+  # geom_point(data = player_data, aes(x = age, y = availability_adjusted), 
+  #            alpha = 0.05, size = 0.5, color = "grey50") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Estimated Average Player Availability vs. Age (NRL 2014-2024)",
+    subtitle = "Population-level Beta regression model with spline for age",
+    x = "Player Age at Start of Season",
+    y = "Estimated Mean Availability %"
+  ) +
+  theme_minimal()
+
+print(plot_m1)
+```
+
+```{r}
+# --- Fit Model 3 (Corrected): Hierarchical Zero-One-Inflated Beta (ZOIB acting as OIB) ---
+
+# Ensure player_data has the ORIGINAL availability_perc column with actual 1s
+# glimpse(player_data) 
+
+# Define the formula for ZOIB. 
+# We include zoi but expect its probability estimate to be near zero.
+formula_m3_zoib_corrected <- bf(
+  availability_perc ~ s(age) + (1 | player_id_factor), # Formula for mu (mean for 0 < y < 1)
+  phi ~ s(age),                                        # Formula for phi (precision)
+  zoi ~ 1,                                             # Formula for zero-inflation probability (will estimate near 0)
+  coi ~ 1                                              # Formula for one-inflation probability
+)
+
+# Define Priors for Model 3-ZOIB (Corrected)
+# Add a prior for zoi intercept suggesting low probability
+priors_m3_zoib_corrected <- c(
+  prior(normal(1, 1.5), class = Intercept),              # Intercept for mu
+  prior(exponential(1), class = sds),                  # SD for mu spline
+  prior(normal(2, 1.5), class = Intercept, dpar = phi), # Intercept for phi (log scale)
+  prior(exponential(1), class = sds, dpar = phi),      # SD for phi spline
+  prior(exponential(1), class = sd),                   # SD for player random intercepts (on mu)
+  # Prior strongly suggesting zoi is near zero (logit(-5) is approx 0.007 prob)
+  prior(normal(-5, 1.5), class = Intercept, dpar = zoi), 
+  # Prior for coi, perhaps slightly positive mean reflecting expected 1s
+  prior(normal(-1, 1.5), class = Intercept, dpar = coi)  
+)
+
+# Fit Model 3-ZOIB (Corrected)
+# Use the original availability_perc column!
+set.seed(112) # Use a different seed just in case
+m3_hier_zoib_corrected <- brm(
+  formula = formula_m3_zoib_corrected,
+  data = player_data,
+  family = zero_one_inflated_beta(), # CORRECTED family name!
+  prior = priors_m3_zoib_corrected,
+  iter = 3000,     
+  warmup = 1500,   
+  chains = 4,      
+  cores = 4,       
+  control = list(adapt_delta = 0.99, max_treedepth=12), 
+  backend = "cmdstanr" 
+  # file = "m3_hier_zoib_corrected_fit" 
+)
+
+# --- Check Model 3-ZOIB Convergence and Diagnostics ---
+summary(m3_hier_zoib_corrected) # Check Rhat, ESS. Look at Intercept for zoi (should be very negative)
+plot(m3_hier_zoib_corrected)   
+
+# *** Check the posterior predictive check for Model 3-ZOIB ***
+pp_check(m3_hier_zoib_corrected, ndraws = 100)  
+```

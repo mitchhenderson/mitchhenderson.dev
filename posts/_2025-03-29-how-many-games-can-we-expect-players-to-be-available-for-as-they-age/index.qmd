@@ -28,6 +28,11 @@ data <- read_csv("posts/_2025-03-29-how-many-games-can-we-expect-players-to-be-a
 ```
 
 ```{r}
+names_lookup <- data |>
+  count(playerId, fullName, sort = T)
+```
+
+```{r}
 # --- Final Preparation ---
 player_data <- data |>
   # Rename age column for easier use in formulas
@@ -57,51 +62,10 @@ n_distinct(player_data$player_id_factor)
 summary(player_data$age)
 ```
 
-```{r}
-# Define Priors for Model 1
-priors_m1 <- c(
-  prior(normal(1, 1.5), class = Intercept),  # Prior for the overall intercept (logit scale)
-  prior(exponential(1), class = sds),       # Prior for the SD of the spline coefficients
-  prior(gamma(2, 0.1), class = phi)         # Prior for the Beta precision parameter
-)
-
-# --- Fit Model 1 ---
-# This might take a few minutes depending on your computer
-# Use options(mc.cores = parallel::detectCores()) to use all cores if desired
-options(mc.cores = parallel::detectCores())
-# For reproducibility
-set.seed(2534) 
-
-# Note: We use availability_adjusted as the outcome!
-m1_population <- brm(
-  formula = availability_adjusted ~ s(age),
-  data = player_data,
-  family = Beta(), # Specify Beta regression family
-  prior = priors_m1,
-  iter = 2000,     # Total iterations per chain
-  warmup = 1000,   # Burn-in iterations
-  chains = 4,      # Number of chains
-  cores = 4,       # Use 4 cores (adjust if needed, or set via options)
-  control = list(adapt_delta = 0.95), # May help with convergence if needed
-  backend = "cmdstanr" # Recommended backend if installed
-  # file = "m1_population_fit" # Optional: Save the fit object to avoid re-running
-)
-
-# --- Check Model Convergence and Diagnostics ---
-# Print summary - look at Rhat values (should be close to 1, e.g., < 1.01)
-# Look at Bulk_ESS and Tail_ESS (should ideally be > 400 per chain, so > 1600 total)
-summary(m1_population)
-
-# Plot model checks (trace plots, posterior distributions)
-# Look for "fuzzy caterpillar" trace plots indicating good mixing
-plot(m1_population) 
-
-# Check posterior predictive checks (does model-generated data look like real data?)
-pp_check(m1_population, ndraws = 100) # Density overlay
-pp_check(m1_population, type = "error_hist", ndraws = 10) # Distribution of residuals
-```
 
 ```{r}
+# CHECK TO SEE IF ANYTHING GOOD IN HERE OTHERWISE DELET
+
 # --- Visualize the Estimated Age Curve ---
 
 # Create a sequence of ages for prediction
@@ -136,56 +100,177 @@ plot_m1 <- ggplot(pred_summary_m1, aes(x = age)) +
 print(plot_m1)
 ```
 
+
 ```{r}
-# --- Fit Model 3 (Corrected): Hierarchical Zero-One-Inflated Beta (ZOIB acting as OIB) ---
+# --- Fit Model 4: Hierarchical One-Inflated Beta on Filtered Data ---
 
-# Ensure player_data has the ORIGINAL availability_perc column with actual 1s
-# glimpse(player_data) 
+# Use the ORIGINAL availability_perc column from the filtered data
+# Include varying precision phi ~ s(age)
 
-# Define the formula for ZOIB. 
-# We include zoi but expect its probability estimate to be near zero.
-formula_m3_zoib_corrected <- bf(
-  availability_perc ~ s(age) + (1 | player_id_factor), # Formula for mu (mean for 0 < y < 1)
-  phi ~ s(age),                                        # Formula for phi (precision)
-  zoi ~ 1,                                             # Formula for zero-inflation probability (will estimate near 0)
-  coi ~ 1                                              # Formula for one-inflation probability
+formula_m4_oib_filt <- bf(
+  availability_perc ~ s(age) + (1 | player_id_factor), # Formula for mu
+  phi ~ s(age),                                        # Formula for phi
+  coi ~ 1,                                              # Formula for one-inflation
+  zoi ~ 1 # Still need zoi for the family, but expect it near zero
 )
 
-# Define Priors for Model 3-ZOIB (Corrected)
-# Add a prior for zoi intercept suggesting low probability
-priors_m3_zoib_corrected <- c(
-  prior(normal(1, 1.5), class = Intercept),              # Intercept for mu
-  prior(exponential(1), class = sds),                  # SD for mu spline
-  prior(normal(2, 1.5), class = Intercept, dpar = phi), # Intercept for phi (log scale)
-  prior(exponential(1), class = sds, dpar = phi),      # SD for phi spline
-  prior(exponential(1), class = sd),                   # SD for player random intercepts (on mu)
-  # Prior strongly suggesting zoi is near zero (logit(-5) is approx 0.007 prob)
-  prior(normal(-5, 1.5), class = Intercept, dpar = zoi), 
-  # Prior for coi, perhaps slightly positive mean reflecting expected 1s
-  prior(normal(-1, 1.5), class = Intercept, dpar = coi)  
+# Priors - reuse m3_zoib_corrected priors, maybe adjust coi prior if needed
+priors_m4_oib_filt <- c(
+  prior(normal(1, 1.5), class = Intercept),              
+  prior(exponential(1), class = sds),                  
+  prior(normal(2, 1.5), class = Intercept, dpar = phi), 
+  prior(exponential(1), class = sds, dpar = phi),      
+  prior(exponential(1), class = sd),                   
+  prior(normal(-5, 1.5), class = Intercept, dpar = zoi), # Expecting near zero
+  # Let's try a slightly more positive prior for coi given it's filtered data
+  prior(normal(1, 1.5), class = Intercept, dpar = coi)  
 )
 
-# Fit Model 3-ZOIB (Corrected)
-# Use the original availability_perc column!
-set.seed(112) # Use a different seed just in case
-m3_hier_zoib_corrected <- brm(
-  formula = formula_m3_zoib_corrected,
-  data = player_data,
-  family = zero_one_inflated_beta(), # CORRECTED family name!
-  prior = priors_m3_zoib_corrected,
-  iter = 3000,     
-  warmup = 1500,   
-  chains = 4,      
-  cores = 4,       
+# Fit Model 4
+set.seed(2534) 
+m4_hier_oib_100 <- brm(
+  formula = formula_m4_oib_filt,
+  data = player_data,       # Use FILTERED data
+  family = zero_one_inflated_beta(), # Use ZOIB family
+  prior = priors_m4_oib_filt,
+  iter = 3000, warmup = 1500, chains = 4, cores = 4,       
   control = list(adapt_delta = 0.99, max_treedepth=12), 
-  backend = "cmdstanr" 
-  # file = "m3_hier_zoib_corrected_fit" 
+  backend = "cmdstanr", 
+  file = "m4_hier_oib_100" 
 )
 
-# --- Check Model 3-ZOIB Convergence and Diagnostics ---
-summary(m3_hier_zoib_corrected) # Check Rhat, ESS. Look at Intercept for zoi (should be very negative)
-plot(m3_hier_zoib_corrected)   
+# --- Check Model 4 Convergence and Diagnostics ---
+summary(m4_hier_oib_100)
+plot(m4_hier_oib_100)
 
-# *** Check the posterior predictive check for Model 3-ZOIB ***
-pp_check(m3_hier_zoib_corrected, ndraws = 100)  
+# *** Check the MOST IMPORTANT plot: pp_check for Model 4 ***
+pp_check(m4_hier_oib_100, ndraws = 100)
+pp_check(m4_hier_oib_100, type = "error_hist", ndraws = 10) # Distribution of residuals
+
+# Optional: Compare Model 2 vs Model 1b using LOO (if diagnostics are good)
+# Note: LOO computation can be slow for large hierarchical models
+# loo_50 <- loo(m4_hier_oib_filt)
+loo_100 <- loo(m4_hier_oib_100)
+loo_compare(loo_50, loo_100)
+```
+
+```{r}
+# --- Visualize the Estimated Age Curve for 0 < y < 1 ---
+
+# Use the same age sequence
+age_seq <- tibble(age = seq(min(player_data$age), max(player_data$age), length.out = 100))
+
+# Get posterior predictions for the MEAN of the Beta component (mu)
+# We specify dpar="mu" to get this specific parameter on the response scale
+pred_m4_mu <- age_seq %>%
+  add_epred_draws(m4_hier_oib_filt, dpar = "mu", re_formula = NA) 
+
+# Calculate summary statistics 
+pred_summary_m4_mu <- pred_m4_mu %>%
+  group_by(age) %>%
+  mean_qi(.epred) 
+
+# Plot the mu curve
+plot_m4_mu <- ggplot(pred_summary_m4_mu, aes(x = age)) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.3, fill = "lightgreen") +
+  geom_line(aes(y = .epred), color = "darkgreen", linewidth = 1) +
+  # Optional: Add filtered data points (excluding the 1s)
+   geom_point(data = player_data %>% filter(availability_perc < 1), 
+              aes(x = age, y = availability_perc), 
+              alpha = 0.05, size = 0.5, color = "grey50") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Estimated Mean Availability (when < 100%) vs. Age",
+    subtitle = "From Hierarchical OIB model (m4_hier_oib_filt) on filtered data",
+    x = "Player Age at Start of Season",
+    y = "Estimated Mean Availability % (mu)"
+  ) +
+  theme_minimal()
+
+print(plot_m4_mu)
+
+# --- Visualize other components if interested ---
+# Example: Probability of achieving 100% availability (coi)
+# Note: coi was intercept-only, but we could have modelled it with s(age) too
+# pred_m4_coi <- age_seq %>%
+#   add_epred_draws(m4_hier_oib_filt, dpar = "coi") %>%
+#   group_by(age) %>%
+#   mean_qi(.epred) 
+# ggplot(pred_m4_coi, aes(x=age, y=.epred)) + geom_line() + ...
+
+# Example: Precision (phi) vs age
+# pred_m4_phi <- age_seq %>%
+#   add_epred_draws(m4_hier_oib_filt, dpar = "phi") %>%
+#   group_by(age) %>%
+#   mean_qi(.epred) 
+# ggplot(pred_m4_phi, aes(x=age, y=.epred)) + geom_line() + ... 
+```
+
+```{r}
+# Extract player random effects (deviations from the mean intercept on logit scale)
+player_effects <- ranef(m4_hier_oib_filt)$player_id_factor %>%
+  as_tibble(rownames = "player_id_str") %>%
+  select(player_id_str, player_intercept_deviation = Estimate.Intercept)
+
+# Convert player_id back to numeric if needed for joining
+player_effects <- player_effects %>%
+  mutate(playerId = as.numeric(player_id_str))
+
+# Optional: Add credible intervals if desired
+# player_effects_ci <- ranef(m4_hier_oib_filt, summary=TRUE, robust=TRUE, probs=c(0.05, 0.95))$player_id_factor %>%
+#  as_tibble(rownames = "player_id_str") %>% ...
+
+# Join with some player info (like name if you have it, or just ID)
+# To see which players deviate most
+player_summary <- player_data %>%
+  group_by(playerId) %>%
+  summarise(
+    n_seasons = n(),
+    mean_age = mean(age),
+    mean_avail_orig = mean(availability_perc) 
+  ) %>%
+  left_join(player_effects, by = "playerId") %>%
+  arrange(desc(player_intercept_deviation)) |> # Sort by effect size
+  left_join(names_lookup, by = join_by(playerId))
+
+# --- Identify Outliers ---
+# Most "durable" (controlling for age) - highest positive deviations
+print("Top Durable Players (relative to age expectation):")
+print(head(player_summary, 10))
+
+# Most "injury-prone" / less available (controlling for age) - highest negative deviations
+print("Top Less Available Players (relative to age expectation):")
+print(tail(player_summary, 10))
+
+# --- Visualize specific players ---
+# Example: Plot observed data + model fit for a few players of interest
+players_of_interest_ids <- c( # Replace with actual playerIds 
+  500121, # T Moga
+  501451, # J Tevaga
+  500973, # J Papalii
+  500845 # V Holmes
+) 
+
+# Get fitted values for these players
+fitted_players <- player_data %>%
+  filter(playerId %in% players_of_interest_ids) %>%
+  left_join(names_lookup, by = join_by(playerId)) |>
+  add_fitted_draws(m4_hier_oib_filt) %>% # fitted includes random effects
+  group_by(playerId, fullName, age) %>%
+  mean_qi(.value)
+
+ggplot(player_data %>% filter(playerId %in% players_of_interest_ids) |> left_join(names_lookup, by = join_by(playerId)), 
+       aes(x = age, y = availability_perc)) +
+  geom_line(data = fitted_players, aes(y = .value, color = factor(fullName)), size = 1) +
+  geom_point(aes(color = factor(fullName)), size = 2) +
+  geom_line(data = pred_summary_m4_mu, aes(x = age, y = .epred), color = "black", linetype = "dashed", inherit.aes = FALSE) + # Add population average mu
+  scale_y_continuous(labels = scales::percent_format()) +
+  facet_wrap(~fullName) + # Separate plot for each player
+  labs(
+    title = "Individual Player Availability vs. Age (Selected Players)",
+    subtitle = "Points: Observed, Lines: Model Fit (inc. random effect), Dashed: Pop. Average (mu)",
+    x = "Age", y = "Availability %", color = "Player ID"
+  ) +
+  theme_minimal() + 
+  theme(legend.position = "none") 
 ```

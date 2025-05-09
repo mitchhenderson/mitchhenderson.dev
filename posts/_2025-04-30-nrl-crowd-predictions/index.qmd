@@ -1,0 +1,68 @@
+---
+title: "NRL crowd predictions"
+description: |
+  
+author: Mitch Henderson
+date: 2025-04-30
+draft: true
+format: 
+  html: 
+    code-fold: true
+    code-tools: true
+    html-table-processing: none
+knitr:
+    opts_chunk: 
+      dev: "ragg_png"
+---
+
+```{r}
+library(tidyverse)
+library(arrow)
+```
+
+```{r}
+match_info_import <- map(
+  list.files("posts/_2025-04-30-nrl-crowd-predictions/match_information", full.names = T),
+  read_parquet
+) |>
+  bind_rows()
+```
+
+### Remove matches with attendance of 0 and COVID affected 2020 season
+
+```{r}
+# Calculating form / ladder position should be done before matches are removed
+match_info <- match_info_import |>
+  filter(attendance != 0,
+         season != 2020)
+```
+
+### Clean venue names
+
+```{r}
+venue_lookup <- read_csv("posts/_2025-04-30-nrl-crowd-predictions/venue_lookup.csv")
+
+match_info_cleaned_venues <- match_info |>
+  left_join(venue_lookup, by = join_by(venue))
+```
+
+### Remove venues with less than 5 matches across the dataset
+
+```{r}
+low_match_venues <- match_info_cleaned_venues |>
+  count(venue_clean, sort = T) |>
+  filter(n < 5) |>
+  pull(venue_clean)
+
+match_info_removed_low_match_venues <- match_info_cleaned_venues |>
+  filter(!venue_clean %in% low_match_venues)
+```
+
+### Add venue capacities
+
+```{r}
+venue_capacities <- read_csv("posts/_2025-04-30-nrl-crowd-predictions/venue_capacities.csv")
+
+data <- match_info_removed_low_match_venues |>
+  left_join(venue_capacities, by = join_by(venue_clean))
+```

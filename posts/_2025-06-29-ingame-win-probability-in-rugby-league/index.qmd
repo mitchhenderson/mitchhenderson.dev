@@ -1,0 +1,8 @@
+---
+title: "In-game win probability in rugby league"
+description: |
+  
+author: Mitch Henderson
+date: 2025-06-29
+draft: true
+---

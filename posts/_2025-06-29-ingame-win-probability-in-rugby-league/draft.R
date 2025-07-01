@@ -41,56 +41,15 @@ play_by_play_data_import <- map(
     "Inside 10 Metres" ~ "Penalty",
     "Ruck Infringement" ~ "Penalty",
     .default = type)) |>
-  filter(!type %in% c("VideoReferee", "CaptainsChallenge", "GameTime", "Interchange", "Sin Bin Return"))
-  
-# Import scoring data ------------------------------------------------------------
-#scoring_data_path <- "posts/_2025-06-29-ingame-win-probability-in-rugby-league/data/scoring"
-#scoring_files_list <- list.files(scoring_data_path, full.names = T)
-
-#scoring_data_import <- map(
-#  scoring_files_list, read_parquet
-#) |> bind_rows()
-
-
-#play_by_play_data_import |> count(title, type) |> View()
-# match_info_data_import |> filter(matchId == 20161110120) |> View()
+  filter(!type %in% c("Sin Bin Return"))
 
 # ---------------------------------------------------------------------------------
-events_that_turnover_possession <- c("Penalty",
-                                     "LineDropout",
-                                     "Error",
-                                     "OnePointFieldGoalMissed",
-                                     "TwoPointFieldGoalMissed",
-                                     "Sent Off",
-                                     "SinBin")
 
 data <- play_by_play_data_import |>
   left_join(home_team_map, by = join_by(matchId)) |>
   arrange(matchId, gameSeconds) |> 
   mutate(
-    game_phase = as_factor(if_else(gameSeconds <= 4800, "Regulation", "GoldenPoint")),
-    seconds_remaining = case_when(
-      game_phase == "Regulation" ~ 4800L - gameSeconds,
-      
-      # For Golden Point, we treat it as counting down from 600s (10 mins)
-      # This maintains the "countdown" format which is easier for models to interpret
-      # than a count-up.
-      game_phase == "GoldenPoint" ~ (4800L + 600L) - gameSeconds,
-      
-      # Default case just in case
-      .default = 0L
-    ),
-    advantage_change = case_when(
-      type == "SinBin" & teamId == homeTeamId ~ -1L,      # Home team loses a player
-      type == "SinBin" & teamId != homeTeamId ~ +1L,      # Away team loses a player (home advantage)
-      type == "Sent Off" & teamId == homeTeamId ~ -1L,     # Home team loses a player
-      type == "Sent Off" & teamId != homeTeamId ~ +1L,     # Away team loses a player (home advantage)
-      type == "Sin Bin Return" & teamId == homeTeamId ~ +1L,  # Home team gets player back
-      type == "Sin Bin Return" & teamId != homeTeamId ~ -1L,  # Away team gets player back (home disadvantage)
-      .default = 0L  # No change for other event types
-    ),
-    # Calculate running player advantage (starting from 0)
-    player_advantage = lag(cumsum(advantage_change), default = 0),
+    seconds_remaining = 4800L - gameSeconds,
     # Calculate points scored on each play
     points = case_when(
         type == "Try" ~ 4L,
@@ -102,41 +61,17 @@ data <- play_by_play_data_import |>
     # Determine if home team scored (positive) or away team scored (negative)
     home_points = if_else(teamId == homeTeamId, points, -points),
     # Calculate running score differential BEFORE each play
-    points_diff_at_start_of_play = lag(cumsum(home_points), default = 0),
-    team_in_posession_at_end_of_play = case_when(
-      type %in% events_that_turnover_possession & teamId == homeTeamId ~ awayTeamId,
-      type %in% events_that_turnover_possession & teamId == awayTeamId ~ homeTeamId,
-      .default = teamId),
-    # Create the new, context-aware event type
-    type = case_when(
-      teamId == homeTeamId ~ paste0("Home_", type),
-      teamId == awayTeamId ~ paste0("Away_", type),
-      .default = type
-    ),
-    type = as_factor(type),
+    points_diff_at_end_of_play = cumsum(home_points),
     .by = matchId) |>
-  select(matchId, gameSeconds, event_type = type, game_phase, seconds_remaining, player_advantage, points_diff_at_start_of_play, team_in_posession_at_end_of_play, home_team_win) |>
-  slice(9000:12000)
-
-# Check that there's no event_type that perfectly predict a win or loss in the dataset
-data %>%
-  group_by(event_type) %>%
-  summarise(
-    n_obs = n(),
-    win_rate = mean(as.numeric(as.character(home_team_win)))
-  ) %>%
-  arrange(-win_rate)
-
-skimr::skim(data)
+  select(matchId, gameSeconds, event_type = type, teamId, homeTeamId, seconds_remaining, points_diff_at_end_of_play, home_team_win)
 
 # Dynamic sin bin returns ------------------------------------------
 
 # Step 1: Create virtual sin bin return events
 virtual_returns <- data |>
-  filter(event_type %in% c("Home_SinBin", "Away_SinBin")) |>
+  filter(event_type == "SinBin") |>
   mutate(
     gameSeconds = gameSeconds + 600,  # 10 minutes = 600 seconds later
-    event_type = if_else(event_type == "Home_SinBin", "Home_Sin Bin Return", "Away_Sin Bin Return"),
     synthetic_row = TRUE
   )
 
@@ -152,108 +87,51 @@ data_with_auto_returns <- combined_data |>
   arrange(matchId, gameSeconds) |>
   mutate(
     advantage_change = case_when(
-      event_type == "Home_SinBin" ~ -1L,      # Home team loses a player
-      event_type == "Away_SinBin" ~ +1L,      # Away team loses a player (home advantage)
-      event_type == "Home_Sent Off" ~ -1L,     # Home team loses a player
-      event_type == "Away_Sent Off" ~ +1L,     # Away team loses a player (home advantage)
-      event_type == "Home_Sin Bin Return" ~ +1L,
-      event_type == "Away_Sin Bin Return" ~ -1L,
+      event_type == "SinBin" & teamId == homeTeamId ~ -1L,      # Home team loses a player
+      event_type == "SinBin" & teamId != homeTeamId ~ +1L,      # Away team loses a player (home advantage)
+      event_type == "Sent Off" & teamId == homeTeamId ~ -1L,     # Home team loses a player
+      event_type == "Sent Off" & teamId != homeTeamId ~ +1L,     # Away team loses a player (home advantage)
+      event_type == "Sin Bin Return" & teamId == homeTeamId ~ +1L,  # Home team gets player back
+      event_type == "Sin Bin Return" & teamId != homeTeamId ~ -1L,  # Away team gets player back (home disadvantage)
       .default = 0L
     ),
-    player_advantage = lag(cumsum(advantage_change), default = 0),
+    player_advantage = cumsum(advantage_change),
     .by = matchId
-  )
-
-# Post score state synthetic data ----------------------------------------
-# Step 1: Create synthetic post-score rows
-post_score_rows <- data_with_auto_returns |>
-  filter(event_type %in% c("Home_Try", "Home_Goal", "Home_OnePointFieldGoal", "Home_TwoPointFieldGoal",
-                           "Away_Try", "Away_Goal", "Away_OnePointFieldGoal", "Away_TwoPointFieldGoal")) |>
-  mutate(
-    gameSeconds = gameSeconds + 0.1,
-    event_type = "Post_Score_State",
-    synthetic_row = TRUE
-  )
-
-# Step 2: Add flag to original data and combine
-data_with_flag <- data_with_auto_returns |>
-  mutate(synthetic_row = FALSE)
-
-combined_data <- bind_rows(data_with_flag, post_score_rows)
-
-# Step 3: Calculate score differential
-data_with_post_score <- combined_data |>
-  arrange(matchId, gameSeconds) |>
-  mutate(
-    points = case_when(
-      event_type == "Home_Try" ~ 4,
-      event_type == "Home_Goal" ~ 2, 
-      event_type == "Home_OnePointFieldGoal" ~ 1,
-      event_type == "Home_TwoPointFieldGoal" ~ 2,
-      event_type == "Away_Try" ~ -4,
-      event_type == "Away_Goal" ~ -2, 
-      event_type == "Away_OnePointFieldGoal" ~ -1,
-      event_type == "Away_TwoPointFieldGoal" ~ -2,
-      .default = 0
-    ),
-    points_diff_at_start_of_play = lag(cumsum(points), default = 0),  # Show score before event
-    .by = matchId
-  )
-
-training_data <- data_with_post_score |>
-  select(matchId, gameSeconds, event_type, game_phase, seconds_remaining, player_advantage, points_diff_at_start_of_play, team_in_posession_at_end_of_play, home_team_win) |>
-  mutate(event_type = as_factor(event_type)) |>
-  filter(game_phase == "Regulation", seconds_remaining <= 4800)
-
-base_data <- training_data |> select(home_team_win, points_diff_at_start_of_play, seconds_remaining)
+  ) |>
+  filter(gameSeconds <= 4800,
+        !is.na(home_team_win))
 
 
 # Modeling --------------------------------------------------------------------------
 
-# Step 1b: Fit a simple GAM
-base_wp_model <- gam(home_team_win ~ te(points_diff_at_start_of_play, seconds_remaining, k=10), 
-                     data = base_data, family = "binomial")
 
-# Step 1c: Add the baseline WP to your main dataframe
-training_data$base_wp <- predict(base_wp_model, newdata = training_data, type = "response")
+# This is the formula that aligns with the nflWAR paper's logic.
+# It predicts the probability of winning from any given state.
+tictoc::tic()
+nrl_wp_model <- bam(
+  home_team_win ~ te(points_diff_at_end_of_play, seconds_remaining, k = 10),
+  data = data_with_auto_returns,
+  family = "binomial"
+)
+tictoc::toc()
 
+summary(nrl_wp_model)
+save(nrl_wp_model, file = "bam_nrl_wp_model.RData")
 
-# Use dplyr's lag() function to get the WP of the previous state
-training_data <- training_data |>
+match_to_plot <- "20141112550"
+
+single_game_data <- data_with_auto_returns |> 
+  filter(matchId == match_to_plot) |>
+  complete(gameSeconds = 0:4800) |>
+  fill(c(-gameSeconds, -synthetic_row), .direction = "down") |>
   mutate(
-    # The WP of the previous state
-    previous_wp = lag(base_wp, default = 0.50), 
-    # The change caused by the current event's state
-    wpa = base_wp - previous_wp,
-    .by = matchId
+    synthetic_row = if_else(is.na(synthetic_row), T, F),
+    seconds_remaining = 4800 - gameSeconds,
+    predicted_wp = predict(nrl_wp_model, newdata = pick(everything()), type = "response")
   )
-
-
-wpa_model <- lm(wpa ~ 0 + event_type, data = training_data)
-summary(wpa_model)
-
-# Get the predicted WPA for each event
-training_data$predicted_wpa <- predict(wpa_model, newdata = training_data)
-
-# Create the new, trustworthy WP chart
-final_wp_data <- training_data |>
-  mutate(
-    # The new WP is the baseline of 50% plus the cumulative sum of event values
-    final_wp = 0.50 + cumsum(predicted_wpa),
-    .by = matchId
-  )
-
-match_to_plot <- "20141112910"
-single_game_data <- final_wp_data |> filter(matchId == match_to_plot)
-
-
-
-# Identify the key non-scoring events you want to label
-events_to_label <- single_game_data %>%
-  filter(event_type %in% c("Home_LineBreak", "Away_LineBreak", "Home_Try", "Away_Try", "Home_Goal", "Away_Goal"))
 
 # Plot final_wp vs. gameSeconds
-ggplot(single_game_data, aes(x = gameSeconds, y = final_wp)) +
+ggplot(single_game_data, aes(x = gameSeconds, y = predicted_wp)) +
   geom_step(color = "blue", linewidth = 1) +
   geom_hline(yintercept = 0.5, linetype = "dotted") +
   geom_point(
@@ -263,15 +141,10 @@ ggplot(single_game_data, aes(x = gameSeconds, y = final_wp)) +
     color = "red",
     size = 3
   ) +
-    geom_text_repel(
-      data = events_to_label,
-      aes(label = event_type),
-      box.padding = 0.5,
-      point.padding = 0.5,
-      size = 3,
-      color = "black"
-    ) +
+  ggrepel::geom_text_repel(data = single_game_data |> filter(synthetic_row == F), 
+                  aes(label = points_diff_at_end_of_play)) +
 scale_y_continuous(limits = c(0, 1)) +
+  scale_x_continuous(limits = c(0, 4800)) +
     labs(
       title = paste("Win Probability Chart for Match:", match_to_plot),
       subtitle = "Home Team (Team_A) vs. Away Team (Team_B)",
@@ -281,31 +154,13 @@ scale_y_continuous(limits = c(0, 1)) +
     theme_minimal()
 
 
-tictoc::tic()
-wp_model <- gam(
-  home_team_win ~ 
-    # 1. Keep the complex 2D smooth for regulation time
-    te(points_diff_at_start_of_play, seconds_remaining, k = 10) +
-    
-    # The impact of specific, discrete events
-    event_type,
-    
-  data = training_data,
-  family = "binomial"
-)
-tictoc::toc()
-summary(wp_model)
-
-# Get the predicted probability for the "1" class (home team win)
-training_data$predicted_wp <- predict(wp_model, type = "response")
-
-
 # Calibration plot --------------------------------------------------
 
 # Create probability bins
-calibration_data <- training_data %>%
+calibration_data <- data_with_auto_returns %>%
   # Convert factor back to numeric for calculation
-  mutate(home_team_win_numeric = as.numeric(as.character(home_team_win))) %>%
+  mutate(predicted_wp = predict(nrl_wp_model, newdata = pick(everything()), type = "response"),
+         home_team_win_numeric = as.numeric(as.character(home_team_win))) %>%
   # Create bins of size 0.05 for the predicted WP
   mutate(wp_bin = cut(predicted_wp, breaks = seq(0, 1, by = 0.05), include.lowest = TRUE)) %>%
   # Group by the bin
@@ -331,64 +186,3 @@ calibration_data <- training_data %>%
     scale_x_continuous(limits = c(0, 1)) +
     scale_y_continuous(limits = c(0, 1)) +
     theme_minimal()
-
-
-# WP plot for a match ---------------------------------------------------
-single_game_data <- training_data %>%
-  filter(matchId == match_to_plot)
-
-single_game_data |>
-  ggplot(aes(x = gameSeconds, y = predicted_wp)) +
-    geom_step(color = "blue", linewidth = 1) +
-    geom_hline(yintercept = 0.5, linetype = "dotted") +
-    geom_point(
-      data = single_game_data %>% filter(event_type %in% c("Home_Try", "Away_Try", 
-                                                           "Home_Goal", "Away_Goal", 
-                                                           "Home_OnePointFieldGoal", "Away_OnePointFieldGoal")),
-      color = "red",
-      size = 3
-    ) +
-  scale_y_continuous(limits = c(0, 1)) +
-      labs(
-        title = paste("Win Probability Chart for Match:", match_to_plot),
-        subtitle = "Home Team (Team_A) vs. Away Team (Team_B)",
-        x = "Game Seconds",
-        y = "Home Team Win Probability"
-      ) +
-      theme_minimal()
-
-
-library(ggrepel)
-
-# Identify the key non-scoring events you want to label
-events_to_label <- single_game_data %>%
-  filter(event_type %in% c("Home_LineBreak", "Away_LineBreak", "Home_Try", "Away_Try", "Home_Goal", "Away_Goal"))
-
-ggplot(single_game_data, aes(x = gameSeconds, y = predicted_wp)) +
-  geom_step(color = "blue", size = 1) +
-  geom_hline(yintercept = 0.5, linetype = "dotted") +
-  
-  # Add labels for the key events
-  geom_text_repel(
-    data = events_to_label,
-    aes(label = event_type),
-    box.padding = 0.5,
-    point.padding = 0.5,
-    size = 3,
-    color = "black"
-  ) +
-
-  # Add points for scoring events
-  geom_point(
-    data = single_game_data %>% filter(event_type %in% c("Try", "Goal", "OnePointFieldGoal")),
-    color = "red",
-    size = 3
-  ) +
-  scale_y_continuous(limits = c(0, 1)) +
-      labs(
-        title = paste("Win Probability Chart for Match:", match_to_plot),
-        subtitle = "Home Team (Team_A) vs. Away Team (Team_B)",
-        x = "Game Seconds",
-        y = "Home Team Win Probability"
-      ) +
-      theme_minimal()

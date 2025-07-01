@@ -4,13 +4,8 @@ library(mgcv)
 library(ggrepel)
 
 # TODO
-# Looks like some Sin Bin Returns are missing and the advantage is being retained to the end of match in the data
-# (maybe dynamically only retain it for 10 minutes and not use the Sin Bin Return records?)
 
-# Can we find pre match odds? This will allow a more reflective starting probability
 # Convert to bayesian model
-# Bring back 2014 and 2015 data?
-# Post event state after sin bins and returns? or after ALL events?
 
 
 # Import match info ------------------------------------------------------------

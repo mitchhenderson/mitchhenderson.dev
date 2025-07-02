@@ -36,7 +36,8 @@ data <- event_data_import |>
       0L
     ),
     draw = ifelse(homeFinalScore == awayFinalScore, 1L, 0L),
-    seconds_remaining = 4800L - gameSeconds,
+    game_minutes = gameSeconds / 60,
+    minutes_remaining = 80 - game_minutes,
     points = case_when(
       type == "Try" ~ 4L,
       type == "Goal" ~ 2L,
@@ -56,7 +57,7 @@ data <- event_data_import |>
 tictoc::tic()
 
 nrl_wp_model <- bam(
-  home_team_win ~ te(points_differential, seconds_remaining, k = 10),
+  home_team_win ~ te(points_differential, minutes_remaining, k = 10),
   data = data,
   family = "binomial"
 )
@@ -111,10 +112,13 @@ match_to_plot <- "20141112550"
 
 single_game_data <- data |>
   filter(matchId == match_to_plot) |>
-  complete(gameSeconds = 0:4800) |>
+  complete(gameSeconds = 0:4800, home_points = 0) |>
   fill(c(-gameSeconds, -title), .direction = "down") |>
+  arrange(matchId, gameSeconds) |>
   mutate(
-    seconds_remaining = 4800 - gameSeconds,
+    points_differential = cumsum(home_points),
+    game_minutes = gameSeconds / 60,
+    minutes_remaining = 80 - game_minutes,
     predicted_wp = predict(
       nrl_wp_model,
       newdata = pick(everything()),
@@ -131,8 +135,8 @@ label_events <- c(
   "2 Point Field Goal-Made"
 )
 
-ggplot(single_game_data, aes(x = gameSeconds, y = predicted_wp)) +
-  geom_step(color = "blue", linewidth = 1) + # geom_line
+ggplot(single_game_data, aes(x = game_minutes, y = predicted_wp)) +
+  geom_line(color = "blue", linewidth = 1) +
   geom_hline(yintercept = 0.5, linetype = "dotted") +
   geom_point(
     data = single_game_data |>
@@ -150,11 +154,11 @@ ggplot(single_game_data, aes(x = gameSeconds, y = predicted_wp)) +
     aes(label = points_differential)
   ) +
   scale_y_continuous(limits = c(0, 1)) +
-  scale_x_continuous(limits = c(0, 4800)) +
+  scale_x_continuous(limits = c(0, 80)) +
   labs(
     title = paste("Win Probability Chart for Match:", match_to_plot),
     subtitle = "Home Team (Team_A) vs. Away Team (Team_B)",
-    x = "Game Seconds",
+    x = "Game Minutes",
     y = "Home Team Win Probability"
   ) +
   theme_minimal()

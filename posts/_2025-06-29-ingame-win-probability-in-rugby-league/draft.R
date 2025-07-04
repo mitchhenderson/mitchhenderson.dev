@@ -1,9 +1,9 @@
 library(tidyverse)
 library(arrow)
-library(mgcv)
+library(brms)
 
-# TODO
-# Convert to bayesian model
+# 3D rendering of probability surface (two coordinate map with elevations representing probs)
+# Probably don't need non-scoring observations
 
 # Import ---------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ data <- event_data_import |>
       1L,
       0L
     ),
-    draw = ifelse(homeFinalScore == awayFinalScore, 1L, 0L),
+    draw_at_fulltime = max(ifelse(gameSeconds > 4800, 1L, 0L)),
     game_minutes = gameSeconds / 60,
     minutes_remaining = 80 - game_minutes,
     points = case_when(
@@ -49,23 +49,46 @@ data <- event_data_import |>
     points_differential = cumsum(home_points),
     .by = matchId
   ) |>
-  filter(gameSeconds <= 4800, draw != 1, !is.na(home_team_win))
+  filter(gameSeconds <= 4800, draw_at_fulltime != 1, !is.na(home_team_win))
 
 # Modeling -------------------------------------------------------------------------
 
-# Takes ~ 40s on my laptop
-tictoc::tic()
-
-nrl_wp_model <- bam(
-  home_team_win ~ te(points_differential, minutes_remaining, k = 10),
-  data = data,
-  family = "binomial"
+# 't2()' is the brms equivalent for a tensor product smooth.
+brms_formula <- bf(
+  home_team_win ~ t2(points_differential, minutes_remaining, k = 10),
+  family = bernoulli(link = "logit")
 )
 
-tictoc::toc()
+# These are weakly regularising priors
+# student_t(3, 0, 2.5) is a robust and commonly recommended default.
+priors <- c(
+  # Prior on the Intercept. Centered at 0 log-odds (50% prob).
+  prior(student_t(3, 0, 2.5), class = "Intercept"),
 
-summary(nrl_wp_model)
-# save(nrl_wp_model, file = "nrl_wp_model.RData")
+  # Prior on the standard deviation of the smooth term ('sds').
+  # This controls the overall "wiggliness" of the surface.
+  prior(student_t(3, 0, 2.5), class = "sds")
+)
+
+
+print("Starting Bayesian GAM fit with brms. This will take several hours.")
+
+wp_brms_model <- brm(
+  formula = brms_formula,
+  data = data,
+  family = bernoulli(link = "logit"),
+  prior = priors,
+  chains = 4,
+  cores = 4,
+  iter = 2000,
+  seed = 2534,
+  backend = "rstan",
+  # control = list(adapt_delta = 0.99),
+  file = "nrl_wp_brms_model"
+)
+
+print("Bayesian model fitting complete.")
+
 
 # Calibration plot -------------------------------------------------------------
 

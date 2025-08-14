@@ -1,9 +1,7 @@
 library(tidyverse)
 library(arrow)
-library(mgcv)
-
-# TODO
-# Convert to bayesian model
+library(brms)
+library(tidybayes)
 
 # Import ---------------------------------------------------------------------------
 
@@ -35,7 +33,7 @@ data <- event_data_import |>
       1L,
       0L
     ),
-    draw = ifelse(homeFinalScore == awayFinalScore, 1L, 0L),
+    draw_at_fulltime = max(ifelse(gameSeconds > 4800, 1L, 0L)),
     game_minutes = gameSeconds / 60,
     minutes_remaining = 80 - game_minutes,
     points = case_when(
@@ -49,116 +47,176 @@ data <- event_data_import |>
     points_differential = cumsum(home_points),
     .by = matchId
   ) |>
-  filter(gameSeconds <= 4800, draw != 1, !is.na(home_team_win))
+  filter(gameSeconds <= 4800, draw_at_fulltime != 1, !is.na(home_team_win)) |>
+  # Work with only non-scoring observations for now and can then think about adding complexity later
+  select(
+    matchId,
+    points_differential,
+    minutes_remaining,
+    home_team_win,
+    type,
+    points
+  )
+
+data_only_scoring <- data |>
+  filter(type == "GameTime" | points != 0) |>
+  mutate(
+    inverse_minutes_remaining = 1 / (minutes_remaining + 0.1)
+  ) |>
+  select(-type, -points)
 
 # Modeling -------------------------------------------------------------------------
 
-# Takes ~ 40s on my laptop
-tictoc::tic()
-
-nrl_wp_model <- bam(
-  home_team_win ~ te(points_differential, minutes_remaining, k = 10),
-  data = data,
-  family = "binomial"
+fit_brms <- readRDS(
+  "posts/_2025-06-29-ingame-win-probability-in-rugby-league/nrl_wp_brms_model.rds"
 )
 
-tictoc::toc()
+# priors <- c(
+#   prior(normal(0, 1), class = "Intercept"),
+#   prior(normal(0, 1), class = "b")
+# )
 
-summary(nrl_wp_model)
-# save(nrl_wp_model, file = "nrl_wp_model.RData")
+# tictoc::tic()
+# fit_brms <- brm(
+#   formula = home_team_win ~ 1 + points_differential * inverse_minutes_remaining,
+#   data = data_only_scoring,
+#   family = bernoulli(link = "logit"),
+#   prior = priors,
+#   chains = 4,
+#   cores = 4,
+#   iter = 2000,
+#   warmup = 1000,
+#   refresh = 500,
+#   seed = 123,
+#   save_pars = save_pars(all = TRUE),
+#   backend = "rstan",
+#   file = "nrl_wp_brms_model"
+# )
+# tictoc::toc()
+
+summary(fit_brms)
+
+plot(fit_brms, nvariables = 4, ask = FALSE)
 
 # Calibration plot -------------------------------------------------------------
 
-calibration_data <- data |>
-  mutate(
-    predicted_wp = predict(
-      nrl_wp_model,
-      newdata = pick(everything()),
-      type = "response"
-    ),
-    home_team_win_numeric = as.numeric(as.character(home_team_win))
-  ) |>
-  mutate(
-    wp_bin = cut(
-      predicted_wp,
-      breaks = seq(0, 1, by = 0.05),
-      include.lowest = TRUE
-    )
-  ) |>
-  summarise(
-    n_plays = n(),
-    actual_win_rate = mean(home_team_win_numeric),
-    predicted_win_rate = mean(predicted_wp),
-    .by = wp_bin
-  ) |>
-  filter(n_plays > 0)
+calibration_data_sample <- data_only_scoring |> slice_sample(n = 10000)
 
-ggplot(calibration_data, aes(x = predicted_win_rate, y = actual_win_rate)) +
-  geom_point(aes(size = n_plays), alpha = 0.7) +
-  geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
-  labs(
-    title = "NRL Win Probability Model Calibration",
-    x = "Predicted Win Probability",
-    y = "Actual Win Probability",
-    caption = "Points should lie on the dashed red line for a perfectly calibrated model."
+
+calibration_draws <- calibration_data_sample |>
+  add_epred_draws(fit_brms, ndraws = 1000)
+
+# Summarize the calibration data
+calibration_summary <- calibration_draws |>
+  group_by(matchId, points_differential, minutes_remaining, home_team_win) |>
+  summarise(median_pred = median(.epred), .groups = "drop") |>
+  # Use 10 bins for stable calibration results
+  mutate(pred_bin = cut(median_pred, breaks = 10, include.lowest = TRUE)) |>
+  group_by(pred_bin) |>
+  summarise(
+    n_games = n(),
+    mean_pred_prob = mean(median_pred),
+    mean_actual_prob = mean(home_team_win)
+  )
+
+# --- 4. Plot the Calibration Chart ---
+ggplot(calibration_summary, aes(x = mean_pred_prob, y = mean_actual_prob)) +
+  geom_abline(linetype = "dashed", color = "gray50") +
+  geom_point(aes(size = n_games), color = "midnightblue", alpha = 0.8) +
+  geom_line(color = "midnightblue", alpha = 0.7) +
+  scale_x_continuous(
+    name = "Predicted Win Probability (Bin)",
+    labels = scales::percent,
+    limits = c(0, 1)
   ) +
-  scale_x_continuous(limits = c(0, 1)) +
-  scale_y_continuous(limits = c(0, 1)) +
+  scale_y_continuous(
+    name = "Actual Win Rate (Bin)",
+    labels = scales::percent,
+    limits = c(0, 1)
+  ) +
+  labs(
+    title = "Calibration Plot for Win Probability Model",
+    subtitle = "Comparing predicted probabilities to actual win rates across 10 bins (sampled data)",
+    size = "Number of\nGame States"
+  ) +
   theme_minimal()
 
 # Win probability plot for single match ---------------------------------------
 
-match_to_plot <- "20141112550"
+match_to_plot_id <- "20231113110"
 
-single_game_data <- data |>
-  filter(matchId == match_to_plot) |>
-  complete(gameSeconds = 0:4800, home_points = 0) |>
-  fill(c(-gameSeconds, -title), .direction = "down") |>
-  arrange(matchId, gameSeconds) |>
+# Prepare the dense timeline for the match, including the inverse time variable
+single_match_dense <- data_only_scoring |>
+  filter(matchId == match_to_plot_id) |>
+  complete(minutes_remaining = seq(80, 0, by = -0.1)) |>
+  arrange(-minutes_remaining) |>
+  fill(points_differential, .direction = "down") |>
   mutate(
-    points_differential = cumsum(home_points),
-    game_minutes = gameSeconds / 60,
-    minutes_remaining = 80 - game_minutes,
-    predicted_wp = predict(
-      nrl_wp_model,
-      newdata = pick(everything()),
-      type = "response"
-    )
-  )
+    points_differential = if_else(
+      is.na(points_differential),
+      0,
+      points_differential
+    ),
+    game_minute = 80 - minutes_remaining,
+    inverse_minutes_remaining = 1 / (minutes_remaining + 0.1)
+  ) |>
+  add_epred_draws(fit_brms)
 
+# Scoring events for annotations (use the sparse data)
+scoring_events <- data_only_scoring |>
+  filter(
+    matchId == match_to_plot_id,
+    points_differential != lag(points_differential, default = 0)
+  ) |>
+  mutate(game_minute = 80 - minutes_remaining)
 
-label_events <- c(
-  "Try",
-  "Conversion-Made",
-  "Penalty Shot-Made",
-  "1 Point Field Goal-Made",
-  "2 Point Field Goal-Made"
-)
+# --- 1. Filter to a Manageable Number of Draws for Plotting ---
+# Plotting all 4000 draws would be too messy. 100-200 is usually a good number.
+plot_draws <- single_match_dense |>
+  filter(.draw %in% 1:100)
 
-ggplot(single_game_data, aes(x = game_minutes, y = predicted_wp)) +
-  geom_line(color = "blue", linewidth = 1) +
-  geom_hline(yintercept = 0.5, linetype = "dotted") +
+# --- 2. Create the Spaghetti Plot ---
+ggplot(plot_draws, aes(x = game_minute, y = .epred)) +
+  # Draw a faint line for each posterior draw (.draw)
+  geom_line(aes(group = .draw), alpha = 0.1, color = "grey") +
+
+  # Overlay the posterior median line in a bold color
+  # We use the full `dense_predictions` here to get the most accurate median
+  stat_summary(
+    data = single_match_dense,
+    fun = median,
+    geom = "line",
+    color = "black",
+    linewidth = 0.25
+  ) +
+
+  # Add the scoring event markers
   geom_point(
-    data = single_game_data |>
-      filter(
-        title %in% label_events
-      ),
+    data = scoring_events,
+    aes(y = 0.5),
     color = "red",
-    size = 3
+    size = 3,
+    shape = 18
   ) +
-  ggrepel::geom_text_repel(
-    data = single_game_data |>
-      filter(
-        title %in% label_events
-      ),
-    aes(label = points_differential)
+
+  # Aesthetics and labels
+  scale_x_continuous(
+    name = "Game Minute",
+    breaks = seq(0, 80, by = 20),
+    limits = c(0, 80)
   ) +
-  scale_y_continuous(limits = c(0, 1)) +
-  scale_x_continuous(limits = c(0, 80)) +
+  scale_y_continuous(
+    name = "Home Team Win Probability",
+    labels = scales::percent,
+    limits = c(0, 1),
+    breaks = seq(0, 1, by = 0.2)
+  ) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
   labs(
-    title = paste("Win Probability Chart for Match:", match_to_plot),
-    subtitle = "Home Team (Team_A) vs. Away Team (Team_B)",
-    x = "Game Minutes",
-    y = "Home Team Win Probability"
+    title = "Win Probability Chart (with 100 Posterior Draws)",
+    subtitle = paste("Match ID:", match_to_plot_id),
+    caption = "Faint grey lines are individual posterior draws; black line is the posterior median."
   ) +
   theme_minimal()
+
+ggsave("2023 GF.png", bg = "white")

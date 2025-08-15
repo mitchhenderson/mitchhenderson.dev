@@ -34,6 +34,7 @@ data <- event_data_import |>
       0L
     ),
     draw_at_fulltime = max(ifelse(gameSeconds > 4800, 1L, 0L)),
+    type = if_else(title == "Sent Off", "SendOff", type),
     game_minutes = gameSeconds / 60,
     minutes_remaining = 80 - game_minutes,
     points = case_when(
@@ -44,59 +45,183 @@ data <- event_data_import |>
       .default = 0L
     ),
     home_points = if_else(teamId == homeTeamId, points, -points),
-    points_differential = cumsum(home_points),
+    event = case_when(
+      type == "GameTime" ~ type,
+      teamId == homeTeamId ~ glue::glue("Home {type}"),
+      teamId == awayTeamId ~ glue::glue("Away {type}")
+    ),
+    possession_change = case_when(
+      event %in%
+        c(
+          "Away Error",
+          "Away Penalty",
+          "Home SetRestart",
+          "Home FortyTwenty",
+          "Home TwentyForty",
+          "Home Goal",
+          "Away GoalMissed",
+          "Home LineBreak",
+          "Away LineDropout",
+          "Home OnePointFieldGoal",
+          "Away OnePointFieldGoalMissed",
+          "Home TwoPointFieldGoal",
+          "Away TwoPointFieldGoalMissed",
+          "Away OffsideWithinTenMetres",
+          "Away RuckInfringement",
+          "Home Try",
+          "Away SinBin"
+        ) ~
+        "Home",
+      event %in%
+        c(
+          "Home Error",
+          "Home Penalty",
+          "Away SetRestart",
+          "Away FortyTwenty",
+          "Away TwentyForty",
+          "Away Goal",
+          "Home GoalMissed",
+          "Away LineBreak",
+          "Home LineDropout",
+          "Away OnePointFieldGoal",
+          "Home OnePointFieldGoalMissed",
+          "Away TwoPointFieldGoal",
+          "Home TwoPointFieldGoalMissed",
+          "Home OffsideWithinTenMetres",
+          "Home RuckInfringement",
+          "Away Try",
+          "Home SinBin"
+        ) ~
+        "Away",
+      .default = NA_character_
+    ),
     .by = matchId
   ) |>
-  filter(gameSeconds <= 4800, draw_at_fulltime != 1, !is.na(home_team_win)) |>
-  # Work with only non-scoring observations for now and can then think about adding complexity later
-  select(
-    matchId,
-    points_differential,
-    minutes_remaining,
-    home_team_win,
-    type,
-    points
-  )
+  filter(
+    gameSeconds <= 4800,
+    draw_at_fulltime != 1,
+    !is.na(home_team_win),
+    minutes_remaining != 0
+  ) |>
+  distinct(matchId, event, minutes_remaining, .keep_all = TRUE)
 
-data_only_scoring <- data |>
-  filter(type == "GameTime" | points != 0) |>
+
+player_events <- data |>
+  filter(
+    event %in% c("Home SinBin", "Away SinBin")
+  ) |>
   mutate(
+    player_change = case_when(
+      event == "Home SinBin" ~ -1,
+      event == "Away SinBin" ~ +1
+    )
+  ) |>
+  mutate(
+    minutes_remaining = minutes_remaining - 10,
+    player_change = player_change * -1,
+    event = if_else(
+      event == "Home SinBin",
+      "Home SinBinReturns",
+      "Away SinBinReturns"
+    )
+  ) |>
+  filter(minutes_remaining >= 0) |>
+  select(matchId, event, home_team_win, minutes_remaining, player_change)
+
+
+full_data <- data |>
+  bind_rows(player_events) |>
+  arrange(matchId, -minutes_remaining) |>
+  group_by(matchId) |>
+  mutate(
+    player_change = case_when(
+      event == "Home SinBin" ~ -1,
+      event == "Away SinBin" ~ +1,
+      event == "Home SendOff" ~ -1,
+      event == "Away SendOff" ~ +1,
+      .default = player_change
+    ),
+    points_differential = cumsum(if_else(is.na(home_points), 0, home_points)),
+    player_advantage = cumsum(if_else(is.na(player_change), 0, player_change))
+  ) |>
+  #  filter(!(minutes_remaining < 5 & abs(points_differential) > 18)) |>
+  fill(possession_change, .direction = "down") |>
+  ungroup() |>
+  mutate(
+    possession_change = case_when(
+      !is.na(possession_change) ~ possession_change,
+      # Random sample for NA values (only kickoffs)
+      runif(n()) < 0.5 ~ "Home",
+      .default = "Away"
+    ),
+    home_gains_possession = if_else(possession_change == "Home", 1, 0),
     inverse_minutes_remaining = 1 / (minutes_remaining + 0.1)
   ) |>
-  select(-type, -points)
+  select(
+    matchId,
+    event,
+    points_differential,
+    minutes_remaining,
+    inverse_minutes_remaining,
+    home_team_win,
+    home_gains_possession,
+    player_advantage
+  )
 
 # Modeling -------------------------------------------------------------------------
 
-fit_brms <- readRDS(
-  "posts/_2025-06-29-ingame-win-probability-in-rugby-league/nrl_wp_brms_model.rds"
+# fit_brms_v2 <- readRDS(
+#   "posts/_2025-06-29-ingame-win-probability-in-rugby-league/nrl_wp_brms_model_v2_full.rds"
+# )
+
+priors <- c(
+  prior(normal(0, 1), class = "Intercept"),
+  prior(normal(0, 1), class = "b")
 )
 
-# priors <- c(
-#   prior(normal(0, 1), class = "Intercept"),
-#   prior(normal(0, 1), class = "b")
-# )
+v2_formula <- bf(
+  home_team_win ~
+    1 +
+      points_differential * inverse_minutes_remaining +
+      home_gains_possession +
+      player_advantage
+)
 
-# tictoc::tic()
-# fit_brms <- brm(
-#   formula = home_team_win ~ 1 + points_differential * inverse_minutes_remaining,
-#   data = data_only_scoring,
-#   family = bernoulli(link = "logit"),
-#   prior = priors,
-#   chains = 4,
-#   cores = 4,
-#   iter = 2000,
-#   warmup = 1000,
-#   refresh = 500,
-#   seed = 123,
-#   save_pars = save_pars(all = TRUE),
-#   backend = "rstan",
-#   file = "nrl_wp_brms_model"
-# )
-# tictoc::toc()
 
-summary(fit_brms)
+tictoc::tic()
+fit_brms_full <- brm(
+  formula = v2_formula,
+  data = full_data,
+  family = bernoulli(link = "cauchit"),
+  prior = priors,
+  chains = 4,
+  cores = 4,
+  iter = 2000,
+  warmup = 1000,
+  refresh = 500,
+  seed = 2534,
+  backend = "rstan",
+  file = "nrl_wp_brms_model_v2_full"
+)
+tictoc::toc()
 
-plot(fit_brms, nvariables = 4, ask = FALSE)
+tictoc::tic()
+loo_v2_full <- add_criterion(fit_brms_full, criterion = "loo")
+tictoc::toc()
+
+
+summary(fit_brms_full)
+
+plot(fit_brms_full)
+
+pp_check(fit_brms_full, ndraws = 100)
+pp_check(your_model, type = "stat", stat = "mean")
+pp_check(your_model, type = "stat_2d", stat = c("mean", "sd"))
+
+fitted_probs <- fitted(fit_brms_full)[, 1]
+summary(fitted_probs)
+hist(fitted_probs)
+
 
 # Calibration plot -------------------------------------------------------------
 
@@ -146,7 +271,7 @@ ggplot(calibration_summary, aes(x = mean_pred_prob, y = mean_actual_prob)) +
 match_to_plot_id <- "20231113110"
 
 # Prepare the dense timeline for the match, including the inverse time variable
-single_match_dense <- data_only_scoring |>
+single_match_dense <- full_data |>
   filter(matchId == match_to_plot_id) |>
   complete(minutes_remaining = seq(80, 0, by = -0.1)) |>
   arrange(-minutes_remaining) |>
@@ -163,7 +288,7 @@ single_match_dense <- data_only_scoring |>
   add_epred_draws(fit_brms)
 
 # Scoring events for annotations (use the sparse data)
-scoring_events <- data_only_scoring |>
+scoring_events <- full_data |>
   filter(
     matchId == match_to_plot_id,
     points_differential != lag(points_differential, default = 0)

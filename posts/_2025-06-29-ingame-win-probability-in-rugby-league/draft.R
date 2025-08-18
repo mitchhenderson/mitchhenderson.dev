@@ -189,10 +189,10 @@ v2_formula <- bf(
 
 
 tictoc::tic()
-fit_brms_full <- brm(
+fit_brms_full_logit <- brm(
   formula = v2_formula,
   data = full_data,
-  family = bernoulli(link = "cauchit"),
+  family = bernoulli(link = "logit"),
   prior = priors,
   chains = 4,
   cores = 4,
@@ -201,12 +201,12 @@ fit_brms_full <- brm(
   refresh = 500,
   seed = 2534,
   backend = "rstan",
-  file = "nrl_wp_brms_model_v2_full"
+  file = "nrl_wp_brms_model_v2_logit"
 )
 tictoc::toc()
 
 tictoc::tic()
-loo_v2_full <- add_criterion(fit_brms_full, criterion = "loo")
+loo_v2_logit <- add_criterion(fit_brms_full_logit, criterion = "loo")
 tictoc::toc()
 
 
@@ -214,40 +214,51 @@ summary(fit_brms_full)
 
 plot(fit_brms_full)
 
-pp_check(fit_brms_full, ndraws = 100)
-pp_check(your_model, type = "stat", stat = "mean")
-pp_check(your_model, type = "stat_2d", stat = c("mean", "sd"))
 
-fitted_probs <- fitted(fit_brms_full)[, 1]
-summary(fitted_probs)
-hist(fitted_probs)
+library(bayesplot)
 
+# Extract predictions
+y_pred <- posterior_predict(fit_brms_full_logit)
+y_actual <- full_data$home_team_win
+
+
+# Create calibration plot
+ppc_stat_grouped(
+  y = y_actual,
+  yrep = y_pred,
+  group = cut(fitted(fit_brms_full_logit)[, 1], breaks = 10),
+  stat = "mean"
+) +
+  labs(title = "Calibration by Predicted Probability Bins")
 
 # Calibration plot -------------------------------------------------------------
 
-calibration_data_sample <- data_only_scoring |> slice_sample(n = 10000)
+epred_draws <- posterior_epred(fit_brms_full_logit)
 
+colnames(epred_draws) <- paste0("obs_", 1:ncol(epred_draws))
 
-calibration_draws <- calibration_data_sample |>
-  add_epred_draws(fit_brms, ndraws = 1000)
+median_predictions_df <- as_draws_df(epred_draws) |>
+  summarise_draws("median")
 
-# Summarize the calibration data
-calibration_summary <- calibration_draws |>
-  group_by(matchId, points_differential, minutes_remaining, home_team_win) |>
-  summarise(median_pred = median(.epred), .groups = "drop") |>
-  # Use 10 bins for stable calibration results
+median_predictions <- median_predictions_df$median
+
+calibration_summary <- full_data |>
+  select(home_team_win) |>
+  mutate(median_pred = median_predictions) |>
   mutate(pred_bin = cut(median_pred, breaks = 10, include.lowest = TRUE)) |>
   group_by(pred_bin) |>
   summarise(
-    n_games = n(),
-    mean_pred_prob = mean(median_pred),
-    mean_actual_prob = mean(home_team_win)
+    n_states = n(),
+    mean_pred_prob = mean(median_pred), # The average predicted probability in the bin
+    mean_actual_prob = mean(home_team_win) # The actual win rate in the bin
   )
 
-# --- 4. Plot the Calibration Chart ---
+# --- 6. Create the Final Calibration Plot ---
 ggplot(calibration_summary, aes(x = mean_pred_prob, y = mean_actual_prob)) +
+  # The line of perfect calibration
   geom_abline(linetype = "dashed", color = "gray50") +
-  geom_point(aes(size = n_games), color = "midnightblue", alpha = 0.8) +
+  # The points for our model, sized by the number of observations in each bin
+  geom_point(aes(size = n_states), color = "midnightblue", alpha = 0.8) +
   geom_line(color = "midnightblue", alpha = 0.7) +
   scale_x_continuous(
     name = "Predicted Win Probability (Bin)",
@@ -260,8 +271,8 @@ ggplot(calibration_summary, aes(x = mean_pred_prob, y = mean_actual_prob)) +
     limits = c(0, 1)
   ) +
   labs(
-    title = "Calibration Plot for Win Probability Model",
-    subtitle = "Comparing predicted probabilities to actual win rates across 10 bins (sampled data)",
+    title = "Calibration Plot for Final Win Probability Model (Logit Link)",
+    subtitle = "Comparing predicted probabilities to actual win rates across the full dataset",
     size = "Number of\nGame States"
   ) +
   theme_minimal()
@@ -269,13 +280,17 @@ ggplot(calibration_summary, aes(x = mean_pred_prob, y = mean_actual_prob)) +
 # Win probability plot for single match ---------------------------------------
 
 match_to_plot_id <- "20231113110"
+n_draws <- 50
 
 # Prepare the dense timeline for the match, including the inverse time variable
 single_match_dense <- full_data |>
   filter(matchId == match_to_plot_id) |>
   complete(minutes_remaining = seq(80, 0, by = -0.1)) |>
   arrange(-minutes_remaining) |>
-  fill(points_differential, .direction = "down") |>
+  fill(
+    c(points_differential, home_gains_possession, player_advantage),
+    .direction = "down"
+  ) |>
   mutate(
     points_differential = if_else(
       is.na(points_differential),
@@ -285,20 +300,17 @@ single_match_dense <- full_data |>
     game_minute = 80 - minutes_remaining,
     inverse_minutes_remaining = 1 / (minutes_remaining + 0.1)
   ) |>
-  add_epred_draws(fit_brms)
+  add_epred_draws(fit_brms_full_logit, ndraws = n_draws)
 
 # Scoring events for annotations (use the sparse data)
 scoring_events <- full_data |>
   filter(
     matchId == match_to_plot_id,
+    event != "GameTime",
     points_differential != lag(points_differential, default = 0)
   ) |>
   mutate(game_minute = 80 - minutes_remaining)
 
-# --- 1. Filter to a Manageable Number of Draws for Plotting ---
-# Plotting all 4000 draws would be too messy. 100-200 is usually a good number.
-plot_draws <- single_match_dense |>
-  filter(.draw %in% 1:100)
 
 # --- 2. Create the Spaghetti Plot ---
 ggplot(plot_draws, aes(x = game_minute, y = .epred)) +
@@ -338,7 +350,9 @@ ggplot(plot_draws, aes(x = game_minute, y = .epred)) +
   ) +
   geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray30") +
   labs(
-    title = "Win Probability Chart (with 100 Posterior Draws)",
+    title = glue::glue(
+      "Win Probability Chart (median with {n_draws} Posterior Draws)"
+    ),
     subtitle = paste("Match ID:", match_to_plot_id),
     caption = "Faint grey lines are individual posterior draws; black line is the posterior median."
   ) +

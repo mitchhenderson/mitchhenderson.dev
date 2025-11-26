@@ -6,13 +6,13 @@ author: Mitch Henderson
 date: 2025-01-27
 thumbnailImage: /img/nrl_finals_probs.png
 draft: false
-format: 
-  html: 
+format:
+  html:
     code-fold: true
     code-tools: true
     html-table-processing: none
 knitr:
-    opts_chunk: 
+    opts_chunk:
       dev: "ragg_png"
 ---
 
@@ -50,7 +50,7 @@ mitchhenderson::font_hoist("Myriad Pro")
 theme_set(theme_minimal() +
             theme(text = element_text(family = "Myriad Pro Regular"),
                   plot.caption = element_markdown(),
-                  plot.title = element_markdown(family = "Myriad Pro Bold Condensed", 
+                  plot.title = element_markdown(family = "Myriad Pro Bold Condensed",
                                                 size = 18),
                   plot.subtitle = element_markdown(family = "Myriad Pro Regular"),
                   plot.title.position = "plot",
@@ -96,13 +96,13 @@ competition_table <- function(df){
     summarise(home_wins = sum(home_win),
               home_for_and_against = sum(points_differential),
               .by = c(season, home)) |>
-    left_join(df |> 
+    left_join(df |>
                 summarise(away_wins = sum(away_win),
                           away_for_and_against = sum(points_differential) * -1,
                           .by = c(season, away)),
               by = join_by(season, home == away)) |>
-    left_join(df |> 
-                summarise(draw = sum(draw), 
+    left_join(df |>
+                summarise(draw = sum(draw),
                           .by = c(season, home)),
               by = join_by(season, home)) |>
     mutate(total_wins = home_wins + away_wins + draw * 0.5,
@@ -137,41 +137,41 @@ observed_summary_results |>
   geom_dotsinterval(group = NA,
                     binwidth = 0.5,
                     overflow = "compress") +
-  annotate("segment", 
-           x = 1.5, 
-           xend = 1.5, 
-           y = 0.075, 
+  annotate("segment",
+           x = 1.5,
+           xend = 1.5,
+           y = 0.075,
            yend = 0.5,
            linewidth = 0.2,
            colour = "grey60") +
-  geom_richtext(data = tibble(y = 0.5, 
+  geom_richtext(data = tibble(y = 0.5,
                               x = 1.5,
                               label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2016 Newcastle Knights</span><br>1 win, 1 draw")),
                 aes(x, y, label = label),
                 family = "Myriad Pro Regular",
-                hjust = 0, 
-                vjust = 1, 
-                fill = NA, 
-                label.color = NA, 
-                size = 2.5, 
+                hjust = 0,
+                vjust = 1,
+                fill = NA,
+                label.color = NA,
+                size = 2.5,
                 colour = "grey40") +
-  annotate("segment", 
-           x = 21, 
-           xend = 21, 
-           y = 0.135, 
+  annotate("segment",
+           x = 21,
+           xend = 21,
+           y = 0.135,
            yend = 0.5,
            linewidth = 0.2,
            colour = "grey60") +
-  geom_richtext(data = tibble(y = 0.5, 
+  geom_richtext(data = tibble(y = 0.5,
                               x = 21,
                               label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2021 Melbourne<br>Storm & Penrith<br>Panthers</span><br>Both with 21 wins")),
                 aes(x, y, label = label),
                 family = "Myriad Pro Regular",
-                hjust = 0, 
-                vjust = 1, 
-                fill = NA, 
-                label.color = NA, 
-                size = 2.5, 
+                hjust = 0,
+                vjust = 1,
+                fill = NA,
+                label.color = NA,
+                size = 2.5,
                 colour = "grey40") +
   labs(x = "Matches won",
        title = "**NRL teams have needed as low as 10 and as high as 14 wins to make<br>the finals over the last 10 years**",
@@ -219,16 +219,16 @@ To begin defining the data generating process, we need a way to randomly generat
 # Define vector of team names
 teams <- unique(data$home)
 
-# Create random graph with 17 nodes (teams) 
+# Create random graph with 17 nodes (teams)
 # Connect each node to 12 other nodes for home games and another 12 for away games
 # Convert to tibble and add team names
 simulate_season_draw <- function(){
    graph <- sample_degseq(rep(12, length(teams)),
                 rep(12, length(teams)),
                 method = "simple.no.multiple")
-   
+
     edges <- as_edgelist(graph)
-    
+
     tibble(
       home = teams[edges[, 1]],
       away = teams[edges[, 2]]
@@ -256,7 +256,7 @@ Now we need results for these games. To do this we need to make an assumption ab
 #| out-width: "100%"
 
 average_10yr_points_diff <- data |>
-  pull(points_differential) |> 
+  pull(points_differential) |>
   mean()
 
 data |>
@@ -268,43 +268,43 @@ data |>
        caption = socials) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05)),
                      breaks = seq(0, 100, 25)) +
-  annotate("segment", 
-           y = 0, 
-           yend = 110, 
-           x = average_10yr_points_diff, 
-           xend = average_10yr_points_diff, 
+  annotate("segment",
+           y = 0,
+           yend = 110,
+           x = average_10yr_points_diff,
+           xend = average_10yr_points_diff,
            linetype = "dashed",
            linewidth = 0.4,
            colour = "grey50") +
-  geom_richtext(data = tibble(y = 102, 
+  geom_richtext(data = tibble(y = 102,
                               x = average_10yr_points_diff,
                               label = glue::glue("<span style='font-family:Myriad Pro Regular'>**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)</span>")),
                 aes(x, y, label = label),
                 family = "Myriad Pro",
-                hjust = 0, 
-                fill = NA, 
-                label.color = NA, 
-                size = 3, 
+                hjust = 0,
+                fill = NA,
+                label.color = NA,
+                size = 3,
                 colour = "grey40") +
-  geom_richtext(data = tibble(y = 61, 
+  geom_richtext(data = tibble(y = 61,
                               x = 45,
                               label = glue::glue("Home team<br>win")),
                 aes(x, y, label = label),
                 family = "Myriad Pro",
-                hjust = 0.5, 
-                fill = NA, 
-                label.color = NA, 
-                size = 6, 
+                hjust = 0.5,
+                fill = NA,
+                label.color = NA,
+                size = 6,
                 colour = "grey60") +
-  geom_richtext(data = tibble(y = 61, 
+  geom_richtext(data = tibble(y = 61,
                               x = -45,
                               label = glue::glue("Away team<br>win")),
                 aes(x, y, label = label),
                 family = "Myriad Pro",
-                hjust = 0.5, 
-                fill = NA, 
-                label.color = NA, 
-                size = 6, 
+                hjust = 0.5,
+                fill = NA,
+                label.color = NA,
+                size = 6,
                 colour = "grey60") +
   theme(panel.grid.major.x = element_blank(),
         axis.line.x = element_line(colour = "grey20"))
@@ -375,10 +375,10 @@ calc_win_prob <- function(multiplier) {
   # Both teams start with equal strength
   home_strength <- 0.5
   away_strength <- 0.5
-  
+
   # Apply multiplier to home team
   adjusted_home <- home_strength * multiplier
-  
+
   # Calculate resulting probability
   prob <- adjusted_home / (adjusted_home + away_strength)
   return(prob)
@@ -386,8 +386,8 @@ calc_win_prob <- function(multiplier) {
 
 # Function to find multiplier that gives desired win probability
 find_optimal_multiplier <- function(target_prob) {
-  optimise(function(m) abs(calc_win_prob(m) - target_prob), 
-          interval = c(1, 2),  # Search between 1-2x multiplier 
+  optimise(function(m) abs(calc_win_prob(m) - target_prob),
+          interval = c(1, 2),  # Search between 1-2x multiplier
           maximum = FALSE)$minimum
 }
 
@@ -405,23 +405,23 @@ Now I can finally define a function that simulates a match. It compares the impl
 # Function to simulate a single match
 simulate_match <- function(home_strength, away_strength, diff_vector) {
   home_advantage_multiplier <- optimal_multiplier
-  
+
   # Apply home advantage to home team's strength
   adjusted_home_strength <- home_strength * home_advantage_multiplier
- 
+
   # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
   home_win_prob <- adjusted_home_strength / (adjusted_home_strength + away_strength)
-  
+
   # Compare to uniform distribution to determine if it's a home win or away win
   is_home_win <- runif(1) < home_win_prob
-  
+
   # Sample the differential
   if (is_home_win) {
     diff <- sample(diff_vector[diff_vector > 0], 1)
   } else {
     diff <- -sample(diff_vector[diff_vector > 0], 1)
   }
-  
+
   return(diff)
 }
 ```
@@ -430,10 +430,10 @@ To demonstrate, here I generate 15 random points differential results for a game
 
 ```{r}
 map2(
-  .x = rep(0.05, 15), 
-  .y = rep(0.20, 15), 
+  .x = rep(0.05, 15),
+  .y = rep(0.20, 15),
   ~simulate_match(.x, .y, data$points_differential)
-  ) |> 
+  ) |>
   unlist()
 ```
 

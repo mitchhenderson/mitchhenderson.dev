@@ -16,34 +16,192 @@ knitr:
       dev: "ragg_png"
 ---
 
+Strength and conditioning coaches collect training data to monitor their athletes' progress and evaluate the effectiveness of their programming. A common method of achieving this in strength training is to calculate an **estimated one repetition maximum** (e1RM) for an exercise completed at a submaximal weight and track changes in this metric over time. Using e1RM is often preferred to true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and yields more frequent data points than periodic testing allows (enabling timely program adjustments). Coaches often program true 1RM testing only a handful of times per season (if at all) and rely on training data measures (e.g., e1RM) between these occasional tests to make inferences on progress and appropriate adjustments.
+
+## The problem
+
+There are a lot of different ways to calculate e1RM.
+
 ```{r}
+#| warning: false
+
 library(tidyverse)
-library(cmdstanr)
-library(posterior)
+library(gganimate)
+library(scales)
+mitchhenderson::font_hoist("Myriad Pro")
+
+# Define the 1RM estimation formulas
+# Each formula calculates %1RM based on number of reps
+formulas <- list(
+  Epley = function(reps) {
+    # Epley: 1RM = weight × (1 + reps/30)
+    # Therefore: %1RM = 100 / (1 + reps/30)
+    100 / (1 + reps / 30)
+  },
+
+  Brzycki = function(reps) {
+    # Brzycki: 1RM = weight × (36/(37 - reps))
+    # Therefore: %1RM = 100 × (37 - reps) / 36
+    100 * (37 - reps) / 36
+  },
+
+  Mayhew = function(reps) {
+    # Mayhew: 1RM = (100 × weight) / (52.2 + 41.9 × exp(-0.055 × reps))
+    # Therefore: %1RM = 52.2 + 41.9 × exp(-0.055 × reps)
+    52.2 + 41.9 * exp(-0.055 * reps)
+  },
+
+  Lombardi = function(reps) {
+    # Lombardi: 1RM = weight × reps^0.10
+    # Therefore: %1RM = 100 / reps^0.10
+    100 / (reps^0.10)
+  },
+
+  `O'Conner` = function(reps) {
+    # O'Conner: 1RM = weight × (1 + reps/40)
+    # Therefore: %1RM = 100 / (1 + reps/40)
+    100 / (1 + reps / 40)
+  },
+
+  Wathan = function(reps) {
+    # Wathan: 1RM = (100 × weight) / (48.8 + 53.8 × exp(-0.075 × reps))
+    # Therefore: %1RM = 48.8 + 53.8 × exp(-0.075 × reps)
+    48.8 + 53.8 * exp(-0.075 * reps)
+  },
+
+  Lander = function(reps) {
+    # Lander: 1RM = (100 × weight) / (101.3 - 2.67123 × reps)
+    # Therefore: %1RM = 101.3 - 2.67123 × reps
+    101.3 - 2.67123 * reps
+  }
+)
+
+# Generate data for reps 1 to 20
+reps_range <- 1:20
+
+# Create a tidy dataframe with all formulas
+e1rm_data <- tibble(reps = reps_range) |>
+  crossing(formula = names(formulas)) |>
+  mutate(
+    percent_1rm = map2_dbl(formula, reps, ~ formulas[[.x]](.y))
+  )
+
+e1rm_data_animated <- e1rm_data |>
+  crossing(highlight = unique(e1rm_data$formula)) |>
+  mutate(
+    is_highlighted = formula == highlight,
+    line_color = if_else(is_highlighted, "highlighted", "grey"),
+    label = if_else(is_highlighted & reps == max(reps), formula, NA_character_),
+    line_size = if_else(is_highlighted, 2, 1)
+  )
+
+animated_plot <- e1rm_data_animated |>
+  ggplot(aes(x = reps, y = percent_1rm, group = formula)) +
+  coord_cartesian(xlim = c(1, 20), clip = "off") +
+  geom_line(
+    data = e1rm_data_animated |> filter(!is_highlighted),
+    aes(linewidth = line_size),
+    colour = "grey70"
+  ) +
+  geom_line(
+    data = e1rm_data_animated |> filter(is_highlighted),
+    aes(linewidth = line_size),
+    colour = "#E74C3C"
+  ) +
+  geom_text(
+    aes(label = label),
+    colour = "#E74C3C",
+    family = "Myriad Pro Regular",
+    hjust = 0,
+    nudge_x = 0.5,
+    size = 6,
+    fontface = "bold",
+    show.legend = FALSE
+  ) +
+  scale_linewidth_identity() +
+  scale_x_continuous(
+    breaks = seq(1, 20, 1)
+  ) +
+  scale_y_continuous(
+    labels = label_percent(scale = 1),
+    breaks = seq(40, 100, 10),
+    limits = c(40, 100)
+  ) +
+  labs(
+    title = "1RM Estimation Formulas",
+    x = "Number of Repetitions",
+    y = NULL,
+    subtitle = "% of 1RM"
+  ) +
+  theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(size = 14, color = "grey40", face = "bold"),
+    axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
+    panel.grid = element_blank(),
+    plot.margin = margin(10, 100, 10, 10),
+    plot.caption = element_text(color = "grey50", hjust = 0, size = 10),
+    legend.position = "none",
+    ,
+    plot.title.position = "plot"
+  ) +
+  transition_manual(
+    highlight,
+    cumulative = FALSE
+  )
+
+# Render the animation
+animate(
+  animated_plot,
+  nframes = 80,
+  fps = 10,
+  width = 8,
+  height = 4.5,
+  device = "ragg_png"
+)
 ```
 
+But none of these common e1RM formulas:
+
+-   Account for differences between athletes in strength endurance.
+
+    Some athletes (fast twitch dominant, higher metabolic cost per rep) have relatively high 1RMs but find higher rep sets at moderate intensities challenging. Other athletes (greater oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimates to take into account what I know about the physiological characteristics of the athlete**. If a fast twitch dominant athlete does a max reps set of 14 x 100kg, I'd expect their 1RM to be higher than a more oxidative dominant athlete performing the same 14 x 100kg because I know they are better suited to high intensity efforts. The common e1RM formulas don't do this.
+
+-   Capture the level of uncertainty in the e1RM they generate.
+
+    The common e1RM formulas return a prediction as a single value. There's a big difference in how I'd interpret a 100kg e1RM if it has 80% certainty of being between 97.5–102.5kg (precise) compared to 80% certainty of being between 77.5–122.5kg (practically useless). There's also a big difference in the level of certainty we can expect from these models when the athlete does 2-5 reps (higher certainty) compared 10+ reps (lower certainty). We also become more certain about an athlete's capacity the more we work with them. I'd have a lot more certainty predicting the 1RM of an athlete I'd worked with and collected training data on for years compared to someone new from another team with limited training data available to me. **I want my e1RM estimates to incorporate all these sources of uncertainty into the prediction so I can interpret and act accordingly**.
+
+## My solution
+
+To address these shortcomings, I'll extend ......
+
+I'll first simulate a dataset
+
 ```{r}
-# 1. Set Seed for Reproducibility
 set.seed(2534)
 
-# 2. Define Hyperparameters (The "Truth" of the Population)
+# Define hyperparameters (the "truth" of the population)
 n_athletes <- 30
 n_obs_per_athlete <- 15
-sigma_noise <- 2.5 # Measurement noise (std dev in kg)
+noise <- 2.5 # Measurement noise (std dev in kg)
 
 # Population distributions
 pop_mean_1rm <- 140
 pop_sd_1rm <- 20
-pop_mean_beta <- 30
-pop_sd_beta <- 6
+pop_mean_endurance_coefficient <- 30
+pop_sd_endurance_coefficient <- 6
 
-# 3. Generate Athlete-Level Parameters (The "Truth" for each Person)
+# Athlete-level parameters (the "truth" for each person)
 athletes <- tibble(
   athlete_id = 1:n_athletes,
   # Latent Variable 1: True Strength
   true_one_rm = rnorm(n_athletes, mean = pop_mean_1rm, sd = pop_sd_1rm),
   # Latent Variable 2: True Endurance (The Beta Coefficient)
-  true_beta = rnorm(n_athletes, mean = pop_mean_beta, sd = pop_sd_beta)
+  true_beta = rnorm(
+    n_athletes,
+    mean = pop_mean_endurance_coefficient,
+    sd = pop_sd_endurance_coefficient
+    )
 )
 
 # 4. Generate Session Data (The Observations)
@@ -65,301 +223,4 @@ sim_data <- athletes |>
     # Clean up: Ensure no negative weights (unlikely but good practice)
     weight_observed = pmax(weight_observed, 0)
   )
-
-# 5. Inspect the Data
-print(head(sim_data))
-
-# 6. Visualization: Sanity Check
-# We want to see if different Betas actually produce different curves.
-# Let's pick 3 athletes: Low Beta, Average Beta, High Beta.
-
-sample_athletes <- athletes |>
-  arrange(true_beta) |>
-  slice(c(1, 15, 30)) |> # Pick min, median, max
-  pull(athlete_id)
-
-sim_data |>
-  filter(athlete_id %in% sample_athletes) |>
-  left_join(athletes, by = join_by(athlete_id, true_one_rm, true_beta)) |>
-  mutate(
-    label = paste0(
-      "Athlete ",
-      athlete_id,
-      "\n(Beta: ",
-      round(true_beta, 1),
-      ", 1RM: ",
-      round(true_one_rm, 0),
-      ")"
-    )
-  ) |>
-  ggplot(aes(x = reps, y = weight_observed, color = as.factor(label))) +
-  geom_point(size = 3, alpha = 0.7) +
-  # Add the theoretical curves to see if points track them
-  stat_function(
-    fun = function(x) 140 / (1 + x / 30),
-    linetype = "dashed",
-    color = "gray",
-    alpha = 0.5
-  ) +
-  geom_smooth(
-    method = "nls",
-    formula = y ~ a / (1 + x / b),
-    method.args = list(start = c(a = 140, b = 30)),
-    se = FALSE
-  ) +
-  labs(
-    title = "Simulated Strength Curves",
-    subtitle = "Notice how the 'Low Beta' athlete's strength drops off faster as reps increase",
-    y = "Weight Lifted (kg)",
-    x = "Reps Performed",
-    color = "Athlete Profile"
-  ) +
-  theme_minimal()
-```
-
-
-```{r}
-# Prepare data list for Stan
-stan_data <- list(
-  N = nrow(sim_data), # Total number of observations
-  J = n_athletes, # Number of athletes
-  athlete = sim_data$athlete_id, # Athlete index for each observation
-  reps = sim_data$reps, # Predictor: Reps
-  weight = sim_data$weight_observed # Outcome: Weight
-)
-
-# Save the ground truth to compare later
-ground_truth <- athletes
-```
-
-
-```{r}
-# 1. Compile the model
-# This creates an executable file in the background
-mod <- cmdstan_model("e1rm_model.stan")
-
-# 2. Fit the model
-# We pass the same 'stan_data' list we created in the previous step
-fit <- mod$sample(
-  data = stan_data,
-  seed = 2534,
-  chains = 4,
-  parallel_chains = 4,
-  iter_warmup = 2000,
-  iter_sampling = 2000,
-  refresh = 500 # Print progress every 500 iterations
-)
-
-# 3. Quick Diagnostics
-# Check for convergence (rhat < 1.01) and effective sample size
-fit$cmdstan_diagnose()
-```
-
-
-```{r}
-# 1. Extract Summary Statistics
-# We only want the athlete-specific parameters: one_rm and beta
-model_summary <- fit$summary(
-  variables = c("one_rm", "beta"),
-  "mean",
-  "sd",
-  ~ quantile(.x, probs = c(0.025, 0.975)) # Custom quantiles for 95% CI
-)
-
-# 2. Clean and Organize the Data
-# We need to parse "one_rm[1]" into param="one_rm" and id=1
-estimates <- model_summary |>
-  # Extract variable name and index using Regex
-  extract(
-    variable,
-    into = c("param_type", "athlete_id"),
-    regex = "(\\w+)\\[(\\d+)\\]",
-    convert = TRUE
-  ) |>
-  # Rename quantile columns for easier plotting
-  rename(lower_ci = `2.5%`, upper_ci = `97.5%`)
-
-# 3. Join with Ground Truth (from the simulation step)
-comparison <- estimates |>
-  left_join(
-    ground_truth |>
-      pivot_longer(
-        cols = c(true_one_rm, true_beta),
-        names_to = "param_type",
-        values_to = "truth"
-      ) |>
-      mutate(param_type = str_remove(param_type, "true_")),
-    by = c("athlete_id", "param_type")
-  )
-
-# 4. Visualization: True vs Estimated
-comparison |>
-  mutate(
-    param_label = case_when(
-      param_type == "beta" ~ "Endurance Coefficient (Beta)",
-      param_type == "one_rm" ~ "Estimated 1RM (kg)"
-    )
-  ) |>
-  ggplot(aes(x = truth, y = mean)) +
-  # The identity line (Perfect recovery)
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50") +
-  # Error bars representing the posterior uncertainty
-  geom_errorbar(
-    aes(ymin = lower_ci, ymax = upper_ci),
-    color = "skyblue",
-    width = 0,
-    alpha = 0.6
-  ) +
-  # The point estimates
-  geom_point(size = 2, alpha = 0.8) +
-  facet_wrap(~param_label, scales = "free") +
-  labs(
-    title = "Parameter Recovery: True vs Estimated",
-    subtitle = "Comparison of Simulated Ground Truth against Bayesian Posterior Means",
-    x = "True Value (Simulated)",
-    y = "Estimated Value (Posterior Mean)"
-  ) +
-  theme_minimal()
-```
-
-
-```{r}
-predict_e1rm <- function(
-  fit_object,
-  athlete_id,
-  weight_lifted,
-  reps_performed
-) {
-  # 1. Extract the posterior draws for this specific athlete's Beta
-  # We use the 'subset_draws' function from the posterior package
-  beta_draws <- fit_object$draws(
-    variables = paste0("beta[", athlete_id, "]")
-  ) |>
-    as_draws_df() |>
-    pull(1) # Extract the first column (the beta values) as a vector
-
-  # 2. Apply the Inverse Epley Formula to EVERY draw
-  # Formula: 1RM = Weight * (1 + Reps/Beta)
-  # We are calculating thousands of potential 1RMs based on the uncertainty of Beta
-  e1rm_distribution <- weight_lifted * (1 + reps_performed / beta_draws)
-
-  # 3. Summarize the Distribution
-  result <- tibble(
-    athlete_id = athlete_id,
-    input_weight = weight_lifted,
-    input_reps = reps_performed,
-
-    # Point Estimate (Median is usually safer than Mean for skewed distributions)
-    e1rm_estimate = median(e1rm_distribution),
-
-    # Uncertainty Intervals (95% Credible Interval)
-    lower_ci = quantile(e1rm_distribution, 0.025),
-    upper_ci = quantile(e1rm_distribution, 0.975),
-
-    # Keep the full distribution if we want to plot it later
-    posterior_samples = list(e1rm_distribution)
-  )
-
-  return(result)
-}
-```
-
-
-```{r}
-# Run the prediction
-prediction <- predict_e1rm(
-  fit,
-  athlete_id = 10,
-  weight_lifted = 85,
-  reps_performed = 8
-)
-
-# Extract the samples from the list column
-plot_data <- tibble(e1rm = prediction$posterior_samples[[1]])
-
-ggplot(plot_data, aes(x = e1rm)) +
-  # The Density Plot
-  geom_density(fill = "skyblue", alpha = 0.6) +
-  # Add the vertical line for the median estimate
-  geom_vline(
-    xintercept = prediction$e1rm_estimate,
-    linetype = "dashed",
-    linewidth = 1
-  ) +
-  # Add the vertical lines for the 95% CI
-  geom_vline(
-    xintercept = c(prediction$lower_ci, prediction$upper_ci),
-    linetype = "dotted"
-  ) +
-  labs(
-    title = paste0(
-      "Predicted 1RM Distribution for Athlete ",
-      prediction$athlete_id
-    ),
-    subtitle = paste0(
-      "Based on set: ",
-      prediction$input_weight,
-      "kg x ",
-      prediction$input_reps,
-      " reps"
-    ),
-    x = "Estimated 1RM (kg)",
-    y = "Probability Density"
-  ) +
-  theme_minimal()
-```
-
-
-```{r}
-# 1. Identify the Extremes
-# We look at our previously extracted estimates to find the min and max Beta
-extreme_athletes <- estimates |>
-  filter(param_type == "beta") |>
-  filter(mean == min(mean) | mean == max(mean)) |>
-  arrange(mean)
-
-low_beta_id <- extreme_athletes$athlete_id[1]
-high_beta_id <- extreme_athletes$athlete_id[2]
-
-# 2. Generate Predictions for the SAME hypothetical set
-# Scenario: 80kg for 10 reps
-pred_low <- predict_e1rm(
-  fit,
-  athlete_id = low_beta_id,
-  weight_lifted = 80,
-  reps_performed = 10
-)
-pred_high <- predict_e1rm(
-  fit,
-  athlete_id = high_beta_id,
-  weight_lifted = 80,
-  reps_performed = 10
-)
-
-# 3. Combine and Visualize
-plot_data <- bind_rows(
-  tibble(
-    Profile = "Low Endurance (Low Beta)",
-    e1rm = pred_low$posterior_samples[[1]]
-  ),
-  tibble(
-    Profile = "High Endurance (High Beta)",
-    e1rm = pred_high$posterior_samples[[1]]
-  )
-)
-
-ggplot(plot_data, aes(x = e1rm, fill = Profile)) +
-  geom_density(alpha = 0.6) +
-  labs(
-    title = "Same Performance, Different Estimates",
-    subtitle = paste0(
-      "Scenario: Both athletes lift 80kg for 10 reps.\n",
-      "The model predicts a higher 1RM for the Low Endurance athlete."
-    ),
-    x = "Estimated 1RM (kg)",
-    y = "Posterior Density",
-    fill = "Athlete Profile"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "top")
-```
+    ```

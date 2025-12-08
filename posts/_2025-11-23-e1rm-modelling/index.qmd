@@ -16,7 +16,30 @@ knitr:
       dev: "ragg_png"
 ---
 
-Strength and conditioning coaches collect training data to monitor their athletes' progress and evaluate the effectiveness of their programming. A common method of achieving this in strength training is to calculate an **estimated one repetition maximum** (e1RM) for an exercise completed at a submaximal weight and track changes in this metric over time. Using e1RM is often preferred to true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and yields more frequent data points than periodic testing allows (enabling timely program adjustments). Coaches often program true 1RM testing only a handful of times per season (if at all) and rely on training data measures (e.g., e1RM) between these occasional tests to make inferences on progress and appropriate adjustments.
+## *tl;dr*: enter takeaway here
+
+<br>
+
+[S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum** (e1RM)](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) using a formula and track it's changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and data can be collected more frequently (enabling faster program adjustments). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength adaptations or detect when a program should be adjusted is a good idea.
+
+```{r}
+#| output: false
+
+library(tidyverse)
+library(gganimate)
+library(scales)
+library(ggtext)
+library(gt)
+library(gtExtras)
+library(sn) # skewed normal distribution function
+
+mitchhenderson::font_hoist("Myriad Pro")
+socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
+
+colours <- c("#E31937", "#134A8E")
+
+# theme_set
+```
 
 ## The problem
 
@@ -24,11 +47,6 @@ There are a lot of different ways to calculate e1RM.
 
 ```{r}
 #| warning: false
-
-library(tidyverse)
-library(gganimate)
-library(scales)
-mitchhenderson::font_hoist("Myriad Pro")
 
 # Define the 1RM estimation formulas
 # Each formula calculates %1RM based on number of reps
@@ -92,7 +110,7 @@ e1rm_data_animated <- e1rm_data |>
     is_highlighted = formula == highlight,
     line_color = if_else(is_highlighted, "highlighted", "grey"),
     label = if_else(is_highlighted & reps == max(reps), formula, NA_character_),
-    line_size = if_else(is_highlighted, 2, 1)
+    line_size = if_else(is_highlighted, 2, 0.5)
   )
 
 animated_plot <- e1rm_data_animated |>
@@ -106,11 +124,11 @@ animated_plot <- e1rm_data_animated |>
   geom_line(
     data = e1rm_data_animated |> filter(is_highlighted),
     aes(linewidth = line_size),
-    colour = "#E74C3C"
+    colour = "#E31937"
   ) +
   geom_text(
     aes(label = label),
-    colour = "#E74C3C",
+    colour = "#E31937",
     family = "Myriad Pro Regular",
     hjust = 0,
     nudge_x = 0.5,
@@ -131,7 +149,8 @@ animated_plot <- e1rm_data_animated |>
     title = "1RM Estimation Formulas",
     x = "Number of Repetitions",
     y = NULL,
-    subtitle = "% of 1RM"
+    subtitle = "% of 1RM",
+    caption = socials
   ) +
   theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
   theme(
@@ -140,9 +159,10 @@ animated_plot <- e1rm_data_animated |>
     axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
     panel.grid = element_blank(),
     plot.margin = margin(10, 100, 10, 10),
-    plot.caption = element_text(color = "grey50", hjust = 0, size = 10),
+    plot.caption = element_markdown(color = "grey50", size = 10),
     legend.position = "none",
-    ,
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
     plot.title.position = "plot"
   ) +
   transition_manual(
@@ -161,66 +181,97 @@ animate(
 )
 ```
 
-But none of these common e1RM formulas:
+But none of these e1RM formulas:
 
--   Account for differences between athletes in strength endurance.
+-   Account for strength endurance differences between athletes
 
-    Some athletes (fast twitch dominant, higher metabolic cost per rep) have relatively high 1RMs but find higher rep sets at moderate intensities challenging. Other athletes (greater oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimates to take into account what I know about the physiological characteristics of the athlete**. If a fast twitch dominant athlete does a max reps set of 14 x 100kg, I'd expect their 1RM to be higher than a more oxidative dominant athlete performing the same 14 x 100kg because I know they are better suited to high intensity efforts. The common e1RM formulas don't do this.
+    Some athletes (fast twitch, higher metabolic cost per rep) have high 1RMs but find higher rep sets challenging. Other athletes (better oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimate to take into account what I know about the physiological characteristics of the athlete**. If a fast twitch athlete does a max reps set of 14 x 100kg, I expect their 1RM to be higher than a more oxidative athlete performing the same 14 x 100kg because I know they are better suited to high intensity work.
 
--   Capture the level of uncertainty in the e1RM they generate.
+    e1RM formulas don't do this.
 
-    The common e1RM formulas return a prediction as a single value. There's a big difference in how I'd interpret a 100kg e1RM if it has 80% certainty of being between 97.5–102.5kg (precise) compared to 80% certainty of being between 77.5–122.5kg (practically useless). There's also a big difference in the level of certainty we can expect from these models when the athlete does 2-5 reps (higher certainty) compared 10+ reps (lower certainty). We also become more certain about an athlete's capacity the more we work with them. I'd have a lot more certainty predicting the 1RM of an athlete I'd worked with and collected training data on for years compared to someone new from another team with limited training data available to me. **I want my e1RM estimates to incorporate all these sources of uncertainty into the prediction so I can interpret and act accordingly**.
+-   Tell me how certainty they are in their estimate
+
+    The standard formulas WILL ALWAYS give you a 1RM estimate, doesn't matter how UNconfident it is. This estimate will always just be a single value. There's a big difference in how I'd interpret a 100kg e1RM if it's 80% certain of being between 97.5–102.5kg (precise) versus 80% certain of being between 77.5–122.5kg (practically useless). There's also a big difference in the certainty we can expect from these models when the athlete does 2-5 reps (higher certainty) compared 10+ reps (lower certainty). We also become more certain about an athlete's ability the more we work with them. I have a lot more confidence predicting the 1RM of an athlete I've worked with and collected training data on for years compared to someone new with little training data available. **I want my e1RM estimate to incorporate all these sources of uncertainty so I can interpret and act accordingly**.
+
+    e1RM formulas don't do this.
 
 ## My solution
 
-To address these shortcomings, I'll extend ......
+The idea is basically to build a statistical model that takes into account which athlete it's estimating the 1RM for. The model will be trained on the athlete's past data so it learns how they handle higher weight vs higher reps and will adjust accordingly. It's kind of like a smarter version of the standard e1RM formulas that change how they work based on the athlete and what it knows about them.
 
-I'll first simulate a dataset
+The model will also be what's called a [Bayesian](https://en.wikipedia.org/wiki/Bayesian_statistics) model in the statistics world. These have advantages over [conventional](https://en.wikipedia.org/wiki/Frequentist_probability) statistical models when it comes to expressing uncertainty ([among other things](https://www.youtube.com/watch?v=R6d-AbkhBQ8)). So instead of just getting a number, you get a full distribution of numbers that can either be interpreted as is, or summarised however you want (e.g., 80% are between *this* number and *that* number). This distribution will account for all the sources of upstream uncertainty (amount of data available on the athlete, number of reps they completed, etc).
+
+To show you what I mean, I'll start by simulating some data.
 
 ```{r}
 set.seed(2534)
 
-# Define hyperparameters (the "truth" of the population)
+# Population hyperparameters (ground truth)
 n_athletes <- 30
-n_obs_per_athlete <- 15
-noise <- 2.5 # Measurement noise (std dev in kg)
+mean_n_obs_per_athlete <- 15
+min_n_obs <- 5
+max_n_obs <- 30
 
-# Population distributions
+# True 1RM population parameters
 pop_mean_1rm <- 140
-pop_sd_1rm <- 20
-pop_mean_endurance_coefficient <- 30
-pop_sd_endurance_coefficient <- 6
+pop_sd_1rm <- 15
 
-# Athlete-level parameters (the "truth" for each person)
+# Endurance coefficient population parameters
+pop_mean_endurance <- 30
+pop_sd_endurance <- 10
+
+# Observation noise
+obs_noise_sd <- 2.5
+
+# Skewness for observed weights (negative = left skew)
+skew_alpha <- -2
+
+# Generate athlete-level ground truth
 athletes <- tibble(
   athlete_id = 1:n_athletes,
-  # Latent Variable 1: True Strength
-  true_one_rm = rnorm(n_athletes, mean = pop_mean_1rm, sd = pop_sd_1rm),
-  # Latent Variable 2: True Endurance (The Beta Coefficient)
-  true_beta = rnorm(
+  true_1rm = rnorm(n_athletes, mean = pop_mean_1rm, sd = pop_sd_1rm),
+  true_endurance = rnorm(
     n_athletes,
-    mean = pop_mean_endurance_coefficient,
-    sd = pop_sd_endurance_coefficient
-    )
+    mean = pop_mean_endurance,
+    sd = pop_sd_endurance
+  ),
+  n_observations = sample(min_n_obs:max_n_obs, n_athletes, replace = TRUE)
 )
 
-# 4. Generate Session Data (The Observations)
+# Generate observations
 sim_data <- athletes |>
-  # Create multiple observations per athlete
-  expand_grid(session_id = 1:n_obs_per_athlete) |>
+  rowwise() |>
+  reframe(
+    athlete_id = athlete_id,
+    true_1rm = true_1rm,
+    true_endurance = true_endurance,
+    session_id = seq_len(n_observations),
+    reps = sample(2:15, n_observations, replace = TRUE)
+  ) |>
   mutate(
-    # Simulate the Reps performed (Independent Variable)
-    # We vary reps from 1 to 12 to ensure the model can learn the curve
-    reps = sample(1:12, size = n(), replace = TRUE),
+    # Theoretical weight from modified Epley formula
+    weight_theoretical = true_1rm / (1 + reps / true_endurance),
 
-    # Calculate the Theoretical Weight (Deterministic Modified Epley)
-    # Formula: W = 1RM / (1 + R/Beta)
-    weight_theoretical = true_one_rm / (1 + reps / true_beta),
-
-    # Add Noise to create Observed Weight (Dependent Variable)
-    weight_observed = rnorm(n(), mean = weight_theoretical, sd = sigma_noise),
-
-    # Clean up: Ensure no negative weights (unlikely but good practice)
-    weight_observed = pmax(weight_observed, 0)
+    # Left-skewed noise using skew-normal distribution
+    weight_observed = weight_theoretical +
+      rsn(n(), xi = 0, omega = obs_noise_sd, alpha = skew_alpha)
   )
-    ```
+```
+
+I've defined the "squad" (30 athletes) to have a mean 1RM of 140 and standard deviation of 20 drawn from a random normal distribution. I also assign them an **endurance ability** (also from normal distribution).
+
+Each athlete will have data from somewhere between 5 and 30 previous training sessions where they've done this exercises til failure.
+
+For each of these max rep sets, the athletes complete somewhere between 2 and 15 reps. I calculate a theoretical weight for the set using the simulated 1RM and reps based on a modified version of the Epley formula (arguably most commonly used, modified to account for endurance ability).
+
+Finally, I simulate the actual weight they lifted for the set by taking the weight they theoretically could lift given their simulated 1RM and reps, added some random noise (because humans just work like that) from a negative skew-normal distribution. I chose negative skew-normal instead of regular normal because I think there's a lot more reasons why an athlete can be down from their theoretical 1RM level on any given day (fatigue, injury, soreness, environment, etc) than above it (strength adaptation). This means that on most days, what they've lifted will be a bit less than what the 1RM formula predicts they could.
+
+This simulation gives me `r nrow(sim_data)` max rep sets across the 30 athletes. 10 picked at random look like this:
+
+```{r}
+sim_data |>
+  slice_sample(n = 10) |>
+  mutate(across(where(is.numeric), \(x) round(x, 1))) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
+```

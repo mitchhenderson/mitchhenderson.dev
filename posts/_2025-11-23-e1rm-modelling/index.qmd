@@ -201,7 +201,9 @@ The idea is basically to build a statistical model that takes into account which
 
 The model will also be what's called a [Bayesian](https://en.wikipedia.org/wiki/Bayesian_statistics) model in the statistics world. These have advantages over [conventional](https://en.wikipedia.org/wiki/Frequentist_probability) statistical models when it comes to expressing uncertainty ([among other things](https://www.youtube.com/watch?v=R6d-AbkhBQ8)). So instead of just getting a number, you get a full distribution of numbers that can either be interpreted as is, or summarised however you want (e.g., 80% are between *this* number and *that* number). This distribution will account for all the sources of upstream uncertainty (amount of data available on the athlete, number of reps they completed, etc).
 
-To show you what I mean, I'll start by simulating some data.
+To show you what I mean, we need some data.
+
+### Simulate data
 
 ```{r}
 set.seed(2534)
@@ -218,7 +220,7 @@ pop_sd_1rm <- 15
 
 # Endurance coefficient population parameters
 pop_mean_endurance <- 30
-pop_sd_endurance <- 10
+pop_sd_endurance <- 6
 
 # Observation noise
 obs_noise_sd <- 2.5
@@ -266,7 +268,7 @@ For each of these max rep sets, the athletes complete somewhere between 2 and 15
 
 Finally, I simulate the actual weight they lifted for the set by taking the weight they theoretically could lift given their simulated 1RM and reps, added some random noise (because humans just work like that) from a negative skew-normal distribution. I chose negative skew-normal instead of regular normal because I think there's a lot more reasons why an athlete can be down from their theoretical 1RM level on any given day (fatigue, injury, soreness, environment, etc) than above it (strength adaptation). This means that on most days, what they've lifted will be a bit less than what the 1RM formula predicts they could.
 
-This simulation gives me `r nrow(sim_data)` max rep sets across the 30 athletes. 10 picked at random look like this:
+This gives me `r nrow(sim_data)` simulated max rep sets across the 30 athletes. 10 picked at random look like this:
 
 ```{r}
 sim_data |>
@@ -275,3 +277,5 @@ sim_data |>
   gt() |>
   gt_theme_538(quiet = TRUE)
 ```
+
+### Define model

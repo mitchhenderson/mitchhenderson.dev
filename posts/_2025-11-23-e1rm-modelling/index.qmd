@@ -20,7 +20,9 @@ knitr:
 
 <br>
 
-[S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum** (e1RM)](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) using a formula and track it's changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and data can be collected more frequently (enabling faster program adjustments). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength adaptations or detect when a program should be adjusted is a good idea.
+TODO: Surprising data far outside of expectations increases uncertainty (another benefit?)
+
+[S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum** (e1RM)](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) using a formula and track its changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and data can be collected more frequently (enabling faster program adjustments). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength adaptations or detect when a program should be adjusted is a good idea.
 
 ```{r}
 #| output: false
@@ -32,6 +34,8 @@ library(ggtext)
 library(gt)
 library(gtExtras)
 library(sn) # skewed normal distribution function
+library(tidybayes)
+library(ggdist)
 
 mitchhenderson::font_hoist("Myriad Pro")
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
@@ -185,7 +189,7 @@ But none of these e1RM formulas:
 
 -   Account for strength endurance differences between athletes
 
-    Some athletes (fast twitch, higher metabolic cost per rep) have high 1RMs but find higher rep sets challenging. Other athletes (better oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimate to take into account what I know about the physiological characteristics of the athlete**. If a fast twitch athlete does a max reps set of 14 x 100kg, I expect their 1RM to be higher than a more oxidative athlete performing the same 14 x 100kg because I know they are better suited to high intensity work.
+    Some athletes (fast twitch, higher metabolic cost per rep) have high 1RMs but find higher rep sets challenging. Other athletes (better oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimate to take into account what I know about the physiological characteristics of the athlete**. This directly impacts how accurate the e1RM will be. If a fast twitch athlete does a max reps set of 14 x 100kg, I expect their 1RM to be higher than a more oxidative athlete performing the same 14 x 100kg because I know they are better suited to high intensity work.
 
     e1RM formulas don't do this.
 
@@ -220,7 +224,7 @@ pop_sd_1rm <- 15
 
 # Endurance coefficient population parameters
 pop_mean_endurance <- 30
-pop_sd_endurance <- 6
+pop_sd_endurance <- 3
 
 # Observation noise
 obs_noise_sd <- 2.5
@@ -256,7 +260,10 @@ sim_data <- athletes |>
 
     # Left-skewed noise using skew-normal distribution
     weight_observed = weight_theoretical +
-      rsn(n(), xi = 0, omega = obs_noise_sd, alpha = skew_alpha)
+      rsn(n(), xi = 0, omega = obs_noise_sd, alpha = skew_alpha),
+
+    # Round to realistic real world weight increment (nearest 2.5)
+    weight_observed = round(weight_observed / 2.5) * 2.5
   )
 ```
 

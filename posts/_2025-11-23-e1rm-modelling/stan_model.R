@@ -1,325 +1,290 @@
-library(tidyverse)
-library(cmdstanr)
-library(posterior)
+library(brms)
 
-# 1. Set Seed for Reproducibility
-set.seed(2534)
+# Data preparation =========================================================
 
-# 2. Define Hyperparameters (The "Truth" of the Population)
-n_athletes <- 30
-n_obs_per_athlete <- 15
-sigma_noise <- 2.5 # Measurement noise (std dev in kg)
-
-# Population distributions
-pop_mean_1rm <- 140
-pop_sd_1rm <- 20
-pop_mean_beta <- 30
-pop_sd_beta <- 6
-
-# 3. Generate Athlete-Level Parameters (The "Truth" for each Person)
-athletes <- tibble(
-  athlete_id = 1:n_athletes,
-  # Latent Variable 1: True Strength
-  true_one_rm = rnorm(n_athletes, mean = pop_mean_1rm, sd = pop_sd_1rm),
-  # Latent Variable 2: True Endurance (The Beta Coefficient)
-  true_beta = rnorm(n_athletes, mean = pop_mean_beta, sd = pop_sd_beta)
-)
-
-# 4. Generate Session Data (The Observations)
-sim_data <- athletes |>
-  # Create multiple observations per athlete
-  expand_grid(session_id = 1:n_obs_per_athlete) |>
-  mutate(
-    # Simulate the Reps performed (Independent Variable)
-    # We vary reps from 1 to 12 to ensure the model can learn the curve
-    reps = sample(1:12, size = n(), replace = TRUE),
-
-    # Calculate the Theoretical Weight (Deterministic Modified Epley)
-    # Formula: W = 1RM / (1 + R/Beta)
-    weight_theoretical = true_one_rm / (1 + reps / true_beta),
-
-    # Add Noise to create Observed Weight (Dependent Variable)
-    weight_observed = rnorm(n(), mean = weight_theoretical, sd = sigma_noise),
-
-    # Clean up: Ensure no negative weights (unlikely but good practice)
-    weight_observed = pmax(weight_observed, 0)
+model_data <- sim_data |>
+  rename(
+    athlete = athlete_id,
+    orm = true_1rm,
+    weight = weight_observed
   )
 
-# 5. Inspect the Data
-print(head(sim_data))
+# Train/test split: hold out last observation per athlete
+holdout <- model_data |>
+  group_by(athlete) |>
+  slice_max(session_id, n = 1) |>
+  ungroup()
 
-# 6. Visualization: Sanity Check
-# We want to see if different Betas actually produce different curves.
-# Let's pick 3 athletes: Low Beta, Average Beta, High Beta.
+train <- model_data |>
+  anti_join(holdout, by = c("athlete", "session_id"))
 
-sample_athletes <- athletes |>
-  arrange(true_beta) |>
-  slice(c(1, 15, 30)) |> # Pick min, median, max
-  pull(athlete_id)
+# Model specification ======================================================
 
-sim_data |>
-  filter(athlete_id %in% sample_athletes) |>
-  left_join(athletes, by = join_by(athlete_id, true_one_rm, true_beta)) |>
-  mutate(
-    label = paste0(
-      "Athlete ",
-      athlete_id,
-      "\n(Beta: ",
-      round(true_beta, 1),
-      ", 1RM: ",
-      round(true_one_rm, 0),
-      ")"
-    )
-  ) |>
-  ggplot(aes(x = reps, y = weight_observed, color = as.factor(label))) +
-  geom_point(size = 3, alpha = 0.7) +
-  # Add the theoretical curves to see if points track them
-  stat_function(
-    fun = function(x) 140 / (1 + x / 30),
-    linetype = "dashed",
-    color = "gray",
-    alpha = 0.5
-  ) +
-  geom_smooth(
-    method = "nls",
-    formula = y ~ a / (1 + x / b),
-    method.args = list(start = c(a = 140, b = 30)),
-    se = FALSE
-  ) +
-  labs(
-    title = "Simulated Strength Curves",
-    subtitle = "Notice how the 'Low Beta' athlete's strength drops off faster as reps increase",
-    y = "Weight Lifted (kg)",
-    x = "Reps Performed",
-    color = "Athlete Profile"
-  ) +
-  theme_minimal()
-
-# Prepare data list for Stan
-stan_data <- list(
-  N = nrow(sim_data), # Total number of observations
-  J = n_athletes, # Number of athletes
-  athlete = sim_data$athlete_id, # Athlete index for each observation
-  reps = sim_data$reps, # Predictor: Reps
-  weight = sim_data$weight_observed # Outcome: Weight
+epley_formula <- bf(
+  weight ~ orm / (1 + reps / exp(logk)),
+  orm ~ 1 + (1 | athlete),
+  logk ~ 1 + (1 | athlete),
+  nl = TRUE
 )
 
-# Save the ground truth to compare later
-ground_truth <- athletes
+epley_priors <- c(
+  prior(normal(140, 30), nlpar = "orm", coef = "Intercept"),
+  prior(normal(3.4, 0.3), nlpar = "logk", coef = "Intercept"), # log(30) ≈ 3.4
+  prior(exponential(0.05), class = "sd", nlpar = "orm"),
+  prior(exponential(2), class = "sd", nlpar = "logk"),
+  prior(exponential(0.2), class = "sigma")
+)
 
-# 1. Compile the model
-# This creates an executable file in the background
-mod <- cmdstan_model("e1rm_model.stan")
+# Prior predictive check ===================================================
 
-# 2. Fit the model
-# We pass the same 'stan_data' list we created in the previous step
-fit <- mod$sample(
-  data = stan_data,
-  seed = 2534,
+epley_prior_check <- brm(
+  formula = epley_formula,
+  data = train,
+  prior = epley_priors,
+  family = gaussian(),
+  sample_prior = "only",
+  cores = 4,
+  chains = 2,
+  iter = 1000,
+  seed = 2534
+)
+
+pp_check(epley_prior_check, ndraws = 100)
+
+# Model fitting ============================================================
+
+epley_fit <- brm(
+  formula = epley_formula,
+  data = train,
+  prior = epley_priors,
+  family = gaussian(),
+  cores = 4,
   chains = 4,
-  parallel_chains = 4,
-  iter_warmup = 2000,
-  iter_sampling = 2000,
-  refresh = 500 # Print progress every 500 iterations
+  iter = 4000,
+  warmup = 2000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  seed = 2534,
+  file = "epley_fit"
 )
 
-# 3. Quick Diagnostics
-# Check for convergence (rhat < 1.01) and effective sample size
-fit$cmdstan_diagnose()
+summary(epley_fit)
+pp_check(epley_fit, ndraws = 100)
+plot(epley_fit)
 
-# 1. Extract Summary Statistics
-# We only want the athlete-specific parameters: one_rm and beta
-model_summary <- fit$summary(
-  variables = c("one_rm", "beta"),
-  "mean",
-  "sd",
-  ~ quantile(.x, probs = c(0.025, 0.975)) # Custom quantiles for 95% CI
-)
+# Prediction function ======================================================
 
-# 2. Clean and Organize the Data
-# We need to parse "one_rm[1]" into param="one_rm" and id=1
-estimates <- model_summary |>
-  # Extract variable name and index using Regex
-  extract(
-    variable,
-    into = c("param_type", "athlete_id"),
-    regex = "(\\w+)\\[(\\d+)\\]",
-    convert = TRUE
-  ) |>
-  # Rename quantile columns for easier plotting
-  rename(lower_ci = `2.5 %`, upper_ci = `97.5%`)
-
-# 3. Join with Ground Truth (from the simulation step)
-comparison <- estimates |>
-  left_join(
-    ground_truth |>
-      pivot_longer(
-        cols = c(true_one_rm, true_beta),
-        names_to = "param_type",
-        values_to = "truth"
-      ) |>
-      mutate(param_type = str_remove(param_type, "true_")),
-    by = c("athlete_id", "param_type")
-  )
-
-# 4. Visualization: True vs Estimated
-comparison |>
-  mutate(
-    param_label = case_when(
-      param_type == "beta" ~ "Endurance Coefficient (Beta)",
-      param_type == "one_rm" ~ "Estimated 1RM (kg)"
-    )
-  ) |>
-  ggplot(aes(x = truth, y = mean)) +
-  # The identity line (Perfect recovery)
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50") +
-  # Error bars representing the posterior uncertainty
-  geom_errorbar(
-    aes(ymin = lower_ci, ymax = upper_ci),
-    color = "skyblue",
-    width = 0,
-    alpha = 0.6
-  ) +
-  # The point estimates
-  geom_point(size = 2, alpha = 0.8) +
-  facet_wrap(~param_label, scales = "free") +
-  labs(
-    title = "Parameter Recovery: True vs Estimated",
-    subtitle = "Comparison of Simulated Ground Truth against Bayesian Posterior Means",
-    x = "True Value (Simulated)",
-    y = "Estimated Value (Posterior Mean)"
-  ) +
-  theme_minimal()
-
-predict_e1rm <- function(
-  fit_object,
-  athlete_id,
-  weight_lifted,
-  reps_performed
-) {
-  # 1. Extract the posterior draws for this specific athlete's Beta
-  # We use the 'subset_draws' function from the posterior package
-  beta_draws <- fit_object$draws(
-    variables = paste0("beta[", athlete_id, "]")
-  ) |>
-    as_draws_df() |>
-    pull(1) # Extract the first column (the beta values) as a vector
-
-  # 2. Apply the Inverse Epley Formula to EVERY draw
-  # Formula: 1RM = Weight * (1 + Reps/Beta)
-  # We are calculating thousands of potential 1RMs based on the uncertainty of Beta
-  e1rm_distribution <- weight_lifted * (1 + reps_performed / beta_draws)
-
-  # 3. Summarize the Distribution
-  result <- tibble(
-    athlete_id = athlete_id,
-    input_weight = weight_lifted,
-    input_reps = reps_performed,
-
-    # Point Estimate (Median is usually safer than Mean for skewed distributions)
-    e1rm_estimate = median(e1rm_distribution),
-
-    # Uncertainty Intervals (95% Credible Interval)
-    lower_ci = quantile(e1rm_distribution, 0.025),
-    upper_ci = quantile(e1rm_distribution, 0.975),
-
-    # Keep the full distribution if we want to plot it later
-    posterior_samples = list(e1rm_distribution)
-  )
-
-  return(result)
+estimate_1rm <- function(model, athlete_id, weight, reps) {
+  model |>
+    spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
+    filter(athlete == athlete_id) |>
+    mutate(
+      k = exp(b_logk_Intercept + r_athlete__logk),
+      orm_estimate = weight * (1 + reps / k)
+    ) |>
+    select(.draw, athlete, k, orm_estimate)
 }
 
-# Run the prediction
-prediction <- predict_e1rm(
-  fit,
-  athlete_id = 10,
-  weight_lifted = 85,
-  reps_performed = 8
+# Holdout evaluation =======================================================
+
+holdout_predictions <- holdout |>
+  rowwise() |>
+  mutate(
+    bayes_pred = estimate_1rm(epley_fit, athlete, weight, reps) |>
+      summarise(pred = mean(orm_estimate)) |>
+      pull(pred),
+    epley_pred = weight * (1 + reps / 30)
+  ) |>
+  ungroup() |>
+  left_join(
+    athletes |> select(athlete = athlete_id, true_1rm),
+    by = "athlete"
+  ) |>
+  mutate(
+    bayes_error = bayes_pred - true_1rm,
+    epley_error = epley_pred - true_1rm
+  )
+
+holdout_predictions |>
+  summarise(
+    bayes_rmse = sqrt(mean(bayes_error^2)),
+    epley_rmse = sqrt(mean(epley_error^2)),
+    bayes_mae = mean(abs(bayes_error)),
+    epley_mae = mean(abs(epley_error))
+  )
+
+# Model fit ==============================
+epley_fit <- brm(
+  formula = epley_formula,
+  data = model_data,
+  prior = epley_priors,
+  family = gaussian(),
+  cores = 4,
+  chains = 4,
+  iter = 4000,
+  warmup = 2000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  seed = 2534,
+  save_model = "epley_fit"
 )
 
-# Extract the samples from the list column
-plot_data <- tibble(e1rm = prediction$posterior_samples[[1]])
+summary(epley_fit)
+pp_check(epley_fit, ndraws = 100)
+plot(epley_fit)
 
-ggplot(plot_data, aes(x = e1rm)) +
-  # The Density Plot
-  geom_density(fill = "skyblue", alpha = 0.6) +
-  # Add the vertical line for the median estimate
-  geom_vline(
-    xintercept = prediction$e1rm_estimate,
-    linetype = "dashed",
-    linewidth = 1
+# Plot 1: Learned endurance profiles =======================================
+
+athlete_k_summary <- epley_fit |>
+  spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
+  mutate(k = exp(b_logk_Intercept + r_athlete__logk)) |>
+  group_by(athlete) |>
+  summarise(mean_k = mean(k)) |>
+  arrange(mean_k)
+
+selected_athletes <- athlete_k_summary |>
+  slice(c(1, 15, 30)) |>
+  pull(athlete)
+
+athlete_labels <- athlete_k_summary |>
+  filter(athlete %in% selected_athletes) |>
+  mutate(label = paste0("Athlete ", athlete, " (k = ", round(mean_k, 0), ")"))
+
+endurance_profiles <- epley_fit |>
+  spread_draws(
+    b_orm_Intercept,
+    b_logk_Intercept,
+    r_athlete__orm[athlete, ],
+    r_athlete__logk[athlete, ]
+  ) |>
+  filter(athlete %in% selected_athletes) |>
+  mutate(
+    orm = b_orm_Intercept + r_athlete__orm,
+    k = exp(b_logk_Intercept + r_athlete__logk),
+  ) |>
+  crossing(reps = 1:15) |>
+  mutate(pct_1rm = 100 / (1 + reps / k)) |>
+  group_by(athlete, reps) |>
+  median_qi(pct_1rm, .width = 0.8) |>
+  left_join(athlete_labels, by = "athlete")
+
+ggplot(
+  endurance_profiles,
+  aes(x = reps, y = pct_1rm, colour = label, fill = label)
+) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.2, colour = NA) +
+  geom_line(linewidth = 1) +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  scale_x_continuous(breaks = seq(1, 15, 1)) +
+  labs(
+    x = "Repetitions",
+    y = "% of 1RM",
+    title = "Learned endurance profiles",
+    subtitle = "Athletes with lower k fatigue faster at higher reps",
+    colour = NULL,
+    fill = NULL
   ) +
-  # Add the vertical lines for the 95% CI
-  geom_vline(
-    xintercept = c(prediction$lower_ci, prediction$upper_ci),
-    linetype = "dotted"
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Plot 2: Effect of historical data on certainty ===========================
+
+n_obs_lookup <- train |>
+  count(athlete, name = "n_obs")
+
+holdout_subset <- holdout |>
+  filter(athlete %in% c(2, 21)) |>
+  left_join(
+    athletes |> select(athlete = athlete_id, true_1rm),
+    by = "athlete"
+  ) |>
+  left_join(n_obs_lookup, by = "athlete") |>
+  mutate(
+    epley_estimate = weight * (1 + reps / 30),
+    label = paste0(
+      "Athlete ",
+      athlete,
+      " (",
+      n_obs,
+      " obs)\n",
+      reps,
+      " reps @ ",
+      round(weight, 0),
+      "kg"
+    )
+  )
+
+plot2_data <- holdout_subset |>
+  pmap_dfr(\(
+    athlete,
+    reps,
+    weight,
+    true_1rm,
+    n_obs,
+    epley_estimate,
+    label,
+    ...
+  ) {
+    estimate_1rm(epley_fit, athlete, weight, reps) |>
+      mutate(
+        true_1rm = true_1rm,
+        epley_estimate = epley_estimate,
+        label = label,
+        n_obs = n_obs
+      )
+  })
+
+ggplot(plot2_data, aes(x = orm_estimate, y = reorder(label, n_obs))) +
+  stat_halfeye(.width = c(0.8, 0.95)) +
+  geom_point(
+    aes(x = true_1rm),
+    shape = 4,
+    size = 4,
+    stroke = 2,
+    colour = "red"
+  ) +
+  geom_point(
+    aes(x = epley_estimate),
+    shape = 1,
+    size = 4,
+    stroke = 2,
+    colour = "blue"
   ) +
   labs(
-    title = paste0(
-      "Predicted 1RM Distribution for Athlete ",
-      prediction$athlete_id
-    ),
-    subtitle = paste0(
-      "Based on set: ",
-      prediction$input_weight,
-      "kg x ",
-      prediction$input_reps,
-      " reps"
-    ),
     x = "Estimated 1RM (kg)",
-    y = "Probability Density"
+    y = NULL,
+    title = "Effect of historical data on prediction certainty",
+    subtitle = "Each athlete's actual holdout observation",
+    caption = "Red X = true 1RM | Blue circle = standard Epley estimate"
   ) +
   theme_minimal()
 
-# 1. Identify the Extremes
-# We look at our previously extracted estimates to find the min and max Beta
-extreme_athletes <- estimates |>
-  filter(param_type == "beta") |>
-  filter(mean == min(mean) | mean == max(mean)) |>
-  arrange(mean)
+# Plot 3: Effect of rep count on certainty =================================
 
-low_beta_id <- extreme_athletes$athlete_id[1]
-high_beta_id <- extreme_athletes$athlete_id[2]
+athlete2_obs <- train |>
+  filter(athlete == 2) |>
+  mutate(
+    rep_bin = case_when(
+      reps <= 5 ~ "low",
+      reps <= 10 ~ "mid",
+      TRUE ~ "high"
+    )
+  ) |>
+  group_by(rep_bin) |>
+  slice_sample(n = 1) |>
+  ungroup()
 
-# 2. Generate Predictions for the SAME hypothetical set
-# Scenario: 80kg for 10 reps
-pred_low <- predict_e1rm(
-  fit,
-  athlete_id = low_beta_id,
-  weight_lifted = 80,
-  reps_performed = 10
-)
-pred_high <- predict_e1rm(
-  fit,
-  athlete_id = high_beta_id,
-  weight_lifted = 80,
-  reps_performed = 10
-)
+plot3_data <- athlete2_obs |>
+  pmap_dfr(\(reps, weight, ...) {
+    estimate_1rm(epley_fit, athlete_id = 2, weight = weight, reps = reps) |>
+      mutate(scenario = paste0(reps, " reps @ ", round(weight, 0), "kg"))
+  }) |>
+  mutate(scenario = fct_reorder(scenario, -parse_number(scenario)))
 
-# 3. Combine and Visualize
-plot_data <- bind_rows(
-  tibble(
-    Profile = "Low Endurance (Low Beta)",
-    e1rm = pred_low$posterior_samples[[1]]
-  ),
-  tibble(
-    Profile = "High Endurance (High Beta)",
-    e1rm = pred_high$posterior_samples[[1]]
-  )
-)
-
-ggplot(plot_data, aes(x = e1rm, fill = Profile)) +
-  geom_density(alpha = 0.6) +
+ggplot(plot3_data, aes(x = orm_estimate, y = scenario)) +
+  stat_halfeye(.width = c(0.8, 0.95)) +
   labs(
-    title = "Same Performance, Different Estimates",
-    subtitle = paste0(
-      "Scenario: Both athletes lift 80kg for 10 reps.\n",
-      "The model predicts a higher 1RM for the Low Endurance athlete."
-    ),
     x = "Estimated 1RM (kg)",
-    y = "Posterior Density",
-    fill = "Athlete Profile"
+    y = NULL,
+    title = "Effect of rep count on prediction certainty",
+    subtitle = "Athlete 2: actual training observations from different rep ranges"
   ) +
-  theme_minimal() +
-  theme(legend.position = "top")
+  theme_minimal()

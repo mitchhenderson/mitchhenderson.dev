@@ -6,6 +6,7 @@ author: Mitch Henderson
 date: 2025-12-09
 thumbnailImage: /img/nrl_finals_probs.png
 draft: true
+filters: [details]
 format:
   html:
     code-fold: true
@@ -32,15 +33,27 @@ library(ggtext)
 library(gt)
 library(gtExtras)
 library(sn) # skewed normal distribution function
+library(brms)
 library(tidybayes)
 library(ggdist)
 
 mitchhenderson::font_hoist("Myriad Pro")
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
-colours <- c("#E31937", "#134A8E")
+colours <- c("#E31937", "#134A8E") # Come back to this
 
-# theme_set
+theme_set(
+  theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
+    theme(
+      plot.title = element_text(face = "bold"),
+      plot.subtitle = element_text(size = 14, color = "grey40", face = "bold"),
+      axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
+      plot.caption = element_markdown(color = "grey50", size = 10), # Maybe make bigger?
+      axis.ticks = element_blank(),
+      axis.line = element_line(colour = "grey50"),
+      plot.title.position = "plot"
+    )
+)
 ```
 
 ## The problem
@@ -154,18 +167,10 @@ animated_plot <- e1rm_data_animated |>
     subtitle = "% of 1RM",
     caption = socials
   ) +
-  theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
   theme(
-    plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(size = 14, color = "grey40", face = "bold"),
-    axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
-    panel.grid = element_blank(),
+    # panel.grid = element_blank(),
     plot.margin = margin(10, 100, 10, 10),
-    plot.caption = element_markdown(color = "grey50", size = 10),
-    legend.position = "none",
-    axis.ticks = element_blank(),
-    axis.line = element_line(colour = "grey50"),
-    plot.title.position = "plot"
+    legend.position = "none"
   ) +
   transition_manual(
     highlight,
@@ -199,7 +204,7 @@ But none of these:
 
 ## My solution
 
-The idea is to extend one of the standard e1RM formulas by building it into a statistical model that takes into account which athlete it's estimating the 1RM for. It'll be trained on the athlete's past data so it learns how they handle higher weight vs higher reps. It's like a smarter version of the standard formula tailored to the athlete. Having this extra information helps it can make more accurate predictions.
+The idea is to extend one of the standard e1RM formulas by building it into a statistical model that takes into account which athlete it's estimating the 1RM for. It'll be fit using the athlete's past data so it learns how they handle higher weight vs higher reps. It's like a smarter version of the standard formula tailored to the athlete. Having this extra information helps it can make more accurate predictions.
 
 The model will also be a [*Bayesian*](https://en.wikipedia.org/wiki/Bayesian_statistics) model. These have advantages over [conventional](https://en.wikipedia.org/wiki/Frequentist_probability) statistical models when it comes to expressing uncertainty ([among other things](https://www.youtube.com/watch?v=R6d-AbkhBQ8)). So instead of just getting a number, you get a full distribution representing the uncertainty in the 1RM estimate (e.g., "The 1RM estimate is 100 with 80% probability of it being between 98 and 102").[^1] This distribution accounts for all the sources of upstream uncertainty (amount of data available on the athlete lifting, number of reps they completed, etc).
 
@@ -224,13 +229,11 @@ pop_sd_1rm <- 15
 
 # Endurance coefficient population parameters
 pop_mean_endurance <- 30
-pop_sd_endurance <- 3
+pop_sd_endurance <- 4
+# Maybe discuss importance of this on results (heterogenous endurance profiles = bigger gain from player specific parameters)
 
 # Observation noise
 obs_noise_sd <- 2.5
-
-# Skewness for observed weights (negative = left skew)
-skew_alpha <- -2
 
 # Generate athlete-level ground truth
 athletes <- tibble(
@@ -245,7 +248,7 @@ athletes <- tibble(
 )
 
 # Generate observations
-sim_data <- athletes |>
+simulated_data <- athletes |>
   rowwise() |>
   reframe(
     athlete_id = athlete_id,
@@ -258,22 +261,28 @@ sim_data <- athletes |>
     # Theoretical weight from modified Epley formula
     weight_theoretical = true_1rm / (1 + reps / true_endurance),
 
-    # Left-skewed noise using skew-normal distribution
-    weight_observed = weight_theoretical +
-      rsn(n(), xi = 0, omega = obs_noise_sd, alpha = skew_alpha),
-
-    # Round to realistic real world weight increment (nearest 2.5)
-    weight_observed = round(weight_observed / 2.5) * 2.5
+    # Add normally distributed noise
+    weight_observed = weight_theoretical + rnorm(n(), 0, obs_noise_sd)
   )
 ```
 
 I've simulated 30 fake athletes, each with their own 1RM, strength endurance capacity, and number of previous sessions of data where they've performed a max reps set for this given exercise.
 
 ::: callout-important
-I'm glossing over a lot of detail in the simulation here to keep this accessible.
+I'm going light on simulation details here to keep this accessible. Expand the section below to get more statistical details on the parameters of the simulated data.
 :::
 
-10 picked at random look like this:
+::: {.details summary="WARNING: NERDS ONLY"}
+I've defined the "squad" (30 athletes) to have a mean 1RM of 140 and standard deviation of 20 drawn from a random normal distribution. I also assign them an **endurance ability** (also from normal distribution).
+
+Each athlete will have data from somewhere between 5 and 30 previous training sessions where they've done this exercises til failure.
+
+For each of these max rep sets, the athletes complete somewhere between 2 and 15 reps (uniformly randomly sampled with replacement). I calculate a theoretical weight they should be able to complete for the set given their simulated 1RM and reps performed based on a modified Epley formula (probably most commonly used e1RM formula, modified to account for variable endurance ability).
+
+I finally simulate the actual weight they lifted for the set by taking the weight they theoretically could lift given their simulated 1RM and reps, added some random noise (because humans work like that) from a random normal distribution (mean of 0, SD of 2.5).
+:::
+
+10 simulated athletes picked at random look like this:
 
 ```{r}
 athletes |>
@@ -283,10 +292,12 @@ athletes |>
   gt_theme_538(quiet = TRUE)
 ```
 
-I use these athletes and their characteristics to simulate weight and reps for these max rep sets. This gives me `r nrow(sim_data)` simulated max rep sets across the 30 athletes. 10 picked at random look like this:
+I use these athletes and their characteristics to simulate realistic weights and reps. This gives me `r nrow(simulated_data)` simulated max rep sets across the 30 athletes.
+
+10 picked at random look like this:
 
 ```{r}
-sim_data |>
+simulated_data |>
   select(-starts_with("true"), -weight_theoretical) |>
   slice_sample(n = 10) |>
   mutate(across(where(is.numeric), \(x) round(x, 1))) |>
@@ -294,4 +305,214 @@ sim_data |>
   gt_theme_538(quiet = TRUE)
 ```
 
-### Define model
+### The model
+
+I'll specify the model to follow a modified [Epley formula](https://1repmaxcalculator.net/topics/epley-formula).
+
+Reasons for this:
+
+1.  It's probably the most commonly used of the standard 1RM estimate formulas
+
+2.  It's fairly simple (good for demo purposes)
+
+3.  I used it as part of how the data was simulated, so seeing how the model's performance compares to the standard Epley formula for predicting the true (albeit simulated) 1RMs will be a good test.
+
+If I had real training data (instead of simulated), I would fit a bunch of different model specifications to see which one performs best.
+
+The standard Epley is:
+
+```{r}
+#| eval: false
+#| code-fold: false
+weight * (1 + reps / 30)
+```
+
+The modification I'm using just changes the `30` (fixed constant representing how quickly strength drops off with more reps; same for everyone) to a parameter the model will optimise based on the data for each athlete. Each athlete gets their own value for this based on how they handle high intensity sets or high volume sets.
+
+I'll fit the model on all the simulated data *except the most recent set for each athlete*. I'll keep these sets as a small holdout or test data for comparing predictive performance between my model and the standard Epley formula.
+
+::: {.details summary="Nerd stats details about the model in here"}
+Flesh these out: log transform k formula rearrangement partial pooling weakly informative priors prior predictive checks model diagnostics posterior predictive checks
+:::
+
+```{r}
+#| output: false
+
+# Data prep
+model_data <- simulated_data |>
+  rename(
+    # brms doesn't like underscores or . in variable names
+    athlete = athlete_id,
+    orm = true_1rm,
+    weight = weight_observed
+  )
+
+# Train/test split: hold out last observation per athlete
+holdout <- model_data |>
+  group_by(athlete) |>
+  slice_max(session_id, n = 1) |>
+  ungroup()
+
+train <- model_data |>
+  anti_join(holdout, by = c("athlete", "session_id"))
+
+# Model specification
+modified_epley_formula <- bf(
+  weight ~ orm / (1 + reps / exp(logk)),
+  orm ~ 1 + (1 | athlete),
+  logk ~ 1 + (1 | athlete),
+  nl = TRUE
+)
+
+# Prior specification
+modified_epley_priors <- c(
+  prior(normal(140, 30), nlpar = "orm", coef = "Intercept"),
+  prior(normal(3.4, 0.3), nlpar = "logk", coef = "Intercept"), # log(30) ≈ 3.4
+  prior(exponential(0.05), class = "sd", nlpar = "orm"),
+  prior(exponential(2), class = "sd", nlpar = "logk"),
+  prior(exponential(0.2), class = "sigma")
+)
+
+
+modified_epley_model_fit <- brm(
+  formula = modified_epley_formula,
+  data = train,
+  prior = modified_epley_priors,
+  family = gaussian(),
+  cores = 4,
+  chains = 4,
+  iter = 4000,
+  warmup = 2000,
+  control = list(adapt_delta = 0.95, max_treedepth = 12),
+  seed = 2534,
+  file = "modified_epley_model_fit"
+)
+
+estimate_1rm <- function(model, athlete_id, weight, reps) {
+  model |>
+    spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
+    filter(athlete == athlete_id) |>
+    mutate(
+      est_endurance = exp(b_logk_Intercept + r_athlete__logk),
+      est_1RM = weight * (1 + reps / est_endurance)
+    ) |>
+    select(.draw, athlete, est_endurance, est_1RM)
+}
+```
+
+Now the model is fit, I use it to make 1RM estimates with the help of a custom function I've defined called `estimate_1rm()`. It takes the model object, the athlete ID, and the weight and reps the athlete performed in the set as arguments and gives me back a distribution of predictions.
+
+```{r}
+#| code-fold: false
+example_predictions <- estimate_1rm(
+  model = modified_epley_model_fit,
+  athlete_id = 17,
+  weight = 102.5,
+  reps = 5
+)
+```
+
+```{r}
+example_predictions |>
+  ggplot(aes(x = est_1RM)) +
+  stat_slab(fill = "skyblue") +
+  stat_spike(at = "median", size = 0, colour = colours[2]) +
+  scale_thickness_shared() +
+  annotate(
+    "curve",
+    x = 120.5,
+    xend = median(example_predictions$est_1RM) + 0.1,
+    y = 1,
+    yend = 0.925,
+    curvature = 0.25,
+    arrow = arrow(length = unit(2, "mm"), type = "closed"),
+    colour = "grey60"
+  ) +
+  annotate(
+    "text",
+    x = 120.8,
+    y = 0.95,
+    label = "Median\n(summarised 1RM estimate)",
+    hjust = 0.5,
+    colour = "grey35",
+    family = "Myriad Pro Regular"
+  ) +
+  annotate(
+    "text",
+    x = 116.5,
+    y = 0.15,
+    label = "Might be this low",
+    hjust = 0.5,
+    colour = "grey35",
+    family = "Myriad Pro Regular"
+  ) +
+  annotate(
+    "text",
+    x = 120.9,
+    y = 0.15,
+    label = "Might be this high",
+    hjust = 0.5,
+    colour = "grey35",
+    family = "Myriad Pro Regular"
+  ) +
+  labs(
+    x = "Estimated 1RM",
+    caption = socials,
+    title = "Full distribution of 1RM estimates",
+    subtitle = "Athlete 17 | Max reps set of 5 @ 102.5"
+  ) +
+  scale_x_continuous(breaks = seq(116, 122, 1)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line.y = element_blank()
+  )
+```
+
+Sometimes the full distribution is a bit much and you just want a summary (e.g. median with 80% credible intervals).[^2] Easy.
+
+[^2]: These intervals are what you get with Bayesian model estimates and they are what I think most people want confidence intervals to be. There is x% probability that the interval contains the true value.
+
+```{r}
+example_predictions |>
+  median_qi(.width = 0.8) |>
+  select(-contains("endurance"), -.interval) |>
+  mutate(across(where(is.numeric), \(x) round(x, 1))) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE)
+```
+
+## How accurate is it?
+
+By seeing how close the model got to the true 1RM (from the simulation) when predicting from data it wasn't trained on, and doing the same for the standard Epley formula, we can compare their predictive accuracy for new data.[^3]
+
+[^3]: This evaluation is pretty crude (hold out each athletes last set for testing; only 30 sets used for this). It's kind of how it would work in real life though; predictions after each new session are like their own test set (assuming model is updated before each session). A stronger approach during the research phase of implementing some thing like (as opposed to ongoing use) would be to do something like [cross validation](https://www.youtube.com/watch?v=fSytzGwwBVw).
+
+```{r}
+holdout_predictions <- holdout |>
+  rowwise() |>
+  mutate(
+    model_prediction = estimate_1rm(
+      modified_epley_model_fit,
+      athlete,
+      weight,
+      reps
+    ) |>
+      summarise(prediction = mean(est_1RM)) |>
+      pull(prediction),
+    standard_epley_prediction = weight * (1 + reps / 30)
+  ) |>
+  ungroup() |>
+  left_join(
+    athletes |> select(athlete = athlete_id, true_1rm),
+    by = "athlete"
+  ) |>
+  mutate(
+    model_error = model_prediction - true_1rm,
+    standard_epley_error = standard_epley_prediction - true_1rm,
+    abs_difference = abs(model_error) - abs(standard_epley_error)
+  )
+
+# I'm thinking table where each row shows which method performed better (model wins by 2kg, coloured pill?)
+```

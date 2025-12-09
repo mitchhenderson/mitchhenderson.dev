@@ -4,6 +4,7 @@ library(brms)
 
 model_data <- sim_data |>
   rename(
+    # brms doesn't like underscores or . in variable names
     athlete = athlete_id,
     orm = true_1rm,
     weight = weight_observed
@@ -111,25 +112,6 @@ holdout_predictions |>
     bayes_mae = mean(abs(bayes_error)),
     epley_mae = mean(abs(epley_error))
   )
-
-# Model fit ==============================
-epley_fit <- brm(
-  formula = epley_formula,
-  data = model_data,
-  prior = epley_priors,
-  family = gaussian(),
-  cores = 4,
-  chains = 4,
-  iter = 4000,
-  warmup = 2000,
-  control = list(adapt_delta = 0.95, max_treedepth = 12),
-  seed = 2534,
-  save_model = "epley_fit"
-)
-
-summary(epley_fit)
-pp_check(epley_fit, ndraws = 100)
-plot(epley_fit)
 
 # Plot 1: Learned endurance profiles =======================================
 

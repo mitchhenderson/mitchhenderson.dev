@@ -1,7 +1,7 @@
 ---
 title: "Making 1 rep max estimates more accurate and honest"
 description: |
-  by taking more than just the weight and reps into account.
+  Use more of the information you have.
 author: Mitch Henderson
 date: 2025-12-09
 thumbnailImage: /img/nrl_finals_probs.png
@@ -20,7 +20,7 @@ knitr:
 
 <br>
 
-[S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum**](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) using a formula and track its changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of true 1RM testing within a program or in-season because it doesn't impact training (integrates into existing training sessions), is safer (lower weight), and data can be collected more frequently (enabling faster program adjustments). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength adaptations or detect when a program should be adjusted is a good idea.
+[S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum**](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) (or e1RM) using a formula and track how it changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of testing a true 1RM during a program or in-season because they don't impact training (integrates into existing training sessions), are safer (lower weight), and data can be collected more frequently (faster program refinements). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength increases or detect when a program should be adjusted is a good idea.
 
 ```{r}
 #| output: false
@@ -45,7 +45,7 @@ colours <- c("#E31937", "#134A8E")
 
 ## The problem
 
-There are a lot of different formulas out there to estimate a 1RM.
+There are [lots of different formulas out there to estimate a 1RM](https://maxcalculator.com/guides/1rm-formulas).
 
 ```{r}
 #| warning: false
@@ -187,21 +187,23 @@ But none of these:
 
 -   Account for strength endurance differences between athletes
 
-    Some athletes (fast twitch, higher metabolic cost per rep) have high 1RMs but find higher rep sets challenging. Other athletes (better oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my e1RM estimate to take into account what I know about the physiological characteristics of the athlete**. This directly impacts how accurate the e1RM will be. If a fast twitch athlete does a max reps set of 14 x 100kg, I expect their 1RM to be higher than a more oxidative athlete performing the same 14 x 100kg because I know they are better suited to high intensity work.
+    Some athletes (fast twitch, higher metabolic cost per rep) have high 1RMs but find higher rep sets challenging. Other athletes (better oxidative capacity, lower metabolic cost per rep) can perform many reps at moderate intensities but quickly hit their 1RM ceiling with more weight. **I want my 1RM estimate to take into account what I know about the physiological characteristics of the athlete**. This directly impacts how accurate the e1RM will be. If a fast twitch athlete does a max reps set of 14 x 100kg, I expect their 1RM to be higher than a more oxidative athlete performing the same 14 x 100kg because I know they are better suited to high intensity work.
 
-    The standard formulas don't do this.
+    *The standard formulas don't do this*.
 
--   Tell me how certainty they are in their estimate
+-   Tell me how certain they are in their estimate
 
-    The standard formulas WILL ALWAYS give you a 1RM estimate, doesn't matter how UNconfident it is. This estimate will always just be a single value. There's a big difference in how I'd interpret a 100kg e1RM if it's 80% certain of being between 97.5–102.5kg (precise) versus 80% certain of being between 77.5–122.5kg (practically useless). There's also a big difference in the certainty we can expect from these models when the athlete does 2-5 reps (higher certainty) compared 10+ reps (lower certainty). We also become more certain about an athlete's ability the more we work with them. I have a lot more confidence predicting the 1RM of an athlete I've worked with and collected training data on for years compared to someone new with little training data available. **I want my e1RM estimate to incorporate all these sources of uncertainty so I can interpret and act accordingly**.
+    The standard formulas WILL ALWAYS give you a 1RM estimate, doesn't matter how *UN*confident they are. The 1RM estimate will also always just be a single value. There's a big difference in how I'd interpret a 100kg e1RM if it's 80% certain of being between 98–102kg (pretty precise) versus 80% certain of being between 77.5–122.5kg (practically useless). There's also a big difference in 1RM certainty when the estimate is based on an athlete doing a max set of 2-5 reps (closer to true 1RM; higher certainty) compared 10+ reps (further from true 1RM; lower certainty). We also become more familiar about an athlete's ability the more we work with them and get to know them. I have a lot more confidence predicting the 1RM of an athlete I've worked with, gotten to know, and collected training data on for years compared to someone new with little training data available. **I want to incorporate all these sources of uncertainty into my 1RM estimate make the most informed decision**.
 
-    The standard formulas don't do this.
+    *The standard formulas don't do this*.
 
 ## My solution
 
-The idea is to extend one of the standard e1RM formulas by building it into a statistical model that takes into account which athlete it's estimating the 1RM for. It'll be trained on the athlete's past data so it learns how they handle higher weight vs higher reps. It's kind of like a smarter version of the standard formula that is tailored to the athlete. Using all this extra information means it can make more accurate predictions.
+The idea is to extend one of the standard e1RM formulas by building it into a statistical model that takes into account which athlete it's estimating the 1RM for. It'll be trained on the athlete's past data so it learns how they handle higher weight vs higher reps. It's like a smarter version of the standard formula tailored to the athlete. Having this extra information helps it can make more accurate predictions.
 
-The model will also be a [*Bayesian*](https://en.wikipedia.org/wiki/Bayesian_statistics) model. These have advantages over [conventional](https://en.wikipedia.org/wiki/Frequentist_probability) statistical models when it comes to expressing uncertainty ([among other things](https://www.youtube.com/watch?v=R6d-AbkhBQ8)). So instead of just getting a number, you get a full distribution representing the uncertainty in the e1RM (e.g., 80% probabililty the 1RM is between *this* and *that* number). This distribution accounts for all the sources of upstream uncertainty (amount of data available on the athlete lifting, number of reps they completed, etc).
+The model will also be a [*Bayesian*](https://en.wikipedia.org/wiki/Bayesian_statistics) model. These have advantages over [conventional](https://en.wikipedia.org/wiki/Frequentist_probability) statistical models when it comes to expressing uncertainty ([among other things](https://www.youtube.com/watch?v=R6d-AbkhBQ8)). So instead of just getting a number, you get a full distribution representing the uncertainty in the 1RM estimate (e.g., "The 1RM estimate is 100 with 80% probability of it being between 98 and 102").[^1] This distribution accounts for all the sources of upstream uncertainty (amount of data available on the athlete lifting, number of reps they completed, etc).
+
+[^1]: Note that this is different, and IMO much more intuitive, to what a confidence interval tells you. Confidence intervals are confusing [and even trained scientists often misinterpret them](https://pubmed.ncbi.nlm.nih.gov/24420726/).
 
 To show you what I mean, we need some data.
 

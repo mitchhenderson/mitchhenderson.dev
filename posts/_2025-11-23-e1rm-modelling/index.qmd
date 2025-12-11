@@ -32,7 +32,7 @@ library(scales)
 library(ggtext)
 library(gt)
 library(gtExtras)
-library(sn) # skewed normal distribution function
+library(geomtextpath)
 library(brms)
 library(tidybayes)
 library(ggdist)
@@ -40,6 +40,7 @@ library(ggdist)
 mitchhenderson::font_hoist("Myriad Pro")
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
+# Add kg to everything?
 colours <- c("#E31937", "#134A8E") # Come back to this
 
 theme_set(
@@ -168,7 +169,6 @@ animated_plot <- e1rm_data_animated |>
     caption = socials
   ) +
   theme(
-    # panel.grid = element_blank(),
     plot.margin = margin(10, 100, 10, 10),
     legend.position = "none"
   ) +
@@ -180,11 +180,11 @@ animated_plot <- e1rm_data_animated |>
 # Render the animation
 animate(
   animated_plot,
-  nframes = 80,
-  fps = 10,
-  width = 8,
-  height = 4.5,
-  device = "ragg_png"
+   nframes = 80,
+   fps = 10,
+   width = 8,
+   height = 4.5,
+   device = "ragg_png"
 )
 ```
 
@@ -324,7 +324,7 @@ The standard Epley is:
 ```{r}
 #| eval: false
 #| code-fold: false
-weight * (1 + reps / 30)
+# weight * (1 + reps / 30)
 ```
 
 The modification I'm using just changes the `30` (fixed constant representing how quickly strength drops off with more reps; same for everyone) to a parameter the model will optimise based on the data for each athlete. Each athlete gets their own value for this based on how they handle high intensity sets or high volume sets.
@@ -485,9 +485,9 @@ example_predictions |>
 
 ## How accurate is it?
 
-By seeing how close the model got to the true 1RM (from the simulation) when predicting from data it wasn't trained on, and doing the same for the standard Epley formula, we can compare their predictive accuracy for new data.[^3]
+By seeing how close the model got to the true 1RM (from the simulation), and doing the same for the standard Epley formula, we can compare their predictive accuracy for new data.[^3]
 
-[^3]: This evaluation is pretty crude (hold out each athletes last set for testing; only 30 sets used for this). It's kind of how it would work in real life though; predictions after each new session are like their own test set (assuming model is updated before each session). A stronger approach during the research phase of implementing some thing like (as opposed to ongoing use) would be to do something like [cross validation](https://www.youtube.com/watch?v=fSytzGwwBVw).
+[^3]: This evaluation is pretty crude (holding out each athletes most recent set for testing; only 30 sets total). It's kind of how it would work in real life though; predictions after each new session are like their own test set (assuming model is updated before each session). A stronger approach to evaluation during the research phase of something like (as opposed to ongoing use) would be to use something like [cross validation](https://www.youtube.com/watch?v=fSytzGwwBVw).
 
 ```{r}
 holdout_predictions <- holdout |>
@@ -499,7 +499,7 @@ holdout_predictions <- holdout |>
       weight,
       reps
     ) |>
-      summarise(prediction = mean(est_1RM)) |>
+      summarise(prediction = mean(est_1RM)) |> # could do median?
       pull(prediction),
     standard_epley_prediction = weight * (1 + reps / 30)
   ) |>
@@ -511,8 +511,217 @@ holdout_predictions <- holdout |>
   mutate(
     model_error = model_prediction - true_1rm,
     standard_epley_error = standard_epley_prediction - true_1rm,
-    abs_difference = abs(model_error) - abs(standard_epley_error)
+    difference = abs(model_error) - abs(standard_epley_error),
+    most_accurate_method = case_when(
+      abs(difference) <= 1 ~ "Both predictions similar (±1)",
+      difference < 0 ~ paste("Model closer by", round(abs(difference), 1)),
+      difference > 0 ~ paste("Formula closer by", round(abs(difference), 1)),
+    )
   )
 
-# I'm thinking table where each row shows which method performed better (model wins by 2kg, coloured pill?)
+holdout_predictions |>
+  select(
+    athlete,
+    weight,
+    reps,
+    `True 1RM` = true_1rm,
+    `Model prediction` = model_prediction,
+    `Formula prediction` = standard_epley_prediction,
+    `Most accurate method` = most_accurate_method
+  ) |>
+  mutate(across(where(is.numeric), \(x) round(x, 1))) |>
+  gt() |>
+  gt_theme_538(quiet = TRUE) |>
+  cols_align(
+    align = "right",
+    columns = `Most accurate method`
+  ) |>
+  tab_style(
+    style = cell_fill(color = "#DCFCE7"),
+    locations = cells_body(rows = startsWith(`Most accurate method`, "Model"))
+  ) |>
+  tab_style(
+    style = cell_text(
+      color = "#16A34A",
+      weight = "bold"
+    ),
+    locations = cells_body(
+      columns = `Most accurate method`,
+      rows = startsWith(`Most accurate method`, "Model")
+    )
+  ) |>
+  tab_style(
+    style = cell_fill(color = "#DBEAFE"),
+    locations = cells_body(rows = startsWith(`Most accurate method`, "Formula"))
+  ) |>
+  tab_style(
+    style = cell_text(
+      color = "#2563EB",
+      weight = "bold"
+    ),
+    locations = cells_body(
+      columns = `Most accurate method`,
+      rows = startsWith(`Most accurate method`, "Formula")
+    )
+  )
 ```
+
+Mean absolute error for the model was **`r round(mean(abs(holdout_predictions$model_error)), 1)`**.
+
+Mean absolute error for the regular Epley formula was **`r round(mean(abs(holdout_predictions$standard_epley_error)), 1)`**.
+
+This means that the model will be **`r round(mean(abs(holdout_predictions$standard_epley_error)) - mean(abs(holdout_predictions$model_error)), 1)` more accurate on average**.[^4]
+
+[^4]: Take with grain of salt as it's only an average over 30 estimates.
+
+## What has the model learned about the athletes?
+
+To demonstrate this point, I'll just show three athletes: the highest endurance (Athlete 12), the lowest endurance (Athlete 24), and one in the middle (Athlete 17).
+
+See how each of their endurance parameters (that the model learned from their past training data) changes their 1RM estimate curve to be tailored to their traits.
+
+```{r}
+athlete_endurance_summary <- modified_epley_model_fit |>
+  spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
+  mutate(endurance_parameter = exp(b_logk_Intercept + r_athlete__logk)) |>
+  group_by(athlete) |>
+  summarise(mean_endurance_parameter = mean(endurance_parameter)) |>
+  arrange(mean_endurance_parameter)
+
+# Grab the athletes with the worst, median, and best strength endurance
+selected_athletes <- athlete_endurance_summary |>
+  slice(c(1, 15, 30)) |>
+  pull(athlete)
+
+athlete_labels <- athlete_endurance_summary |>
+  filter(athlete %in% selected_athletes) |>
+  mutate(
+    label = paste0(
+      "Athlete ",
+      athlete,
+      " (endurance parameter = ",
+      round(mean_endurance_parameter, 0),
+      ")"
+    )
+  )
+
+endurance_profiles <- modified_epley_model_fit |>
+  spread_draws(
+    b_orm_Intercept,
+    b_logk_Intercept,
+    r_athlete__orm[athlete, ],
+    r_athlete__logk[athlete, ]
+  ) |>
+  filter(athlete %in% selected_athletes) |>
+  mutate(
+    est_1RM = b_orm_Intercept + r_athlete__orm,
+    endurance_parameter = exp(b_logk_Intercept + r_athlete__logk),
+  ) |>
+  crossing(reps = 1:15) |>
+  mutate(pct_est_1RM = 100 / (1 + reps / endurance_parameter)) |>
+  group_by(athlete, reps) |>
+  median_qi(pct_est_1RM, .width = 0.8) |>
+  left_join(athlete_labels, by = "athlete")
+
+ggplot(
+  endurance_profiles,
+  aes(x = reps, y = pct_est_1RM, colour = label, fill = label)
+) +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.15, colour = NA) +
+  geom_textline(aes(label = label), hjust = 0.75, family = "Myriad Pro Regular") +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  scale_x_continuous(limits = c(1, 15), breaks = seq(1, 15, 1)) +
+  scale_colour_manual(values = c("#16A34A", "#2563EB", "#DB2777")) +
+  scale_fill_manual(values = c("#16A34A", "#2563EB", "#DB2777")) +
+  labs(
+    x = "Repetitions",
+    title = "Athletes with lower endurance fatigue faster",
+    subtitle = "% of 1RM",
+    caption = socials,
+    y = NULL
+  ) +
+  theme(legend.position = "none")
+```
+
+## How much does having training data impact estimate certainty?
+
+Text.
+
+```{r}
+n_obs_lookup <- train |>
+  count(athlete, name = "n_obs")
+
+holdout_subset <- holdout |>
+  filter(athlete %in% c(2, 21)) |>
+  left_join(
+    athletes |> select(athlete = athlete_id, true_1rm),
+    by = "athlete"
+  ) |>
+  left_join(n_obs_lookup, by = "athlete") |>
+  mutate(
+    epley_estimate = weight * (1 + reps / 30),
+    label = paste0(
+      "Athlete ",
+      athlete,
+      " (",
+      n_obs,
+      " obs)\n",
+      reps,
+      " reps @ ",
+      round(weight, 0),
+      "kg"
+    )
+  )
+
+plot2_data <- holdout_subset |>
+  pmap_dfr(\(
+    athlete,
+    reps,
+    weight,
+    true_1rm,
+    n_obs,
+    epley_estimate,
+    label,
+    ...
+  ) {
+    estimate_1rm(modified_epley_model_fit, athlete, weight, reps) |>
+      mutate(
+        true_1rm = true_1rm,
+        epley_estimate = epley_estimate,
+        label = label,
+        n_obs = n_obs
+      )
+  })
+
+ggplot(plot2_data, aes(x = est_1RM, y = reorder(label, n_obs))) +
+  stat_halfeye(.width = c(0.8, 0.95)) +
+  geom_point(
+    aes(x = true_1rm),
+    shape = 4,
+    size = 4,
+    stroke = 2,
+    colour = "red"
+  ) +
+  geom_point(
+    aes(x = epley_estimate),
+    shape = 1,
+    size = 4,
+    stroke = 2,
+    colour = "blue"
+  ) +
+  labs(
+    x = "Estimated 1RM (kg)",
+    y = NULL,
+    title = "Effect of historical data on prediction certainty",
+    subtitle = "Each athlete's actual holdout observation",
+    caption = "Red X = true 1RM | Blue circle = standard Epley estimate"
+  )
+```
+
+## Final thoughts
+
+Multi model or model averaging approach might be the best.
+
+My simulated data might not align with the patterns in real athletes, but I think the idea that some can do heavy weight well while others do higher reps well is valid and should/could be captured in 1RM estimates.
+
+Integrating this into a larger system would involve deploying the model on a server (probably on cloud but could also be on a physical machine you or your team own). Predictions could then be generated by making requests to the model's API using your analysis tool of choice (R, Python, Excel via Power Query, etc).

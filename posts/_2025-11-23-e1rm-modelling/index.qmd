@@ -46,7 +46,7 @@ colours <- c("#E31937", "#134A8E") # Come back to this
 theme_set(
   theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
     theme(
-      plot.title = element_text(face = "bold"),
+      plot.title = element_markdown(face = "bold"),
       plot.subtitle = element_text(size = 14, color = "grey40", face = "bold"),
       axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
       plot.caption = element_markdown(color = "grey50", size = 10), # Maybe make bigger?
@@ -456,7 +456,7 @@ example_predictions |>
     title = "Full distribution of 1RM estimates",
     subtitle = paste0("Athlete 17 | Max reps set of 5 @ 102.5", units)
   ) +
-  scale_x_continuous(breaks = seq(116, 122, 1), labels = scales::label_number(suffix = units)) +
+  scale_x_continuous(breaks = seq(116, 122, 1), labels = label_number(suffix = units)) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   theme(
     axis.text.y = element_blank(),
@@ -631,7 +631,7 @@ endurance_profiles |>
     size = 5,
     family = "Myriad Pro Regular"
   ) +
-  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1)) +
   scale_x_continuous(limits = c(1, 15), breaks = seq(1, 15, 1)) +
   scale_colour_manual(values = c("#16A34A", "#2563EB", "#DB2777")) +
   scale_fill_manual(values = c("#16A34A", "#2563EB", "#DB2777")) +
@@ -650,11 +650,13 @@ endurance_profiles |>
 Text.
 
 ```{r}
-athletes_varying_obs <- train |>
-  count(athlete, name = "n_obs", sort = T) |>
-  slice(c(1, 5, 10, 15, 20, 25, 30))
+#| fig-asp: 1
+#| warning: false
 
-# more data doesn't always mean more certainty about the prediction — sometimes it means more certainty that the athlete is inherently variable.
+athletes_varying_obs <- train |>
+  count(athlete, name = "n_obs") |>
+  arrange(n_obs) |>
+  slice(seq(1, 30, by = 9))
 
 data_varying_obs <- athletes_varying_obs |>
   mutate(
@@ -664,40 +666,80 @@ data_varying_obs <- athletes_varying_obs |>
     ),
     athlete = factor(
       athlete,
-      levels = athletes_varying_obs$athlete,
+      levels = rev(athletes_varying_obs$athlete),
       labels = paste0(
         "Athlete ",
-        athletes_varying_obs$athlete,
-        " (",
-        n_obs,
-        " sets of historical data)"
+        rev(athletes_varying_obs$athlete),
+        "<br><span style='color:grey50; font-size:11pt;'>(",
+        rev(n_obs),
+        " sets of historical data)</span>"
       )
     )
   ) |>
   rename(athlete_id = athlete) |>
   unnest(estimate)
 
-# Make it taller
-# hline after stat_slab
-# Make geom_hline grey (same as x axis)
-# maybe annotate?
-# number of historical data should be grey and maybe smaller?
+annotations <- tibble(
+  athlete_id = c(
+    data_varying_obs |>
+      filter(n_obs == max(n_obs)) |>
+      pull(athlete_id) |>
+      unique(),
+    data_varying_obs |>
+      filter(n_obs == min(n_obs)) |>
+      pull(athlete_id) |>
+      unique()
+  ),
+  x = c(130.5, 130.5),
+  y = c(0.4, 0.4),
+  label = c(
+    paste0(
+      "More data → narrower distribution<br>",
+      max(data_varying_obs$n_obs),
+      " sets gives high confidence"
+    ),
+    paste0(
+      "Less data → wider distribution<br>Only ",
+      min(data_varying_obs$n_obs),
+      " sets means more uncertainty"
+    )
+  )
+)
+
 data_varying_obs |>
   ggplot(aes(x = est_1RM)) +
   facet_wrap(~athlete_id, ncol = 1) +
-  geom_hline(yintercept = 0) +
   stat_slab(fill = "skyblue") +
   stat_spike(at = "median", size = 0, colour = colours[2]) +
   scale_thickness_shared() +
-  scale_x_continuous(labels = scales::label_number(suffix = "kg")) +
-  labs(y = NULL, x = "Estimated 1RM") +
+  geom_hline(yintercept = 0, colour = "grey50", linewidth = 1) +
+  geom_richtext(
+    data = annotations,
+    aes(x = x, y = y, label = label),
+    fill = NA,
+    colour = "grey35",
+    hjust = 0.5,
+    label.color = NA,
+    size = 4,
+    family = "Myriad Pro Regular"
+  ) +
+  scale_x_continuous(
+    labels = label_number(suffix = "kg"),
+    limits = c(117, 133)
+  ) +
+  labs(
+    y = NULL,
+    x = "Estimated 1RM",
+    title = "1RM estimates with more data are usually more confident",
+    caption = socials
+  ) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
-    axis.line.y = element_blank(),
+    axis.line = element_blank(),
     strip.background = element_blank(),
-    strip.text = element_text(family = "Myriad Pro Regular", hjust = 0)
+    strip.text = element_markdown(family = "Myriad Pro Regular", hjust = 0)
   )
 ```
 
@@ -708,3 +750,5 @@ Multi model or model averaging approach might be the best.
 My simulated data might not align with the patterns in real athletes, but I think the idea that some can do heavy weight well while others do higher reps well is valid and should/could be captured in 1RM estimates.
 
 Integrating this into a larger system would involve deploying the model on a server (probably on cloud but could also be on a physical machine you or your team own). Predictions could then be generated by making requests to the model's API using your analysis tool of choice (R, Python, Excel via Power Query, etc).
+
+more data doesn't always mean more certainty about the prediction — sometimes it means more certainty that the athlete is inherently variable.

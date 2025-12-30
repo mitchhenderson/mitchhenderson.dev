@@ -275,7 +275,7 @@ I've simulated `r n_athletes` fake athletes, each with their own 1RM, strength e
 I'm going light on simulation details here to keep this accessible. Expand the section below to get more statistical details on the parameters of the simulated data.
 :::
 
-::: {.details summary="**Optional** technical simulation details"}
+::: {.details summary="Technical simulation details (optional)"}
 I've defined the "squad" (`r n_athletes` athletes) to have a mean 1RM of `r paste0(pop_mean_1rm, units)` and standard deviation of `r paste0(pop_sd_1rm, units)` drawn from a random normal distribution. I also assign them an **endurance ability** (also drawn from a normal distribution with a mean of `r pop_mean_endurance` and standard deviation of `r pop_sd_endurance`).
 
 Each athlete will have data from somewhere between `r min_n_obs` and `r max_n_obs` previous training sessions where they've done this exercises til failure.
@@ -326,7 +326,7 @@ The modification I'm using just changes the `30` (fixed constant representing ho
 
 I'll fit the model on all the simulated data *except the most recent set for each athlete*. I'll keep these sets as a small holdout or test data for comparing predictive performance between my model and the standard Epley formula.
 
-::: {.details summary="Optional stats details about the model"}
+::: {.details summary="Stats details about the model (optional)"}
 Flesh these out: log transform k formula rearrangement partial pooling weakly informative priors prior predictive checks model diagnostics posterior predictive checks
 :::
 
@@ -436,7 +436,7 @@ example_predictions |>
     "text",
     x = 116.6,
     y = 0.2,
-    label = "Might be this low",
+    label = "Lower end of\nestimates",
     hjust = 0.5,
     colour = "grey35",
     family = "Myriad Pro Regular"
@@ -445,7 +445,7 @@ example_predictions |>
     "text",
     x = 122.3,
     y = 0.2,
-    label = "Might be this high",
+    label = "Upper end of\nestimates",
     hjust = 0.5,
     colour = "grey35",
     family = "Myriad Pro Regular"
@@ -456,7 +456,10 @@ example_predictions |>
     title = "Full distribution of 1RM estimates",
     subtitle = paste0("Athlete 17 | Max reps set of 5 @ 102.5", units)
   ) +
-  scale_x_continuous(breaks = seq(116, 122, 1), labels = label_number(suffix = units)) +
+  scale_x_continuous(
+    breaks = seq(116, 122, 1),
+    labels = label_number(suffix = units)
+  ) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   theme(
     axis.text.y = element_blank(),
@@ -730,7 +733,7 @@ data_varying_obs |>
     family = "Myriad Pro Regular"
   ) +
   scale_x_continuous(
-    labels = label_number(suffix = "kg"),
+    labels = label_number(suffix = units),
     limits = c(117, 133)
   ) +
   labs(
@@ -754,36 +757,92 @@ data_varying_obs |>
 Text.
 
 ```{r}
-# TBC
-# athlete2_obs <- train |>
-#   filter(athlete == 2) |>
-#   mutate(
-#     rep_bin = case_when(
-#       reps <= 5 ~ "low",
-#       reps <= 10 ~ "mid",
-#       TRUE ~ "high"
-#     )
-#   ) |>
-#   group_by(rep_bin) |>
-#   slice_sample(n = 1) |>
-#   ungroup()
+#| fig-asp: 1
 
-# plot3_data <- athlete2_obs |>
-#   pmap_dfr(\(reps, weight, ...) {
-#     estimate_1rm(epley_fit, athlete_id = 2, weight = weight, reps = reps) |>
-#       mutate(scenario = paste0(reps, " reps @ ", round(weight, 0), "kg"))
-#   }) |>
-#   mutate(scenario = fct_reorder(scenario, -parse_number(scenario)))
+# SET SEED
+set.seed()
 
-# ggplot(plot3_data, aes(x = orm_estimate, y = scenario)) +
-#   stat_halfeye(.width = c(0.8, 0.95)) +
-#   labs(
-#     x = "Estimated 1RM (kg)",
-#     y = NULL,
-#     title = "Effect of rep count on prediction certainty",
-#     subtitle = "Athlete 2: actual training observations from different rep ranges"
-#   ) +
-#   theme_minimal()
+rep_count_plot_athlete <- 6
+
+rep_count_plot_athlete_data <- train |>
+  filter(athlete == rep_count_plot_athlete) |>
+  mutate(
+    rep_bin = case_when(
+      reps <= 5 ~ "low",
+      reps <= 10 ~ "mid",
+      TRUE ~ "high"
+    )
+  ) |>
+  group_by(rep_bin) |>
+  slice_sample(n = 1) |>
+  ungroup()
+
+rep_count_plot_athlete_1RM <- rep_count_plot_athlete_data$orm[1]
+
+rep_count_plot_data <- rep_count_plot_athlete_data |>
+  pmap_dfr(\(reps, weight, ...) {
+    estimate_1rm(
+      modified_epley_model_fit,
+      athlete_id = rep_count_plot_athlete,
+      weight = weight,
+      reps = reps
+    ) |>
+      mutate(scenario = paste0(reps, " reps @ ", round(weight, 0), units))
+  }) |>
+  mutate(scenario = fct_reorder(scenario, parse_number(scenario)))
+
+scenario_levels <- levels(factor(rep_count_plot_data$scenario))
+
+true_1RM_annotation <- tibble(
+  scenario = factor(scenario_levels[1], levels = scenario_levels),
+  x = rep_count_plot_athlete_1RM - 0.1,
+  y = 1,
+  label = "True 1RM"
+)
+
+rep_count_plot_data |>
+  ggplot(aes(x = est_1RM)) +
+  facet_wrap(~scenario, ncol = 1) +
+  stat_slab(fill = "skyblue") +
+  stat_spike(at = "median", size = 0, colour = colours[2]) +
+  scale_thickness_shared() +
+  geom_hline(yintercept = 0, colour = "grey50", linewidth = 1) +
+  geom_vline(
+    xintercept = rep_count_plot_athlete_1RM,
+    colour = "red",
+    linetype = "dashed",
+    linewidth = 0.5
+  ) +
+  geom_richtext(
+    data = true_1RM_annotation,
+    aes(x = x, y = y, label = label),
+    fill = NA,
+    colour = "red",
+    label.color = NA,
+    hjust = 1,
+    family = "Myriad Pro Regular"
+  ) +
+  labs(
+    x = "Estimated 1RM (kg)",
+    y = NULL,
+    title = "1RM estimates are more confident with lower rep sets",
+    subtitle = paste0(
+      "Athlete ",
+      rep_count_plot_athlete,
+      " | Max rep sets from simulated training data"
+    ),
+    caption = socials
+  ) +
+  scale_x_continuous(
+    labels = label_number(suffix = units)
+  ) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.line = element_blank(),
+    strip.background = element_blank(),
+    strip.text = element_markdown(family = "Myriad Pro Regular", hjust = 0)
+  )
 ```
 
 ## Final thoughts

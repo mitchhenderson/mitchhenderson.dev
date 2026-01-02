@@ -586,7 +586,7 @@ Reasons for this:
 
 3.  I used it as part of how the data was simulated, so seeing how the model's performance compares to the standard Epley formula for predicting the true (albeit simulated) 1RMs will be a good test.
 
-::: callout-tip
+::: callout-note
 If I had real training data (instead of simulated), I would fit a bunch of different model specifications to see which one performs best.
 :::
 

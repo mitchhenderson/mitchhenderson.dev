@@ -521,7 +521,7 @@ holdout_predictions <- holdout |>
     standard_epley_error = standard_epley_prediction - true_1rm,
     difference = abs(model_error) - abs(standard_epley_error),
     most_accurate_method = case_when(
-      abs(difference) <= 1 ~ "Both predictions similar (±1)",
+      abs(difference) <= 1 ~ "Similar predictions (±1)",
       difference < 0 ~ paste0(
         "Model closer by ",
         round(abs(difference), 1),

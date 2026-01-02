@@ -5451,8 +5451,8 @@ font-style: inherit;">0</span>)</span>
 </div>
 </div>
 </section>
-<section id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" class="level2">
-<h2 class="anchored" data-anchor-id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets?</h2>
+<section id="how-much-accuracy-do-you-lose-with-higher-rep-sets" class="level2">
+<h2 class="anchored" data-anchor-id="how-much-accuracy-do-you-lose-with-higher-rep-sets">How much accuracy do you lose with higher rep sets?</h2>
 <p>The further a max reps set is from a true 1RM, the more the model has to extrapolate to provide an estimate. This extrapolation causes uncertainty in the 1RM estimates to compound. I think this is intuitive to most people; predicting the weather a few hours from now isn’t super hard, but forecasting days or weeks in advance carries a lot more uncertainty because there’s so much more time for conditions to diverge from your model. Same idea here. Heavy sets where only 2–5 reps are completed provide more representative evidence of what your 1RM actually is.</p>
 <div class="cell">
 <details class="code-fold">

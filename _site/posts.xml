@@ -1050,7 +1050,7 @@ Note
 <p>I’m going light on simulation details here to keep this accessible. Expand the section below to get more statistical details on the parameters of the simulated data.</p>
 </div>
 </div>
-<details aria-label="Simulation technical details (optional)" id="details-1">
+<details id="details-1" aria-label="Simulation technical details (optional)">
 <summary>Simulation technical details (optional)</summary>
 <p>I’ve defined the “squad” (30 athletes) to have a mean 1RM of 140kg
 and standard deviation of 15kg drawn from a random normal distribution.
@@ -2200,7 +2200,7 @@ Tip
 <p>The standard Epley is <code>weight * (1 + reps / 30)</code>.</p>
 <p>The modification I’m using just changes the <code>30</code> (fixed constant representing how quickly strength drops off with more reps; same for everyone) to a parameter the model will optimise based on the data for each athlete. Each athlete gets their own value for this based on how they handle high intensity sets or high volume sets.</p>
 <p>I’ll fit the model on all the simulated data <em>except the most recent set for each athlete</em>. I’ll keep these sets as a small holdout or test data for comparing predictive performance between my model and the standard Epley formula.</p>
-<details aria-label="Stats details about the model (optional)" id="details-2">
+<details id="details-2" aria-label="Stats details about the model (optional)">
 <summary>Stats details about the model (optional)</summary>
 <p>The standard Epley formula estimates 1RM from a submaximal lift, but
 this treats 1RM as the outcome (which we don’t observe directly). What
@@ -3571,7 +3571,7 @@ font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Both predictions similar (±1)"</span>,</span>
+font-style: inherit;">"Similar predictions (±1)"</span>,</span>
 <span id="cb10-25">      difference <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
@@ -4443,7 +4443,7 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">144.3</td>
 <td headers="Model prediction" class="gt_row gt_right">144.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">144.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">9</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">98.5</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">14</td>
@@ -4457,14 +4457,14 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">146.0</td>
 <td headers="Model prediction" class="gt_row gt_right">145.6</td>
 <td headers="Formula prediction" class="gt_row gt_right">146.5</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">11</td>
 <td headers="weight" class="gt_row gt_right">101.3</td>
 <td headers="reps" class="gt_row gt_right">15</td>
 <td headers="True 1RM" class="gt_row gt_right">149.9</td>
 <td headers="Model prediction" class="gt_row gt_right">147.9</td>
 <td headers="Formula prediction" class="gt_row gt_right">152.0</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">12</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">132.8</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">3</td>
@@ -4478,14 +4478,14 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">130.2</td>
 <td headers="Model prediction" class="gt_row gt_right">129.5</td>
 <td headers="Formula prediction" class="gt_row gt_right">130.9</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">14</td>
 <td headers="weight" class="gt_row gt_right">103.3</td>
 <td headers="reps" class="gt_row gt_right">7</td>
 <td headers="True 1RM" class="gt_row gt_right">132.4</td>
 <td headers="Model prediction" class="gt_row gt_right">127.5</td>
 <td headers="Formula prediction" class="gt_row gt_right">127.4</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">15</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">111.2</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">11</td>
@@ -4499,21 +4499,21 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">111.8</td>
 <td headers="Model prediction" class="gt_row gt_right">113.7</td>
 <td headers="Formula prediction" class="gt_row gt_right">114.3</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">17</td>
 <td headers="weight" class="gt_row gt_right">91.7</td>
 <td headers="reps" class="gt_row gt_right">9</td>
 <td headers="True 1RM" class="gt_row gt_right">119.9</td>
 <td headers="Model prediction" class="gt_row gt_right">118.7</td>
 <td headers="Formula prediction" class="gt_row gt_right">119.2</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">18</td>
 <td headers="weight" class="gt_row gt_right">75.3</td>
 <td headers="reps" class="gt_row gt_right">14</td>
 <td headers="True 1RM" class="gt_row gt_right">109.3</td>
 <td headers="Model prediction" class="gt_row gt_right">110.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">110.5</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">19</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">117.9</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">9</td>
@@ -4527,14 +4527,14 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">138.3</td>
 <td headers="Model prediction" class="gt_row gt_right">139.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">140.3</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">21</td>
 <td headers="weight" class="gt_row gt_right">138.4</td>
 <td headers="reps" class="gt_row gt_right">7</td>
 <td headers="True 1RM" class="gt_row gt_right">168.7</td>
 <td headers="Model prediction" class="gt_row gt_right">166.3</td>
 <td headers="Formula prediction" class="gt_row gt_right">170.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DBEAFE;">22</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DBEAFE;">82.6</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DBEAFE;">15</td>
@@ -4569,7 +4569,7 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">102.3</td>
 <td headers="Model prediction" class="gt_row gt_right">100.0</td>
 <td headers="Formula prediction" class="gt_row gt_right">99.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">27</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">72.3</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">14</td>
@@ -4590,7 +4590,7 @@ font-style: inherit;">15</span></span>
 <td headers="True 1RM" class="gt_row gt_right">137.3</td>
 <td headers="Model prediction" class="gt_row gt_right">140.3</td>
 <td headers="Formula prediction" class="gt_row gt_right">133.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">30</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">116.2</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">7</td>
@@ -5452,7 +5452,7 @@ font-style: inherit;">0</span>)</span>
 </div>
 </section>
 <section id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" class="level2">
-<h2 class="anchored" data-anchor-id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets</h2>
+<h2 class="anchored" data-anchor-id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets?</h2>
 <p>The further a max reps set is from a true 1RM, the more the model has to extrapolate to provide an estimate. This extrapolation causes uncertainty in the 1RM estimates to compound. I think this is intuitive to most people; predicting the weather a few hours from now isn’t super hard, but forecasting days or weeks in advance carries a lot more uncertainty because there’s so much more time for conditions to diverge from your model. Same idea here. Heavy sets where only 2–5 reps are completed provide more representative evidence of what your 1RM actually is.</p>
 <div class="cell">
 <details class="code-fold">

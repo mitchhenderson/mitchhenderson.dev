@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#how-accurate-is-it" id="toc-how-accurate-is-it" class="nav-link" data-scroll-target="#how-accurate-is-it">How accurate is it?</a></li>
   <li><a href="#what-has-the-model-learned-about-the-athletes" id="toc-what-has-the-model-learned-about-the-athletes" class="nav-link" data-scroll-target="#what-has-the-model-learned-about-the-athletes">What has the model learned about the athletes?</a></li>
   <li><a href="#how-much-does-having-historical-training-data-help" id="toc-how-much-does-having-historical-training-data-help" class="nav-link" data-scroll-target="#how-much-does-having-historical-training-data-help">How much does having historical training data help?</a></li>
-  <li><a href="#how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" id="toc-how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" class="nav-link" data-scroll-target="#how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets</a></li>
+  <li><a href="#how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" id="toc-how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" class="nav-link" data-scroll-target="#how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets?</a></li>
   <li><a href="#integrating-this" id="toc-integrating-this" class="nav-link" data-scroll-target="#integrating-this">Integrating this</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -2261,7 +2261,7 @@ assumptions adequately captured the features of the observed data).</p>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">standard_epley_error =</span> standard_epley_prediction <span class="sc">-</span> true_1rm,</span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">difference =</span> <span class="fu">abs</span>(model_error) <span class="sc">-</span> <span class="fu">abs</span>(standard_epley_error),</span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">most_accurate_method =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(difference) <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Both predictions similar (±1)"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(difference) <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Similar predictions (±1)"</span>,</span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>      difference <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="fu">paste0</span>(</span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Model closer by "</span>,</span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">abs</span>(difference), <span class="dv">1</span>),</span>
@@ -2857,7 +2857,7 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">144.3</td>
 <td headers="Model prediction" class="gt_row gt_right">144.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">144.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">9</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">98.5</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">14</td>
@@ -2871,14 +2871,14 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">146.0</td>
 <td headers="Model prediction" class="gt_row gt_right">145.6</td>
 <td headers="Formula prediction" class="gt_row gt_right">146.5</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">11</td>
 <td headers="weight" class="gt_row gt_right">101.3</td>
 <td headers="reps" class="gt_row gt_right">15</td>
 <td headers="True 1RM" class="gt_row gt_right">149.9</td>
 <td headers="Model prediction" class="gt_row gt_right">147.9</td>
 <td headers="Formula prediction" class="gt_row gt_right">152.0</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">12</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">132.8</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">3</td>
@@ -2892,14 +2892,14 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">130.2</td>
 <td headers="Model prediction" class="gt_row gt_right">129.5</td>
 <td headers="Formula prediction" class="gt_row gt_right">130.9</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">14</td>
 <td headers="weight" class="gt_row gt_right">103.3</td>
 <td headers="reps" class="gt_row gt_right">7</td>
 <td headers="True 1RM" class="gt_row gt_right">132.4</td>
 <td headers="Model prediction" class="gt_row gt_right">127.5</td>
 <td headers="Formula prediction" class="gt_row gt_right">127.4</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">15</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">111.2</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">11</td>
@@ -2913,21 +2913,21 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">111.8</td>
 <td headers="Model prediction" class="gt_row gt_right">113.7</td>
 <td headers="Formula prediction" class="gt_row gt_right">114.3</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">17</td>
 <td headers="weight" class="gt_row gt_right">91.7</td>
 <td headers="reps" class="gt_row gt_right">9</td>
 <td headers="True 1RM" class="gt_row gt_right">119.9</td>
 <td headers="Model prediction" class="gt_row gt_right">118.7</td>
 <td headers="Formula prediction" class="gt_row gt_right">119.2</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">18</td>
 <td headers="weight" class="gt_row gt_right">75.3</td>
 <td headers="reps" class="gt_row gt_right">14</td>
 <td headers="True 1RM" class="gt_row gt_right">109.3</td>
 <td headers="Model prediction" class="gt_row gt_right">110.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">110.5</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">19</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">117.9</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">9</td>
@@ -2941,14 +2941,14 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">138.3</td>
 <td headers="Model prediction" class="gt_row gt_right">139.8</td>
 <td headers="Formula prediction" class="gt_row gt_right">140.3</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right">21</td>
 <td headers="weight" class="gt_row gt_right">138.4</td>
 <td headers="reps" class="gt_row gt_right">7</td>
 <td headers="True 1RM" class="gt_row gt_right">168.7</td>
 <td headers="Model prediction" class="gt_row gt_right">166.3</td>
 <td headers="Formula prediction" class="gt_row gt_right">170.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DBEAFE;">22</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DBEAFE;">82.6</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DBEAFE;">15</td>
@@ -2983,7 +2983,7 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">102.3</td>
 <td headers="Model prediction" class="gt_row gt_right">100.0</td>
 <td headers="Formula prediction" class="gt_row gt_right">99.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">27</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">72.3</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">14</td>
@@ -3004,7 +3004,7 @@ assumptions adequately captured the features of the observed data).</p>
 <td headers="True 1RM" class="gt_row gt_right">137.3</td>
 <td headers="Model prediction" class="gt_row gt_right">140.3</td>
 <td headers="Formula prediction" class="gt_row gt_right">133.7</td>
-<td headers="Most accurate method" class="gt_row gt_right">Both predictions similar (±1)</td></tr>
+<td headers="Most accurate method" class="gt_row gt_right">Similar predictions (±1)</td></tr>
     <tr><td headers="athlete" class="gt_row gt_right" style="background-color: #DCFCE7;">30</td>
 <td headers="weight" class="gt_row gt_right" style="background-color: #DCFCE7;">116.2</td>
 <td headers="reps" class="gt_row gt_right" style="background-color: #DCFCE7;">7</td>
@@ -3222,7 +3222,7 @@ assumptions adequately captured the features of the observed data).</p>
 </div>
 </section>
 <section id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets" class="level2">
-<h2 class="anchored" data-anchor-id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets</h2>
+<h2 class="anchored" data-anchor-id="how-much-1rm-accuracy-do-you-lose-with-higher-rep-sets">How much 1RM accuracy do you lose with higher rep sets?</h2>
 <p>The further a max reps set is from a true 1RM, the more the model has to extrapolate to provide an estimate. This extrapolation causes uncertainty in the 1RM estimates to compound. I think this is intuitive to most people; predicting the weather a few hours from now isn’t super hard, but forecasting days or weeks in advance carries a lot more uncertainty because there’s so much more time for conditions to diverge from your model. Same idea here. Heavy sets where only 2–5 reps are completed provide more representative evidence of what your 1RM actually is.</p>
 <div class="cell">
 <details class="code-fold">
@@ -4361,7 +4361,7 @@ assumptions adequately captured the features of the observed data).</p>
 <span id="cb15-541"><a href="#cb15-541" aria-hidden="true" tabindex="-1"></a>    <span class="at">standard_epley_error =</span> standard_epley_prediction <span class="sc">-</span> true_1rm,</span>
 <span id="cb15-542"><a href="#cb15-542" aria-hidden="true" tabindex="-1"></a>    <span class="at">difference =</span> <span class="fu">abs</span>(model_error) <span class="sc">-</span> <span class="fu">abs</span>(standard_epley_error),</span>
 <span id="cb15-543"><a href="#cb15-543" aria-hidden="true" tabindex="-1"></a>    <span class="at">most_accurate_method =</span> <span class="fu">case_when</span>(</span>
-<span id="cb15-544"><a href="#cb15-544" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(difference) <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Both predictions similar (±1)"</span>,</span>
+<span id="cb15-544"><a href="#cb15-544" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(difference) <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Similar predictions (±1)"</span>,</span>
 <span id="cb15-545"><a href="#cb15-545" aria-hidden="true" tabindex="-1"></a>      difference <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="fu">paste0</span>(</span>
 <span id="cb15-546"><a href="#cb15-546" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Model closer by "</span>,</span>
 <span id="cb15-547"><a href="#cb15-547" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">abs</span>(difference), <span class="dv">1</span>),</span>
@@ -4620,7 +4620,7 @@ assumptions adequately captured the features of the observed data).</p>
 <span id="cb15-806"><a href="#cb15-806" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb15-807"><a href="#cb15-807" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb15-808"><a href="#cb15-808" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-809"><a href="#cb15-809" aria-hidden="true" tabindex="-1"></a><span class="fu">## How much 1RM accuracy do you lose with higher rep sets</span></span>
+<span id="cb15-809"><a href="#cb15-809" aria-hidden="true" tabindex="-1"></a><span class="fu">## How much 1RM accuracy do you lose with higher rep sets?</span></span>
 <span id="cb15-810"><a href="#cb15-810" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-811"><a href="#cb15-811" aria-hidden="true" tabindex="-1"></a>The further a max reps set is from a true 1RM, the more the model has to extrapolate to provide an estimate. This extrapolation causes uncertainty in the 1RM estimates to compound. I think this is intuitive to most people; predicting the weather a few hours from now isn't super hard, but forecasting days or weeks in advance carries a lot more uncertainty because there's so much more time for conditions to diverge from your model. Same idea here. Heavy sets where only 2–5 reps are completed provide more representative evidence of what your 1RM actually is.</span>
 <span id="cb15-812"><a href="#cb15-812" aria-hidden="true" tabindex="-1"></a></span>

@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.mitchhenderson.dev/index.html</loc>
-    <lastmod>2025-01-27T03:52:34.533Z</lastmod>
+    <lastmod>2025-01-27T03:52:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts.html</loc>
-    <lastmod>2025-01-18T05:40:19.844Z</lastmod>
+    <lastmod>2025-01-18T05:40:19.000Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</loc>
@@ -26,6 +26,10 @@
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html</loc>
-    <lastmod>2025-01-29T02:43:15.091Z</lastmod>
+    <lastmod>2025-11-26T03:58:21.725Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2025-01-02-e1rm-modelling/index.html</loc>
+    <lastmod>2026-01-02T03:15:25.465Z</lastmod>
   </url>
 </urlset>

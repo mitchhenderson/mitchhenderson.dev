@@ -28,7 +28,7 @@ You can get more accurate 1RM estimates by using a statistical model that accoun
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -64,7 +64,7 @@ theme_set(
 )
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 
 ::: {.callout-note}
 ## Python code outputs will differ from rendered results
@@ -107,7 +107,7 @@ There are [lots of different formulas out there to estimate a 1RM](https://maxca
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| warning: false
 #| output: false
@@ -211,7 +211,7 @@ animate(
 )
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -344,7 +344,7 @@ To show you what I mean, we need some data.
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 set.seed(2534)
 
@@ -400,7 +400,7 @@ simulated_data <- athletes |>
   )
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ::: {.callout-note}
 ## Different random number generators
 R and Python use different random number generation algorithms, so even with the same seed value, the simulated data will differ between languages. This means specific values (e.g. individual athlete 1RMs, credible intervals) won't match exactly. The overall patterns will be consistent, and the same analytical conclusions apply.
@@ -490,7 +490,7 @@ The simulated athlete data looks like this:
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -500,7 +500,7 @@ athletes |>
   gt_theme_538(quiet = TRUE)
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -532,7 +532,7 @@ The simulated sets data looks like this:
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -543,7 +543,7 @@ simulated_data |>
   gt_theme_538(quiet = TRUE)
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -608,7 +608,7 @@ Although they're not included in this post (I wanted to keep it tight), I did do
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -674,7 +674,7 @@ estimate_1rm <- function(model, athlete_id, weight, reps) {
 }
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -764,7 +764,7 @@ Now the model is fit, I use it to make 1RM estimates with the help of a custom f
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| code-fold: false
 example_predictions <- estimate_1rm(
@@ -775,7 +775,7 @@ example_predictions <- estimate_1rm(
 )
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 #| code-fold: false
@@ -789,7 +789,7 @@ example_predictions = estimate_1rm(
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -855,7 +855,7 @@ example_dist <- example_predictions |>
 example_dist
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -900,7 +900,7 @@ Sometimes the full distribution is a bit much and you just want a summary (e.g. 
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -914,7 +914,7 @@ example_summary <- example_predictions |>
 example_summary
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -950,7 +950,7 @@ By seeing how close the model got to the true 1RM (defined in the simulation), a
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1050,7 +1050,7 @@ tbl <- holdout_predictions |>
 tbl
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -1171,7 +1171,7 @@ The model was therefore **`r paste0(round(mean(abs(holdout_predictions$standard_
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 athlete_endurance_summary <- modified_epley_model_fit |>
   spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
@@ -1216,7 +1216,7 @@ endurance_profiles <- modified_epley_model_fit |>
   left_join(athlete_labels, by = "athlete")
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -1281,7 +1281,7 @@ See how each of their endurance parameters (that the model learned from their pa
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1312,7 +1312,7 @@ predicted_curves_plot <- endurance_profiles |>
 predicted_curves_plot
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -1363,7 +1363,7 @@ Notice how the shape of the 1RM estimate distribution becomes taller and thinner
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1459,7 +1459,7 @@ historical_data_plot <- data_varying_obs |>
 historical_data_plot
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 
@@ -1555,7 +1555,7 @@ Same idea here. Heavy sets where only 2–5 reps are completed are more represen
 
 ::: {.panel-tabset group="language"}
 
-## ![](https://www.r-project.org/logo/Rlogo.svg){height=25}
+## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1661,7 +1661,7 @@ rep_count_plot <- rep_count_plot_data |>
 rep_count_plot
 ```
 
-## ![](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height=30}
 ```{python}
 #| eval: false
 

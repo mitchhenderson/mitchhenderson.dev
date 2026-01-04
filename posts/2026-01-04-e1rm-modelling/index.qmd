@@ -3,7 +3,7 @@ title: "Making 1 rep max estimates more accurate and honest"
 description: |
   Use more of the information you have.
 author: Mitch Henderson
-date: 2026-01-02
+date: 2026-01-04
 thumbnailImage: /img/1rm_curve_thumbnail.png
 draft: false
 filters: [details]
@@ -17,18 +17,19 @@ knitr:
       dev: "ragg_png"
 ---
 
-::: {.callout-note}
+::: callout-note
 ## tl;dr
-You can get more accurate 1RM estimates by using a statistical model that accounts for differences between athletes. They can also tell you how certain their estimate are (which matters).
+
+You can get more accurate 1RM estimates by using a model that learns and accounts for differences between athletes. It also quantifies how certain the estimates are (which matters).
 :::
 
 <br>
 
 [S&C coaches](https://en.wikipedia.org/wiki/Strength_and_conditioning_coach) collect training data to monitor progress and evaluate the effectiveness of their programming. A common method in strength training is to calculate an [**estimated one repetition maximum**](https://en.wikipedia.org/wiki/One-repetition_maximum#Estimating_1RM) (or e1RM) using a [formula](https://maxcalculator.com/guides/1rm-formulas) and track how it changes over time. Lots of coaches are happy to use e1RM as a progress indicator instead of testing a true 1RM during a program or in-season because they don't negatively impact training (integrates into existing training sessions), are safer (lower weight), and data can be collected more frequently (faster program refinements). [True 1RM](https://en.wikipedia.org/wiki/One-repetition_maximum#Measuring_1RM) testing might only be programmed a handful of times per season (if at all) so using training data to regularly estimate strength increases or detect when a program should be adjusted is a good idea.
 
-::: {.panel-tabset group="language"}
+:::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -64,10 +65,11 @@ theme_set(
 )
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
 
-::: {.callout-note}
+::: callout-note
 ## Python code outputs will differ from rendered results
+
 The visualisations and tables on this page are generated from the R code. Running the Python code will produce the equivalent analyses but with different styling (e.g. fonts, themes, annotations) because Python uses different plotting and table libraries. The analytical conclusions are the same though.
 :::
 
@@ -98,16 +100,15 @@ theme_set(
     )
 )
 ```
-
-:::
+::::
 
 ## The problem
 
 There are [lots of different formulas out there to estimate a 1RM](https://maxcalculator.com/guides/1rm-formulas).
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| warning: false
 #| output: false
@@ -211,7 +212,8 @@ animate(
 )
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -293,7 +295,6 @@ anim = animation.FuncAnimation(
 anim.save("1rm_formulas.gif", writer="pillow", fps=1)
 plt.close()
 ```
-
 :::
 
 ```{r}
@@ -342,9 +343,9 @@ To show you what I mean, we need some data.
 
 ### Simulate data
 
-::: {.panel-tabset group="language"}
+:::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 set.seed(2534)
 
@@ -400,11 +401,14 @@ simulated_data <- athletes |>
   )
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
-::: {.callout-note}
+## ![](/img/python-logo-only.svg){height="30"}
+
+::: callout-note
 ## Different random number generators
+
 R and Python use different random number generation algorithms, so even with the same seed value, the simulated data will differ between languages. This means specific values (e.g. individual athlete 1RMs, credible intervals) won't match exactly. The overall patterns will be consistent, and the same analytical conclusions apply.
 :::
+
 ```{python}
 #| eval: false
 
@@ -467,8 +471,7 @@ simulated_data = (
     )
 )
 ```
-
-:::
+::::
 
 I've simulated `r n_athletes` fake athletes, each with their own 1RM, strength endurance capacity, and number of previous sessions of data where they've performed a max reps set for this given exercise.
 
@@ -489,8 +492,8 @@ I finally simulate the actual weight they lifted for the set by taking the weigh
 The simulated athlete data looks like this:
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -500,7 +503,8 @@ athletes |>
   gt_theme_538(quiet = TRUE)
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -514,7 +518,6 @@ preview_df = pl.concat(
 
 GT(preview_df)
 ```
-
 :::
 
 ```{r}
@@ -531,8 +534,8 @@ I use these athletes and their characteristics to simulate realistic weights and
 The simulated sets data looks like this:
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -543,7 +546,8 @@ simulated_data |>
   gt_theme_538(quiet = TRUE)
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -561,7 +565,6 @@ preview_df = pl.concat(
 
 GT(preview_df)
 ```
-
 :::
 
 ```{r}
@@ -607,8 +610,8 @@ Although they're not included in this post (I wanted to keep it tight), I did do
 :::
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -674,7 +677,8 @@ estimate_1rm <- function(model, athlete_id, weight, reps) {
 }
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -757,14 +761,13 @@ def estimate_1rm(trace, athlete_id, weight, reps, n_samples=4000):
         "est_1rm": est_1rm[:n_samples],
     }
 ```
-
 :::
 
 Now the model is fit, I use it to make 1RM estimates with the help of a custom function I've defined called `estimate_1rm()`. It takes the model object, the athlete ID, and the weight and reps the athlete performed in the set as arguments and gives me back a distribution of predictions.
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| code-fold: false
 example_predictions <- estimate_1rm(
@@ -775,7 +778,8 @@ example_predictions <- estimate_1rm(
 )
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 #| code-fold: false
@@ -784,12 +788,11 @@ example_predictions = estimate_1rm(
     trace=modified_epley_trace, athlete_id=17, weight=102.5, reps=5
 )
 ```
-
 :::
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -855,7 +858,8 @@ example_dist <- example_predictions |>
 example_dist
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -885,7 +889,6 @@ example_pred_df = pd.DataFrame({"est_1RM": example_predictions["est_1rm"]})
     )
 )
 ```
-
 :::
 
 ```{r}
@@ -899,8 +902,8 @@ Sometimes the full distribution is a bit much and you just want a summary (e.g. 
 [^2]: These intervals are what you get with Bayesian model estimates and they are what I think most people want confidence intervals to be. There is x% probability that the interval contains the true value.
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -914,7 +917,8 @@ example_summary <- example_predictions |>
 example_summary
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -933,7 +937,6 @@ summary_df = pl.DataFrame(
 
 GT(summary_df)
 ```
-
 :::
 
 ```{r}
@@ -949,8 +952,8 @@ By seeing how close the model got to the true 1RM (defined in the simulation), a
 [^3]: This evaluation is pretty crude (holding out each athletes most recent set for testing; only `r n_athletes` sets total). It's kind of how it would work in real life though; predictions after each new session are like their own test set (assuming model is updated before each session). A stronger approach to evaluation during the research phase of something like (as opposed to ongoing use) would be to use something like [cross validation](https://www.youtube.com/watch?v=fSytzGwwBVw).
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1050,7 +1053,8 @@ tbl <- holdout_predictions |>
 tbl
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -1150,7 +1154,6 @@ display_df = (
     )
 )
 ```
-
 :::
 
 ```{r}
@@ -1170,8 +1173,8 @@ The model was therefore **`r paste0(round(mean(abs(holdout_predictions$standard_
 ## What has the model learned about the athletes?
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 athlete_endurance_summary <- modified_epley_model_fit |>
   spread_draws(b_logk_Intercept, r_athlete__logk[athlete, ]) |>
@@ -1216,7 +1219,8 @@ endurance_profiles <- modified_epley_model_fit |>
   left_join(athlete_labels, by = "athlete")
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -1272,7 +1276,6 @@ endurance_profiles["label"] = endurance_profiles.apply(
     axis=1,
 )
 ```
-
 :::
 
 To demonstrate this point, I'll just show three athletes: the highest endurance (Athlete `r selected_athletes[3]`), the lowest endurance (Athlete `r selected_athletes[1]`), and one in the middle (Athlete `r selected_athletes[2]`).
@@ -1280,8 +1283,8 @@ To demonstrate this point, I'll just show three athletes: the highest endurance 
 See how each of their endurance parameters (that the model learned from their past training data) changes their 1RM estimate curve to be tailored to their traits.
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1312,7 +1315,8 @@ predicted_curves_plot <- endurance_profiles |>
 predicted_curves_plot
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -1342,7 +1346,6 @@ predicted_curves_plot
     )
 )
 ```
-
 :::
 
 ```{r}
@@ -1362,8 +1365,8 @@ To demonstrate, here's four athletes' estimates after hypothetically performing 
 Notice how the shape of the 1RM estimate distribution becomes taller and thinner or wider and flatter as the amount of historical data changes. These shapes represent the level of certainty in the 1RM estimate and incorporate all sources of performance variability in the training data.
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1459,7 +1462,8 @@ historical_data_plot <- data_varying_obs |>
 historical_data_plot
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -1536,7 +1540,6 @@ varying_obs_df["label"] = pd.Categorical(
     )
 )
 ```
-
 :::
 
 ```{r}
@@ -1554,8 +1557,8 @@ The further a max reps set is from a true 1RM, the more the model has to extrapo
 Same idea here. Heavy sets where only 2–5 reps are completed are more representative of what your 1RM actually is.
 
 ::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-## ![](/img/Rlogo.svg){height=25}
 ```{r}
 #| output: false
 
@@ -1661,7 +1664,8 @@ rep_count_plot <- rep_count_plot_data |>
 rep_count_plot
 ```
 
-## ![](/img/python-logo-only.svg){height=30}
+## ![](/img/python-logo-only.svg){height="30"}
+
 ```{python}
 #| eval: false
 
@@ -1752,7 +1756,6 @@ rep_count_df["scenario"] = pd.Categorical(
     )
 )
 ```
-
 :::
 
 ```{r}
@@ -1771,10 +1774,10 @@ Integrating this into a larger system would involve deploying the model to a ser
 
 My simulated data might not align with the patterns in real training data, but I think the idea that some athletes can do heavy weight well while others do higher reps well is valid and should/can be captured when you're estimating 1RM from a submaximal set for max reps.
 
-Key takeaways:
+Takeaways:
 
-- Athletes have different characteristics that statistical models can learn and account for when making inferences or predictions.
+-   Athletes have different characteristics that statistical models can learn and account for when making inferences or predictions.
 
-- Quantifying uncertainty helps us make better decisions. Especially knowing when we don't have enough information to act confidently.
+-   Quantifying uncertainty helps us make better decisions. Especially knowing when we don't have enough information to act confidently.
 
-- Models like this can be fit to your athletes' data, updated automatically as new training results come in, and integrated into your programming or monitoring workflows.
+-   Models like this can be fit to your athletes' data, updated automatically as new training results come in, and integrated into your programming or monitoring workflows.

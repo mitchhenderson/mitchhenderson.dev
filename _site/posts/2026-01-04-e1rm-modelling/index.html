@@ -691,7 +691,7 @@ Note
 <p>I’m going light on simulation details here to keep this accessible. Expand the section below to get more statistical details on the parameters of the simulated data.</p>
 </div>
 </div>
-<details aria-label="Simulation technical details (optional)" id="details-1">
+<details id="details-1" aria-label="Simulation technical details (optional)">
 <summary>Simulation technical details (optional)</summary>
 <p>I’ve defined the “squad” (30 athletes) to have a mean 1RM of 140kg
 and standard deviation of 15kg drawn from a random normal distribution.
@@ -1835,7 +1835,7 @@ Note
 <p>The standard Epley is <code>weight * (1 + reps / 30)</code>.</p>
 <p>The modification I’m using just changes the <code>30</code> (fixed constant representing how quickly strength drops off with more reps; same for everyone) to a parameter the model will optimise based on the data for each athlete. Each athlete gets their own value for this based on how they handle high intensity sets or high volume sets.</p>
 <p>I’ll fit the model on all the simulated data <em>except the most recent set for each athlete</em>. I’ll keep these sets as a small holdout or test data for comparing predictive performance between my model and the standard Epley formula.</p>
-<details aria-label="Stats details about the model (optional)" id="details-2">
+<details id="details-2" aria-label="Stats details about the model (optional)">
 <summary>Stats details about the model (optional)</summary>
 <p>The standard Epley formula estimates 1RM from a submaximal lift, but
 this treats 1RM as the outcome (which we don’t observe directly). What
@@ -4716,7 +4716,7 @@ assumptions adequately captured the features of the observed data).</p>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">  Use more of the information you have.</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Mitch Henderson</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2026-01-04</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="an">thumbnailImage:</span><span class="co"> /img/1rm_curve_thumbnail.png</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> /img/1rm_curve_thumbnail.png</span></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="an">draft:</span><span class="co"> false</span></span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span><span class="co"> [details]</span></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>

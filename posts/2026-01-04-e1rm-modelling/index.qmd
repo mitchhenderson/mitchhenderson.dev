@@ -4,7 +4,7 @@ description: |
   Use more of the information you have.
 author: Mitch Henderson
 date: 2026-01-04
-thumbnailImage: /img/1rm_curve_thumbnail.png
+image: /img/1rm_curve_thumbnail.png
 draft: false
 filters: [details]
 format:

@@ -58,16 +58,16 @@ Inside, there'll be 2 files. For our purposes, you only need the **export** file
 I've made a new folder that houses all files, and this is where my working directly will be set. In Rstudio, I'll create an R script and load the packages I need. If you don't have these packages installed use `install.packages("packagename")` before loading them with `library()`.
 
 ```{r}
-#| label = "emojis and icons",
-#| include = FALSE
+#| label: "emojis and icons"
+#| include: FALSE
 library(emo)
 library(fontawesome)
 ```
 
 ```{r}
-#| label = "Load packages",
-#| message = FALSE,
-#| warning = FALSE
+#| label: "Load packages"
+#| message: FALSE
+#| warning: FALSE
 library("XML")
 library("methods")
 library("tidyverse")
@@ -99,9 +99,9 @@ First, we need to make an object that I'll call `xml` and view it's contents usi
 <br>
 
 ```{r}
-#| label = "Open XML",
-#| echo = TRUE,
-#| paged.print = FALSE
+#| label: "Open XML"
+#| echo: TRUE
+#| paged.print: FALSE
 xml <- xmlParse(paste("heidi-thornton_apple-data.xml"))
 summary(xml)
 ```
@@ -113,8 +113,8 @@ summary(xml)
 I'm interested in the workout data. We can open this using `xmlAttrsToDataFrame()`.
 
 ```{r}
-#| label = "Open df_workout",
-#| echo = TRUE
+#| label: "Open df_workout"
+#| echo: TRUE
 df_workout <-  XML:::xmlAttrsToDataFrame(xml["//Workout"])[c(1:2, 4, 6, 12)]
 head(df_workout, n = 5) # View the top 5 rows of data
 ```
@@ -134,26 +134,26 @@ We will use `%>%` (pipes) from the `tidyverse` package perform this as it's much
 ### Daily running sessions
 
 ```{r}
-#| label = "Distance Graph ouput",
-#| echo = TRUE,
-#| fig.align = "center",
-#| message = FALSE,
-#| warning = FALSE,
-#| font.size = 10
+#| label: "Distance Graph ouput"
+#| echo: TRUE
+#| fig.align: "center"
+#| message: FALSE
+#| warning: FALSE
+#| font.size: 10
 df_workout %>%
-  
-    # Change data types (i.e. distance to m not km, numeric) 
+
+    # Change data types (i.e. distance to m not km, numeric)
       mutate(
         workoutActivityType = as.character(workoutActivityType),
         totalDistance = as.numeric(as.character(totalDistance))*1000,
         duration = as.numeric(duration),
-        endDate = as.Date(endDate)) %>% 
-  
+        endDate = as.Date(endDate)) %>%
+
     # Only running sessions- depending on watch the name may differ
       filter(workoutActivityType == "HKWorkoutActivityTypeRunning") %>%
       filter(endDate >= "2020-03-23") %>% # only after shut down
 
-# Create ggplot    
+# Create ggplot
 ggplot(aes(x= endDate, y = totalDistance)) +
     geom_bar(stat="identity", fill='#5ab4ac')+
     labs(title = "Not exactly periodised, but it's better than nothing....",
@@ -161,7 +161,7 @@ ggplot(aes(x= endDate, y = totalDistance)) +
            x = "Date",
            y = NULL) +
     scale_x_date(date_breaks = "7 days",
-                   date_labels = "%b %d") + 
+                   date_labels = "%b %d") +
     scale_y_continuous(expand = c(0, 0)) +
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
@@ -180,23 +180,23 @@ Now we have our first plot showing my running over the days after the COVID shut
 We need to manipulate the data a bit more to get the weekly running volume.
 
 ```{r}
-#| label = "Weekly volume",
-#| fig.align = "center",
-#| message = FALSE,
-#| warning = FALSE
+#| label: "Weekly volume"
+#| fig.align: "center"
+#| message: FALSE
+#| warning: FALSE
 df_workout %>%
-  
+
    mutate(
     workoutActivityType = as.character(workoutActivityType),
     totalDistance = as.numeric(as.character(totalDistance))*1000,
     endDate = as.Date(endDate),
     week = isoweek(ymd(endDate))) %>% # Add week column
-  
+
    filter(workoutActivityType == "HKWorkoutActivityTypeRunning") %>%
    filter(endDate >= "2020-03-23") %>%
    group_by(week) %>% # summarise by week (starts week in 1st jan)
-  
-ggplot(aes(x = week, y = totalDistance)) + 
+
+ggplot(aes(x = week, y = totalDistance)) +
   geom_bar(stat = "identity", fill='#5ab4ac') +
   labs(title = "Cardinal rule of training: Be consistent",
        subtitle = "Total distance (m) across annual weeks",
@@ -219,31 +219,31 @@ ggplot(aes(x = week, y = totalDistance)) +
 I want to know energy consumption by **activity type**. To extract a clean name for this we need to do some string manipulation using the `str_sub()` function from the `stringr` package (part of the `tidyverse`).
 
 ```{r}
-#| label = "energy graph",
-#| echo = TRUE,
-#| fig.align = "center",
-#| message = FALSE,
-#| warning = FALSE
+#| label: "energy graph"
+#| echo: TRUE
+#| fig.align: "center"
+#| message: FALSE
+#| warning: FALSE
 df_workout %>%
-  
+
    mutate(
       workoutActivityType = as.character(workoutActivityType),
       totalDistance = as.numeric(as.character(totalDistance)) * 1000,
       totalEnergyBurned = as.numeric(as.character(totalEnergyBurned)),
-      endDate = as.Date(endDate), 
-      
+      endDate = as.Date(endDate),
+
       # Add week column
-      week = isoweek(ymd(endDate)), 
-      
+      week = isoweek(ymd(endDate)),
+
       # new column- text after 22nd character
       Type = str_sub(workoutActivityType, 22)) %>%
-  
+
    # Filter out cycling
-   filter(endDate >= "2020-03-23" & Type %in% c('Running','Other')) %>% 
+   filter(endDate >= "2020-03-23" & Type %in% c('Running','Other')) %>%
    group_by(week) %>%
 
-ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) + 
-    geom_bar(stat = "identity", position = position_dodge()) + 
+ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
     facet_wrap(~Type) +
     labs(title = "Weekly energy consumption (kj) by activity type",
         subtitle = "'Other' sessions include weights or walking",
@@ -251,7 +251,7 @@ ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
         x = "Annual week") +
     scale_x_continuous(breaks = seq(13, 19, by = 1)) +
     scale_y_continuous(expand = c(0, 0)) +
-    theme_minimal() + 
+    theme_minimal() +
     theme(legend.position = "none",
           panel.grid.minor = element_blank(),
           panel.grid.major.x = element_blank(),
@@ -268,13 +268,13 @@ ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
 Lets move on from workout data and import 'Record' data. This one will take a while to load.
 
 ```{r}
-#| label = "Import record data",
-#| message = FALSE,
-#| warning = FALSE
+#| label: "Import record data"
+#| message: FALSE
+#| warning: FALSE
 df_record <-  XML:::xmlAttrsToDataFrame(xml["//Record"]) [c(1,6,8)]
 
 # See data types available in record
-  df_record %>% 
+  df_record %>%
     mutate(Type = str_sub(type, 25)) %>% # Include text after the 25th character
     select(Type) %>% distinct
 ```
@@ -290,17 +290,17 @@ This one isn't exactly useful for athletes - this is more for my own interest of
 I am replicating a plot created by [Taras Kaduk](https://twitter.com/taraskaduk) on his blog post titled [Analyze and visualize your iPhone's Health app data in R](https://taraskaduk.com/2019/03/23/apple-health/).
 
 ```{r}
-#| label = "Step count plot by hour",
-#| echo = TRUE,
-#| fig.align = "center",
-#| message = FALSE,
-#| warning = FALSE
+#| label: "Step count plot by hour"
+#| echo: TRUE
+#| fig.align: "center"
+#| message: FALSE
+#| warning: FALSE
 
 df_record %>%
-  
+
    mutate(
-      # Rename type by removing that text 
-       Type = str_remove(type, "HKQuantityTypeIdentifier"), 
+      # Rename type by removing that text
+       Type = str_remove(type, "HKQuantityTypeIdentifier"),
        value = as.numeric(as.character(value)),
        Date = as.Date.character(startDate),
        weekday = wday(Date), # Day of week
@@ -308,10 +308,10 @@ df_record %>%
    filter(Type == 'StepCount' & Date >= "2020-03-23") %>%
    group_by(Date, weekday, hour) %>%  # Summarise by date, weekday and hour
    summarise(value = sum(value)) %>% # Sum steps over ^^
-   group_by(weekday, hour) %>% # Now summarise by weekday and hour  
+   group_by(weekday, hour) %>% # Now summarise by weekday and hour
    summarise(value = mean(value)) %>% # Take mean steps over ^^
    filter(between(hour,6,21)) %>% # Filtering to include between 6am - 9pm
- 
+
 ggplot(aes(x = hour, y = weekday,  fill = value)) +
   geom_tile(col = 'grey40') +
   scale_fill_continuous(labels = scales::comma,
@@ -348,25 +348,25 @@ ggplot(aes(x = hour, y = weekday,  fill = value)) +
 One last one - we will plot HR across 2 days. I have added a colour scale for low (green) and high (red).
 
 ```{r}
-#| label = "HR Graph",
-#| echo = TRUE,
-#| message = FALSE,
-#| warning = FALSE
+#| label: "HR Graph"
+#| echo: TRUE
+#| message: FALSE
+#| warning: FALSE
 df_record %>%
-  mutate(Type = str_remove(type, "HKQuantityTypeIdentifier"), # Rename 
-      value = as.numeric(as.character(value)), 
+  mutate(Type = str_remove(type, "HKQuantityTypeIdentifier"), # Rename
+      value = as.numeric(as.character(value)),
       startDate = as_datetime(startDate),
-      Date = as.Date.character(startDate)) %>% 
+      Date = as.Date.character(startDate)) %>%
       filter(Type == 'HeartRate') %>%
         filter(Date >= as.Date("2020-04-03") &  Date <= as.Date("2020-04-04")) %>%
-  
+
 ggplot(aes(x = startDate, y = value, colour = value)) +
   geom_line(size = 0.75) +
   scale_color_gradient(low = "springgreen3", high = "firebrick2") +
   labs(title = NULL,
        y = "Heart rate",
        x = NULL) +
-  expand_limits(y = c(50, 200)) + 
+  expand_limits(y = c(50, 200)) +
   theme_minimal() +
   theme(legend.position = "none",
         panel.grid.minor = element_blank(),
@@ -382,7 +382,8 @@ ggplot(aes(x = startDate, y = value, colour = value)) +
 There are other data types available from Apple Health
 
 ```{Apple}
-#| label = "Health Data types"
+#| label: "Health Data types"
+
 df_record <-   XML:::xmlAttrsToDataFrame(xml["//Record"])
 df_activity <- XML:::xmlAttrsToDataFrame(xml["//ActivitySummary"])
 df_workout <-  XML:::xmlAttrsToDataFrame(xml["//Workout"])
@@ -407,7 +408,7 @@ The presentation slides for this post can be viewed [full screen](https://mitchh
 <br>
 
 ```{r}
-#| echo = FALSE
+#| echo: FALSE
 knitr::include_url('https://mitchhenderson.github.io/heidi-slides/Heidi-Presentation-Xaringan--2-.html')
 ```
 
@@ -428,6 +429,7 @@ If you want to learn more about R, there is some awesome work out there from fel
 ```{=html}
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ```
+
 `r emo::ji("envelope_with_arrow")` [heidi.thornton\@goldcoastfc.com.au](mailto:heidi.thornton@goldcoastfc.com.au)
 
 <br>
@@ -439,10 +441,10 @@ If you want to learn more about R, there is some awesome work out there from fel
 # Full code
 
 ```{r}
-#| label = "full code",
-#| eval = FALSE,
-#| message = FALSE,
-#| warning = FALSE
+#| label: "full code"
+#| eval: FALSE
+#| message: FALSE
+#| warning: FALSE
 library("XML")
 library("methods")
 library("tidyverse")
@@ -461,19 +463,19 @@ head(df_workout, n = 5) # View the top 5 rows of data
 # Daily running chart
 
 df_workout %>%
-  
-    # Change data types (i.e. distance to m not km, numeric) 
+
+    # Change data types (i.e. distance to m not km, numeric)
       mutate(
         workoutActivityType = as.character(workoutActivityType),
         totalDistance = as.numeric(as.character(totalDistance))*1000,
         duration = as.numeric(duration),
-        endDate = as.Date(endDate)) %>% 
-  
+        endDate = as.Date(endDate)) %>%
+
     # Only running sessions- depending on watch the name may differ
       filter(workoutActivityType == "HKWorkoutActivityTypeRunning") %>%
       filter(endDate >= "2020-03-23") %>% # only after shut down
 
-# Create ggplot    
+# Create ggplot
 ggplot(aes(x= endDate, y = totalDistance)) +
     geom_bar(stat="identity", fill='#5ab4ac')+
     labs(title = "Not exactly periodised, but it's better than nothing....",
@@ -481,7 +483,7 @@ ggplot(aes(x= endDate, y = totalDistance)) +
            x = "Date",
            y = NULL) +
     scale_x_date(date_breaks = "7 days",
-                   date_labels = "%b %d") + 
+                   date_labels = "%b %d") +
     scale_y_continuous(expand = c(0, 0)) +
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
@@ -494,18 +496,18 @@ ggplot(aes(x= endDate, y = totalDistance)) +
 # Weekly running chart
 
 df_workout %>%
-  
+
    mutate(
     workoutActivityType = as.character(workoutActivityType),
     totalDistance = as.numeric(as.character(totalDistance))*1000,
     endDate = as.Date(endDate),
     week = isoweek(ymd(endDate))) %>% # Add week column
-  
+
    filter(workoutActivityType == "HKWorkoutActivityTypeRunning") %>%
    filter(endDate >= "2020-03-23") %>%
    group_by(week) %>% # summarise by week (starts week in 1st jan)
-  
-ggplot(aes(x = week, y = totalDistance)) + 
+
+ggplot(aes(x = week, y = totalDistance)) +
   geom_bar(stat = "identity", fill='#5ab4ac') +
   labs(title = "Cardinal rule of training: Be consistent",
        subtitle = "Total distance (m) across annual weeks",
@@ -524,25 +526,25 @@ ggplot(aes(x = week, y = totalDistance)) +
 # Energy consumption (Other vs Running) chart
 
 df_workout %>%
-  
+
    mutate(
       workoutActivityType = as.character(workoutActivityType),
       totalDistance = as.numeric(as.character(totalDistance)) * 1000,
       totalEnergyBurned = as.numeric(as.character(totalEnergyBurned)),
-      endDate = as.Date(endDate), 
-      
+      endDate = as.Date(endDate),
+
       # Add week column
-      week = isoweek(ymd(endDate)), 
-      
+      week = isoweek(ymd(endDate)),
+
       # new column- text after 22nd character
       Type = str_sub(workoutActivityType, 22)) %>%
-  
+
    # Filter out cycling
-   filter(endDate >= "2020-03-23" & Type %in% c('Running','Other')) %>% 
+   filter(endDate >= "2020-03-23" & Type %in% c('Running','Other')) %>%
    group_by(week) %>%
 
-ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) + 
-    geom_bar(stat = "identity", position = position_dodge()) + 
+ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
+    geom_bar(stat = "identity", position = position_dodge()) +
     facet_wrap(~Type) +
     labs(title = "Weekly energy consumption (kj) by session type",
         subtitle = "'Other' sessions include weights or walking",
@@ -550,7 +552,7 @@ ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
         x = "Annual week") +
     scale_x_continuous(breaks = seq(13, 19, by = 1)) +
     scale_y_continuous(expand = c(0, 0)) +
-    theme_minimal() + 
+    theme_minimal() +
     theme(legend.position = "none",
           panel.grid.minor = element_blank(),
           panel.grid.major.x = element_blank(),
@@ -565,19 +567,19 @@ ggplot(aes(x = week, y = totalEnergyBurned, fill = Type)) +
 df_record <-  XML:::xmlAttrsToDataFrame(xml["//Record"]) [c(1,6,8)]
 
 # See data types available in record
-  df_record %>% 
+  df_record %>%
     mutate(Type = str_sub(type, 25)) %>% # Include text after the 25th character
     select(Type) %>% distinct
-  
-  
-  
+
+
+
 # Step count chart
-  
+
 df_record %>%
-  
+
    mutate(
-      # Rename type by removing that text 
-       Type = str_remove(type, "HKQuantityTypeIdentifier"), 
+      # Rename type by removing that text
+       Type = str_remove(type, "HKQuantityTypeIdentifier"),
        value = as.numeric(as.character(value)),
        Date = as.Date.character(startDate),
        weekday = wday(Date), # Day of week
@@ -585,10 +587,10 @@ df_record %>%
    filter(Type == 'StepCount' & Date >= "2020-03-23") %>%
    group_by(Date, weekday, hour) %>%  # Summarise by date, weekday and hour
    summarise(value = sum(value)) %>% # Sum steps over ^^
-   group_by(weekday, hour) %>% # Now summarise by weekday and hour  
+   group_by(weekday, hour) %>% # Now summarise by weekday and hour
    summarise(value = mean(value)) %>% # Take mean steps over ^^
    filter(between(hour,6,21)) %>% # Filtering to include between 6am - 9pm
- 
+
 ggplot(aes(x = hour, y = weekday,  fill = value)) +
   geom_tile(col = 'grey40') +
   scale_fill_continuous(labels = scales::comma,
@@ -622,20 +624,20 @@ ggplot(aes(x = hour, y = weekday,  fill = value)) +
 # Heart rate chart
 
 df_record %>%
-  mutate(Type = str_remove(type, "HKQuantityTypeIdentifier"), # Rename 
-      value = as.numeric(as.character(value)), 
+  mutate(Type = str_remove(type, "HKQuantityTypeIdentifier"), # Rename
+      value = as.numeric(as.character(value)),
       startDate = as_datetime(startDate),
-      Date = as.Date.character(startDate)) %>% 
+      Date = as.Date.character(startDate)) %>%
       filter(Type == 'HeartRate') %>%
         filter(Date >= as.Date("2020-04-03") &  Date <= as.Date("2020-04-04")) %>%
-  
+
 ggplot(aes(x = startDate, y = value, colour = value)) +
   geom_line(size = 0.75) +
   scale_color_gradient(low = "springgreen3", high = "firebrick2") +
   labs(title = NULL,
        y = "Heart rate",
        x = NULL) +
-  expand_limits(y = c(50, 200)) + 
+  expand_limits(y = c(50, 200)) +
   theme_minimal() +
   theme(legend.position = "none",
         panel.grid.minor = element_blank(),

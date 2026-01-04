@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.mitchhenderson.dev/index.html</loc>
-    <lastmod>2025-01-27T03:52:34.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://www.mitchhenderson.dev/posts.html</loc>
     <lastmod>2025-01-18T05:40:19.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</loc>
-    <lastmod>2025-01-18T05:40:19.844Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</loc>
-    <lastmod>2025-01-18T05:40:19.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</loc>
-    <lastmod>2025-01-18T05:40:19.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</loc>
-    <lastmod>2025-01-18T05:40:19.845Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html</loc>
     <lastmod>2025-11-26T03:58:21.725Z</lastmod>
   </url>
   <url>
-    <loc>https://www.mitchhenderson.dev/posts/2025-01-02-e1rm-modelling/index.html</loc>
-    <lastmod>2026-01-02T12:57:27.133Z</lastmod>
+    <loc>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</loc>
+    <lastmod>2026-01-04T02:29:39.783Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</loc>
+    <lastmod>2025-01-18T05:40:19.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/index.html</loc>
+    <lastmod>2025-01-27T03:52:34.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</loc>
+    <lastmod>2025-01-18T05:40:19.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</loc>
+    <lastmod>2025-01-18T05:40:19.000Z</lastmod>
   </url>
   <url>
     <loc>https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/index.html</loc>
-    <lastmod>2026-01-04T02:11:18.716Z</lastmod>
+    <lastmod>2026-01-04T02:19:42.143Z</lastmod>
   </url>
 </urlset>

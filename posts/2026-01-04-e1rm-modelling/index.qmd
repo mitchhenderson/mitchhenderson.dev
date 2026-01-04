@@ -1183,7 +1183,6 @@ athlete_endurance_summary <- modified_epley_model_fit |>
   summarise(mean_endurance_parameter = mean(endurance_parameter)) |>
   arrange(mean_endurance_parameter)
 
-# Grab the athletes with the worst, median, and best strength endurance
 selected_athletes <- athlete_endurance_summary |>
   slice(c(2, 15, 30)) |>
   pull(athlete)
@@ -1237,7 +1236,7 @@ athlete_endurance_summary = pl.DataFrame(
     }
 ).sort("mean_endurance_parameter")
 
-# Select athletes with worst, median, and best endurance
+# Select athletes
 selected_athletes = (
     athlete_endurance_summary.row(1),
     athlete_endurance_summary.row(14),
@@ -1252,7 +1251,7 @@ profiles = []
 for athlete_id in selected_athlete_ids:
     athlete_idx = np.where(athlete_codes == athlete_id)[0][0]
 
-    # Get posterior samples for this athlete (no need to add logk_mu)
+    # Get posterior samples for this athlete
     logk_samples = logk_athlete[:, athlete_idx]
     endurance_samples = np.exp(logk_samples)
     mean_endurance_param = endurance_samples.mean()
@@ -1278,7 +1277,7 @@ endurance_profiles["label"] = endurance_profiles.apply(
 ```
 :::
 
-To demonstrate this point, I'll just show three athletes: the highest endurance (Athlete `r selected_athletes[3]`), the lowest endurance (Athlete `r selected_athletes[1]`), and one in the middle (Athlete `r selected_athletes[2]`).
+To demonstrate this point, I'll just show three athletes: one with high endurance (Athlete `r selected_athletes[3]`), one with low endurance (Athlete `r selected_athletes[1]`), and one in the middle (Athlete `r selected_athletes[2]`).
 
 See how each of their endurance parameters (that the model learned from their past training data) changes their 1RM estimate curve to be tailored to their traits.
 
@@ -1671,7 +1670,6 @@ rep_count_plot
 
 np.random.seed(2534)
 
-# Pick an athlete
 rep_count_plot_athlete = 6
 
 # Get their data and sample one set from each rep bin

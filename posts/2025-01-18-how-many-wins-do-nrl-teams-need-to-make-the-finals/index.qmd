@@ -15,14 +15,13 @@ knitr:
     opts_chunk:
       dev: "ragg_png"
 ---
-
-### *tl;dr:* Probably 13.
-
-<br>
+::: callout-note
+## *tl;dr:* Probably 13.
+:::
 
 Sounds like a simple problem, but it isn't.
 
-It's pretty common for sports teams to set a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal is that the number of wins needed to qualify for the finals varies from season-to-season depending on the results of other teams. A 12-win season (from 24 games) is enough to qualify some years, but not enough in others.
+It's pretty common for sports teams to set a goal at the start of a season to make the finals/playoffs . Teams in the NRL[^1] are no different. The flaw in this goal is that it's a moving target; the number of wins needed to qualify varies from season-to-season depending on the results of other teams. A 12-win season (from 24 games) is enough to qualify some years, but not enough in others.
 
 [^1]: National Rugby League
 
@@ -42,19 +41,26 @@ library(ggtext)
 library(gganimate)
 library(gt)
 library(gtExtras)
+library(scales)
+library(systemfonts)
 
 colours <- c("#E31937", "#134A8E")
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
-mitchhenderson::font_hoist("Myriad Pro")
 
-theme_set(theme_minimal() +
-            theme(text = element_text(family = "Myriad Pro Regular"),
-                  plot.caption = element_markdown(),
-                  plot.title = element_markdown(family = "Myriad Pro Bold Condensed",
-                                                size = 18),
-                  plot.subtitle = element_markdown(family = "Myriad Pro Regular"),
-                  plot.title.position = "plot",
-                  panel.grid.minor = element_blank()))
+theme_set(
+  theme_minimal(base_size = 14) +
+    theme(
+      text = element_text(family = "MyriadPro-Regular"),
+      plot.caption = element_markdown(),
+      plot.title = element_markdown(
+        family = "MyriadPro-BoldCond",
+        size = 18
+      ),
+      plot.subtitle = element_markdown(family = "MyriadPro-Regular"),
+      plot.title.position = "plot",
+      panel.grid.minor = element_blank()
+    )
+)
 ```
 
 To work it out, I scraped 10 seasons of match result data from Wikipedia (2014-2024 excluding the shortened 2020 season) and saved the results in a file.
@@ -64,7 +70,9 @@ To work it out, I scraped 10 seasons of match result data from Wikipedia (2014-2
 #| code-fold: false
 
 # Import match results for 10 seasons (up to 2024)
-import <- read_csv("https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv")
+import <- read_csv(
+  "https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv"
+)
 ```
 
 The first 10 rows look like this:
@@ -84,34 +92,47 @@ I calculated the points differential for each game and created binary (0 or 1) i
 
 ```{r}
 data <- import |>
-  mutate(points_differential = home_score - away_score,
-         home_win = if_else(points_differential > 0, 1, 0),
-         away_win = if_else(points_differential < 0, 1, 0),
-         draw = if_else(points_differential == 0, 1, 0))
+  mutate(
+    points_differential = home_score - away_score,
+    home_win = if_else(points_differential > 0, 1, 0),
+    away_win = if_else(points_differential < 0, 1, 0),
+    draw = if_else(points_differential == 0, 1, 0)
+  )
 
 # Calculate final competition ladder for each season -------------------
 
-competition_table <- function(df){
+competition_table <- function(df) {
   df <- df |>
-    summarise(home_wins = sum(home_win),
-              home_for_and_against = sum(points_differential),
-              .by = c(season, home)) |>
-    left_join(df |>
-                summarise(away_wins = sum(away_win),
-                          away_for_and_against = sum(points_differential) * -1,
-                          .by = c(season, away)),
-              by = join_by(season, home == away)) |>
-    left_join(df |>
-                summarise(draw = sum(draw),
-                          .by = c(season, home)),
-              by = join_by(season, home)) |>
-    mutate(total_wins = home_wins + away_wins + draw * 0.5,
-           for_and_against = home_for_and_against + away_for_and_against) |>
+    summarise(
+      home_wins = sum(home_win),
+      home_for_and_against = sum(points_differential),
+      .by = c(season, home)
+    ) |>
+    left_join(
+      df |>
+        summarise(
+          away_wins = sum(away_win),
+          away_for_and_against = sum(points_differential) * -1,
+          .by = c(season, away)
+        ),
+      by = join_by(season, home == away)
+    ) |>
+    left_join(
+      df |>
+        summarise(draw = sum(draw), .by = c(season, home)),
+      by = join_by(season, home)
+    ) |>
+    mutate(
+      total_wins = home_wins + away_wins + draw * 0.5,
+      for_and_against = home_for_and_against + away_for_and_against
+    ) |>
     select(season, team = home, total_wins, for_and_against) |>
     arrange(season, -total_wins, -for_and_against) |>
-    mutate(regular_season_position = row_number(),
-           made_finals = if_else(regular_season_position <= 8, 1, 0),
-           .by = season)
+    mutate(
+      regular_season_position = row_number(),
+      made_finals = if_else(regular_season_position <= 8, 1, 0),
+      .by = season
+    )
 }
 
 observed_summary_results <- competition_table(data)
@@ -129,66 +150,98 @@ All 10 seasons can then be visualised together as a dot plot. Notice how one tea
 ```{r}
 #| fig-align: "center"
 #| out-width: "100%"
+#| fig-height: 4.8
 
 observed_summary_results |>
   mutate(made_finals = factor(made_finals)) |>
   arrange(made_finals) |>
-  ggplot(aes(x = total_wins, fill = made_finals, colour = made_finals)) +
-  geom_dotsinterval(group = NA,
-                    binwidth = 0.5,
-                    overflow = "compress") +
-  annotate("segment",
-           x = 1.5,
-           xend = 1.5,
-           y = 0.075,
-           yend = 0.5,
-           linewidth = 0.2,
-           colour = "grey60") +
-  geom_richtext(data = tibble(y = 0.5,
-                              x = 1.5,
-                              label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2016 Newcastle Knights</span><br>1 win, 1 draw")),
-                aes(x, y, label = label),
-                family = "Myriad Pro Regular",
-                hjust = 0,
-                vjust = 1,
-                fill = NA,
-                label.color = NA,
-                size = 2.5,
-                colour = "grey40") +
-  annotate("segment",
-           x = 21,
-           xend = 21,
-           y = 0.135,
-           yend = 0.5,
-           linewidth = 0.2,
-           colour = "grey60") +
-  geom_richtext(data = tibble(y = 0.5,
-                              x = 21,
-                              label = glue::glue("<span style=\"font-family:'Myriad Pro Bold'; \">2021 Melbourne<br>Storm & Penrith<br>Panthers</span><br>Both with 21 wins")),
-                aes(x, y, label = label),
-                family = "Myriad Pro Regular",
-                hjust = 0,
-                vjust = 1,
-                fill = NA,
-                label.color = NA,
-                size = 2.5,
-                colour = "grey40") +
-  labs(x = "Matches won",
-       title = "**NRL teams have needed as low as 10 and as high as 14 wins to make<br>the finals over the last 10 years**",
-       subtitle = glue::glue("Each circle is one team's season that either <span style='color: {colours[1]}; font-size:11pt; font-family:Myriad Pro'>**didn't make the finals**</span> or <span style='color: {colours[2]}; font-size:11pt; font-family:Myriad Pro'>**made the finals**</span>.<br>Teams with the same number of wins are stacked on top of each other."),
-       caption = socials) +
-  scale_x_continuous(limits = c(1.5, 23.5),
-                     breaks = seq(1, 24, 1)) +
-  scale_y_continuous(limits = c(0, 1),
-                     expand = expansion(mult = c(0, 0.05))) +
+  ggplot(
+    aes(
+      x = total_wins,
+      fill = made_finals,
+      colour = made_finals
+    )
+  ) +
+  geom_dotsinterval(
+    slab_colour = "black",
+    slab_linewidth = 0.35,
+    group = NA,
+    binwidth = 0.5,
+    overflow = "compress"
+  ) +
+  annotate(
+    "segment",
+    x = 1.5,
+    xend = 1.5,
+    y = 0.075,
+    yend = 0.5,
+    linewidth = 0.2,
+    colour = "grey60"
+  ) +
+  geom_richtext(
+    data = tibble(
+      y = 0.5,
+      x = 1.5,
+      label = glue::glue(
+        "<span style=\"font-family:'MyriadPro-Bold'; \">2016 Newcastle Knights</span><br>1 win, 1 draw"
+      )
+    ),
+    aes(x, y, label = label),
+    family = "MyriadPro-Regular",
+    hjust = 0,
+    vjust = 1,
+    fill = NA,
+    label.color = NA,
+    size = 3,
+    colour = "grey40"
+  ) +
+  annotate(
+    "segment",
+    x = 21,
+    xend = 21,
+    y = 0.135,
+    yend = 0.5,
+    linewidth = 0.2,
+    colour = "grey60"
+  ) +
+  geom_richtext(
+    data = tibble(
+      y = 0.5,
+      x = 21,
+      label = glue::glue(
+        "<span style=\"font-family:'MyriadPro-Bold'; \">2021 Melbourne<br>Storm & Penrith<br>Panthers</span><br>Both with 21 wins"
+      )
+    ),
+    aes(x, y, label = label),
+    family = "MyriadPro-Regular",
+    hjust = 0,
+    vjust = 1,
+    fill = NA,
+    label.color = NA,
+    size = 3,
+    colour = "grey40"
+  ) +
+  labs(
+    x = "Matches won",
+    title = "**NRL teams have needed as low as 10 and as high as 14 wins to make<br>the finals over the last 10 years**",
+    subtitle = glue::glue(
+      "Each circle is one team's season that either <span style='color: {colours[1]}; font-family:MyriadPro-Semibold'>**didn't make the finals**</span> or <span style='color: {colours[2]}; font-family:MyriadPro-Semibold'>**made the finals**</span>.<br>Teams with the same number of wins are stacked on top of each other."
+    ),
+    caption = socials
+  ) +
+  scale_x_continuous(limits = c(1.5, 23.5), breaks = seq(1, 24, 1)) +
+  scale_y_continuous(limits = c(0, 1), expand = expansion(mult = c(0, 0.05))) +
   scale_fill_manual(values = colours) +
   scale_colour_manual(values = colours) +
-  theme(legend.position = "none",
-        axis.line.x = element_line(colour = "grey20"),
-        axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid = element_blank())
+  theme(
+    legend.position = "none",
+    axis.line.x = element_line(colour = "grey20"),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank(),
+    plot.caption = element_markdown(size = 11)
+  )
 ```
 
 There are a few ways to approach calculating the probability of making the finals based on a given number of wins. Doing this requires a mindset shift from thinking only about the outcome of a single event (qualify for finals vs not) to considering the expected frequency of an outcome occurring over a large number of events involving uncertainty and randomness.
@@ -211,6 +264,8 @@ This also isn't a good idea. On the surface, a logistic regression model sounds 
 
 These are a class of methods that basically use randomness to solve problems. They allow us to skip most of the hard maths and use computer simulations to get practically the same answers that could have very painfully been calculated analytically anyway. The idea is that we define a data generating process that mimics the way that data is generated in the real world, and then let the power of computers generate a huge amount of data. This lets us explore tens or hundreds of thousand (or more) possible season outcomes to give us a fuller picture of the probability of making the finals for each win-loss record. This is especially important for edge cases and unusual season results that are unlikely to have occurred in a small sample of historical data like ours. The beauty is that we can build in all the dependencies and constraints of the competition structure so we know the simulated data generated will adhere to it. It'll capture the non-linear and threshold effects that exist as a result of the competition format. With enough simulated seasons, we can simply count the proportion of teams that qualify for a given number of wins to estimate the probability. The [law of large numbers](https://www.statology.org/law-of-large-numbers/) tells us this converges to the true probability.
 
+<br>
+
 #### Simulating a season draw
 
 To begin defining the data generating process, we need a way to randomly generate a season draw. *This was tricky*. 17 teams need to play 24 matches against other teams, 12 home and 12 away, where you play 8 teams twice and the other 8 teams only once (and of course accounting for the dependencies of head-to-head matches so one team's schedule can't be considered in isolation). I found a way to do it using network graph theory.
@@ -222,17 +277,19 @@ teams <- unique(data$home)
 # Create random graph with 17 nodes (teams)
 # Connect each node to 12 other nodes for home games and another 12 for away games
 # Convert to tibble and add team names
-simulate_season_draw <- function(){
-   graph <- sample_degseq(rep(12, length(teams)),
-                rep(12, length(teams)),
-                method = "simple.no.multiple")
+simulate_season_draw <- function() {
+  graph <- sample_degseq(
+    rep(12, length(teams)),
+    rep(12, length(teams)),
+    method = "fast.heur.simple"
+  )
 
-    edges <- as_edgelist(graph)
+  edges <- as_edgelist(graph)
 
-    tibble(
-      home = teams[edges[, 1]],
-      away = teams[edges[, 2]]
-    )
+  tibble(
+    home = teams[edges[, 1]],
+    away = teams[edges[, 2]]
+  )
 }
 ```
 
@@ -242,7 +299,8 @@ The output is one randomly simulated season draw. Here is 10 random match-ups fr
 simulate_season_draw() |>
   slice_sample(n = 10) |>
   gt() |>
-  gt_theme_538(quiet = TRUE)
+  gt_theme_538(quiet = TRUE) |>
+  tab_options(table.align = "left")
 ```
 
 <br>
@@ -262,55 +320,74 @@ average_10yr_points_diff <- data |>
 data |>
   ggplot(aes(x = points_differential)) +
   geom_histogram(binwidth = 1, colour = "white", fill = colours[2]) +
-  labs(y = "Number of games", x = "Points differential",
-       title = "**Most games end with an even  points differential**",
-       subtitle = "This makes sense given tries (4) and goals (2) are by far the most common ways to score points",
-       caption = socials) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05)),
-                     breaks = seq(0, 100, 25)) +
-  annotate("segment",
-           y = 0,
-           yend = 110,
-           x = average_10yr_points_diff,
-           xend = average_10yr_points_diff,
-           linetype = "dashed",
-           linewidth = 0.4,
-           colour = "grey50") +
-  geom_richtext(data = tibble(y = 102,
-                              x = average_10yr_points_diff,
-                              label = glue::glue("<span style='font-family:Myriad Pro Regular'>**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)</span>")),
-                aes(x, y, label = label),
-                family = "Myriad Pro",
-                hjust = 0,
-                fill = NA,
-                label.color = NA,
-                size = 3,
-                colour = "grey40") +
-  geom_richtext(data = tibble(y = 61,
-                              x = 45,
-                              label = glue::glue("Home team<br>win")),
-                aes(x, y, label = label),
-                family = "Myriad Pro",
-                hjust = 0.5,
-                fill = NA,
-                label.color = NA,
-                size = 6,
-                colour = "grey60") +
-  geom_richtext(data = tibble(y = 61,
-                              x = -45,
-                              label = glue::glue("Away team<br>win")),
-                aes(x, y, label = label),
-                family = "Myriad Pro",
-                hjust = 0.5,
-                fill = NA,
-                label.color = NA,
-                size = 6,
-                colour = "grey60") +
-  theme(panel.grid.major.x = element_blank(),
-        axis.line.x = element_line(colour = "grey20"))
+  labs(
+    y = "Number of games",
+    x = "Points differential",
+    title = "**Most games end with an even  points differential**",
+    subtitle = "This makes sense given tries (4) and goals (2) are by far the most common ways to score points",
+    caption = socials
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.05)),
+    breaks = seq(0, 100, 25)
+  ) +
+  annotate(
+    "segment",
+    y = 0,
+    yend = 110,
+    x = average_10yr_points_diff,
+    xend = average_10yr_points_diff,
+    linetype = "dashed",
+    linewidth = 0.4,
+    colour = "grey50"
+  ) +
+  geom_richtext(
+    data = tibble(
+      y = 102,
+      x = average_10yr_points_diff,
+      label = glue::glue(
+        "<span style='font-family:MyriadPro-Regular'>**+{scales::number(average_10yr_points_diff, accuracy = 0.1)} points**<br>Home team advantage over past 10 years<br>(i.e. average points differential)</span>"
+      )
+    ),
+    aes(x, y, label = label),
+    family = "MyriadPro-Regular",
+    hjust = 0,
+    fill = NA,
+    label.color = NA,
+    size = 3,
+    colour = "grey40"
+  ) +
+  geom_richtext(
+    data = tibble(y = 61, x = 45, label = glue::glue("Home team<br>win")),
+    aes(x, y, label = label),
+    family = "MyriadPro-Regular",
+    hjust = 0.5,
+    fill = NA,
+    label.color = NA,
+    size = 6,
+    colour = "grey60"
+  ) +
+  geom_richtext(
+    data = tibble(y = 61, x = -45, label = glue::glue("Away team<br>win")),
+    aes(x, y, label = label),
+    family = "MyriadPro-Regular",
+    hjust = 0.5,
+    fill = NA,
+    label.color = NA,
+    size = 6,
+    colour = "grey60"
+  ) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    axis.line.x = element_line(colour = "grey20"),
+    plot.subtitle = element_markdown(size = 12),
+    plot.caption = element_markdown(size = 11)
+  )
 ```
 
 This is an *interesting* distribution. The points differentials on even numbers are **far** more frequently observed than odd numbered differentials. This is an influence of competition constraints. Tries (4) and goals (2) are far more common than field goals (1), so it's expected that even numbered point differences are more likely to occur. Out of interest, I also added the average points differential across the data set as an annotation in the visual (+2.4). This is the expected advantage of playing at home over the last \~10 years.
+
+<br>
 
 #### Accounting for team quality
 
@@ -322,25 +399,25 @@ The bookmaker odds are converted to an implied probability of winning the compet
 # Sportsbet odds for to win 2025 GF
 # Collected on 21st Jan 2025
 sportsbet_odds <- tibble::tribble(
-                                              ~team, ~sportsbet_odds,
-                                 "Brisbane Broncos",             8.5,
-                                 "Canberra Raiders",              67,
-                    "Canterbury Bankstown Bulldogs",              17,
-                       "Cronulla Sutherland Sharks",              13,
-                                         "Dolphins",              61,
-                                "Gold Coast Titans",              61,
-                       "Manly Warringah Sea Eagles",              16,
-                                  "Melbourne Storm",            3.85,
-                             "New Zealand Warriors",              51,
-                                "Newcastle Knights",              61,
-                         "North Queensland Cowboys",              26,
-                                  "Parramatta Eels",              41,
-                                 "Penrith Panthers",             4.8,
-                           "South Sydney Rabbitohs",              18,
-                      "St George Illawarra Dragons",              81,
-                                  "Sydney Roosters",              20,
-                                     "Wests Tigers",              46
-                    )
+  ~team                           , ~sportsbet_odds ,
+  "Brisbane Broncos"              ,  8.5            ,
+  "Canberra Raiders"              , 67              ,
+  "Canterbury Bankstown Bulldogs" , 17              ,
+  "Cronulla Sutherland Sharks"    , 13              ,
+  "Dolphins"                      , 61              ,
+  "Gold Coast Titans"             , 61              ,
+  "Manly Warringah Sea Eagles"    , 16              ,
+  "Melbourne Storm"               ,  3.85           ,
+  "New Zealand Warriors"          , 51              ,
+  "Newcastle Knights"             , 61              ,
+  "North Queensland Cowboys"      , 26              ,
+  "Parramatta Eels"               , 41              ,
+  "Penrith Panthers"              ,  4.8            ,
+  "South Sydney Rabbitohs"        , 18              ,
+  "St George Illawarra Dragons"   , 81              ,
+  "Sydney Roosters"               , 20              ,
+  "Wests Tigers"                  , 46
+)
 
 # Get a team strength measure (based on Sportsbet odds to win premiership)
 odds_to_probabilities <- function(odds) {
@@ -351,12 +428,15 @@ sportsbet_implied_probabilities <- sportsbet_odds |>
   mutate(implied_probabilities = odds_to_probabilities(sportsbet_odds)) |>
   select(-sportsbet_odds)
 
-sportsbet_implied_probabilities  |>
+sportsbet_implied_probabilities |>
   arrange(-implied_probabilities) |>
   gt() |>
   gt_theme_538(quiet = TRUE) |>
-  fmt_percent(implied_probabilities, decimals = 1)
+  fmt_percent(implied_probabilities, decimals = 1) |>
+  tab_options(table.align = "left")
 ```
+
+<br>
 
 #### Accounting for home field advantage
 
@@ -386,9 +466,11 @@ calc_win_prob <- function(multiplier) {
 
 # Function to find multiplier that gives desired win probability
 find_optimal_multiplier <- function(target_prob) {
-  optimise(function(m) abs(calc_win_prob(m) - target_prob),
-          interval = c(1, 2),  # Search between 1-2x multiplier
-          maximum = FALSE)$minimum
+  optimise(
+    function(m) abs(calc_win_prob(m) - target_prob),
+    interval = c(1, 2), # Search between 1-2x multiplier
+    maximum = FALSE
+  )$minimum
 }
 
 # Find multiplier that produces observed 55.8% home win rate
@@ -396,6 +478,8 @@ optimal_multiplier <- find_optimal_multiplier(perc_home_win)
 ```
 
 This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each difference in relative team quality (e.g., unequally matched teams).
+
+<br>
 
 #### Simulate the match results
 
@@ -410,7 +494,8 @@ simulate_match <- function(home_strength, away_strength, diff_vector) {
   adjusted_home_strength <- home_strength * home_advantage_multiplier
 
   # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
-  home_win_prob <- adjusted_home_strength / (adjusted_home_strength + away_strength)
+  home_win_prob <- adjusted_home_strength /
+    (adjusted_home_strength + away_strength)
 
   # Compare to uniform distribution to determine if it's a home win or away win
   is_home_win <- runif(1) < home_win_prob
@@ -432,8 +517,8 @@ To demonstrate, here I generate 15 random points differential results for a game
 map2(
   .x = rep(0.05, 15),
   .y = rep(0.20, 15),
-  ~simulate_match(.x, .y, data$points_differential)
-  ) |>
+  ~ simulate_match(.x, .y, data$points_differential)
+) |>
   unlist()
 ```
 
@@ -442,6 +527,8 @@ Notice how most of the values are negative (meaning the away team won).
 This incorporates the away team being of higher quality (20% chance of winning the competition vs 5%) and the home team benefiting from the home field advantage. The proportion of away team wins over a very large number of simulations gives us an estimated probability of the away team winning this game that approaches the true value.
 
 There are again some simplifications at play here. Firstly, draws/ties are not considered (or possible) with this data generating process. I think this is fine as only 0.25% of matches in the data set ended in draws (5 from 1,944). Secondly, within home wins or away wins, the sampling of the points differential is completely random. This means that if a home team has been assigned the win, the amount they win by doesn't consider the difference in team quality or home field advantage. The winning amount is completely random within the winning point differentials in the data set. Team strength values and home field advantage only influence who wins. I also don't think this threatens the validity of the results (only for and against values will be affected), but worth mentioning as it is a simplifying assumption that I doubt is true in reality.
+
+<br>
 
 #### Simulating many seasons
 
@@ -452,6 +539,8 @@ Now we have a function to simulate a match, we need to use it populate the rando
 This is where the actual work gets done. To demonstrate what this looks like, I'll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.
 
 ```{r}
+#| warning: false
+
 seasons_to_simulate <- 10000
 
 # Set up parallel processing
@@ -463,8 +552,12 @@ set.seed(2025)
 # Simulate full seasons with results
 simulated_seasons <- tibble(
   season = 1:seasons_to_simulate,
-  results = future_map(season, ~ simulate_season_draw(),
-                       .options = furrr_options(seed = TRUE))) |>
+  results = future_map(
+    season,
+    ~ simulate_season_draw(),
+    .options = furrr_options(seed = TRUE)
+  )
+) |>
   unnest(results) |>
   left_join(sportsbet_implied_probabilities, by = join_by(home == team)) |>
   rename(home_implied_probability = implied_probabilities) |>
@@ -491,6 +584,8 @@ simulated_seasons |>
 
 This takes a minute or two to run because it's generating 10,000 random season draws and then simulating results for all 2,040,000 games.
 
+<br>
+
 ### Exploring the results
 
 We can use the function we defined earlier to summarise the match level simulation results into an end-of-season ladder for each of the 10,000 seasons. Here is one of those seasons final standings (for season number 2,534 out of 10,000).
@@ -511,82 +606,94 @@ What we're really after though is the proportion of teams that make the finals f
 ```{r}
 # Calculate proportions ----------------------------
 probabilities_simulated <- simulation_summary_results |>
-  summarise(count_made_finals = sum(made_finals),
-            total_count = n(),
-            .by = total_wins) |>
+  summarise(
+    count_made_finals = sum(made_finals),
+    total_count = n(),
+    .by = total_wins
+  ) |>
   mutate(percentage = count_made_finals / total_count) |>
   arrange(-total_wins)
 
 # Create table --------------------------------------
 probabilities_simulated |>
-  mutate(perc_no_finals = 1 - percentage,
-         total_wins = glue::glue("{total_wins} wins")) |>
+  mutate(
+    perc_no_finals = 1 - percentage,
+    total_wins = glue::glue("{total_wins} wins")
+  ) |>
   pivot_longer(starts_with("perc"), names_to = "metric", values_to = "perc") |>
   summarise(
     total = total_count[1],
     made_finals = count_made_finals[1],
     list_data = list(perc),
-    .by = total_wins) |>
+    .by = total_wins
+  ) |>
   gt(rowname_col = "total_wins") |>
   gt_theme_538(quiet = TRUE) |>
-  fmt_number(columns = c("total", "made_finals"),
-             decimals = 0) |>
+  fmt_number(columns = c("total", "made_finals"), decimals = 0) |>
   tab_header(
-    title = html("NRL teams need to win 13 games to be confident of playing finals"),
+    title = html(
+      "NRL teams need to win 13 games to be confident of playing finals"
+    ),
     subtitle = "Finals probabilities based on results from 10,000 simulated seasons"
   ) |>
   tab_source_note(
     source_note = html(socials)
   ) |>
-  gt_plt_bar_stack(list_data, width = 70,
-                   labels = c("Qualify", "Fail to qualify"),
-                   palette = rev(colours),
-                   font = "Segoe UI",
-                   fmt_fn = function(x) {
-                     case_when(
-                       x < 0.03 ~ "",
-                       x == 1 ~ "100%",
-                       x > 0.999 & x < 1 ~ ">99.9%",
-                       .default = scales::label_percent(accuracy = 0.1)(x)
-                       )
-                   }) |>
+  gt_plt_bar_stack(
+    list_data,
+    width = 70,
+    labels = c("Qualify", "Fail to qualify"),
+    palette = rev(colours),
+    font = "MyriadPro-Semibold",
+    fmt_fn = function(x) {
+      case_when(
+        x < 0.03 ~ "",
+        x == 1 ~ "100%",
+        x > 0.999 & x < 1 ~ ">99.9%",
+        .default = scales::label_percent(accuracy = 0.1)(x)
+      )
+    }
+  ) |>
   cols_label(
     total = html("Simulated<br>occurrences"),
     made_finals = html("Times<br>qualified")
   ) |>
-  cols_label_with(columns = list_data,
-                  fn = function(label) {
-                    full_label <- glue::glue("Finals probability<br>{label}")
-                    sprintf("<span>%s</span>", full_label) |>
-                      html()
-    }) |>
+  cols_label_with(columns = list_data, fn = function(label) {
+    full_label <- glue::glue("Finals probability<br>{label}")
+    sprintf("<span>%s</span>", full_label) |>
+      html()
+  }) |>
   tab_style(
-    style = cell_text(font = "Myriad Pro"),
+    style = cell_text(font = "MyriadPro-Regular"),
     locations = cells_body()
   ) |>
   tab_style(
     style = cell_text(
-      font = "Myriad Pro Condensed",
-      weight = "bold"),
+      font = "MyriadPro-BoldCond"
+    ),
     locations = cells_title(groups = "title")
   ) |>
-  tab_style(style = cell_text(align = "right"),
-            locations = cells_source_notes()) |>
-  tab_options(heading.title.font.size = 36,
-              heading.subtitle.font.size = 18,
-              table.width = 700,
-              source_notes.font.size = 15)
+  tab_style(
+    style = cell_text(align = "right"),
+    locations = cells_source_notes()
+  ) |>
+  tab_options(
+    heading.title.font.size = 36,
+    heading.subtitle.font.size = 18,
+    table.width = 700,
+    source_notes.font.size = 15
+  )
 ```
 
 Winning 16 or more games in a season was enough to make the finals in every one of the 10,000 simulations. Winning 8 or less wasn't enough to qualify in any. No real surprises there. In many of those cases it would be mathematically impossible for a different result. These simulations don't prove that though (maybe a team could qualify with 8 wins in circumstances that didn't occur in my 10,000 simulations), but the law of large numbers tells us these results are close enough to be correct for all practical purposes. To demonstrate, only one team made the finals with 9 wins (out of 12,996 teams that finished with 9 wins across the simulations). Finishing in the top 8 with only 9 wins is clearly mathematically possible, but it's so unlikely that it'll probably not happen in 10 lifetimes. So for all practical purposes, more wins are needed.
 
 The big movements happen between 11 and 13 wins:
 
--   With 11, it's unlikely but realistically possible
+- With 11, it's unlikely but realistically possible
 
--   With 12, it's a toss up
+- With 12, it's a toss up
 
--   With 13, it's likely
+- With 13, it's likely
 
 This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulated seasons to show the law of large numbers at work.
 
@@ -598,51 +705,70 @@ running_mean <- function(x) {
 }
 
 probs_animated_plot <- simulation_summary_results |>
-  filter(total_wins %in% c(10:15),
-         season <= 1000) |>
-  mutate(total_wins = factor(
-    total_wins,
-    levels = sort(unique(total_wins),
-                  decreasing = TRUE)),
-    facets = glue::glue("{total_wins} win season")) |>
-  mutate(probs_made_finals = running_mean(made_finals),
-         label = glue::glue("Estimated finals<br>probability: {scales::percent(probs_made_finals, accuracy = 0.1)}"),
-         .by = total_wins) |>
+  filter(total_wins %in% c(10:15), season <= 1000) |>
+  mutate(
+    total_wins = factor(
+      total_wins,
+      levels = sort(unique(total_wins), decreasing = TRUE)
+    ),
+    facets = glue::glue("{total_wins} win season")
+  ) |>
+  mutate(
+    probs_made_finals = running_mean(made_finals),
+    label = glue::glue(
+      "Estimated finals<br>probability: {scales::percent(probs_made_finals, accuracy = 0.1)}"
+    ),
+    .by = total_wins
+  ) |>
   ggplot(aes(x = season, y = probs_made_finals)) +
   geom_hline(yintercept = 0, colour = "grey30", linewidth = 1) +
   geom_line(colour = colours[1], linewidth = 1) +
   geom_richtext(
     aes(label = label),
-    family = "Myriad Pro Regular",
-    x = 1000, y = 0.2,
-    hjust = 1, vjust = 0,
-    fill = NA, label.color = NA,
-    size = 5.5, color = "grey60"
+    family = "MyriadPro-Regular",
+    x = 1000,
+    y = 0.2,
+    hjust = 1,
+    vjust = 0,
+    fill = NA,
+    label.color = NA,
+    size = 5.5,
+    color = "grey60"
   ) +
-  scale_y_continuous(breaks = seq(0, 1, by = 0.2),
-                     limits = c(0, 1),
-                     labels = scales::percent_format()
-                     ) +
+  scale_y_continuous(
+    breaks = seq(0, 1, by = 0.2),
+    limits = c(0, 1),
+    labels = scales::percent_format()
+  ) +
+  scale_x_continuous(labels = label_number(big.mark = ",")) +
   facet_wrap(~facets, nrow = 2) +
-  labs(x = "Simulated season number",
-       y = "Probability of finals",
-       caption = socials) +
-  theme(strip.text = element_text(size = 22,
-                                  hjust = 0,
-                                  family = "Myriad Pro Regular"),
-        text = element_text(size = 18, family = "Myriad Pro Regular"),
-        plot.caption = element_markdown(size = 16),
-        panel.grid.major.x = element_blank(),
-        panel.spacing = unit(2, "lines")) +
+  labs(
+    x = "Simulated season number",
+    y = "Probability of finals",
+    caption = socials
+  ) +
+  theme(
+    strip.text = element_text(
+      size = 22,
+      hjust = 0,
+      family = "MyriadPro-Regular"
+    ),
+    text = element_text(size = 20, family = "MyriadPro-Regular"),
+    plot.caption = element_markdown(size = 18),
+    panel.grid.major.x = element_blank(),
+    panel.spacing = unit(2, "lines")
+  ) +
   transition_reveal(season)
 
-animate(probs_animated_plot,
-        nframes = 100,
-        height = 8.6,
-        width = 12,
-        fps = 10,
-        device = "ragg_png",
-        end_pause = 20)
+animate(
+  probs_animated_plot,
+  nframes = 100,
+  height = 8.6,
+  width = 12,
+  fps = 10,
+  device = "ragg_png",
+  end_pause = 20
+)
 ```
 
 If you've taken statistics classes at uni you'll probably have come across a similar idea to this with coin flips or finding pi. Basically, the average of a small group of numbers varies a lot, but stabilises as the sample gets larger. This is why we generally don't want to infer things about a population based only on a small sample, we might just be interpreting the early variation before the stable number (that converges on the true value) is found. The finals probability for each win count in the animation doesn't really become stable until around 250 seasons. Making inferences after only 10 seasons (like using the data we had) would have given us an unreliable estimate.

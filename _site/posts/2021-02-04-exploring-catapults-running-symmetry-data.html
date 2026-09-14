@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>Exploring Catapult’s running imbalance data – mitchhenderson.dev</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f9e6e4d29af3f5f6ee06eaf03ed5edd8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1b5cbb678aba238cc9ecc8dbef59e0a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,9 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -228,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“Average percentage load difference between left and right legs, across all Running Symmetry Series/Efforts. A negative running imbalance % is indicative of an x% additional load on the left side (where x is the running imbalance value). A positive running imbalance % is indicative of an x% additional load on the right side (where x is the running imbalance value).”</p>
 </blockquote>
 <p>Whilst I do have concerns about some of the measurement properties of this metric and don’t currently use it in practice for these reasons, I wanted to explore the data and see what it’s telling me. This post will show you how to export the data from <em>Openfield Cloud</em>, and visualise it using <a href="https://cran.r-project.org/">R</a> and <a href="https://rstudio.com/">RStudio</a>.</p>
-<p><img src="..\img/left_vs_right.png" class="img-fluid"></p>
+<p><img src="../img/left_vs_right.png" class="img-fluid"></p>
 <p><em>The full un-separated code is available at the end of this post for anyone looking to copy it into their script.</em></p>
 <section id="step-1-export-from-openfield-cloud" class="level1">
 <h1>Step 1 | Export from Openfield Cloud</h1>
@@ -238,27 +239,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-parameter-group" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-parameter-group">Create a parameter group</h3>
 <p>After logging into Openfield Cloud, press <em>Settings</em></p>
-<p><img src="..\img/OF-settings.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-settings.JPG" class="img-fluid"></p>
 <p>Select <em>Parameters</em> in the sidebar, then <em>Parameter Groups</em> in the top bar.</p>
-<p><img src="..\img/OF-parameters.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-parameters.JPG" class="img-fluid"></p>
 <p>Now we need to <em>Add new</em>.</p>
-<p><img src="..\img/OF-addnew.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-addnew.JPG" class="img-fluid"></p>
 <p>We can give the group we’re creating a name (<em>I’m calling mine “Imbalance”</em>) and select the metrics we’re interested in (<em>I’m only selecting “Date” and “Running Imbalance”</em>). Then we click the orange <em>Add Parameter Group</em> at the bottom of the window to save our new group.</p>
-<p><img src="..\img/OF-imbalancegroup.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-imbalancegroup.JPG" class="img-fluid"></p>
 </section>
 <section id="select-sessions-to-export" class="level3">
 <h3 class="anchored" data-anchor-id="select-sessions-to-export">Select sessions to export</h3>
 <p>The <em>Activities</em> bar on the left of screen can be used to select multiple sessions that we’re interested in exporting data for. Using the click buttons on the right on the bar, we can select one or more years, months, days, or activities to export (<em>I’ve selected all of 2021 below</em>).</p>
-<p><img src="..\img/OF-sessionselect.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-sessionselect.JPG" class="img-fluid"></p>
 <p>When more than one activity is selected, a green <em>Bulk Export CTRs</em> button will become available in the top right of screen (also showing how many activities have been selected). Click on it.</p>
-<p><img src="..\img/OF-bulkexport.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-bulkexport.JPG" class="img-fluid"></p>
 <p>This will bring up a window allowing us to select some options for our exports. The only things we need to do is select our newly created parameter group (<em>I’m selecting “Imbalance” below</em>) and enter the email you’d like the links for the exports to go to. Then select <em>Export Bulk CTR</em>.</p>
-<p><img src="..\img/OF-email.JPG" class="img-fluid"></p>
+<p><img src="../img/OF-email.JPG" class="img-fluid"></p>
 </section>
 <section id="download-exports" class="level3">
 <h3 class="anchored" data-anchor-id="download-exports">Download exports</h3>
 <p>You’ll then shortly receive one or more emails (depending on how many activities, and therefore data, you’re exporting) from <strong>Openfield Web</strong> with links to download <code>.zip</code> folders containing the exports.</p>
-<p><img src="..\img/openfield-web-emails.JPG" class="img-fluid"></p>
+<p><img src="../img/openfield-web-emails.JPG" class="img-fluid"></p>
 </section>
 </section>
 <section id="step-2-import-into-rstudio" class="level1">
@@ -270,10 +271,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Below are the packages we’ll need for this process. I’ve already installed them, so I’m only loading them here (and have commented out the installation commands at the top), but if you haven’t previously installed them then you’ll need to delete the hashtags at the beginning of the lines and run the top parts first (<em>only needs to be done once</em>). The install might take a while (<em>minutes, not hours</em>), and you might need to follow some prompts in the R console (bottom left window of RStudio) for the process to fully complete.</p>
 <p>Note that I’m using a Windows computer (hence the <code>device = "win"</code> component of the code). I believe R works much better with fonts on Macs and this part of that line isn’t required (<code>extrafont::loadfonts()</code> should work, <em>I’m interested to know if anyone reading is using a Mac</em>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="import-files" class="level3">
@@ -287,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>We’ll also <code>select()</code> only the <code>Date</code>, <code>Player Name</code>, and <code>Running Imbalance</code> columns (all others are discarded), and use <code>mutate()</code> with <code>dmy()</code> to tell R that our <code>Date</code> variable should be in a date format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(<span class="at">path =</span> <span class="fu">here</span>(<span class="st">"Exports"</span>),</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">pattern =</span> <span class="st">"*.csv"</span>, </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">full.names =</span> T) <span class="sc">%&gt;%</span></span>
@@ -296,19 +297,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Date</span><span class="st">`</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Player Name</span><span class="st">`</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Running Imbalance</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">dmy</span>(Date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">dmy</span>(Date))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>For everyone following along that uses the Catapult system and can access their team’s data, the code above is what’s required to import all your data into R. <em>For those that just want to follow along with some dummy data in the same format, you can click <a href="https://drive.google.com/uc?export=download&amp;id=1yU34CWCPi-iq06OfCDwz65jFU7PiwBAC">here</a> to download my example <code>.csv</code> file</em>.</p>
 <p>For privacy reasons, I’ll continue the tutorial using the dummy data contained in my <code>.csv</code> file. Note that all code from Step 3 onwards works on data imported either way (i.e.&nbsp;from either your own Openfield exports (method above) or my example <code>.csv</code> (method below)).</p>
 <p>The import for the <code>.csv</code> file is much simpler:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"example_running_imbalance_data.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">dmy</span>(Date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"example_running_imbalance_data.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">dmy</span>(Date))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The first 6 rows of data (251 rows, 3 columns in total) look like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table caption-top table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">Date</th>
@@ -357,9 +358,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Step 3 | Visualise using {ggplot2}</h1>
 <p>It’s beyond the scope of this post to go into full details of what each part of this <code>ggplot2</code> code is doing (I have done this for a previous post where <a href="https://www.mitchhenderson.org/2020/04/how-sports-scientists-can-use-ggplot2-in-r-to-make-better-visualisations/">I built a more sophisticated chart step-by-step for those interested</a>).</p>
 <p>In an attempt to avoid telling you all to just <em>“draw the rest of the damn owl”</em>, I’ll heavily comment my code so the purpose of all major functions are clear (<a href="https://knowyourmeme.com/memes/how-to-draw-an-owl">context for the owl meme reference</a>).</p>
-<p><img src="..\img/owl.jpg" class="img-fluid"></p>
+<p><img src="../img/owl.jpg" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an object called min_date representing the minimum value in my `Date` column</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an object called min_date representing the minimum value in my `Date` column</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Same thing for max_date with maximum value</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>min_date <span class="ot">&lt;-</span> <span class="fu">min</span>(data<span class="sc">$</span>Date)</span>
@@ -428,9 +429,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the output in our working directory.  </span></span>
 <span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"left_vs_right.png"</span>, <span class="at">width =</span> <span class="fl">10.7</span>, <span class="at">height =</span> <span class="fl">5.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"left_vs_right.png"</span>, <span class="at">width =</span> <span class="fl">10.7</span>, <span class="at">height =</span> <span class="fl">5.75</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><img src="..\img/left_vs_right.png" class="img-fluid"></p>
+<p><img src="../img/left_vs_right.png" class="img-fluid"></p>
 <p>And that’s it! Let me know if you have any questions or want me to clarify anything. Very interested to hear your ideas about running symmetry / imbalance data and how it can be best visualised / presented.</p>
 <p>If the interest is there, I can do a video walkthrough of this process (similar to my others on <a href="https://www.youtube.com/watch?v=VSrGkZgFP1E&amp;ab_channel=MitchHenderson">constructing a ggplot</a> and <a href="https://www.youtube.com/watch?v=N0DCRqqSKPw&amp;t=41s&amp;ab_channel=MitchHenderson">tidying data</a>).</p>
 <p><strong>Keep up to date with anything new from me on <a href="https://twitter.com/mitchhendo_">my Twitter</a>.</strong></p>
@@ -443,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="full-code" class="level1">
 <h1>Full code</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages -----------------------------------------------------------</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages -----------------------------------------------------------</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
@@ -507,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">18</span>),</span>
 <span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"left_vs_right.png"</span>, <span class="at">width =</span> <span class="fl">10.7</span>, <span class="at">height =</span> <span class="fl">5.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"left_vs_right.png"</span>, <span class="at">width =</span> <span class="fl">10.7</span>, <span class="at">height =</span> <span class="fl">5.75</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -565,13 +566,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

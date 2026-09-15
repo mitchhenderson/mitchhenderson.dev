@@ -15,9 +15,17 @@
 }
 
 
+:root {
+  /* Litera's default (1.1rem) runs larger than most reading-focused themes;
+     1rem keeps body copy closer to a browser's base size on every device. */
+  --bs-body-font-size: 1rem;
+}
+
 h1.title {
   font-family: "Raleway";
-  font-size: 40px;
+  /* Scales from ~28px on narrow phones up to the original 40px on desktop,
+     instead of staying fixed at 40px regardless of viewport. */
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 40px);
 }
 
 pre code {

@@ -27,6 +27,9 @@ It's pretty common for sports teams to set a goal at the start of a season to ma
 
 So how many wins do teams need to be confident they'll qualify?
 
+:::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
 #| output: false
 
@@ -63,7 +66,35 @@ theme_set(
 )
 ```
 
+## ![](/img/python-logo-only.svg){height="30"}
+
+::: callout-note
+## Python code outputs will differ from rendered results
+
+The visualisations and tables on this page are generated from the R code. Running the Python code will produce the equivalent analyses but with different styling (e.g. fonts, themes, annotations) because Python uses different plotting and table libraries. The analytical conclusions are the same though.
+:::
+
+```{python}
+#| eval: false
+
+from __future__ import annotations
+
+import polars as pl
+import numpy as np
+from great_tables import GT
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
+from matplotlib.lines import Line2D
+import igraph
+
+colours = ["#E31937", "#134A8E"]
+```
+::::
+
 To work it out, I scraped 10 seasons of match result data from Wikipedia (2014-2024 excluding the shortened 2020 season) and saved the results in a file.
+
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
 ```{r}
 #| output: false
@@ -75,13 +106,50 @@ import <- read_csv(
 )
 ```
 
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+#| code-fold: false
+
+# Import match results for 10 seasons (up to 2024)
+data_import = pl.read_csv(
+    "https://raw.githubusercontent.com/mitchhenderson/mitchhenderson.dev/refs/heads/main/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/2014-2024_nrl_match_results.csv"
+)
+```
+:::
+
 The first 10 rows look like this:
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
-import |>
+#| output: false
+
+import_preview_tbl <- import |>
   slice_head(n = 10) |>
   gt() |>
   gt_theme_538(quiet = TRUE)
+
+import_preview_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+import_preview_tbl = GT(data_import.head(10))
+
+import_preview_tbl
+```
+:::
+
+```{r}
+#| echo: false
+
+import_preview_tbl
 ```
 
 <br>
@@ -90,7 +158,12 @@ import |>
 
 I calculated the points differential for each game and created binary (0 or 1) indicator columns for the winning/losing team and draws. I could then use this match level data to calculate the competition ladder at the end of the season for each year in the data set. The table below shows only 2014, but the final table has been calculated for all available seasons.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
+#| output: false
+
 data <- import |>
   mutate(
     points_differential = home_score - away_score,
@@ -137,22 +210,111 @@ competition_table <- function(df) {
 
 observed_summary_results <- competition_table(data)
 
-observed_summary_results |>
+observed_results_tbl <- observed_summary_results |>
   slice_head(n = 16) |>
   gt() |>
   gt_theme_538(quiet = TRUE)
+
+observed_results_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+data = data_import.with_columns(
+    points_differential=pl.col("home_score") - pl.col("away_score")
+).with_columns(
+    home_win=pl.when(pl.col("points_differential") > 0).then(1).otherwise(0),
+    away_win=pl.when(pl.col("points_differential") < 0).then(1).otherwise(0),
+    draw=pl.when(pl.col("points_differential") == 0).then(1).otherwise(0),
+)
+
+# Calculate final competition ladder for each season -------------------
+
+
+def competition_table(df):
+    home_stats = (
+        df.group_by("season", "home")
+        .agg(
+            pl.col("home_win").sum().alias("home_wins"),
+            pl.col("points_differential").sum().alias("home_for_and_against"),
+        )
+        .rename({"home": "team"})
+    )
+
+    away_stats = (
+        df.group_by("season", "away")
+        .agg(
+            pl.col("away_win").sum().alias("away_wins"),
+            (pl.col("points_differential").sum() * -1).alias("away_for_and_against"),
+        )
+        .rename({"away": "team"})
+    )
+
+    draw_stats = (
+        df.group_by("season", "home")
+        .agg(pl.col("draw").sum().alias("draw"))
+        .rename({"home": "team"})
+    )
+
+    return (
+        home_stats.join(away_stats, on=["season", "team"], how="left")
+        .join(draw_stats, on=["season", "team"], how="left")
+        .with_columns(
+            (pl.col("home_wins") + pl.col("away_wins") + pl.col("draw") * 0.5).alias(
+                "total_wins"
+            ),
+            (pl.col("home_for_and_against") + pl.col("away_for_and_against")).alias(
+                "for_and_against"
+            ),
+        )
+        .select("season", "team", "total_wins", "for_and_against")
+        .sort(
+            ["season", "total_wins", "for_and_against"],
+            descending=[False, True, True],
+            maintain_order=True,
+        )
+        .with_columns(
+            pl.int_range(1, pl.len() + 1)
+            .over("season")
+            .alias("regular_season_position")
+        )
+        .with_columns(
+            pl.when(pl.col("regular_season_position") <= 8)
+            .then(1)
+            .otherwise(0)
+            .alias("made_finals")
+        )
+    )
+
+
+observed_summary_results = competition_table(data)
+
+observed_results_tbl = GT(observed_summary_results.head(16))
+
+observed_results_tbl
+```
+:::
+
+```{r}
+#| echo: false
+
+observed_results_tbl
 ```
 
 <br>
 
 All 10 seasons can then be visualised together as a dot plot. Notice how one team won 10 games one season and made the finals (blue circle at the top of the 10 wins column) and another team won 13 games in a different season but didn't qualify (red circle at the bottom of the 13 wins column).
 
-```{r}
-#| fig-align: "center"
-#| out-width: "100%"
-#| fig-height: 4.8
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
-observed_summary_results |>
+```{r}
+#| output: false
+
+dot_plot <- observed_summary_results |>
   mutate(made_finals = factor(made_finals)) |>
   arrange(made_finals) |>
   ggplot(
@@ -242,6 +404,144 @@ observed_summary_results |>
     panel.grid = element_blank(),
     plot.caption = element_markdown(size = 11)
   )
+
+dot_plot
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+def _stack_positions(values: list[float]) -> list[int]:
+    seen: dict[float, int] = {}
+    positions = []
+    for v in values:
+        idx = seen.get(v, 0)
+        positions.append(idx)
+        seen[v] = idx + 1
+    return positions
+
+
+def make_finals_dot_plot(
+    df: pl.DataFrame,
+    colours: tuple[str, str] = ("#b5b5b5", "#c0392b"),
+    title: str | None = None,
+    subtitle: str = "Each circle is one team's season. Teams with the same number of wins are stacked on top of each other.",
+    caption: str | None = None,
+    figsize: tuple[float, float] = (11, 7),
+):
+    """
+    df must contain: season, team, total_wins, made_finals (0/1) — i.e. the
+    output of competition_table().
+    """
+    df = df.sort("made_finals")  # made_finals == 0 drawn first (sits at the bottom)
+
+    x = df["total_wins"].to_list()
+    made_finals = df["made_finals"].to_list()
+
+    stack_idx = _stack_positions(x)
+    radius = 0.24
+    spacing = 2 * radius + 0.08
+
+    fig, ax = plt.subplots(figsize=figsize)
+
+    for xi, made, s_idx in zip(x, made_finals, stack_idx):
+        y = spacing / 2 + s_idx * spacing
+        ax.add_patch(
+            Circle(
+                (xi, y),
+                radius,
+                facecolor=colours[1] if made == 1 else colours[0],
+                edgecolor="black",
+                linewidth=0.4,
+                zorder=3,
+            )
+        )
+
+    max_stack = max(stack_idx) + 1
+    x_min, x_max = min(x), max(x)
+    ax.set_xlim(x_min - 1, x_max + 1)
+    ax.set_ylim(0, max_stack * spacing + spacing * 0.5)
+    ax.set_aspect("equal", adjustable="box")
+
+    # --- axes / theme ---
+    ax.set_xticks(range(int(x_min), int(x_max) + 2))
+    ax.set_xlabel("Matches won", labelpad=10)
+    for side in ("left", "top", "right"):
+        ax.spines[side].set_visible(False)
+    ax.spines["bottom"].set_color("#333333")
+    ax.set_yticks([])
+    ax.set_ylabel("")
+
+    if title is None:
+        title = (
+            f"NRL teams have needed as few as {x_min:g} and as many as "
+            f"{x_max:g} wins to make the finals"
+        )
+    ax.set_title(title, fontsize=14, fontweight="bold", loc="left", pad=30)
+    ax.text(
+        0.0,
+        1.03,
+        subtitle,
+        transform=ax.transAxes,
+        fontsize=9.5,
+        color="#555555",
+        va="bottom",
+        linespacing=1.4,
+    )
+
+    legend_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            linestyle="",
+            markerfacecolor=colours[0],
+            markeredgecolor="black",
+            markersize=8,
+            label="Didn't make the finals",
+        ),
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            linestyle="",
+            markerfacecolor=colours[1],
+            markeredgecolor="black",
+            markersize=8,
+            label="Made the finals",
+        ),
+    ]
+    ax.legend(
+        handles=legend_handles,
+        loc="lower center",
+        bbox_to_anchor=(0.5, -0.3),
+        ncol=2,
+        frameon=False,
+        fontsize=9,
+    )
+
+    if caption:
+        fig.text(
+            0.99, 0.01, caption, ha="right", va="bottom", fontsize=8, color=colours[1]
+        )
+
+    fig.tight_layout()
+    return fig, ax
+
+
+fig, ax = make_finals_dot_plot(observed_summary_results, colours=colours)
+```
+:::
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+#| fig-height: 4.8
+
+dot_plot
 ```
 
 There are a few ways to approach calculating the probability of making the finals based on a given number of wins. Doing this requires a mindset shift from thinking only about the outcome of a single event (qualify for finals vs not) to considering the expected frequency of an outcome occurring over a large number of events involving uncertainty and randomness.
@@ -270,6 +570,9 @@ These are a class of methods that basically use randomness to solve problems. Th
 
 To begin defining the data generating process, we need a way to randomly generate a season draw. *This was tricky*. 17 teams need to play 24 matches against other teams, 12 home and 12 away, where you play 8 teams twice and the other 8 teams only once (and of course accounting for the dependencies of head-to-head matches so one team's schedule can't be considered in isolation). I found a way to do it using network graph theory.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
 # Define vector of team names
 teams <- unique(data$home)
@@ -293,14 +596,68 @@ simulate_season_draw <- function() {
 }
 ```
 
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+# Define vector of team names
+teams = data.get_column("home").unique(maintain_order=True).to_list()
+
+
+# Create random graph with 17 nodes (teams)
+# Connect each node to 12 other nodes for home games and another 12 for away games
+# Convert to a DataFrame and add team names
+def simulate_season_draw():
+    graph = igraph.Graph.Degree_Sequence(
+        [12] * len(teams),
+        [12] * len(teams),
+        method="fast_heur_simple",
+    )
+
+    edges = graph.get_edgelist()
+
+    return pl.DataFrame(
+        {
+            "home": [teams[home] for home, away in edges],
+            "away": [teams[away] for home, away in edges],
+        }
+    )
+```
+:::
+
 The output is one randomly simulated season draw. Here is 10 random match-ups from a simulated draw.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
-simulate_season_draw() |>
+#| output: false
+
+sample_matchups_tbl <- simulate_season_draw() |>
   slice_sample(n = 10) |>
   gt() |>
   gt_theme_538(quiet = TRUE) |>
   tab_options(table.align = "left")
+
+sample_matchups_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+sample_matchups_tbl = simulate_season_draw()
+
+GT(sample_matchups_tbl.sample(n=10))
+```
+:::
+
+```{r}
+#| echo: false
+
+sample_matchups_tbl
 ```
 
 <br>
@@ -309,15 +666,17 @@ simulate_season_draw() |>
 
 Now we need results for these games. To do this we need to make an assumption about how we can realistically generate random results for matches between these teams. The points differential between teams in a match determines who wins and loses, so we need to mimic the way points differentials are distributed in real NRL games. This is how they're distributed in the 2014-2024 data set we have.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
-#| fig-align: "center"
-#| out-width: "100%"
+#| output: false
 
 average_10yr_points_diff <- data |>
   pull(points_differential) |>
   mean()
 
-data |>
+points_diff_plot <- data |>
   ggplot(aes(x = points_differential)) +
   geom_histogram(binwidth = 1, colour = "white", fill = colours[2]) +
   labs(
@@ -383,6 +742,37 @@ data |>
     plot.subtitle = element_markdown(size = 12),
     plot.caption = element_markdown(size = 11)
   )
+
+points_diff_plot
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+average_10yr_points_diff = data["points_differential"].mean()
+
+points_diff = data["points_differential"].to_numpy()
+
+fig, ax = plt.subplots(figsize=(8, 5))
+bins = range(points_diff.min() - 1, points_diff.max() + 2)
+ax.hist(points_diff, bins=bins, color=colours[1], edgecolor="white")
+ax.axvline(average_10yr_points_diff, color="grey", linestyle="--", linewidth=1)
+ax.set_xlabel("Points differential")
+ax.set_ylabel("Number of games")
+ax.set_title("Most games end with an even points differential")
+
+fig
+```
+:::
+
+```{r}
+#| echo: false
+#| fig-align: "center"
+#| out-width: "100%"
+
+points_diff_plot
 ```
 
 This is an *interesting* distribution. The points differentials on even numbers are **far** more frequently observed than odd numbered differentials. This is an influence of competition constraints. Tries (4) and goals (2) are far more common than field goals (1), so it's expected that even numbered point differences are more likely to occur. Out of interest, I also added the average points differential across the data set as an annotation in the visual (+2.4). This is the expected advantage of playing at home over the last \~10 years.
@@ -395,7 +785,12 @@ Because this distribution is so unique, I'll randomly sample directly from it to
 
 The bookmaker odds are converted to an implied probability of winning the competition. This will be my measure of relative team quality.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
+#| output: false
+
 # Sportsbet odds for to win 2025 GF
 # Collected on 21st Jan 2025
 sportsbet_odds <- tibble::tribble(
@@ -428,19 +823,98 @@ sportsbet_implied_probabilities <- sportsbet_odds |>
   mutate(implied_probabilities = odds_to_probabilities(sportsbet_odds)) |>
   select(-sportsbet_odds)
 
-sportsbet_implied_probabilities |>
+sportsbet_probs_tbl <- sportsbet_implied_probabilities |>
   arrange(-implied_probabilities) |>
   gt() |>
   gt_theme_538(quiet = TRUE) |>
   fmt_percent(implied_probabilities, decimals = 1) |>
   tab_options(table.align = "left")
+
+sportsbet_probs_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+# Sportsbet odds for to win 2025 GF
+# Collected on 21st Jan 2025
+sportsbet_odds = pl.DataFrame(
+    {
+        "team": [
+            "Brisbane Broncos",
+            "Canberra Raiders",
+            "Canterbury Bankstown Bulldogs",
+            "Cronulla Sutherland Sharks",
+            "Dolphins",
+            "Gold Coast Titans",
+            "Manly Warringah Sea Eagles",
+            "Melbourne Storm",
+            "New Zealand Warriors",
+            "Newcastle Knights",
+            "North Queensland Cowboys",
+            "Parramatta Eels",
+            "Penrith Panthers",
+            "South Sydney Rabbitohs",
+            "St George Illawarra Dragons",
+            "Sydney Roosters",
+            "Wests Tigers",
+        ],
+        "sportsbet_odds": [
+            8.5,
+            67,
+            17,
+            13,
+            61,
+            61,
+            16,
+            3.85,
+            51,
+            61,
+            26,
+            41,
+            4.8,
+            18,
+            81,
+            20,
+            46,
+        ],
+    }
+)
+
+
+# Get a team strength measure (based on Sportsbet odds to win premiership)
+def odds_to_probabilities(odds: pl.Expr) -> pl.Expr:
+    return (1 / odds) / (1 / odds).sum()
+
+
+sportsbet_implied_probabilities = sportsbet_odds.with_columns(
+    implied_probabilities=odds_to_probabilities(pl.col("sportsbet_odds"))
+).drop("sportsbet_odds")
+
+sportsbet_probs_tbl = GT(
+    sportsbet_implied_probabilities.sort("implied_probabilities", descending=True)
+).fmt_percent("implied_probabilities", decimals=1)
+
+sportsbet_probs_tbl
+```
+:::
+
+```{r}
+#| echo: false
+
+sportsbet_probs_tbl
 ```
 
 <br>
 
 #### Accounting for home field advantage
 
-Next I need to account for home field advantage. Home teams won \~55.8% of games in the data set (1,084/1,944). If two teams of **equal** quality play, I want to adjust the probability of winning for the home team from 50% (based only on relative team quality) to \~55.8% so it matches the proportion of home wins observed in the 10 seasons of data. I can do this by searching across all potential home advantage multipliers from 1 (no home advantage) to 2 (playing at home doubles team quality) to find the optimal value that returns \~55.8% home win probability against equally matched opponents.
+Next I need to account for home field advantage. Home teams won \~55.8% of games in the data set (1,084/1,944). If two teams of **equal** quality play, I want to adjust the probability of winning for the home team from 50% (based only on relative team quality) to \~55.8% so it matches the proportion of home wins observed in the 10 seasons of data. For two equally matched teams, the win probability model simplifies to `m / (m + 1)`, where `m` is the home advantage multiplier, so I can solve directly for the multiplier that returns \~55.8% home win probability against equally matched opponents.
+
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
 ```{r}
 perc_home_win <- mean(data$points_differential > 0)
@@ -450,32 +924,32 @@ perc_home_win <- mean(data$points_differential > 0)
 # 2. Historical data shows home teams actually win 55.8% of the time
 # 3. We need a multiplier that turns 50-50 into 55.8-44.2 (assuming no draws)
 
-# Function to calculate win probability for equal teams given a multiplier
-calc_win_prob <- function(multiplier) {
-  # Both teams start with equal strength
-  home_strength <- 0.5
-  away_strength <- 0.5
-
-  # Apply multiplier to home team
-  adjusted_home <- home_strength * multiplier
-
-  # Calculate resulting probability
-  prob <- adjusted_home / (adjusted_home + away_strength)
-  return(prob)
-}
-
-# Function to find multiplier that gives desired win probability
-find_optimal_multiplier <- function(target_prob) {
-  optimise(
-    function(m) abs(calc_win_prob(m) - target_prob),
-    interval = c(1, 2), # Search between 1-2x multiplier
-    maximum = FALSE
-  )$minimum
-}
-
-# Find multiplier that produces observed 55.8% home win rate
-optimal_multiplier <- find_optimal_multiplier(perc_home_win)
+# For equal team strengths (both 0.5), the win probability model
+# (adjusted_home / (adjusted_home + away_strength)) simplifies to
+# m / (m + 1), which can be solved directly for the multiplier
+# that produces the observed home win rate
+optimal_multiplier <- perc_home_win / (1 - perc_home_win)
 ```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+perc_home_win=(data["points_differential"] > 0).mean()
+
+# We know that for equally matched teams:
+# 1. Without home advantage, each team has 50% chance of winning
+# 2. Historical data shows home teams actually win 55.8% of the time
+# 3. We need a multiplier that turns 50-50 into 55.8-44.2 (assuming no draws)
+
+# For equal team strengths (both 0.5), the win probability model
+# (adjusted_home / (adjusted_home + away_strength)) simplifies to
+# m / (m + 1), which can be solved directly for the multiplier
+# that produces the observed home win rate
+optimal_multiplier=perc_home_win / (1 - perc_home_win)
+```
+:::
 
 This method carries some simplifying assumptions. In reality, some teams are pretty likely to benefit more from playing at home than others. That isn't accounted for here (all teams will be given the same home advantage based on historical data). Also the multiplier used to apply the home team advantage was found by optimising for the win rate between two teams of equal quality. This was to best isolate the degree of home advantage without the influence of differences in team quality. The mathematically optimal multiplier will change with each difference in relative team quality (e.g., unequally matched teams).
 
@@ -484,6 +958,9 @@ This method carries some simplifying assumptions. In reality, some teams are pre
 #### Simulate the match results
 
 Now I can finally define a function that simulates a match. It compares the implied probability of winning the competition after accounting for home field advantage to calculate the home team win probability for the game. A random number is drawn from a uniform distribution (0 to 1) and if this number is less than the home win probability, then the match is assigned as a home win. Once we know whether the home or away team wins, a random sample is drawn from either the positive (home wins) or negative (away wins) observed points differential distribution (i.e., empirical distribution).
+
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
 ```{r}
 # Function to simulate a single match
@@ -511,7 +988,41 @@ simulate_match <- function(home_strength, away_strength, diff_vector) {
 }
 ```
 
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+# Function to simulate a single match
+def simulate_match(home_strength, away_strength, diff_vector):
+
+    home_advantage_multiplier=optimal_multiplier
+
+    # Apply home advantage to home team's strength
+    adjusted_home_strength=home_strength * home_advantage_multiplier
+
+    # Calculate win probabilities based on Sportsbet's Grand Final win probabilities
+    home_win_prob=adjusted_home_strength / (adjusted_home_strength + away_strength)
+
+    # Compare to uniform distribution to determine if it's a home win or away win
+    is_home_win=np.random.uniform(size=1) < home_win_prob
+
+    # Sample the differential
+    positive_diffs = diff_vector.filter(diff_vector > 0)
+
+    if is_home_win:
+        diff=np.random.choice(positive_diffs)
+    else:
+        diff=-np.random.choice(positive_diffs)
+
+    return diff
+```
+:::
+
 To demonstrate, here I generate 15 random points differential results for a game between a home team with a 5% chance of winning the competition and an away team with a 20% chance.
+
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
 
 ```{r}
 map2(
@@ -521,6 +1032,15 @@ map2(
 ) |>
   unlist()
 ```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+results = [simulate_match(0.05, 0.20, data['points_differential']) for _ in range(15)]
+```
+:::
 
 Notice how most of the values are negative (meaning the away team won).
 
@@ -538,8 +1058,12 @@ Now we have a function to simulate a match, we need to use it populate the rando
 
 This is where the actual work gets done. To demonstrate what this looks like, I'll pick out a random 10 simulated games with results to display from the 2,040,000 total simulated matches.
 
+:::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
 #| warning: false
+#| output: false
 
 seasons_to_simulate <- 10000
 
@@ -573,11 +1097,79 @@ simulated_seasons <- tibble(
     draw = if_else(points_differential == 0, 1, 0)
   )
 
-simulated_seasons |>
+simulated_seasons_preview_tbl <- simulated_seasons |>
   select(-ends_with("probability"), -draw) |>
   slice_sample(n = 10) |>
   gt() |>
   gt_theme_538(quiet = TRUE)
+
+simulated_seasons_preview_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+::: callout-note
+## Different random number generators
+
+R and Python use different random number generation algorithms, so even with the same seed value, the simulated seasons will differ between languages. This means specific values (e.g. individual simulated match results, finals probabilities) won't match exactly. The overall patterns will be consistent, and the same analytical conclusions apply.
+:::
+
+```{python}
+#| eval: false
+
+seasons_to_simulate = 10_000
+
+# For reproducibility
+np.random.seed(2025)
+
+# Simulate full seasons with results
+simulated_seasons = pl.concat(
+    [
+        simulate_season_draw().with_columns(season=pl.lit(season))
+        for season in range(1, seasons_to_simulate + 1)
+    ]
+).join(
+    sportsbet_implied_probabilities.rename(
+        {"team": "home", "implied_probabilities": "home_implied_probability"}
+    ),
+    on="home",
+    how="left",
+).join(
+    sportsbet_implied_probabilities.rename(
+        {"team": "away", "implied_probabilities": "away_implied_probability"}
+    ),
+    on="away",
+    how="left",
+)
+
+points_differential = [
+    simulate_match(home_prob, away_prob, data["points_differential"])
+    for home_prob, away_prob in zip(
+        simulated_seasons["home_implied_probability"],
+        simulated_seasons["away_implied_probability"],
+    )
+]
+
+simulated_seasons = simulated_seasons.with_columns(
+    points_differential=pl.Series(points_differential)
+).with_columns(
+    home_win=pl.when(pl.col("points_differential") > 0).then(1).otherwise(0),
+    away_win=pl.when(pl.col("points_differential") < 0).then(1).otherwise(0),
+    draw=pl.when(pl.col("points_differential") == 0).then(1).otherwise(0),
+)
+
+simulated_seasons_preview_tbl = GT(
+    simulated_seasons.select(pl.exclude("^.*probability$", "draw")).sample(n=10)
+)
+
+simulated_seasons_preview_tbl
+```
+::::
+
+```{r}
+#| echo: false
+
+simulated_seasons_preview_tbl
 ```
 
 <br>
@@ -590,20 +1182,54 @@ This takes a minute or two to run because it's generating 10,000 random season d
 
 We can use the function we defined earlier to summarise the match level simulation results into an end-of-season ladder for each of the 10,000 seasons. Here is one of those seasons final standings (for season number 2,534 out of 10,000).
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
+#| output: false
+
 simulation_summary_results <- competition_table(simulated_seasons)
 
-simulation_summary_results |>
+season_2534_tbl <- simulation_summary_results |>
   filter(season == 2534) |>
   gt() |>
   gt_theme_538(quiet = TRUE)
+
+season_2534_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+simulation_summary_results = competition_table(simulated_seasons)
+
+season_2534_tbl = GT(
+  simulation_summary_results
+  .filter(pl.col("season") == 2534)
+)
+
+season_2534_tbl
+```
+:::
+
+```{r}
+#| echo: false
+
+season_2534_tbl
 ```
 
 <br>
 
 What we're really after though is the proportion of teams that make the finals for each given win total across each of the 10,000 simulated seasons.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
+#| output: false
+
 # Calculate proportions ----------------------------
 probabilities_simulated <- simulation_summary_results |>
   summarise(
@@ -615,7 +1241,7 @@ probabilities_simulated <- simulation_summary_results |>
   arrange(-total_wins)
 
 # Create table --------------------------------------
-probabilities_simulated |>
+finals_probability_tbl <- probabilities_simulated |>
   mutate(
     perc_no_finals = 1 - percentage,
     total_wins = glue::glue("{total_wins} wins")
@@ -683,6 +1309,55 @@ probabilities_simulated |>
     table.width = 700,
     source_notes.font.size = 15
   )
+
+finals_probability_tbl
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+```{python}
+#| eval: false
+
+# Calculate proportions ----------------------------
+probabilities_simulated = (
+    simulation_summary_results.group_by("total_wins")
+    .agg(
+        count_made_finals=pl.col("made_finals").sum(),
+        total_count=pl.len(),
+    )
+    .with_columns(percentage=pl.col("count_made_finals") / pl.col("total_count"))
+    .sort("total_wins", descending=True)
+)
+
+# Create table --------------------------------------
+finals_probability_tbl = (
+    GT(
+        probabilities_simulated.with_columns(
+            total_wins=pl.format("{} wins", pl.col("total_wins").cast(pl.Int64))
+        ),
+        rowname_col="total_wins",
+    )
+    .fmt_integer(columns=["total_count", "count_made_finals"])
+    .fmt_percent(columns="percentage", decimals=1)
+    .tab_header(
+        title="NRL teams need to win 13 games to be confident of playing finals",
+        subtitle="Finals probabilities based on results from 10,000 simulated seasons",
+    )
+    .cols_label(
+        total_count="Simulated occurrences",
+        count_made_finals="Times qualified",
+        percentage="Finals probability",
+    )
+)
+
+finals_probability_tbl
+```
+:::
+
+```{r}
+#| echo: false
+
+finals_probability_tbl
 ```
 
 Winning 16 or more games in a season was enough to make the finals in every one of the 10,000 simulations. Winning 8 or less wasn't enough to qualify in any. No real surprises there. In many of those cases it would be mathematically impossible for a different result. These simulations don't prove that though (maybe a team could qualify with 8 wins in circumstances that didn't occur in my 10,000 simulations), but the law of large numbers tells us these results are close enough to be correct for all practical purposes. To demonstrate, only one team made the finals with 9 wins (out of 12,996 teams that finished with 9 wins across the simulations). Finishing in the top 8 with only 9 wins is clearly mathematically possible, but it's so unlikely that it'll probably not happen in 10 lifetimes. So for all practical purposes, more wins are needed.
@@ -697,8 +1372,12 @@ The big movements happen between 11 and 13 wins:
 
 This basically aligns with what was observed in the sample of 10 seasons accounting for some sampling error. To demonstrate the mistake we would have been making by only using data from the 10 observed seasons, I've created an animation with the first 1,000 simulated seasons to show the law of large numbers at work.
 
+::: {.panel-tabset group="language"}
+## ![](/img/Rlogo.svg){height="25"}
+
 ```{r}
 #| warning: false
+#| output: false
 
 running_mean <- function(x) {
   cumsum(x) / seq_along(x)
@@ -759,6 +1438,77 @@ probs_animated_plot <- simulation_summary_results |>
     panel.spacing = unit(2, "lines")
   ) +
   transition_reveal(season)
+```
+
+## ![](/img/python-logo-only.svg){height="30"}
+
+::: callout-note
+## Static instead of animated
+
+This python version of the plot is static. The convergence pattern described below is still visible, just not animated frame-by-frame.
+:::
+
+```{python}
+#| eval: false
+
+win_totals = [10, 11, 12, 13, 14, 15]
+
+probs_data = (
+    simulation_summary_results.filter(
+        pl.col("total_wins").is_in(win_totals) & (pl.col("season") <= 1000)
+    )
+    .sort(["total_wins", "season"])
+    .with_columns(
+        probs_made_finals=(
+            pl.col("made_finals").cum_sum() / pl.int_range(1, pl.len() + 1)
+        ).over("total_wins")
+    )
+)
+
+fig, axes = plt.subplots(2, 3, figsize=(12, 8.6), sharex=True, sharey=True)
+
+facet_order = sorted(win_totals)
+
+for ax, total_wins in zip(axes.flat, facet_order):
+    facet_data = probs_data.filter(pl.col("total_wins") == total_wins)
+    final_prob = facet_data["probs_made_finals"][-1]
+
+    ax.axhline(0, color="#4d4d4d", linewidth=1)
+    ax.plot(
+        facet_data["season"],
+        facet_data["probs_made_finals"],
+        color=colours[0],
+        linewidth=1.5,
+    )
+    ax.text(
+        0.98,
+        0.2,
+        f"Estimated finals\nprobability: {final_prob:.1%}",
+        transform=ax.get_yaxis_transform(),
+        ha="right",
+        va="bottom",
+        fontsize=9,
+        color="grey",
+    )
+    ax.set_ylim(0, 1)
+    ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    ax.set_yticklabels([f"{y:.0%}" for y in [0, 0.2, 0.4, 0.6, 0.8, 1.0]])
+    ax.set_title(f"{int(total_wins)} win season", loc="left", fontsize=12)
+    ax.spines[["top", "right"]].set_visible(False)
+
+for ax in axes[-1, :]:
+    ax.set_xlabel("Simulated season number")
+for ax in axes[:, 0]:
+    ax.set_ylabel("Probability of finals")
+
+fig.tight_layout()
+
+fig
+```
+:::
+
+```{r}
+#| echo: false
 
 animate(
   probs_animated_plot,

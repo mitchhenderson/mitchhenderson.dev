@@ -4,8 +4,7 @@ author: Mitch Henderson
 date: '2021-02-10'
 slug: exploring-catapults-running-symmetry-data
 metaAlignment: center
-thumbnailImage: /img/OF.jpg
-thumbnailImagePosition: left
+image: /img/OF.jpg
 description: This post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R.
 ---
 

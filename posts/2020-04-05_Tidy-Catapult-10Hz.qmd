@@ -4,8 +4,7 @@ author: Mitch Henderson
 date: '2020-04-05'
 coverMeta: out
 metaAlignment: center
-thumbnailImage: /img/catapult_square.jpg
-thumbnailImagePosition: left
+image: /img/catapult_square.jpg
 description: The export format of Catapult's 10Hz GPS data isn't ideal for analysis. This post shows you how to tidy it using R.
 ---
 

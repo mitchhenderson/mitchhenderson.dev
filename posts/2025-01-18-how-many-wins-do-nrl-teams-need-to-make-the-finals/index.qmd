@@ -4,7 +4,7 @@ description: |
   It depends, but Monte Carlo simulations give us a pretty good idea
 author: Mitch Henderson
 date: 2025-01-27
-thumbnailImage: /img/nrl_finals_probs.png
+image: /img/nrl_finals_probs.png
 draft: false
 format:
   html:
@@ -1270,7 +1270,7 @@ finals_probability_tbl <- probabilities_simulated |>
     width = 70,
     labels = c("Qualify", "Fail to qualify"),
     palette = rev(colours),
-    font = "MyriadPro-Semibold",
+    font = "Poppins",
     fmt_fn = function(x) {
       case_when(
         x < 0.03 ~ "",
@@ -1290,19 +1290,14 @@ finals_probability_tbl <- probabilities_simulated |>
       html()
   }) |>
   tab_style(
-    style = cell_text(font = "MyriadPro-Regular"),
+    style = cell_text(font = google_font("Source Sans 3")),
     locations = cells_body()
-  ) |>
-  tab_style(
-    style = cell_text(
-      font = "MyriadPro-BoldCond"
-    ),
-    locations = cells_title(groups = "title")
   ) |>
   tab_style(
     style = cell_text(align = "right"),
     locations = cells_source_notes()
   ) |>
+  opt_css(google_font("Poppins")$import_stmt, add = TRUE) |>
   tab_options(
     heading.title.font.size = 36,
     heading.subtitle.font.size = 18,

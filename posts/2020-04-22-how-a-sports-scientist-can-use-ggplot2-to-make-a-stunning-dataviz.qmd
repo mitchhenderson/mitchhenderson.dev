@@ -5,8 +5,7 @@ date: '2020-04-22'
 slug: making-better-visualisations-using-ggplot2-in-R
 coverMeta: out
 metaAlignment: center
-thumbnailImage: /img/ggplot2.png
-thumbnailImagePosition: left
+image: /img/ggplot2.png
 description: Great visualisations help communicate your message more clearly. This post shows you an example of my process.
 knitr:
   opts_chunk: 

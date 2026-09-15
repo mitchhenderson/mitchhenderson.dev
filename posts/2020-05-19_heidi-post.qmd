@@ -7,8 +7,7 @@ keywords: tech
 metaAlignment: center
 slug: visualising-data-measured-from-activity-watches
 description: Tracking data from your Apple watch doesn't have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.
-thumbnailImage: /img/Heart.png
-thumbnailImagePosition: left
+image: /img/Heart.png
 ---
 
 ![](/img/Applehealth.jpg)

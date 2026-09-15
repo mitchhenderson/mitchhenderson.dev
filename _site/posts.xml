@@ -9231,27 +9231,27 @@ font-style: inherit;">10</span>))</span>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ismkdnngtc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hmbgaeeexj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ismkdnngtc table {
+#hmbgaeeexj table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ismkdnngtc thead, #ismkdnngtc tbody, #ismkdnngtc tfoot, #ismkdnngtc tr, #ismkdnngtc td, #ismkdnngtc th {
+#hmbgaeeexj thead, #hmbgaeeexj tbody, #hmbgaeeexj tfoot, #hmbgaeeexj tr, #hmbgaeeexj td, #hmbgaeeexj th {
   border-style: none;
 }
 
-#ismkdnngtc p {
+#hmbgaeeexj p {
   margin: 0;
   padding: 0;
 }
 
-#ismkdnngtc .gt_table {
+#hmbgaeeexj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -9277,12 +9277,12 @@ font-style: inherit;">10</span>))</span>
   border-left-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_caption {
+#hmbgaeeexj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ismkdnngtc .gt_title {
+#hmbgaeeexj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -9294,7 +9294,7 @@ font-style: inherit;">10</span>))</span>
   border-bottom-width: 0;
 }
 
-#ismkdnngtc .gt_subtitle {
+#hmbgaeeexj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -9306,7 +9306,7 @@ font-style: inherit;">10</span>))</span>
   border-top-width: 0;
 }
 
-#ismkdnngtc .gt_heading {
+#hmbgaeeexj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -9318,13 +9318,13 @@ font-style: inherit;">10</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_bottom_border {
+#hmbgaeeexj .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_col_headings {
+#hmbgaeeexj .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9339,7 +9339,7 @@ font-style: inherit;">10</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_col_heading {
+#hmbgaeeexj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9359,7 +9359,7 @@ font-style: inherit;">10</span>))</span>
   overflow-x: hidden;
 }
 
-#ismkdnngtc .gt_column_spanner_outer {
+#hmbgaeeexj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9371,15 +9371,15 @@ font-style: inherit;">10</span>))</span>
   padding-right: 4px;
 }
 
-#ismkdnngtc .gt_column_spanner_outer:first-child {
+#hmbgaeeexj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ismkdnngtc .gt_column_spanner_outer:last-child {
+#hmbgaeeexj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ismkdnngtc .gt_column_spanner {
+#hmbgaeeexj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -9391,11 +9391,11 @@ font-style: inherit;">10</span>))</span>
   width: 100%;
 }
 
-#ismkdnngtc .gt_spanner_row {
+#hmbgaeeexj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ismkdnngtc .gt_group_heading {
+#hmbgaeeexj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9421,7 +9421,7 @@ font-style: inherit;">10</span>))</span>
   text-align: left;
 }
 
-#ismkdnngtc .gt_empty_group_heading {
+#hmbgaeeexj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -9436,15 +9436,15 @@ font-style: inherit;">10</span>))</span>
   vertical-align: middle;
 }
 
-#ismkdnngtc .gt_from_md > :first-child {
+#hmbgaeeexj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ismkdnngtc .gt_from_md > :last-child {
+#hmbgaeeexj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ismkdnngtc .gt_row {
+#hmbgaeeexj .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -9463,7 +9463,7 @@ font-style: inherit;">10</span>))</span>
   overflow-x: hidden;
 }
 
-#ismkdnngtc .gt_stub {
+#hmbgaeeexj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9476,7 +9476,7 @@ font-style: inherit;">10</span>))</span>
   padding-right: 5px;
 }
 
-#ismkdnngtc .gt_stub_row_group {
+#hmbgaeeexj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -9490,15 +9490,15 @@ font-style: inherit;">10</span>))</span>
   vertical-align: top;
 }
 
-#ismkdnngtc .gt_row_group_first td {
+#hmbgaeeexj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ismkdnngtc .gt_row_group_first th {
+#hmbgaeeexj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ismkdnngtc .gt_summary_row {
+#hmbgaeeexj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9508,16 +9508,16 @@ font-style: inherit;">10</span>))</span>
   padding-right: 5px;
 }
 
-#ismkdnngtc .gt_first_summary_row {
+#hmbgaeeexj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_first_summary_row.thick {
+#hmbgaeeexj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ismkdnngtc .gt_last_summary_row {
+#hmbgaeeexj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9527,7 +9527,7 @@ font-style: inherit;">10</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_grand_summary_row {
+#hmbgaeeexj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -9537,7 +9537,7 @@ font-style: inherit;">10</span>))</span>
   padding-right: 5px;
 }
 
-#ismkdnngtc .gt_first_grand_summary_row {
+#hmbgaeeexj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9547,7 +9547,7 @@ font-style: inherit;">10</span>))</span>
   border-top-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_last_grand_summary_row_top {
+#hmbgaeeexj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -9557,11 +9557,11 @@ font-style: inherit;">10</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_striped {
+#hmbgaeeexj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ismkdnngtc .gt_table_body {
+#hmbgaeeexj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -9570,7 +9570,7 @@ font-style: inherit;">10</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_footnotes {
+#hmbgaeeexj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9584,7 +9584,7 @@ font-style: inherit;">10</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_footnote {
+#hmbgaeeexj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -9593,7 +9593,7 @@ font-style: inherit;">10</span>))</span>
   padding-right: 5px;
 }
 
-#ismkdnngtc .gt_sourcenotes {
+#hmbgaeeexj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -9607,7 +9607,7 @@ font-style: inherit;">10</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#ismkdnngtc .gt_sourcenote {
+#hmbgaeeexj .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -9615,76 +9615,76 @@ font-style: inherit;">10</span>))</span>
   padding-right: 5px;
 }
 
-#ismkdnngtc .gt_left {
+#hmbgaeeexj .gt_left {
   text-align: left;
 }
 
-#ismkdnngtc .gt_center {
+#hmbgaeeexj .gt_center {
   text-align: center;
 }
 
-#ismkdnngtc .gt_right {
+#hmbgaeeexj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ismkdnngtc .gt_font_normal {
+#hmbgaeeexj .gt_font_normal {
   font-weight: normal;
 }
 
-#ismkdnngtc .gt_font_bold {
+#hmbgaeeexj .gt_font_bold {
   font-weight: bold;
 }
 
-#ismkdnngtc .gt_font_italic {
+#hmbgaeeexj .gt_font_italic {
   font-style: italic;
 }
 
-#ismkdnngtc .gt_super {
+#hmbgaeeexj .gt_super {
   font-size: 65%;
 }
 
-#ismkdnngtc .gt_footnote_marks {
+#hmbgaeeexj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ismkdnngtc .gt_asterisk {
+#hmbgaeeexj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ismkdnngtc .gt_indent_1 {
+#hmbgaeeexj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ismkdnngtc .gt_indent_2 {
+#hmbgaeeexj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ismkdnngtc .gt_indent_3 {
+#hmbgaeeexj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ismkdnngtc .gt_indent_4 {
+#hmbgaeeexj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ismkdnngtc .gt_indent_5 {
+#hmbgaeeexj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ismkdnngtc .katex-display {
+#hmbgaeeexj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ismkdnngtc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hmbgaeeexj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#ismkdnngtc tbody tr:last-child {
+#hmbgaeeexj tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -10349,27 +10349,27 @@ font-style: inherit;">16</span>))</span>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rjbleclvsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eublnoftyr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#rjbleclvsc table {
+#eublnoftyr table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rjbleclvsc thead, #rjbleclvsc tbody, #rjbleclvsc tfoot, #rjbleclvsc tr, #rjbleclvsc td, #rjbleclvsc th {
+#eublnoftyr thead, #eublnoftyr tbody, #eublnoftyr tfoot, #eublnoftyr tr, #eublnoftyr td, #eublnoftyr th {
   border-style: none;
 }
 
-#rjbleclvsc p {
+#eublnoftyr p {
   margin: 0;
   padding: 0;
 }
 
-#rjbleclvsc .gt_table {
+#eublnoftyr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -10395,12 +10395,12 @@ font-style: inherit;">16</span>))</span>
   border-left-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_caption {
+#eublnoftyr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rjbleclvsc .gt_title {
+#eublnoftyr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -10412,7 +10412,7 @@ font-style: inherit;">16</span>))</span>
   border-bottom-width: 0;
 }
 
-#rjbleclvsc .gt_subtitle {
+#eublnoftyr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -10424,7 +10424,7 @@ font-style: inherit;">16</span>))</span>
   border-top-width: 0;
 }
 
-#rjbleclvsc .gt_heading {
+#eublnoftyr .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -10436,13 +10436,13 @@ font-style: inherit;">16</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_bottom_border {
+#eublnoftyr .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_col_headings {
+#eublnoftyr .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -10457,7 +10457,7 @@ font-style: inherit;">16</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_col_heading {
+#eublnoftyr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10477,7 +10477,7 @@ font-style: inherit;">16</span>))</span>
   overflow-x: hidden;
 }
 
-#rjbleclvsc .gt_column_spanner_outer {
+#eublnoftyr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10489,15 +10489,15 @@ font-style: inherit;">16</span>))</span>
   padding-right: 4px;
 }
 
-#rjbleclvsc .gt_column_spanner_outer:first-child {
+#eublnoftyr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rjbleclvsc .gt_column_spanner_outer:last-child {
+#eublnoftyr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rjbleclvsc .gt_column_spanner {
+#eublnoftyr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -10509,11 +10509,11 @@ font-style: inherit;">16</span>))</span>
   width: 100%;
 }
 
-#rjbleclvsc .gt_spanner_row {
+#eublnoftyr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rjbleclvsc .gt_group_heading {
+#eublnoftyr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10539,7 +10539,7 @@ font-style: inherit;">16</span>))</span>
   text-align: left;
 }
 
-#rjbleclvsc .gt_empty_group_heading {
+#eublnoftyr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -10554,15 +10554,15 @@ font-style: inherit;">16</span>))</span>
   vertical-align: middle;
 }
 
-#rjbleclvsc .gt_from_md > :first-child {
+#eublnoftyr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rjbleclvsc .gt_from_md > :last-child {
+#eublnoftyr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rjbleclvsc .gt_row {
+#eublnoftyr .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -10581,7 +10581,7 @@ font-style: inherit;">16</span>))</span>
   overflow-x: hidden;
 }
 
-#rjbleclvsc .gt_stub {
+#eublnoftyr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10594,7 +10594,7 @@ font-style: inherit;">16</span>))</span>
   padding-right: 5px;
 }
 
-#rjbleclvsc .gt_stub_row_group {
+#eublnoftyr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -10608,15 +10608,15 @@ font-style: inherit;">16</span>))</span>
   vertical-align: top;
 }
 
-#rjbleclvsc .gt_row_group_first td {
+#eublnoftyr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rjbleclvsc .gt_row_group_first th {
+#eublnoftyr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rjbleclvsc .gt_summary_row {
+#eublnoftyr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -10626,16 +10626,16 @@ font-style: inherit;">16</span>))</span>
   padding-right: 5px;
 }
 
-#rjbleclvsc .gt_first_summary_row {
+#eublnoftyr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_first_summary_row.thick {
+#eublnoftyr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rjbleclvsc .gt_last_summary_row {
+#eublnoftyr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10645,7 +10645,7 @@ font-style: inherit;">16</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_grand_summary_row {
+#eublnoftyr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -10655,7 +10655,7 @@ font-style: inherit;">16</span>))</span>
   padding-right: 5px;
 }
 
-#rjbleclvsc .gt_first_grand_summary_row {
+#eublnoftyr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10665,7 +10665,7 @@ font-style: inherit;">16</span>))</span>
   border-top-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_last_grand_summary_row_top {
+#eublnoftyr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -10675,11 +10675,11 @@ font-style: inherit;">16</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_striped {
+#eublnoftyr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rjbleclvsc .gt_table_body {
+#eublnoftyr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -10688,7 +10688,7 @@ font-style: inherit;">16</span>))</span>
   border-bottom-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_footnotes {
+#eublnoftyr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -10702,7 +10702,7 @@ font-style: inherit;">16</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_footnote {
+#eublnoftyr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -10711,7 +10711,7 @@ font-style: inherit;">16</span>))</span>
   padding-right: 5px;
 }
 
-#rjbleclvsc .gt_sourcenotes {
+#eublnoftyr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -10725,7 +10725,7 @@ font-style: inherit;">16</span>))</span>
   border-right-color: #D3D3D3;
 }
 
-#rjbleclvsc .gt_sourcenote {
+#eublnoftyr .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -10733,76 +10733,76 @@ font-style: inherit;">16</span>))</span>
   padding-right: 5px;
 }
 
-#rjbleclvsc .gt_left {
+#eublnoftyr .gt_left {
   text-align: left;
 }
 
-#rjbleclvsc .gt_center {
+#eublnoftyr .gt_center {
   text-align: center;
 }
 
-#rjbleclvsc .gt_right {
+#eublnoftyr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rjbleclvsc .gt_font_normal {
+#eublnoftyr .gt_font_normal {
   font-weight: normal;
 }
 
-#rjbleclvsc .gt_font_bold {
+#eublnoftyr .gt_font_bold {
   font-weight: bold;
 }
 
-#rjbleclvsc .gt_font_italic {
+#eublnoftyr .gt_font_italic {
   font-style: italic;
 }
 
-#rjbleclvsc .gt_super {
+#eublnoftyr .gt_super {
   font-size: 65%;
 }
 
-#rjbleclvsc .gt_footnote_marks {
+#eublnoftyr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rjbleclvsc .gt_asterisk {
+#eublnoftyr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rjbleclvsc .gt_indent_1 {
+#eublnoftyr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rjbleclvsc .gt_indent_2 {
+#eublnoftyr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rjbleclvsc .gt_indent_3 {
+#eublnoftyr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rjbleclvsc .gt_indent_4 {
+#eublnoftyr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rjbleclvsc .gt_indent_5 {
+#eublnoftyr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rjbleclvsc .katex-display {
+#eublnoftyr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rjbleclvsc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eublnoftyr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#rjbleclvsc tbody tr:last-child {
+#eublnoftyr tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -12219,27 +12219,27 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="zzmrriddwn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qvmmemagzu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#zzmrriddwn table {
+#qvmmemagzu table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zzmrriddwn thead, #zzmrriddwn tbody, #zzmrriddwn tfoot, #zzmrriddwn tr, #zzmrriddwn td, #zzmrriddwn th {
+#qvmmemagzu thead, #qvmmemagzu tbody, #qvmmemagzu tfoot, #qvmmemagzu tr, #qvmmemagzu td, #qvmmemagzu th {
   border-style: none;
 }
 
-#zzmrriddwn p {
+#qvmmemagzu p {
   margin: 0;
   padding: 0;
 }
 
-#zzmrriddwn .gt_table {
+#qvmmemagzu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -12265,12 +12265,12 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-left-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_caption {
+#qvmmemagzu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zzmrriddwn .gt_title {
+#qvmmemagzu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -12282,7 +12282,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-bottom-width: 0;
 }
 
-#zzmrriddwn .gt_subtitle {
+#qvmmemagzu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -12294,7 +12294,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-top-width: 0;
 }
 
-#zzmrriddwn .gt_heading {
+#qvmmemagzu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -12306,13 +12306,13 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-right-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_bottom_border {
+#qvmmemagzu .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_col_headings {
+#qvmmemagzu .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -12327,7 +12327,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-right-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_col_heading {
+#qvmmemagzu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -12347,7 +12347,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   overflow-x: hidden;
 }
 
-#zzmrriddwn .gt_column_spanner_outer {
+#qvmmemagzu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -12359,15 +12359,15 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 4px;
 }
 
-#zzmrriddwn .gt_column_spanner_outer:first-child {
+#qvmmemagzu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zzmrriddwn .gt_column_spanner_outer:last-child {
+#qvmmemagzu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zzmrriddwn .gt_column_spanner {
+#qvmmemagzu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -12379,11 +12379,11 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   width: 100%;
 }
 
-#zzmrriddwn .gt_spanner_row {
+#qvmmemagzu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zzmrriddwn .gt_group_heading {
+#qvmmemagzu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -12409,7 +12409,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   text-align: left;
 }
 
-#zzmrriddwn .gt_empty_group_heading {
+#qvmmemagzu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -12424,15 +12424,15 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   vertical-align: middle;
 }
 
-#zzmrriddwn .gt_from_md > :first-child {
+#qvmmemagzu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zzmrriddwn .gt_from_md > :last-child {
+#qvmmemagzu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zzmrriddwn .gt_row {
+#qvmmemagzu .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -12451,7 +12451,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   overflow-x: hidden;
 }
 
-#zzmrriddwn .gt_stub {
+#qvmmemagzu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -12464,7 +12464,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 5px;
 }
 
-#zzmrriddwn .gt_stub_row_group {
+#qvmmemagzu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -12478,15 +12478,15 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   vertical-align: top;
 }
 
-#zzmrriddwn .gt_row_group_first td {
+#qvmmemagzu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zzmrriddwn .gt_row_group_first th {
+#qvmmemagzu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zzmrriddwn .gt_summary_row {
+#qvmmemagzu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -12496,16 +12496,16 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 5px;
 }
 
-#zzmrriddwn .gt_first_summary_row {
+#qvmmemagzu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_first_summary_row.thick {
+#qvmmemagzu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zzmrriddwn .gt_last_summary_row {
+#qvmmemagzu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -12515,7 +12515,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-bottom-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_grand_summary_row {
+#qvmmemagzu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -12525,7 +12525,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 5px;
 }
 
-#zzmrriddwn .gt_first_grand_summary_row {
+#qvmmemagzu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -12535,7 +12535,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-top-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_last_grand_summary_row_top {
+#qvmmemagzu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -12545,11 +12545,11 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-bottom-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_striped {
+#qvmmemagzu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zzmrriddwn .gt_table_body {
+#qvmmemagzu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -12558,7 +12558,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-bottom-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_footnotes {
+#qvmmemagzu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -12572,7 +12572,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-right-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_footnote {
+#qvmmemagzu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -12581,7 +12581,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 5px;
 }
 
-#zzmrriddwn .gt_sourcenotes {
+#qvmmemagzu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -12595,7 +12595,7 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   border-right-color: #D3D3D3;
 }
 
-#zzmrriddwn .gt_sourcenote {
+#qvmmemagzu .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -12603,76 +12603,76 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
   padding-right: 5px;
 }
 
-#zzmrriddwn .gt_left {
+#qvmmemagzu .gt_left {
   text-align: left;
 }
 
-#zzmrriddwn .gt_center {
+#qvmmemagzu .gt_center {
   text-align: center;
 }
 
-#zzmrriddwn .gt_right {
+#qvmmemagzu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zzmrriddwn .gt_font_normal {
+#qvmmemagzu .gt_font_normal {
   font-weight: normal;
 }
 
-#zzmrriddwn .gt_font_bold {
+#qvmmemagzu .gt_font_bold {
   font-weight: bold;
 }
 
-#zzmrriddwn .gt_font_italic {
+#qvmmemagzu .gt_font_italic {
   font-style: italic;
 }
 
-#zzmrriddwn .gt_super {
+#qvmmemagzu .gt_super {
   font-size: 65%;
 }
 
-#zzmrriddwn .gt_footnote_marks {
+#qvmmemagzu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zzmrriddwn .gt_asterisk {
+#qvmmemagzu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zzmrriddwn .gt_indent_1 {
+#qvmmemagzu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zzmrriddwn .gt_indent_2 {
+#qvmmemagzu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zzmrriddwn .gt_indent_3 {
+#qvmmemagzu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zzmrriddwn .gt_indent_4 {
+#qvmmemagzu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zzmrriddwn .gt_indent_5 {
+#qvmmemagzu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zzmrriddwn .katex-display {
+#qvmmemagzu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zzmrriddwn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qvmmemagzu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#zzmrriddwn tbody tr:last-child {
+#qvmmemagzu tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -12684,26 +12684,26 @@ font-style: inherit;">10</span>))</span></code></pre></div></div>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="home" class="gt_row gt_left">Canberra Raiders</td>
-<td headers="away" class="gt_row gt_left">South Sydney Rabbitohs</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Newcastle Knights</td>
-<td headers="away" class="gt_row gt_left">Melbourne Storm</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Wests Tigers</td>
-<td headers="away" class="gt_row gt_left">Melbourne Storm</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
+<td headers="away" class="gt_row gt_left">Wests Tigers</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Penrith Panthers</td>
+<td headers="away" class="gt_row gt_left">Sydney Roosters</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Manly Warringah Sea Eagles</td>
+<td headers="away" class="gt_row gt_left">St George Illawarra Dragons</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Melbourne Storm</td>
+<td headers="away" class="gt_row gt_left">Canberra Raiders</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">South Sydney Rabbitohs</td>
+<td headers="away" class="gt_row gt_left">Brisbane Broncos</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Dolphins</td>
+<td headers="away" class="gt_row gt_left">North Queensland Cowboys</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Brisbane Broncos</td>
+<td headers="away" class="gt_row gt_left">North Queensland Cowboys</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">Melbourne Storm</td>
+<td headers="away" class="gt_row gt_left">Penrith Panthers</td></tr>
     <tr><td headers="home" class="gt_row gt_left">Brisbane Broncos</td>
 <td headers="away" class="gt_row gt_left">Sydney Roosters</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
-<td headers="away" class="gt_row gt_left">Dolphins</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Parramatta Eels</td>
-<td headers="away" class="gt_row gt_left">Brisbane Broncos</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Newcastle Knights</td>
-<td headers="away" class="gt_row gt_left">Parramatta Eels</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Manly Warringah Sea Eagles</td>
-<td headers="away" class="gt_row gt_left">Wests Tigers</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">St George Illawarra Dragons</td>
-<td headers="away" class="gt_row gt_left">Newcastle Knights</td></tr>
-    <tr><td headers="home" class="gt_row gt_left">Melbourne Storm</td>
-<td headers="away" class="gt_row gt_left">Newcastle Knights</td></tr>
+    <tr><td headers="home" class="gt_row gt_left">South Sydney Rabbitohs</td>
+<td headers="away" class="gt_row gt_left">Cronulla Sutherland Sharks</td></tr>
   </tbody>
   
 </table>
@@ -13595,27 +13595,27 @@ font-style: inherit;">1</span>)</span>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tilbfittwn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gvfynstrnf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tilbfittwn table {
+#gvfynstrnf table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tilbfittwn thead, #tilbfittwn tbody, #tilbfittwn tfoot, #tilbfittwn tr, #tilbfittwn td, #tilbfittwn th {
+#gvfynstrnf thead, #gvfynstrnf tbody, #gvfynstrnf tfoot, #gvfynstrnf tr, #gvfynstrnf td, #gvfynstrnf th {
   border-style: none;
 }
 
-#tilbfittwn p {
+#gvfynstrnf p {
   margin: 0;
   padding: 0;
 }
 
-#tilbfittwn .gt_table {
+#gvfynstrnf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -13641,12 +13641,12 @@ font-style: inherit;">1</span>)</span>
   border-left-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_caption {
+#gvfynstrnf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tilbfittwn .gt_title {
+#gvfynstrnf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -13658,7 +13658,7 @@ font-style: inherit;">1</span>)</span>
   border-bottom-width: 0;
 }
 
-#tilbfittwn .gt_subtitle {
+#gvfynstrnf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -13670,7 +13670,7 @@ font-style: inherit;">1</span>)</span>
   border-top-width: 0;
 }
 
-#tilbfittwn .gt_heading {
+#gvfynstrnf .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -13682,13 +13682,13 @@ font-style: inherit;">1</span>)</span>
   border-right-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_bottom_border {
+#gvfynstrnf .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_col_headings {
+#gvfynstrnf .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -13703,7 +13703,7 @@ font-style: inherit;">1</span>)</span>
   border-right-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_col_heading {
+#gvfynstrnf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -13723,7 +13723,7 @@ font-style: inherit;">1</span>)</span>
   overflow-x: hidden;
 }
 
-#tilbfittwn .gt_column_spanner_outer {
+#gvfynstrnf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -13735,15 +13735,15 @@ font-style: inherit;">1</span>)</span>
   padding-right: 4px;
 }
 
-#tilbfittwn .gt_column_spanner_outer:first-child {
+#gvfynstrnf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tilbfittwn .gt_column_spanner_outer:last-child {
+#gvfynstrnf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tilbfittwn .gt_column_spanner {
+#gvfynstrnf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -13755,11 +13755,11 @@ font-style: inherit;">1</span>)</span>
   width: 100%;
 }
 
-#tilbfittwn .gt_spanner_row {
+#gvfynstrnf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tilbfittwn .gt_group_heading {
+#gvfynstrnf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -13785,7 +13785,7 @@ font-style: inherit;">1</span>)</span>
   text-align: left;
 }
 
-#tilbfittwn .gt_empty_group_heading {
+#gvfynstrnf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -13800,15 +13800,15 @@ font-style: inherit;">1</span>)</span>
   vertical-align: middle;
 }
 
-#tilbfittwn .gt_from_md > :first-child {
+#gvfynstrnf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tilbfittwn .gt_from_md > :last-child {
+#gvfynstrnf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tilbfittwn .gt_row {
+#gvfynstrnf .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -13827,7 +13827,7 @@ font-style: inherit;">1</span>)</span>
   overflow-x: hidden;
 }
 
-#tilbfittwn .gt_stub {
+#gvfynstrnf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -13840,7 +13840,7 @@ font-style: inherit;">1</span>)</span>
   padding-right: 5px;
 }
 
-#tilbfittwn .gt_stub_row_group {
+#gvfynstrnf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -13854,15 +13854,15 @@ font-style: inherit;">1</span>)</span>
   vertical-align: top;
 }
 
-#tilbfittwn .gt_row_group_first td {
+#gvfynstrnf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tilbfittwn .gt_row_group_first th {
+#gvfynstrnf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tilbfittwn .gt_summary_row {
+#gvfynstrnf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -13872,16 +13872,16 @@ font-style: inherit;">1</span>)</span>
   padding-right: 5px;
 }
 
-#tilbfittwn .gt_first_summary_row {
+#gvfynstrnf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_first_summary_row.thick {
+#gvfynstrnf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tilbfittwn .gt_last_summary_row {
+#gvfynstrnf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -13891,7 +13891,7 @@ font-style: inherit;">1</span>)</span>
   border-bottom-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_grand_summary_row {
+#gvfynstrnf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -13901,7 +13901,7 @@ font-style: inherit;">1</span>)</span>
   padding-right: 5px;
 }
 
-#tilbfittwn .gt_first_grand_summary_row {
+#gvfynstrnf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -13911,7 +13911,7 @@ font-style: inherit;">1</span>)</span>
   border-top-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_last_grand_summary_row_top {
+#gvfynstrnf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -13921,11 +13921,11 @@ font-style: inherit;">1</span>)</span>
   border-bottom-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_striped {
+#gvfynstrnf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tilbfittwn .gt_table_body {
+#gvfynstrnf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -13934,7 +13934,7 @@ font-style: inherit;">1</span>)</span>
   border-bottom-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_footnotes {
+#gvfynstrnf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -13948,7 +13948,7 @@ font-style: inherit;">1</span>)</span>
   border-right-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_footnote {
+#gvfynstrnf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -13957,7 +13957,7 @@ font-style: inherit;">1</span>)</span>
   padding-right: 5px;
 }
 
-#tilbfittwn .gt_sourcenotes {
+#gvfynstrnf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -13971,7 +13971,7 @@ font-style: inherit;">1</span>)</span>
   border-right-color: #D3D3D3;
 }
 
-#tilbfittwn .gt_sourcenote {
+#gvfynstrnf .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -13979,76 +13979,76 @@ font-style: inherit;">1</span>)</span>
   padding-right: 5px;
 }
 
-#tilbfittwn .gt_left {
+#gvfynstrnf .gt_left {
   text-align: left;
 }
 
-#tilbfittwn .gt_center {
+#gvfynstrnf .gt_center {
   text-align: center;
 }
 
-#tilbfittwn .gt_right {
+#gvfynstrnf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tilbfittwn .gt_font_normal {
+#gvfynstrnf .gt_font_normal {
   font-weight: normal;
 }
 
-#tilbfittwn .gt_font_bold {
+#gvfynstrnf .gt_font_bold {
   font-weight: bold;
 }
 
-#tilbfittwn .gt_font_italic {
+#gvfynstrnf .gt_font_italic {
   font-style: italic;
 }
 
-#tilbfittwn .gt_super {
+#gvfynstrnf .gt_super {
   font-size: 65%;
 }
 
-#tilbfittwn .gt_footnote_marks {
+#gvfynstrnf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tilbfittwn .gt_asterisk {
+#gvfynstrnf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tilbfittwn .gt_indent_1 {
+#gvfynstrnf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tilbfittwn .gt_indent_2 {
+#gvfynstrnf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tilbfittwn .gt_indent_3 {
+#gvfynstrnf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tilbfittwn .gt_indent_4 {
+#gvfynstrnf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tilbfittwn .gt_indent_5 {
+#gvfynstrnf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tilbfittwn .katex-display {
+#gvfynstrnf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tilbfittwn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#gvfynstrnf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 
-#tilbfittwn tbody tr:last-child {
+#gvfynstrnf tbody tr:last-child {
   border-bottom: 2px solid #ffffff00;
 }
 </style>
@@ -14448,7 +14448,7 @@ background-color: null;
 font-style: inherit;">unlist</span>()</span></code></pre></div></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  12  -6  -4 -22  -2 -20   1 -12 -36  -1 -20  17 -29  -1   5</code></pre>
+<pre><code> [1] -12  -8 -34  -8  -4  10  -4  -1 -12  -2 -16   8 -32 -34 -20</code></pre>
 </div>
 </div>
 </div>
@@ -16317,7 +16317,7 @@ font-style: inherit;">rev</span>(colours),</span>
 background-color: null;
 font-style: inherit;">font =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"MyriadPro-Semibold"</span>,</span>
+font-style: inherit;">"Poppins"</span>,</span>
 <span id="cb30-42">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">fmt_fn =</span> <span class="cf" style="color: #003B4F;
@@ -16437,9 +16437,11 @@ font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cell_text</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">font =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">font =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"MyriadPro-Regular"</span>),</span>
+font-style: inherit;">google_font</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source Sans 3"</span>)),</span>
 <span id="cb30-62">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
@@ -16455,71 +16457,60 @@ font-style: inherit;">tab_style</span>(</span>
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">cell_text</span>(</span>
-<span id="cb30-66">      <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">font =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"MyriadPro-BoldCond"</span></span>
-<span id="cb30-67">    ),</span>
-<span id="cb30-68">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cells_title</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">groups =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"title"</span>)</span>
-<span id="cb30-69">  ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb30-70">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">tab_style</span>(</span>
-<span id="cb30-71">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
 font-style: inherit;">cell_text</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">align =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"right"</span>),</span>
-<span id="cb30-72">    <span class="at" style="color: #657422;
+<span id="cb30-66">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cells_source_notes</span>()</span>
-<span id="cb30-73">  ) <span class="sc" style="color: #5E5E5E;
+<span id="cb30-67">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb30-74">  <span class="fu" style="color: #4758AB;
+<span id="cb30-68">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">opt_css</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">google_font</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Poppins"</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>import_stmt, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">add =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb30-69">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_options</span>(</span>
-<span id="cb30-75">    <span class="at" style="color: #657422;
+<span id="cb30-70">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">heading.title.font.size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">36</span>,</span>
-<span id="cb30-76">    <span class="at" style="color: #657422;
+<span id="cb30-71">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">heading.subtitle.font.size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">18</span>,</span>
-<span id="cb30-77">    <span class="at" style="color: #657422;
+<span id="cb30-72">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">table.width =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">700</span>,</span>
-<span id="cb30-78">    <span class="at" style="color: #657422;
+<span id="cb30-73">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">source_notes.font.size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span></span>
-<span id="cb30-79">  )</span>
-<span id="cb30-80"></span>
-<span id="cb30-81">finals_probability_tbl</span></code></pre></div></div>
+<span id="cb30-74">  )</span>
+<span id="cb30-75"></span>
+<span id="cb30-76">finals_probability_tbl</span></code></pre></div></div>
 </details>
 </div>
 </div>
@@ -16652,10 +16643,12 @@ font-style: inherit;">"Finals probability"</span>,</span>
 <div class="cell">
 <div class="cell-output-display">
 <div id="upgqoofrvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cairo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 #upgqoofrvl table {
   font-family: Cairo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
@@ -17111,7 +17104,7 @@ font-style: inherit;">"Finals probability"</span>,</span>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
     <tr class="gt_heading">
-      <td colspan="4" class="gt_heading gt_title gt_font_normal" style="font-family: MyriadPro-BoldCond; font-weight: 700;">NRL teams need to win 13 games to be confident of playing finals</td>
+      <td colspan="4" class="gt_heading gt_title gt_font_normal" style="font-family: Chivo; font-weight: 700;">NRL teams need to win 13 games to be confident of playing finals</td>
     </tr>
     <tr class="gt_heading">
       <td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-family: Chivo; font-weight: 300;">Finals probabilities based on results from 10,000 simulated seasons</td>
@@ -17125,105 +17118,105 @@ font-style: inherit;">"Finals probability"</span>,</span>
   </thead>
   <tbody class="gt_table_body">
     <tr><th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">24 wins</th>
-<td headers="stub_1_1 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">232</td>
-<td headers="stub_1_1 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">232</td>
-<td headers="stub_1_1 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_1 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">232</td>
+<td headers="stub_1_1 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">232</td>
+<td headers="stub_1_1 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">23 wins</th>
-<td headers="stub_1_2 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">1,273</td>
-<td headers="stub_1_2 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">1,273</td>
-<td headers="stub_1_2 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_2 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">1,273</td>
+<td headers="stub_1_2 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">1,273</td>
+<td headers="stub_1_2 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">22 wins</th>
-<td headers="stub_1_3 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">3,045</td>
-<td headers="stub_1_3 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">3,045</td>
-<td headers="stub_1_3 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_3 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">3,045</td>
+<td headers="stub_1_3 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">3,045</td>
+<td headers="stub_1_3 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">21 wins</th>
-<td headers="stub_1_4 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">4,799</td>
-<td headers="stub_1_4 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">4,799</td>
-<td headers="stub_1_4 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_4 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">4,799</td>
+<td headers="stub_1_4 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">4,799</td>
+<td headers="stub_1_4 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">20 wins</th>
-<td headers="stub_1_5 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">5,830</td>
-<td headers="stub_1_5 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">5,830</td>
-<td headers="stub_1_5 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_5 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">5,830</td>
+<td headers="stub_1_5 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">5,830</td>
+<td headers="stub_1_5 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub">19 wins</th>
-<td headers="stub_1_6 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">6,022</td>
-<td headers="stub_1_6 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">6,022</td>
-<td headers="stub_1_6 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_6 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">6,022</td>
+<td headers="stub_1_6 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">6,022</td>
+<td headers="stub_1_6 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub">18 wins</th>
-<td headers="stub_1_7 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">6,585</td>
-<td headers="stub_1_7 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">6,585</td>
-<td headers="stub_1_7 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_7 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">6,585</td>
+<td headers="stub_1_7 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">6,585</td>
+<td headers="stub_1_7 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_8" scope="row" class="gt_row gt_center gt_stub">17 wins</th>
-<td headers="stub_1_8 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">7,648</td>
-<td headers="stub_1_8 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">7,648</td>
-<td headers="stub_1_8 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_8 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">7,648</td>
+<td headers="stub_1_8 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">7,648</td>
+<td headers="stub_1_8 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_9" scope="row" class="gt_row gt_center gt_stub">16 wins</th>
-<td headers="stub_1_9 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">8,810</td>
-<td headers="stub_1_9 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">8,810</td>
-<td headers="stub_1_9 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_9 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">8,810</td>
+<td headers="stub_1_9 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">8,810</td>
+<td headers="stub_1_9 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.43" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_10" scope="row" class="gt_row gt_center gt_stub">15 wins</th>
-<td headers="stub_1_10 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,212</td>
-<td headers="stub_1_10 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,210</td>
-<td headers="stub_1_10 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.39" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.39" y="0.0000000000000018" width="0.039" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.19" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="28.00px" lengthadjust="spacingAndGlyphs">&gt;99.9%</text></g></g></svg></td></tr>
+<td headers="stub_1_10 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,212</td>
+<td headers="stub_1_10 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,210</td>
+<td headers="stub_1_10 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.39" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="198.39" y="0.0000000000000018" width="0.039" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.19" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="28.98px" lengthadjust="spacingAndGlyphs">&gt;99.9%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_11" scope="row" class="gt_row gt_center gt_stub">14 wins</th>
-<td headers="stub_1_11 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,508</td>
-<td headers="stub_1_11 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,345</td>
-<td headers="stub_1_11 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="195.35" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="195.35" y="0.0000000000000018" width="3.08" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="97.67" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">98.4%</text></g></g></svg></td></tr>
+<td headers="stub_1_11 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,508</td>
+<td headers="stub_1_11 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,345</td>
+<td headers="stub_1_11 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="195.35" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="195.35" y="0.0000000000000018" width="3.08" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="97.67" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="24.39px" lengthadjust="spacingAndGlyphs">98.4%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_12" scope="row" class="gt_row gt_center gt_stub">13 wins</th>
-<td headers="stub_1_12 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,431</td>
-<td headers="stub_1_12 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">8,926</td>
-<td headers="stub_1_12 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="169.80" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="169.80" y="0.0000000000000018" width="28.63" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="84.90" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">85.6%</text><text x="184.11" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">14.4%</text></g></g></svg></td></tr>
+<td headers="stub_1_12 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,431</td>
+<td headers="stub_1_12 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">8,926</td>
+<td headers="stub_1_12 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="169.80" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="169.80" y="0.0000000000000018" width="28.63" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="84.90" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="24.44px" lengthadjust="spacingAndGlyphs">85.6%</text><text x="184.11" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="21.72px" lengthadjust="spacingAndGlyphs">14.4%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_13" scope="row" class="gt_row gt_center gt_stub">12 wins</th>
-<td headers="stub_1_13 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">9,785</td>
-<td headers="stub_1_13 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">4,859</td>
-<td headers="stub_1_13 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="98.53" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="98.53" y="0.0000000000000018" width="99.89" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="49.27" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">49.7%</text><text x="148.48" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">50.3%</text></g></g></svg></td></tr>
+<td headers="stub_1_13 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">9,785</td>
+<td headers="stub_1_13 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">4,859</td>
+<td headers="stub_1_13 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="98.53" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="98.53" y="0.0000000000000018" width="99.89" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="49.27" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="23.66px" lengthadjust="spacingAndGlyphs">49.7%</text><text x="148.48" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="24.02px" lengthadjust="spacingAndGlyphs">50.3%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_14" scope="row" class="gt_row gt_center gt_stub">11 wins</th>
-<td headers="stub_1_14 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,427</td>
-<td headers="stub_1_14 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">1,323</td>
-<td headers="stub_1_14 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="25.18" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="25.18" y="0.0000000000000018" width="173.25" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="12.59" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">12.7%</text><text x="111.80" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">87.3%</text></g></g></svg></td></tr>
+<td headers="stub_1_14 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,427</td>
+<td headers="stub_1_14 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">1,323</td>
+<td headers="stub_1_14 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="25.18" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="25.18" y="0.0000000000000018" width="173.25" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="12.59" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="20.56px" lengthadjust="spacingAndGlyphs">12.7%</text><text x="111.80" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="23.34px" lengthadjust="spacingAndGlyphs">87.3%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_15" scope="row" class="gt_row gt_center gt_stub">10 wins</th>
-<td headers="stub_1_15 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">11,257</td>
-<td headers="stub_1_15 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">92</td>
-<td headers="stub_1_15 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="1.62" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="1.62" y="0.0000000000000018" width="196.80" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="100.02" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="22.92px" lengthadjust="spacingAndGlyphs">99.2%</text></g></g></svg></td></tr>
+<td headers="stub_1_15 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">11,257</td>
+<td headers="stub_1_15 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">92</td>
+<td headers="stub_1_15 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="1.62" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="1.62" y="0.0000000000000018" width="196.80" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="100.02" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="23.92px" lengthadjust="spacingAndGlyphs">99.2%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_16" scope="row" class="gt_row gt_center gt_stub">9 wins</th>
-<td headers="stub_1_16 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">12,997</td>
-<td headers="stub_1_16 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">1</td>
-<td headers="stub_1_16 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.015" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.015" y="0.0000000000000018" width="198.41" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.22" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="28.00px" lengthadjust="spacingAndGlyphs">&gt;99.9%</text></g></g></svg></td></tr>
+<td headers="stub_1_16 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">12,997</td>
+<td headers="stub_1_16 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">1</td>
+<td headers="stub_1_16 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.015" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.015" y="0.0000000000000018" width="198.41" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.22" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="28.98px" lengthadjust="spacingAndGlyphs">&gt;99.9%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_17" scope="row" class="gt_row gt_center gt_stub">8 wins</th>
-<td headers="stub_1_17 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">13,688</td>
-<td headers="stub_1_17 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_17 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_17 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">13,688</td>
+<td headers="stub_1_17 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_17 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_18" scope="row" class="gt_row gt_center gt_stub">7 wins</th>
-<td headers="stub_1_18 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">13,003</td>
-<td headers="stub_1_18 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_18 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_18 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">13,003</td>
+<td headers="stub_1_18 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_18 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_19" scope="row" class="gt_row gt_center gt_stub">6 wins</th>
-<td headers="stub_1_19 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">10,427</td>
-<td headers="stub_1_19 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_19 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_19 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">10,427</td>
+<td headers="stub_1_19 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_19 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_20" scope="row" class="gt_row gt_center gt_stub">5 wins</th>
-<td headers="stub_1_20 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">7,013</td>
-<td headers="stub_1_20 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_20 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_20 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">7,013</td>
+<td headers="stub_1_20 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_20 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_21" scope="row" class="gt_row gt_center gt_stub">4 wins</th>
-<td headers="stub_1_21 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">3,823</td>
-<td headers="stub_1_21 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_21 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_21 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">3,823</td>
+<td headers="stub_1_21 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_21 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_22" scope="row" class="gt_row gt_center gt_stub">3 wins</th>
-<td headers="stub_1_22 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">1,593</td>
-<td headers="stub_1_22 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_22 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_22 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">1,593</td>
+<td headers="stub_1_22 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_22 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_23" scope="row" class="gt_row gt_center gt_stub">2 wins</th>
-<td headers="stub_1_23 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">496</td>
-<td headers="stub_1_23 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_23 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_23 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">496</td>
+<td headers="stub_1_23 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_23 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_24" scope="row" class="gt_row gt_center gt_stub">1 wins</th>
-<td headers="stub_1_24 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">90</td>
-<td headers="stub_1_24 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_24 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_24 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">90</td>
+<td headers="stub_1_24 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_24 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
     <tr><th id="stub_1_25" scope="row" class="gt_row gt_center gt_stub">0 wins</th>
-<td headers="stub_1_25 total" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">6</td>
-<td headers="stub_1_25 made_finals" class="gt_row gt_right" style="font-family: MyriadPro-Regular;">0</td>
-<td headers="stub_1_25 list_data" class="gt_row gt_center" style="font-family: MyriadPro-Regular;"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="9.96" text-anchor="middle" style="font-size: 8.54px; font-weight: 600;fill: #FFFFFF; font-family: &quot;Myriad Pro&quot;;" textlength="20.91px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
+<td headers="stub_1_25 total" class="gt_row gt_right" style="font-family: 'Source Sans 3';">6</td>
+<td headers="stub_1_25 made_finals" class="gt_row gt_right" style="font-family: 'Source Sans 3';">0</td>
+<td headers="stub_1_25 list_data" class="gt_row gt_center" style="font-family: 'Source Sans 3';"><!--?xml version='1.0' encoding='UTF-8' ?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="198.43pt" height="14.17pt" viewbox="0 0 198.43 14.17"><g class="svglite"><defs>  <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs>  <clippath id="cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==">    <rect x="0.00" y="0.00" width="198.43" height="14.17"></rect>  </clippath></defs><g clip-path="url(#cpMC4wMHwxOTguNDN8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="0.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #134A8E;"></rect><rect x="0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" y="0.0000000000000018" width="198.43" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E31937;"></rect><text x="99.21" y="10.04" text-anchor="middle" style="font-size: 8.54px;fill: #FFFFFF; font-family: &quot;Poppins&quot;;" textlength="19.92px" lengthadjust="spacingAndGlyphs">100%</text></g></g></svg></td></tr>
   </tbody>
   <tfoot>
     <tr class="gt_sourcenotes">
@@ -17934,6 +17927,7 @@ font-style: inherit;">"Probability of finals"</span>)</span>
 </section></div> ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/</guid>
   <pubDate>Sun, 26 Jan 2025 13:00:00 GMT</pubDate>
+  <media:content url="https://www.mitchhenderson.dev/img/nrl_finals_probs.png" medium="image" type="image/png" height="232" width="144"/>
 </item>
 <item>
   <title>Exploring Catapult’s running imbalance data</title>
@@ -19042,6 +19036,7 @@ font-style: inherit;">5.75</span>)</span></code></pre></div></div>
  ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</guid>
   <pubDate>Tue, 09 Feb 2021 13:00:00 GMT</pubDate>
+  <media:content url="https://www.mitchhenderson.dev/img/OF.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Visualising Apple Health data |Guest post by Heidi Thornton</title>
@@ -21761,6 +21756,7 @@ font-style: inherit;">"//Location"</span>])</span></code></pre></div></div>
  ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</guid>
   <pubDate>Mon, 18 May 2020 14:00:00 GMT</pubDate>
+  <media:content url="https://www.mitchhenderson.dev/img/Heart.png" medium="image" type="image/png" height="81" width="144"/>
 </item>
 <item>
   <title>Making better visualisations using ggplot2 in R</title>
@@ -26125,6 +26121,7 @@ font-style: inherit;">"_peak-years.png"</span>)) </span></code></pre></div></div
  ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</guid>
   <pubDate>Tue, 21 Apr 2020 14:00:00 GMT</pubDate>
+  <media:content url="https://www.mitchhenderson.dev/img/ggplot2.png" medium="image" type="image/png" height="151" width="144"/>
 </item>
 <item>
   <title>Tidying Catapult 10Hz export data</title>
@@ -26387,6 +26384,7 @@ font-style: inherit;">row.names =</span> F)</span></code></pre></div></div>
  ]]></description>
   <guid>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</guid>
   <pubDate>Sat, 04 Apr 2020 13:00:00 GMT</pubDate>
+  <media:content url="https://www.mitchhenderson.dev/img/catapult_square.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

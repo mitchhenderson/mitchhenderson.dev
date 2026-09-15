@@ -1,6 +1,18 @@
 /* css styles */
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* mitchhenderson::social_caption() sets font-family: "Font Awesome 7 Brands"
+   directly on inline spans (not FA's own CSS classes), so it only needs the
+   webfont file itself, not the full Font Awesome stylesheet. */
+@font-face {
+  font-family: "Font Awesome 7 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/webfonts/fa-brands-400.woff2") format("woff2");
+}
 
 
 h1.title {

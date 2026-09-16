@@ -28,6 +28,14 @@ h1.title {
   font-size: clamp(1.75rem, 1.3rem + 2vw, 40px);
 }
 
+.navbar-title {
+  /* Litera's default is 1.25em (~27.5px), which clips "mitchhenderson.dev"
+     on narrow phones because the theme's overflow/ellipsis rule sits on the
+     parent .navbar-brand link, not this flex-wrapping span. Shrinks on
+     small screens; unchanged (1.25em) from ~992px up. */
+  font-size: clamp(0.85em, 0.5em + 2.2vw, 1.25em);
+}
+
 pre code {
   font-size: 0.8em;  /* This makes the code 80% of the normal size */
 }

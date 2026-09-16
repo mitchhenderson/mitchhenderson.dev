@@ -29,11 +29,11 @@ h1.title {
 }
 
 .navbar-title {
-  /* Litera's default is 1.25em (~27.5px), which clips "mitchhenderson.dev"
-     on narrow phones because the theme's overflow/ellipsis rule sits on the
-     parent .navbar-brand link, not this flex-wrapping span. Shrinks on
-     small screens; unchanged (1.25em) from ~992px up. */
-  font-size: clamp(0.85em, 0.5em + 2.2vw, 1.25em);
+  /* No theme rule actually sets this for a non-dashboard site — it just
+     inherits .navbar-brand's font-size (1.375rem), which is what clipped
+     "mitchhenderson.dev" on narrow phones. Shrinks on small screens; the
+     1em ceiling reproduces the original (unstyled) desktop size exactly. */
+  font-size: clamp(0.85em, 0.5em + 2.2vw, 1em);
 }
 
 pre code {

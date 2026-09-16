@@ -40,6 +40,9 @@ format:
     # iOS home-screen icon (it ignores SVG favicons)
     include-in-header:
       text: '<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">'
+    # Works around a Quarto 1.9.x bug where the built-in Show/Hide All Code
+    # toggle can't find folded code because of an extra copy-button wrapper div
+    include-after-body: code-tools-fix.html
 
 editor: visual
 

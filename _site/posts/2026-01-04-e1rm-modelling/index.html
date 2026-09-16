@@ -6550,5 +6550,36 @@ assumptions adequately captured the features of the observed data).</p>
 
 
 
+<script>
+// Quarto 1.9.x wraps folded code in an extra .code-copy-outer-scaffold div,
+// which breaks the built-in "Show All Code" / "Hide All Code" toggle (its
+// selector expects .sourceCode to be a direct child of <details>). This
+// re-implements the toggle against details.code-fold directly so it keeps
+// working regardless of the internal wrapper structure.
+document.addEventListener("DOMContentLoaded", function () {
+  function setAllCodeOpen(show) {
+    document.querySelectorAll(".cell > details.code-fold").forEach(function (details) {
+      if (show) {
+        details.setAttribute("open", "");
+      } else {
+        details.removeAttribute("open");
+      }
+    });
+  }
 
+  var hideAllCode = document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", function () {
+      setAllCodeOpen(false);
+    });
+  }
+
+  var showAllCode = document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", function () {
+      setAllCodeOpen(true);
+    });
+  }
+});
+</script>
 </body></html>

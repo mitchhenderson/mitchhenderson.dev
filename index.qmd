@@ -23,7 +23,9 @@ listing:
 I use data and statistical models to answer practical questions in sport.
 :::
 
-This is where I write those ideas up in full: how to wrangle messy tracking exports, how to visualise athlete data so it gets used, and how to build models that are honest about what they don't know. Most posts include the complete code in both R and Python so you can run it on your own data.
+I'm a PhD-trained quantitative researcher. I started out in sports science and analytics, and now work in enterprise data science, but sport is still where I like to work through ideas.
+
+This is where I write them up in full: how to wrangle messy tracking exports, how to visualise athlete data so it gets used, and how to build models that are honest about what they don't know. Most posts include the complete code in both R and Python so you can run it on your own data.
 
 ::: home-links
 [<i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i> Resume](https://drive.google.com/uc?export=download&id=1a5qqr7yBhxUemN35BaE8nMW9mcFiXsBL)

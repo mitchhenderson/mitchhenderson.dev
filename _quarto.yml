@@ -5,6 +5,7 @@ website:
   title: "mitchhenderson.dev"
   site-url: https://www.mitchhenderson.dev
   description: "Sports data science and statistical modelling, with worked examples in R and Python."
+  favicon: favicon.svg
   open-graph: true
   twitter-card: true
   navbar:
@@ -36,6 +37,9 @@ format:
       light: [litera, theme.scss]
     css: styles.css
     highlight-style: arrow
+    # iOS home-screen icon (it ignores SVG favicons)
+    include-in-header:
+      text: '<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">'
 
 editor: visual
 

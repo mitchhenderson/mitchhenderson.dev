@@ -8,7 +8,7 @@ listing:
   contents: posts
   sort: "date desc"
   type: default
-  max-items: 3
+  max-items: 2
   fields: [date, title, description, image]
   feed: false
 ---
@@ -23,15 +23,17 @@ listing:
 I use data and statistical models to answer practical questions in sport.
 :::
 
-I have a PhD in sports science and do data science work for NSW Health (state government health department). Whenever I can, I like to use statistical programming and modelling to solve sports problems.
+I have a PhD in sports science and do data science work for NSW Health (state government health department).
 
-Most posts include the data and code in both R and Python so you can reproduce them.
+Most posts include the data and code in both R and Python.
 
 ::: home-links
 [<i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i> Resume](https://drive.google.com/uc?export=download&id=1a5qqr7yBhxUemN35BaE8nMW9mcFiXsBL) [<i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn](https://www.linkedin.com/in/mitch-henderson-9761b8114/) [<i class="bi bi-bluesky" aria-hidden="true"></i> Bluesky](https://bsky.app/profile/mitchhenderson.bsky.social) [<i class="bi bi-github" aria-hidden="true"></i> GitHub](https://github.com/mitchhenderson)
 :::
 :::::
 ::::::
+
+<br>
 
 ## Latest posts {.home-section-title .unnumbered .unlisted}
 

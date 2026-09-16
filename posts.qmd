@@ -1,6 +1,5 @@
 ---
 title: "Posts"
-description: "Worked examples on sport science data: tidying exports, visualising athlete data, and building models that are honest about uncertainty."
 listing:
   contents: posts
   sort: "date desc"

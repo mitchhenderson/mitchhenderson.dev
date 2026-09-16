@@ -17,6 +17,7 @@ $ink: #1b1e23;
 $muted: #5a6270;
 $rule: #e2e5e9;
 $accent: #1f4e8c;
+$link-hover-bright: #4582ec;
 
 $body-color: $ink;
 $primary: $accent;
@@ -89,11 +90,12 @@ h2.anchored {
   border-bottom: 1px solid $rule;
 }
 
+// Keeps Litera's original system font for the site name
 .navbar-title {
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-weight: 400;
   // Shrinks on narrow phones so the domain never clips next to the toggler
-  font-size: clamp(0.95rem, 0.75rem + 1.2vw, 1.1rem);
+  font-size: clamp(0.85em, 0.5em + 2.2vw, 1em);
 }
 
 .navbar .nav-link {
@@ -307,18 +309,25 @@ nav[role="doc-toc"] {
   }
 
   // Thumbnails are a mix of charts, tables and logos. A fixed 3:2 frame
-  // anchored to the top shows each chart's headline instead of letting a
-  // tall table stretch its row to 800px.
+  // stops a tall table stretching its row to 800px; centring suits the
+  // logos, while very tall images opt in to a top anchor below.
   .thumbnail img {
     margin-top: 0;
     width: 100%;
     aspect-ratio: 3 / 2;
     height: auto;
     object-fit: cover;
-    object-position: top;
+    object-position: center;
     border: 1px solid $rule;
     border-radius: 6px;
     background: #fff;
+  }
+
+  // Tall images whose headline sits at the top: a centre crop would show
+  // only unlabelled middle rows. Add filenames here as needed.
+  .thumbnail img[src$="nrl_finals_probs.png"],
+  .thumbnail img[src$="1rm_curve_thumbnail.png"] {
+    object-position: top;
   }
 
   &:hover .listing-title a {
@@ -351,7 +360,7 @@ nav[role="doc-toc"] {
 
 .home-intro {
   display: grid;
-  grid-template-columns: 9.5rem minmax(0, 1fr);
+  grid-template-columns: 14rem minmax(0, 1fr);
   column-gap: 2.25rem;
   align-items: start;
   margin-top: 2.5rem;
@@ -364,24 +373,23 @@ nav[role="doc-toc"] {
 }
 
 .home-portrait {
-  width: 9.5rem;
-  height: 9.5rem;
+  width: 14rem;
+  height: 14rem;
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 20%;
 
   @include media-breakpoint-down(md) {
-    width: 6.5rem;
-    height: 6.5rem;
+    width: 10rem;
+    height: 10rem;
   }
 }
 
 h1.home-name {
-  font-family: $font-family-serif;
-  font-weight: 600;
-  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
-  letter-spacing: -0.015em;
-  margin: 0 0 0.75rem;
+  font-family: "Raleway", $font-family-sans-serif;
+  font-weight: 100;
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 40px);
+  margin: 0.25rem 0 0.75rem;
 }
 
 .home-lede p {
@@ -417,11 +425,12 @@ h1.home-name {
       color: $muted;
     }
 
+    // Litera's bright blue, as the original homepage buttons used on hover
     &:hover {
-      color: $accent;
+      color: $link-hover-bright;
 
       .bi {
-        color: $accent;
+        color: $link-hover-bright;
       }
     }
   }

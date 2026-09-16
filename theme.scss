@@ -1,0 +1,453 @@
+/*-- scss:defaults --*/
+
+// Type system
+// - Source Serif 4: long-form reading (optical sizing keeps it crisp at body size)
+// - IBM Plex Sans: headings, navigation and metadata; technical without feeling cold
+// - IBM Plex Mono: code, shares Plex Sans' proportions so inline code sits naturally
+$font-family-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", serif;
+$font-family-sans-serif: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "IBM Plex Mono", SFMono-Regular, Menlo, Consolas, monospace;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 600;
+$font-size-base: 1.0625rem;
+$line-height-base: 1.65;
+
+// Colour: near-black ink, one navy accent drawn from the charts in the posts
+$ink: #1b1e23;
+$muted: #5a6270;
+$rule: #e2e5e9;
+$accent: #1f4e8c;
+
+$body-color: $ink;
+$primary: $accent;
+$link-color: $accent;
+$link-decoration: underline;
+$link-hover-color: darken($accent, 12%);
+$navbar-bg: #ffffff;
+$navbar-fg: $ink;
+$navbar-hl: $accent;
+$footer-bg: #ffffff;
+$footer-fg: $muted;
+$toc-color: $accent;
+
+$code-color: #8a2c3b;
+$btn-border-radius: 0.375rem;
+$btn-border-radius-sm: 0.25rem;
+$btn-border-radius-lg: 0.5rem;
+
+/*-- scss:rules --*/
+
+// ---------- Base ----------
+
+// Litera only sets the serif on <p>; extend it so lists and definition
+// lists in posts match the surrounding paragraphs.
+main li,
+main dd,
+main blockquote {
+  font-family: $font-family-serif;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba($accent, 0.4);
+  transition: text-decoration-color 150ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $ink;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  margin-top: 2.5rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+// Quarto draws a heavy rule under every h2; a lighter one keeps sections
+// distinct without chopping the article into boxes.
+h2.anchored {
+  border-bottom: 1px solid $rule;
+  padding-bottom: 0.3rem;
+}
+
+::selection {
+  background: rgba($accent, 0.15);
+}
+
+// ---------- Navbar ----------
+
+.navbar {
+  border: 0;
+  border-bottom: 1px solid $rule;
+}
+
+.navbar-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  // Shrinks on narrow phones so the domain never clips next to the toggler
+  font-size: clamp(0.95rem, 0.75rem + 1.2vw, 1.1rem);
+}
+
+.navbar .nav-link {
+  font-size: 0.95rem;
+}
+
+// ---------- Title blocks ----------
+
+h1.title {
+  font-family: $font-family-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-size: clamp(1.9rem, 1.4rem + 2.2vw, 2.75rem);
+  text-wrap: balance;
+}
+
+// Quarto pads the banner by 2.5em top and bottom; halve it so the article
+// starts closer to its headline.
+.quarto-title-banner {
+  margin-bottom: 0;
+
+  @include media-breakpoint-up(lg) {
+    padding-top: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.quarto-title .description,
+.quarto-title .description p {
+  font-family: $font-family-sans-serif;
+  color: $muted;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.quarto-title .description {
+  margin-top: 0.75rem;
+}
+
+// Author and date sit side by side rather than spread across two equal
+// columns, with a hairline separating the header from the article.
+#title-block-header.quarto-title-block.default {
+  margin-bottom: 0.5rem;
+
+  .quarto-title-meta {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2.5rem;
+    row-gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid $rule;
+    font-family: $font-family-sans-serif;
+  }
+
+  .quarto-title-meta-contents p {
+    margin-bottom: 0;
+  }
+}
+
+.quarto-title-meta-heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: $muted;
+}
+
+.quarto-title-meta-contents,
+.quarto-title-meta-contents p {
+  font-family: $font-family-sans-serif;
+  font-size: 0.95rem;
+}
+
+// ---------- Article body ----------
+
+// Keep code readable but clearly secondary to the prose
+pre code,
+div.sourceCode code {
+  font-size: 0.82em;
+}
+
+p code:not(.sourceCode),
+li code:not(.sourceCode) {
+  font-size: 0.88em;
+  background: #f4f5f7;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+div.sourceCode {
+  border: 1px solid $rule;
+  border-radius: 6px;
+}
+
+// Folded code: quiet, so readers who don't want code can skim past
+details.code-fold > summary {
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+  color: $muted;
+}
+
+// R / Python language tabs
+.panel-tabset .nav-tabs .nav-link {
+  padding: 0.35rem 0.8rem;
+}
+
+.callout {
+  font-family: $font-family-sans-serif;
+}
+
+figcaption,
+.figure-caption {
+  font-family: $font-family-sans-serif;
+  color: $muted;
+  font-size: 0.9rem;
+}
+
+// TOC
+#TOC,
+nav[role="doc-toc"] {
+  font-family: $font-family-sans-serif;
+}
+
+#toc-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $muted;
+  font-weight: 600;
+}
+
+// Keep fixed-width plots/tables from overflowing on mobile
+.cell-output-display {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.gt_table {
+  max-width: 100% !important;
+}
+
+// ---------- Post listings ----------
+
+// Quarto's markup order is thumbnail, body, metadata (flipped visually with
+// row-reverse). A named grid lets the date sit above the title instead of in
+// its own wide column, and the same structure works on phones.
+.list.quarto-listing-default div.quarto-post {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  grid-template-areas:
+    "meta  thumb"
+    "body  thumb";
+  // A fixed date row: with an auto row, Chrome hands the tall thumbnail's
+  // spare height to the date and pushes the title down.
+  grid-template-rows: 1.75rem auto;
+  align-content: start;
+  // Quarto's `gap: 2em` also sets a row gap above md; only columns need one
+  row-gap: 0;
+  column-gap: 2rem;
+  padding-block: 1.75rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid $rule;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  .metadata {
+    grid-area: meta;
+    margin: 0 0 0.35rem;
+    padding: 0;
+    font-family: $font-family-sans-serif;
+  }
+
+  .body {
+    grid-area: body;
+  }
+
+  .thumbnail {
+    grid-area: thumb;
+  }
+
+  .listing-date {
+    font-size: 0.85rem;
+    color: $muted;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .body h3.listing-title {
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+    text-wrap: balance;
+
+    // The title link carries its own font-weight: 400
+    a {
+      font-weight: inherit;
+    }
+  }
+
+  .listing-description,
+  .listing-description a,
+  .listing-description p {
+    font-family: $font-family-serif;
+    color: $muted;
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  // Thumbnails are a mix of charts, tables and logos. A fixed 3:2 frame
+  // anchored to the top shows each chart's headline instead of letting a
+  // tall table stretch its row to 800px.
+  .thumbnail img {
+    margin-top: 0;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid $rule;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  &:hover .listing-title a {
+    color: $accent;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .list.quarto-listing-default div.quarto-post {
+    grid-template-columns: minmax(0, 1fr) 5.5rem;
+    column-gap: 1rem;
+    padding-block: 1.25rem;
+
+    .body h3.listing-title {
+      font-size: 1.1rem;
+    }
+
+    .listing-description,
+    .listing-description p {
+      font-size: 0.95rem;
+    }
+
+    .thumbnail img {
+      aspect-ratio: 1;
+    }
+  }
+}
+
+// ---------- Home page ----------
+
+.home-intro {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  column-gap: 2.25rem;
+  align-items: start;
+  margin-top: 2.5rem;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+}
+
+.home-portrait {
+  width: 9.5rem;
+  height: 9.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 20%;
+
+  @include media-breakpoint-down(md) {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+}
+
+h1.home-name {
+  font-family: $font-family-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.6rem);
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+
+.home-lede p {
+  font-family: $font-family-sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: $ink;
+  text-wrap: pretty;
+  margin-bottom: 1rem;
+}
+
+.home-text > p {
+  color: lighten($ink, 12%);
+}
+
+.home-links p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1.25rem;
+  font-family: $font-family-sans-serif;
+  font-size: 0.95rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: $ink;
+    text-decoration: none;
+
+    .bi {
+      color: $muted;
+    }
+
+    &:hover {
+      color: $accent;
+
+      .bi {
+        color: $accent;
+      }
+    }
+  }
+}
+
+h2.home-section-title {
+  margin-top: 3.5rem;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $muted;
+  border-bottom: 1px solid $rule;
+  padding-bottom: 0.6rem;
+}
+
+.home-all-posts {
+  font-family: $font-family-sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+// ---------- Footer ----------
+
+.nav-footer {
+  border-top: 1px solid $rule;
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+}

@@ -4,7 +4,7 @@
     "href": "posts.html",
     "title": "Posts",
     "section": "",
-    "text": "Making 1 rep max estimates more accurate and honest\n\n\nUse more of the information you have.\n\n\n\n\n\nJan 4, 2026\n\n\nMitch Henderson\n\n\n\n\n\n\n\n\n\n\n\n\nHow many wins do NRL teams need to make the finals?\n\n\nIt depends, but Monte Carlo simulations give us a pretty good idea\n\n\n\n\n\nJan 27, 2025\n\n\nMitch Henderson\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Catapult’s running imbalance data\n\n\nThis post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R.\n\n\n\n\n\nFeb 10, 2021\n\n\nMitch Henderson\n\n\n\n\n\n\n\n\n\n\n\n\nVisualising Apple Health data |Guest post by Heidi Thornton\n\n\nTracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.\n\n\n\n\n\nMay 19, 2020\n\n\nHeidi Thornton\n\n\n\n\n\n\n\n\n\n\n\n\nMaking better visualisations using ggplot2 in R\n\n\nGreat visualisations help communicate your message more clearly. This post shows you an example of my process.\n\n\n\n\n\nApr 22, 2020\n\n\nMitch Henderson\n\n\n\n\n\n\n\n\n\n\n\n\nTidying Catapult 10Hz export data\n\n\nThe export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.\n\n\n\n\n\nApr 5, 2020\n\n\nMitch Henderson\n\n\n\n\n\nNo matching items"
+    "text": "Making 1 rep max estimates more accurate and honest\n\n\nUse more of the information you have.\n\n\n\n\n\nJan 4, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHow many wins do NRL teams need to make the finals?\n\n\nIt depends, but Monte Carlo simulations give us a pretty good idea\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Catapult’s running imbalance data\n\n\nThis post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R.\n\n\n\n\n\nFeb 10, 2021\n\n\n\n\n\n\n\n\n\n\n\n\nVisualising Apple Health data |Guest post by Heidi Thornton\n\n\nTracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.\n\n\n\n\n\nMay 19, 2020\n\n\n\n\n\n\n\n\n\n\n\n\nMaking better visualisations using ggplot2 in R\n\n\nGreat visualisations help communicate your message more clearly. This post shows you an example of my process.\n\n\n\n\n\nApr 22, 2020\n\n\n\n\n\n\n\n\n\n\n\n\nTidying Catapult 10Hz export data\n\n\nThe export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.\n\n\n\n\n\nApr 5, 2020\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2021-02-04-exploring-catapults-running-symmetry-data.html",
@@ -172,6 +172,13 @@
     "href": "index.html",
     "title": "Mitch Henderson",
     "section": "",
-    "text": "Sport🏅 | Science 👨‍🔬 | Data 💻\nResume"
+    "text": "I use data and statistical models to answer practical questions in sport.\n\nThis is where I write those ideas up in full: how to wrangle messy tracking exports, how to visualise athlete data so it gets used, and how to build models that are honest about what they don’t know. Most posts include the complete code in both R and Python so you can run it on your own data.\n\n Resume  LinkedIn  Bluesky  GitHub"
+  },
+  {
+    "objectID": "index.html#latest-posts",
+    "href": "index.html#latest-posts",
+    "title": "Mitch Henderson",
+    "section": "Latest posts",
+    "text": "Latest posts\n\n\n\n\n\n\n\n\n\n\nMaking 1 rep max estimates more accurate and honest\n\n\nUse more of the information you have.\n\n\n\n\n\nJan 4, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nHow many wins do NRL teams need to make the finals?\n\n\nIt depends, but Monte Carlo simulations give us a pretty good idea\n\n\n\n\n\nJan 27, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nExploring Catapult’s running imbalance data\n\n\nThis post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R.\n\n\n\n\n\nFeb 10, 2021\n\n\n\n\n\nNo matching items\n\nAll posts →"
   }
 ]

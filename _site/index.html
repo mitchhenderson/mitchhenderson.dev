@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Sports data science and statistical modelling, with worked examples in R and Python.">
 
-<title>Mitch Henderson – mitchhenderson.dev</title>
+<title>Mitch Henderson · Sports data science – mitchhenderson.dev</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -32,16 +33,18 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-238635b79ede54fe729691291bcb9680.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1b5cbb678aba238cc9ecc8dbef59e0a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-059d876d5fa3c4ca61ed61de650ea387.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,9 +72,75 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-recent-posts .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-description','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-recent-posts'] = new List('listing-recent-posts', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Mitch Henderson · Sports data science">
+<meta property="og:description" content="Sports data science and statistical modelling, with worked examples in R and Python.">
+<meta property="og:image" content="https://www.mitchhenderson.dev/headshot.jpg">
+<meta property="og:site_name" content="mitchhenderson.dev">
+<meta name="twitter:title" content="Mitch Henderson · Sports data science">
+<meta name="twitter:description" content="Sports data science and statistical modelling, with worked examples in R and Python.">
+<meta name="twitter:image" content="https://www.mitchhenderson.dev/headshot.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -92,14 +161,13 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-file-person" role="img">
-</i> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./posts.html"> <i class="bi bi-file-text" role="img">
-</i> 
+    <a class="nav-link" href="./posts.html"> 
 <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="./posts.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -114,39 +182,113 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="headshot.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Mitch Henderson</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><main class="content" id="quarto-document-content">
-<p>Sport🏅 | Science 👨‍🔬 | Data 💻</p>
-<p><a href="https://drive.google.com/uc?export=download&amp;id=1a5qqr7yBhxUemN35BaE8nMW9mcFiXsBL" title="Resume download link">Resume</a></p>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://www.linkedin.com/in/mitch-henderson-9761b8114/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://bsky.app/profile/mitchhenderson.bsky.social" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="fa6-brands:bluesky" aria-label="Icon bluesky from fa6-brands Iconify.design set." title="Icon bluesky from fa6-brands Iconify.design set."></iconify-icon> Bluesky</span>
-  </a>
-  <a href="https://github.com/mitchhenderson" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
+
+
+<div class="home-intro">
+<p><img src="img/headshot-480.jpg" class="home-portrait" alt="Portrait of Mitch Henderson" width="480" height="433"></p>
+<section id="mitch-henderson" class="level1 home-name unnumbered unlisted home-text">
+<h1 class="home-name unnumbered unlisted">Mitch Henderson</h1>
+<div class="home-lede">
+<p>I use data and statistical models to answer practical questions in sport.</p>
+</div>
+<p>This is where I write those ideas up in full: how to wrangle messy tracking exports, how to visualise athlete data so it gets used, and how to build models that are honest about what they don’t know. Most posts include the complete code in both R and Python so you can run it on your own data.</p>
+<div class="home-links">
+<p><a href="https://drive.google.com/uc?export=download&amp;id=1a5qqr7yBhxUemN35BaE8nMW9mcFiXsBL"><i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i> Resume</a> <a href="https://www.linkedin.com/in/mitch-henderson-9761b8114/"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a> <a href="https://bsky.app/profile/mitchhenderson.bsky.social"><i class="bi bi-bluesky" aria-hidden="true"></i> Bluesky</a> <a href="https://github.com/mitchhenderson"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a></p>
+</div>
+</section>
+</div>
+<section id="latest-posts" class="level2 home-section-title unnumbered unlisted">
+<h2 class="home-section-title unnumbered unlisted anchored" data-anchor-id="latest-posts">Latest posts</h2>
+<div id="listing-recent-posts" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1767445200000" data-listing-file-modified-sort="1789346721143" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="47" data-listing-word-count-sort="9201">
+<div class="thumbnail"><a href="./posts/2026-01-04-e1rm-modelling/index.html" class="no-external">
+
+<img loading="lazy" src="./img/1rm_curve_thumbnail.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2026-01-04-e1rm-modelling/index.html" class="no-external">Making 1 rep max estimates more accurate and honest</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/2026-01-04-e1rm-modelling/index.html" class="no-external">
+<p>Use more of the information you have.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/2026-01-04-e1rm-modelling/index.html" class="no-external">
+<div class="listing-date">
+Jan 4, 2026
+</div>
+</a>
 </div>
 </div>
- <!-- /main -->
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1737896400000" data-listing-file-modified-sort="1789478517390" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="46" data-listing-word-count-sort="9103">
+<div class="thumbnail"><a href="./posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html" class="no-external">
+
+<img loading="lazy" src="./img/nrl_finals_probs.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html" class="no-external">How many wins do NRL teams need to make the finals?</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html" class="no-external">
+<p>It depends, but Monte Carlo simulations give us a pretty good idea</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html" class="no-external">
+<div class="listing-date">
+Jan 27, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1612875600000" data-listing-file-modified-sort="1789477046961" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2458">
+<div class="thumbnail"><a href="./posts/2021-02-04-exploring-catapults-running-symmetry-data.html" class="no-external">
+
+<img loading="lazy" src="./img/OF.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2021-02-04-exploring-catapults-running-symmetry-data.html" class="no-external">Exploring Catapult’s running imbalance data</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/2021-02-04-exploring-catapults-running-symmetry-data.html" class="no-external">
+<p>This post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/2021-02-04-exploring-catapults-running-symmetry-data.html" class="no-external">
+<div class="listing-date">
+Feb 10, 2021
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+<p><a href="./posts.html" class="home-all-posts">All posts →</a></p>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
@@ -539,6 +681,44 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Mitch Henderson · Sport, science, data</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mitchhenderson">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/mitch-henderson-9761b8114/">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/mitchhenderson.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./posts.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS feed">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 

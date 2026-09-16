@@ -4,20 +4,36 @@ project:
 website:
   title: "mitchhenderson.dev"
   site-url: https://www.mitchhenderson.dev
-  description: "Sport, science, data"
+  description: "Sports data science and statistical modelling, with worked examples in R and Python."
+  open-graph: true
+  twitter-card: true
   navbar:
     pinned: true
     right:
-      - text: "Home"
-        icon: file-person
-        file: index.qmd
       - text: "Posts"
-        icon: file-text
         file: posts.qmd
+      - icon: rss
+        href: posts.xml
+        aria-label: "RSS feed"
+  page-footer:
+    left: "Mitch Henderson · Sport, science, data"
+    right:
+      - icon: github
+        href: https://github.com/mitchhenderson
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/mitch-henderson-9761b8114/
+        aria-label: LinkedIn
+      - icon: bluesky
+        href: https://bsky.app/profile/mitchhenderson.bsky.social
+        aria-label: Bluesky
+      - icon: rss
+        href: posts.xml
+        aria-label: "RSS feed"
 format:
   html:
     theme:
-      light: litera
+      light: [litera, theme.scss]
     css: styles.css
     highlight-style: arrow
 

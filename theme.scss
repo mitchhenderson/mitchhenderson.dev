@@ -1,462 +1,2079 @@
 /*-- scss:defaults --*/
 
-// Type system
-// - Source Serif 4: long-form reading (optical sizing keeps it crisp at body size)
-// - IBM Plex Sans: headings, navigation and metadata; technical without feeling cold
-// - IBM Plex Mono: code, shares Plex Sans' proportions so inline code sits naturally
-$font-family-serif: "Source Serif 4", Georgia, Cambria, "Times New Roman", serif;
-$font-family-sans-serif: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$font-family-monospace: "IBM Plex Mono", SFMono-Regular, Menlo, Consolas, monospace;
-$headings-font-family: $font-family-sans-serif;
-$headings-font-weight: 600;
-$font-size-base: 1.0625rem;
-$line-height-base: 1.65;
+// One family for all text. Source Sans 3 is the open sibling of Myriad Pro,
+// the typeface used in the charts, so figures and prose read as one design.
+$font-family-sans-serif: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-monospace: "Source Code Pro", SFMono-Regular, Menlo, Consolas, monospace !default;
+$font-size-base: 1.125rem !default;
+$line-height-base: 1.6 !default;
+$headings-font-weight: 650 !default;
+$headings-line-height: 1.2 !default;
 
-// Colour: near-black ink, one navy accent drawn from the charts in the posts
-$ink: #1b1e23;
-$muted: #5a6270;
-$rule: #e2e5e9;
-$accent: #1f4e8c;
-$link-hover-bright: #4582ec;
-
-$body-color: $ink;
-$primary: $accent;
-$link-color: $accent;
-$link-decoration: underline;
-$link-hover-color: darken($accent, 12%);
-$navbar-bg: #ffffff;
-$navbar-fg: $ink;
-$navbar-hl: $accent;
-$footer-bg: #ffffff;
-$footer-fg: $muted;
-$toc-color: $accent;
-
-$code-color: #8a2c3b;
-$btn-border-radius: 0.375rem;
-$btn-border-radius-sm: 0.25rem;
-$btn-border-radius-lg: 0.5rem;
+// Colour: one primary (the navy from the charts) and navy-cast neutrals.
+// Bootstrap does colour maths on these, so they stay literal; component
+// rules below use the CSS custom properties instead.
+$brand: #134a8e !default;
+$body-bg: #ffffff !default;
+$body-color: #263142 !default;
+$primary: $brand !default;
+$link-color: $brand !default;
+$link-decoration: underline !default;
+$navbar-bg: $body-bg !default;
+$navbar-fg: #263142 !default;
+$navbar-hl: $brand !default;
+$footer-bg: $body-bg !default;
+$footer-fg: #5b6676 !default;
+$code-color: #263142 !default;
+$border-radius: 0.5rem !default;
 
 /*-- scss:rules --*/
 
+// ---------- Tokens ----------
+
+:root {
+  // Colour
+  --c-bg: #ffffff;
+  --c-surface: #f4f7fb;
+  --c-surface-strong: #e8eff8;
+  --c-border: #dde4ee;
+  --c-ink: #0f1b2d;
+  --c-text: #263142;
+  --c-muted: #5b6676;
+  --c-primary: #134a8e;
+  --c-primary-strong: #0d3566;
+  --c-on-primary: #ffffff;
+  --c-code-bg: #f4f7fb;
+  // Charts and tables keep a light surface in every theme
+  --c-paper: #ffffff;
+  // The hero band is the brand colour at full strength
+  --c-hero-bg: #134a8e;
+  --c-hero-ink: #ffffff;
+  --c-hero-text: #d5e2f4;
+  // The band is lit: deeper behind the text, a soft light behind the portrait
+  --c-hero-deep: #0d3566;
+  --c-hero-glow: #2463b0;
+  // The forecast fan drawn on the band
+  --c-hero-line: rgba(255, 255, 255, 0.2);
+  --c-hero-line-strong: rgba(255, 255, 255, 0.62);
+  --c-hero-band: rgba(255, 255, 255, 0.055);
+
+  // 4-point spacing scale
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+
+  // Type scale: four text sizes, a fixed heading, then three headings that
+  // grow with the screen
+  --t-small: 0.875rem;
+  --t-ui: 1rem;
+  --t-body: 1.125rem;
+  --t-lead: 1.3125rem;
+  --t-h2: 1.625rem;
+  --t-section: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  --t-display: clamp(2rem, 1.4rem + 2.6vw, 3rem);
+  --t-hero: clamp(2.5rem, 1.3rem + 4.6vw, 4.25rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.25rem;
+  --shadow-card: 0 1px 2px rgba(15, 27, 45, 0.04), 0 8px 24px rgba(15, 27, 45, 0.06);
+  // For a surface lifted on hover
+  --shadow-raised: 0 2px 4px rgba(15, 27, 45, 0.05), 0 18px 40px -8px rgba(15, 27, 45, 0.14);
+  --ease: 150ms ease;
+  --wide: 62rem;
+}
+
+// A soft cross-fade between pages where the browser supports it
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  @view-transition {
+    navigation: none;
+  }
+}
+
 // ---------- Base ----------
 
-// Litera only sets the serif on <p>; extend it so lists and definition
-// lists in posts match the surrounding paragraphs.
-main li,
-main dd,
-main blockquote {
-  font-family: $font-family-serif;
+body {
+  color: var(--c-text);
+  background: var(--c-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--c-ink);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--t-display);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--t-h2);
+  margin-top: var(--s-12);
+  margin-bottom: var(--s-4);
+}
+
+h3 {
+  font-size: var(--t-lead);
+  margin-top: var(--s-8);
+  margin-bottom: var(--s-3);
+}
+
+h4, h5, h6 {
+  font-size: var(--t-body);
+  margin-top: var(--s-6);
+}
+
+// Quarto draws a rule under every h2; whitespace separates sections instead
+h2 {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 a {
+  color: var(--c-primary);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
-  text-decoration-color: rgba($accent, 0.4);
-  transition: text-decoration-color 150ms ease;
+  text-decoration-color: color-mix(in srgb, var(--c-primary) 40%, transparent);
+  transition: color var(--ease), text-decoration-color var(--ease), background-color var(--ease);
 
   &:hover {
+    color: var(--c-primary-strong);
     text-decoration-color: currentColor;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $ink;
-  letter-spacing: -0.01em;
-}
-
-h2 {
-  margin-top: 2.5rem;
-}
-
-h3 {
-  margin-top: 2rem;
-}
-
-// Quarto draws a heavy rule under every h2; a lighter one keeps sections
-// distinct without chopping the article into boxes.
-h2.anchored {
-  border-bottom: 1px solid $rule;
-  padding-bottom: 0.3rem;
+:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 ::selection {
-  background: rgba($accent, 0.15);
+  background: color-mix(in srgb, var(--c-primary) 18%, transparent);
+}
+
+// Images carry their dimensions so the page doesn't jump as they load; the
+// height still follows the width when the layout scales them down.
+:where(img[width][height]) {
+  height: auto;
+}
+
+// <picture> only chooses which file to load. Without a box of its own, the
+// image inside is laid out as if the wrapper weren't there, which keeps
+// figures in their grid columns.
+picture {
+  display: contents;
+
+  // Otherwise each <source> becomes an empty item in a flex or grid parent
+  // and takes up a gap
+  > source {
+    display: none;
+  }
+}
+
+// Hidden until it takes keyboard focus
+.skip-link {
+  position: fixed;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 2000;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--radius);
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+  font-size: var(--t-ui);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+    color: var(--c-on-primary);
+    outline-color: var(--c-ink);
+  }
+
+  // Fixed elements repeat on every printed page
+  @media print {
+    display: none;
+  }
+}
+
+// Bootstrap replaces the outline on nav links with a faint glow; keep the
+// same ring as everything else
+.nav-link:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+hr {
+  border-color: var(--c-border);
+  opacity: 1;
 }
 
 // ---------- Navbar ----------
 
 .navbar {
-  border: 0;
-  border-bottom: 1px solid $rule;
+  border-bottom: 1px solid var(--c-border);
+  padding-block: var(--s-2);
 }
 
-// Keeps Litera's original system font for the site name
-.navbar-title {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  font-weight: 400;
-  // Shrinks on narrow phones so the domain never clips next to the toggler
-  font-size: clamp(0.85em, 0.5em + 2.2vw, 1em);
+.navbar-brand .navbar-title {
+  font-weight: 650;
+  font-size: var(--t-body);
+  letter-spacing: -0.01em;
+  color: var(--c-ink);
 }
 
-.navbar .nav-link {
-  font-size: 0.95rem;
-}
+.navbar .navbar-nav .nav-link {
+  font-size: var(--t-ui);
+  font-weight: 500;
+  color: var(--c-muted);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius);
+  transition: color var(--ease), background-color var(--ease);
 
-// ---------- Title blocks ----------
+  &:hover {
+    color: var(--c-ink);
+    background: var(--c-surface);
+  }
 
-h1.title {
-  font-family: $font-family-serif;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  font-size: clamp(1.9rem, 1.4rem + 2.2vw, 2.75rem);
-  text-wrap: balance;
-}
-
-// Quarto pads the banner by 2.5em top and bottom; halve it so the article
-// starts closer to its headline.
-.quarto-title-banner {
-  margin-bottom: 0;
-
-  @include media-breakpoint-up(lg) {
-    padding-top: 2.5rem;
-    padding-bottom: 0.5rem;
+  // The current page is filled, so it reads as selected
+  &.active {
+    color: var(--c-primary);
+    background: var(--c-surface-strong);
   }
 }
 
-.quarto-title .description,
-.quarto-title .description p {
-  font-family: $font-family-sans-serif;
-  color: $muted;
-  font-size: 1.15rem;
-  line-height: 1.5;
+.navbar #quarto-search .aa-DetachedSearchButton,
+.navbar .quarto-color-scheme-toggle {
+  color: var(--c-muted);
 }
 
-.quarto-title .description {
-  margin-top: 0.75rem;
+// ---------- Shared pieces ----------
+
+// Home, About, Posts and 404 write their own heading inside the layout.
+// Quarto would otherwise lift the first h1 out into a generated title block,
+// so those pages set a title in their metadata and hide that block.
+body.own-title #title-block-header {
+  display: none;
 }
 
-// Author and date sit side by side rather than spread across two equal
-// columns, with a hairline separating the header from the article.
-#title-block-header.quarto-title-block.default {
-  margin-bottom: 0.5rem;
 
-  .quarto-title-meta {
+// Home, About and Posts use the full page layout with their own measure
+.wrap {
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding-block: var(--s-8) var(--s-16);
+}
+
+h2.section-title {
+  font-size: var(--t-h2);
+  letter-spacing: -0.02em;
+  color: var(--c-ink);
+  margin-top: var(--s-16);
+  margin-bottom: var(--s-6);
+}
+
+.section-intro {
+  color: var(--c-muted);
+  margin-top: calc(var(--s-4) * -1);
+  margin-bottom: var(--s-6);
+}
+
+// Buttons: horizontal padding is double the vertical
+.btn-solid,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.75rem;
+  padding: var(--s-3) var(--s-6);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-size: var(--t-ui);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--ease), border-color var(--ease), color var(--ease), transform var(--ease);
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-solid {
+  background: var(--c-primary);
+  color: var(--c-on-primary);
+
+  &:hover {
+    background: var(--c-primary-strong);
+    color: var(--c-on-primary);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-ink);
+  border-color: var(--c-border);
+
+  &:hover {
+    background: var(--c-surface);
+    border-color: var(--c-muted);
+    color: var(--c-ink);
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: var(--s-1) var(--s-3);
+  border-radius: 999px;
+  background: var(--c-surface-strong);
+  color: var(--c-primary-strong);
+  font-size: var(--t-small);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.text-link {
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ---------- Home ----------
+
+.wrap.home {
+  padding-top: 0;
+
+  // Section headings sit a clear step above the titles inside them
+  h2.section-title {
+    font-size: var(--t-section);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: var(--s-8);
+  }
+}
+
+// The band starts directly under the navbar
+body:has(.hero) #quarto-content,
+body:has(.hero) #quarto-content > main.content {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+// Full-bleed band. The colour is a real background on the element, and a
+// layer behind it carries the lit version out to the viewport edges. That
+// layer is wider than the screen, so the page container clips it. (The clip
+// can't go on <body>: the browser applies body's overflow to the viewport,
+// which then scrolls sideways.)
+body:has(.hero) #quarto-content {
+  overflow-x: clip;
+}
+
+// Fine grain, so the band's gradients don't show steps. Plain white specks
+// at low alpha: a blend mode on a layer this wide is slow to paint.
+// It is an SVG of feTurbulence noise, base64-encoded because the filter is
+// referenced inside it as url(#n), and Quarto reads any url() it finds in
+// the stylesheet as a file to copy, which fails the render.
+$hero-grain: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMjAnIGhlaWdodD0nMjIwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjknIG51bU9jdGF2ZXM9JzInIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9JzAgMCAwIDAgMSAwIDAgMCAwIDEgMCAwIDAgMCAxIDAgMCAwIC4xIDAnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMjIwJyBoZWlnaHQ9JzIyMCcgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 19rem;
+  column-gap: var(--s-16);
+  align-items: center;
+  padding-block: clamp(var(--s-12), 8vw, 6rem);
+  background: var(--c-hero-bg);
+  color: var(--c-hero-text);
+
+  // The layer is the column plus 100vmax each side, so positions are written
+  // from its edges: the column starts at 100vmax and ends at 100% - 100vmax.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 -100vmax;
+    z-index: -1;
+    background:
+      $hero-grain,
+      // A soft light behind the portrait
+      radial-gradient(ellipse 36rem 30rem at calc(100% - 100vmax - 9.5rem) 46%, var(--c-hero-glow), transparent 72%),
+      // Deeper towards the foot of the band
+      linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--c-hero-deep) 70%, transparent)),
+      // Deep navy behind the text, the chart navy towards the portrait
+      linear-gradient(90deg, var(--c-hero-deep) calc(100vmax - 8rem), var(--c-hero-bg) calc(100% - 100vmax - 14rem));
+  }
+
+  // Stacked: a small portrait leads, then the text
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-6);
+
+    // The light moves up behind the small portrait
+    &::before {
+      background:
+        $hero-grain,
+        radial-gradient(ellipse 26rem 20rem at calc(100vmax + 3rem) 5rem, var(--c-hero-glow), transparent 72%),
+        linear-gradient(180deg, var(--c-hero-bg), var(--c-hero-deep));
+    }
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  :focus-visible {
+    outline-color: var(--c-hero-ink);
+  }
+}
+
+h1.hero-title {
+  margin: 0 0 var(--s-6);
+  font-size: var(--t-hero);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--c-hero-ink);
+}
+
+.hero-lead,
+.hero-detail {
+  max-width: 34rem;
+  margin: 0 0 var(--s-4);
+}
+
+.hero-lead {
+  font-size: var(--t-lead);
+  line-height: 1.45;
+  color: var(--c-hero-ink);
+}
+
+.hero-detail {
+  font-size: var(--t-ui);
+  line-height: 1.6;
+}
+
+.hero-portrait {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: var(--radius-xl);
+  // A hairline to hold the edge against the band, and a soft drop below
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 1.5rem 3rem -1rem rgba(3, 14, 33, 0.6);
+
+  @include media-breakpoint-down(lg) {
+    order: -1;
+    width: 6rem;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+  }
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-8);
+
+  // On a phone they stack at one width instead of two ragged ones
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+
+    a {
+      justify-content: center;
+    }
+  }
+}
+
+// On the band the buttons invert: white carries the primary action
+.hero .btn-solid {
+  background: var(--c-hero-ink);
+  color: var(--c-hero-bg);
+
+  &:hover {
+    background: var(--c-hero-text);
+    color: var(--c-hero-bg);
+  }
+}
+
+.hero .btn-ghost {
+  color: var(--c-hero-ink);
+  border-color: rgba(255, 255, 255, 0.45);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--c-hero-ink);
+    color: var(--c-hero-ink);
+  }
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-1);
+  // Pulled left so the first icon lines up with the text above
+  margin: var(--s-4) 0 0 calc(var(--s-2) * -1);
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-small);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: 2.75rem;
+    padding: var(--s-2);
+    border-radius: var(--radius);
+    color: var(--c-hero-text);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-hero-ink);
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Says what the artwork behind the band is, in the manner of a chart's
+// source line, and links to the script that makes it
+.hero-note {
+  max-width: 34rem;
+  margin: var(--s-4) 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+
+  // The links to the code sit on their own line beneath
+  .hero-note-links {
+    display: block;
+    margin-top: var(--s-1);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+
+    &:hover {
+      color: var(--c-hero-ink);
+    }
+  }
+}
+
+// The forecast fan: an observed line runs under the copy, then opens into
+// possible futures beneath the portrait. It is posterior draws from a
+// Gaussian process, generated by tools/hero-fan.R. The layer sits above the
+// colour layer and below the content.
+.hero-art {
+  position: absolute;
+  inset: 0 calc((100vw - 100%) / -2);
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+
+  // On a phone the fan moves to the strip beside the small portrait. It fades
+  // out before the headline, and the stub of history that would show in the
+  // gutter to the left of the portrait is hidden.
+  @include media-breakpoint-down(md) {
+    bottom: auto;
+    height: 11.5rem;
+    mask-image: linear-gradient(180deg, #000 55%, transparent 96%), linear-gradient(90deg, transparent 8.25rem, #000 8.5rem);
+    mask-composite: intersect;
+  }
+}
+
+// Drawn for a 1440 x 870 band. It scales uniformly, anchored to the foot of
+// the band, so nothing is distorted.
+.hero-fan {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  path {
+    fill: none;
+    stroke-width: 1;
+  }
+
+  // "Now" sits just right of the portrait, so the futures leave from it
+  @include media-breakpoint-down(md) {
+    --fan-width: min(calc(225vw - 337px), 760px);
+    position: absolute;
+    // "Now" is at 55.56% across and 57.1% down the drawing
+    left: calc(150px - var(--fan-width) * 0.5556);
+    top: calc(120px - var(--fan-width) * 0.571);
+    width: var(--fan-width);
+    height: calc(var(--fan-width) * 870 / 1440);
+    mask-image: linear-gradient(90deg, #000 78%, transparent 99%);
+  }
+}
+
+.hero-fan-draw {
+  stroke: var(--c-hero-line);
+}
+
+.hero-fan path.hero-fan-median,
+.hero-fan path.hero-fan-history {
+  stroke: var(--c-hero-line-strong);
+  stroke-width: 1.5;
+}
+
+.hero-fan path.hero-fan-band {
+  fill: var(--c-hero-band);
+  stroke: none;
+}
+
+.hero-fan-point {
+  fill: var(--c-hero-line-strong);
+}
+
+.hero-fan-now {
+  fill: var(--c-hero-ink);
+}
+
+// The one authored moment on the page: the hero settles into place on
+// arrival while the fan draws itself. Everything is visible without it.
+@media (prefers-reduced-motion: no-preference) {
+  .hero-text > *,
+  .hero-portrait {
+    animation: hero-settle 800ms var(--ease-out) both;
+  }
+
+  .hero-lead {
+    animation-delay: 70ms;
+  }
+
+  .hero-detail {
+    animation-delay: 130ms;
+  }
+
+  .hero-actions {
+    animation-delay: 190ms;
+  }
+
+  .hero-links {
+    animation-delay: 240ms;
+  }
+
+  // The note arrives once the fan it describes has been drawn
+  .hero-note {
+    animation-delay: 1500ms;
+  }
+
+  .hero-portrait {
+    animation-name: hero-portrait-in;
+    animation-duration: 1000ms;
+    animation-delay: 120ms;
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes hero-portrait-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+    filter: blur(6px);
+  }
+}
+
+// The observed line draws first. As it reaches "now", each future leaves at
+// its own moment (--d) and pace (--t), both set on the element by
+// tools/hero-fan.R, and the bands fade in last.
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fan-stroke {
+    stroke-dasharray: 1;
+    animation: hero-fan-stroke var(--t) var(--ease-out) var(--d) both;
+  }
+
+  // The history is read left to right, so it moves at an even pace
+  .hero-fan path.hero-fan-history {
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+
+  .hero-fan-point,
+  .hero-fan-now {
+    animation: hero-fan-fade 300ms ease var(--d) both;
+  }
+
+  .hero-fan-band {
+    animation: hero-fan-fade 1100ms ease 1300ms both;
+  }
+}
+
+@keyframes hero-fan-stroke {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+// fill-opacity, not opacity: an opacity animation gives each small shape its
+// own compositor layer, and some of them then failed to paint in testing
+@keyframes hero-fan-fade {
+  from {
+    fill-opacity: 0;
+  }
+}
+
+// Selected work: the chart leads and the whole row is the link. Rows
+// alternate sides so the page doesn't read as a list.
+.feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: var(--s-12);
+  align-items: center;
+
+  & + & {
+    margin-top: var(--s-16);
+  }
+
+  // Every other row is mirrored; the chart keeps the wide column
+  &:nth-of-type(even) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+
+    .feature-figure {
+      order: 1;
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    &,
+    &:nth-of-type(even) {
+      grid-template-columns: 1fr;
+      row-gap: var(--s-6);
+    }
+
+    & + & {
+      margin-top: var(--s-12);
+    }
+
+    &:nth-of-type(even) .feature-figure {
+      order: 0;
+    }
+  }
+
+  h3 {
+    margin: 0 0 var(--s-3);
+    font-size: var(--t-h2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+
+    a {
+      color: var(--c-ink);
+      font-weight: inherit;
+      text-decoration: none;
+      transition: color var(--ease);
+
+      // Stretch the title link over the whole row
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  p {
+    margin: 0 0 var(--s-4);
+    font-size: var(--t-body);
+    line-height: 1.55;
+  }
+
+  &:hover h3 a {
+    color: var(--c-primary);
+  }
+
+  &:has(a:focus-visible) {
+    outline: 2px solid var(--c-primary);
+    outline-offset: var(--s-3);
+    border-radius: var(--radius-lg);
+  }
+}
+
+// Charts are drawn for a white page, so they sit on paper in both themes
+.feature-figure {
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-paper);
+  box-shadow: var(--shadow-card);
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out), border-color var(--ease);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .feature:hover & {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--c-primary) 35%, var(--c-border));
+    box-shadow: var(--shadow-raised);
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-6);
+  padding: 0;
+  list-style: none;
+}
+
+.feature-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+  color: var(--c-primary);
+  font-size: var(--t-ui);
+  font-weight: 600;
+
+  .bi {
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .feature:hover & .bi {
+    transform: translateX(var(--s-1));
+  }
+}
+
+// What I work on: three plain columns under a shared rule
+.focus {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--s-12);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--c-border);
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-6);
+  }
+
+  h3 {
+    margin: 0 0 var(--s-2);
+    font-size: var(--t-body);
+  }
+
+  p {
+    margin: 0 0 var(--s-2);
+    font-size: var(--t-ui);
+    line-height: 1.55;
+  }
+
+  .tools {
+    margin-bottom: 0;
+    color: var(--c-muted);
+    font-size: var(--t-small);
+  }
+}
+
+.focus-note {
+  margin: var(--s-6) 0 0;
+  color: var(--c-muted);
+  font-size: var(--t-ui);
+}
+
+.earlier {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+// Cards for the Posts page and the end of each post: the chart leads and
+// the whole card is the link
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-8);
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+}
+
+.work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--s-6) var(--s-6);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-bg);
+  overflow: hidden;
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--c-primary) 45%, var(--c-border));
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
+  }
+
+  &:focus-within {
+    border-color: var(--c-primary);
+  }
+
+  > p:has(img) {
+    margin: 0 calc(var(--s-6) * -1) var(--s-6);
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-paper);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  .work-meta {
+    margin: auto 0 0;
+    font-size: var(--t-small);
+    color: var(--c-muted);
+  }
+
+  h3 {
+    font-size: var(--t-lead);
+    line-height: 1.25;
+    margin: 0 0 var(--s-3);
+
+    a {
+      color: var(--c-ink);
+      text-decoration: none;
+      font-weight: inherit;
+
+      // Stretch the title link over the whole card
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  &:hover h3 a {
+    color: var(--c-primary);
+  }
+
+  &:has(a:focus-visible) {
+    outline: 2px solid var(--c-primary);
+    outline-offset: 3px;
+  }
+
+  p {
+    color: var(--c-text);
+    font-size: var(--t-ui);
+    line-height: 1.55;
+    margin-bottom: var(--s-4);
+  }
+
+  // Quarto wraps a heading and what follows it in a <section>
+  section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  // Labels sit on the bottom edge so cards of different length line up
+  p:has(> .tag) {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 2.5rem;
-    row-gap: 0.5rem;
-    margin-top: 1.25rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid $rule;
-    font-family: $font-family-sans-serif;
+    gap: var(--s-2);
+    margin: auto 0 0;
+    padding-top: var(--s-2);
   }
 
-  .quarto-title-meta-contents p {
+  > p:last-child,
+  section > p:last-child {
     margin-bottom: 0;
   }
 }
 
-.quarto-title-meta-heading {
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: $muted;
+// ---------- Posts page ----------
+
+.page-head {
+  h1 {
+    margin: 0 0 var(--s-4);
+  }
+
+  p {
+    font-size: var(--t-lead);
+    color: var(--c-muted);
+    max-width: 56ch;
+    margin-bottom: var(--s-8);
+  }
 }
 
-.quarto-title-meta-contents,
-.quarto-title-meta-contents p {
-  font-family: $font-family-sans-serif;
-  font-size: 0.95rem;
+// Earlier writing: compact rows, no images
+.row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--c-border);
+
+  li {
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--s-4);
+    align-items: baseline;
+    padding: var(--s-3) var(--s-2);
+    color: var(--c-ink);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color var(--ease), color var(--ease);
+
+    &:hover {
+      background: var(--c-surface);
+      color: var(--c-primary);
+    }
+  }
+
+  .row-date {
+    color: var(--c-muted);
+    font-size: var(--t-small);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
 }
 
-// ---------- Article body ----------
+// ---------- About and resume ----------
 
-// Keep code readable but clearly secondary to the prose
-pre code,
-div.sourceCode code {
-  font-size: 0.82em;
+.cv {
+  max-width: 50rem;
 }
 
-p code:not(.sourceCode),
-li code:not(.sourceCode) {
-  font-size: 0.88em;
-  background: #f4f5f7;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
+.cv-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-6);
+
+  // The name block takes the spare width and wraps if it must, so the
+  // download button stays at the far end of the same row
+  .cv-head-text {
+    flex: 1 1 14rem;
+    min-width: 0;
+  }
+
+  h1 {
+    margin: 0 0 var(--s-2);
+  }
+
+  p {
+    font-size: var(--t-lead);
+    color: var(--c-muted);
+    margin: 0;
+  }
 }
 
-div.sourceCode {
-  border: 1px solid $rule;
-  border-radius: 6px;
+.cv-portrait {
+  width: 5.5rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: var(--radius-lg);
 }
 
-// Folded code: quiet, so readers who don't want code can skim past
-details.code-fold > summary {
-  font-family: $font-family-sans-serif;
-  font-size: 0.85rem;
-  color: $muted;
+.cv-contact p {
+  margin: var(--s-4) 0 0;
+  font-size: var(--t-ui);
+  color: var(--c-muted);
 }
 
-// R / Python language tabs
-.panel-tabset .nav-tabs .nav-link {
-  padding: 0.35rem 0.8rem;
+.cv-summary {
+  margin-top: var(--s-8);
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--c-border);
+
+  p {
+    max-width: 68ch;
+  }
+
+  p:first-child {
+    font-size: var(--t-lead);
+    line-height: 1.45;
+    color: var(--c-ink);
+  }
 }
 
-.callout {
-  font-family: $font-family-sans-serif;
+// Skills use plain rows: a label on the left, the detail on the right
+.cv-entry {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  column-gap: var(--s-6);
+  padding-block: var(--s-4);
+  border-top: 1px solid var(--c-border);
+  break-inside: avoid;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-1);
+  }
 }
 
-figcaption,
-.figure-caption {
-  font-family: $font-family-sans-serif;
-  color: $muted;
-  font-size: 0.9rem;
+// Experience and education are a vertical timeline: dates, then a line with
+// a node per employer, then a callout holding the roles. Spacing follows the
+// content, not the calendar.
+.cv-entry[id^="role-"] {
+  --node: 0.875rem;
+  --node-top: 1.375rem;
+  position: relative;
+  grid-template-columns: 7rem 1.5rem minmax(0, 1fr);
+  column-gap: var(--s-4);
+  padding: 0 0 var(--s-6);
+  border-top: 0;
+
+  // The line: runs through the gap below so entries join up
+  &::before {
+    content: "";
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    width: 2px;
+    margin-bottom: calc(var(--s-6) * -1);
+    background: var(--c-border);
+    // Backgrounds are dropped in print by default; the line should stay
+    print-color-adjust: exact;
+  }
+
+  // The node
+  &::after {
+    content: "";
+    position: absolute;
+    top: var(--node-top);
+    left: calc(7rem + var(--s-4) + 0.75rem - var(--node) / 2);
+    width: var(--node);
+    height: var(--node);
+    border-radius: 50%;
+    background: var(--c-bg);
+    border: 2px solid var(--c-primary);
+    transition: background-color var(--ease), transform var(--ease);
+  }
+
+  &:hover::after {
+    background: var(--c-primary);
+    transform: scale(1.15);
+  }
+
+  // The line starts at the first node and fades out after the last
+  h2 + &::before {
+    margin-top: var(--node-top);
+  }
+
+  &:not(:has(+ .cv-entry))::before {
+    margin-bottom: 0;
+    background: linear-gradient(to bottom, var(--c-border) 40%, transparent);
+  }
+
+  .cv-dates {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: calc(var(--node-top) - 0.4rem);
+    text-align: right;
+  }
+
+  .cv-body {
+    grid-column: 3;
+    grid-row: 1;
+    position: relative;
+    padding: var(--s-4) var(--s-6);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    background: var(--c-bg);
+    transition: border-color var(--ease), box-shadow var(--ease);
+
+    // Connector from the node to the callout
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(var(--node-top) + var(--node) / 2 - 1px);
+      right: 100%;
+      width: calc(var(--s-4) + 0.75rem - var(--node) / 2);
+      height: 2px;
+      background: var(--c-border);
+    }
+  }
+
+  &:hover .cv-body {
+    border-color: color-mix(in srgb, var(--c-primary) 45%, var(--c-border));
+    box-shadow: var(--shadow-card);
+  }
+
+  // Phones: the line moves to the left edge and dates sit above the callout
+  @include media-breakpoint-down(md) {
+    --node-top: 0.3rem;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: var(--s-3);
+    row-gap: var(--s-2);
+
+    &::before {
+      grid-column: 1;
+    }
+
+    &::after {
+      left: calc(0.75rem - var(--node) / 2);
+    }
+
+    .cv-dates {
+      grid-column: 2;
+      padding-top: 0;
+      text-align: left;
+    }
+
+    .cv-body {
+      grid-column: 2;
+      grid-row: 2;
+      padding: var(--s-4);
+
+      &::before {
+        display: none;
+      }
+    }
+  }
 }
 
-// TOC
+// The current role's node is filled
+#role-nswhp::after {
+  background: var(--c-primary);
+}
+
+.cv-dates p {
+  margin: 0;
+  font-size: var(--t-small);
+  line-height: 1.9;
+  color: var(--c-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cv-body {
+  h3 {
+    font-size: var(--t-body);
+    margin: 0 0 var(--s-1);
+  }
+
+  p {
+    font-size: var(--t-ui);
+    line-height: 1.55;
+    margin-bottom: var(--s-2);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--c-ink);
+  }
+}
+
+.cv-when {
+  color: var(--c-muted);
+  font-size: var(--t-small);
+  margin-left: var(--s-2);
+  white-space: nowrap;
+}
+
+.cv-papers {
+  font-size: var(--t-ui);
+
+  ul {
+    padding-left: var(--s-6);
+  }
+
+  li {
+    margin-bottom: var(--s-2);
+  }
+}
+
+// The link to this site is only useful on paper; on screen the reader is
+// already here
+.cv-print-only {
+  display: none;
+}
+
+// Printed, the page is the resume: no site chrome, tighter spacing
+@media print {
+  .cv-print-only {
+    display: inline;
+  }
+
+  @page {
+    margin: 14mm 16mm;
+  }
+
+  body.about-page {
+    font-size: 10pt;
+    padding-top: 0 !important;
+
+    #quarto-content {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .cv {
+      max-width: none;
+    }
+
+    .cv-summary p {
+      max-width: none;
+    }
+
+    #quarto-header,
+    .nav-footer,
+    .cv-print,
+    #quarto-back-to-top {
+      display: none !important;
+    }
+
+    #quarto-content,
+    main.content {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      max-width: none;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 22pt;
+    }
+
+    h2.section-title {
+      font-size: 12pt;
+      margin-top: 14pt;
+      margin-bottom: 4pt;
+    }
+
+    .cv-summary {
+      margin-top: 10pt;
+      padding-top: 10pt;
+    }
+
+    .cv-summary p:first-child,
+    .cv-head p {
+      font-size: 11pt;
+    }
+
+    .cv-entry {
+      padding-block: 5pt;
+    }
+
+    .cv-entry[id^="role-"] {
+      padding-bottom: 8pt;
+    }
+
+    .cv-entry[id^="role-"] .cv-body {
+      padding: 6pt 10pt;
+    }
+
+    .cv-body p,
+    .cv-papers,
+    .cv-contact p,
+    .section-intro {
+      font-size: 9.5pt;
+    }
+
+    h2,
+    h3 {
+      break-after: avoid;
+    }
+
+    .section-intro {
+      margin-top: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+// ---------- Article pages ----------
+
+#title-block-header.quarto-title-block.default {
+  margin-top: var(--s-8);
+  margin-bottom: var(--s-8);
+  padding-bottom: var(--s-6);
+  border-bottom: 1px solid var(--c-border);
+
+  h1.title {
+    margin-bottom: 0;
+  }
+
+  .description {
+    margin-top: var(--s-4);
+    font-size: var(--t-lead);
+    line-height: 1.45;
+    color: var(--c-muted);
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  // Author and date on one quiet line; the labels add nothing
+  .quarto-title-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-4);
+    margin-top: var(--s-6);
+    font-size: var(--t-ui);
+    color: var(--c-muted);
+
+    > div {
+      display: contents;
+    }
+  }
+
+  .quarto-title-meta-heading {
+    display: none;
+  }
+
+  .quarto-title-meta-contents {
+    font-size: var(--t-ui);
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.quarto-title-meta > div + div .quarto-title-meta-contents p::before {
+  content: "·";
+  margin-right: var(--s-4);
+}
+
+// On a phone the name is already in the navbar directly above, and leaving
+// it out keeps the date and reading time on one line
+@include media-breakpoint-down(sm) {
+  .quarto-title-meta > div:first-child:not(:only-child) {
+    display: none;
+  }
+
+  .quarto-title-meta > div:nth-child(2) .quarto-title-meta-contents p::before {
+    content: none;
+  }
+}
+
+// Page-level "Code" menu
+.quarto-title .code-tools-button,
+#quarto-code-tools-source,
+.quarto-title-tools-only .btn {
+  font-size: var(--t-small);
+  color: var(--c-muted);
+}
+
+// One R / Python switch for the whole page, built by
+// posts/post-enhancements.html. The chosen language is filled.
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-top: var(--s-6);
+  padding: var(--s-1);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  font-size: var(--t-small);
+
+  button {
+    min-height: 2rem;
+    padding: var(--s-1) var(--s-3);
+    border: 0;
+    border-radius: calc(var(--radius) - 2px);
+    background: transparent;
+    color: var(--c-muted);
+    font-weight: 600;
+    cursor: pointer;
+    transition: color var(--ease), background-color var(--ease), transform var(--ease);
+
+    &:hover {
+      color: var(--c-ink);
+      background: var(--c-surface);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &[aria-pressed="true"] {
+      color: var(--c-on-primary);
+      background: var(--c-primary);
+    }
+
+    // Fingers need a bigger target than a cursor does
+    @media (pointer: coarse) {
+      min-height: 2.75rem;
+      padding-inline: var(--s-4);
+    }
+  }
+}
+
+.language-switch-label {
+  padding-inline: var(--s-2) var(--s-1);
+  color: var(--c-muted);
+}
+
+// "On this page" for screens too narrow to show the contents in the margin
+.toc-inline {
+  display: none;
+  margin-bottom: var(--s-8);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  font-size: var(--t-ui);
+
+  @include media-breakpoint-down(lg) {
+    display: block;
+  }
+
+  summary {
+    padding: var(--s-3) var(--s-4);
+    font-weight: 600;
+    color: var(--c-ink);
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--s-4) var(--s-2);
+
+    ul {
+      padding: 0 0 0 var(--s-4);
+    }
+  }
+
+  a {
+    display: block;
+    padding: var(--s-2) 0;
+    color: var(--c-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-primary);
+    }
+  }
+}
+
+// Cards for the other current analyses, added to the end of each post by
+// tools/post-render.mjs
+.more-work {
+  margin-block: var(--s-16) var(--s-12);
+
+  h2.section-title {
+    margin-top: 0;
+  }
+
+  // A lone card keeps a card's proportions instead of stretching
+  .work-grid:has(> :only-child) {
+    grid-template-columns: minmax(0, 26rem);
+  }
+}
+
+// A reading-progress line under the navbar on posts. Pure CSS, so browsers
+// without scroll-driven animations simply don't show it.
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body.post-page::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 2px;
+      z-index: 1100;
+      background: var(--c-primary);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      animation: reading-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes reading-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// Table of contents
+#quarto-margin-sidebar {
+  padding-top: var(--s-8);
+}
+
 #TOC,
 nav[role="doc-toc"] {
-  font-family: $font-family-sans-serif;
+  font-size: var(--t-small);
+
+  > ul {
+    border-left: 1px solid var(--c-border);
+  }
+
+  .nav-link {
+    color: var(--c-muted);
+    transition: color var(--ease);
+
+    &:hover {
+      color: var(--c-ink);
+    }
+
+    &.active {
+      color: var(--c-primary);
+      font-weight: 600;
+      border-left-color: var(--c-primary);
+    }
+  }
 }
 
 #toc-title {
-  font-size: 0.72rem;
+  font-size: var(--t-small);
+  font-weight: 650;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: $muted;
-  font-weight: 600;
+  color: var(--c-muted);
 }
 
-// Keep fixed-width plots/tables from overflowing on mobile
+// The opening callout is the short answer: the one thing a reader who
+// stops here should take away.
+.callout.callout-style-default {
+  border: 1px solid var(--c-border);
+  border-left: 1px solid var(--c-border) !important;
+  border-radius: var(--radius);
+  background: var(--c-surface);
+  font-size: var(--t-ui);
+
+  > .callout-header,
+  &.callout-titled > .callout-header {
+    background: transparent !important;
+    padding-bottom: 0;
+    font-size: var(--t-small);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+
+    .callout-icon-container {
+      display: none;
+    }
+
+    em {
+      font-style: normal;
+    }
+
+    strong {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: var(--t-body);
+      color: var(--c-ink);
+    }
+  }
+
+  > .callout-body {
+    padding-top: var(--s-1);
+  }
+}
+
+#title-block-header + .callout.callout-style-default {
+  padding: var(--s-2) var(--s-2);
+  margin-bottom: var(--s-8);
+
+  > .callout-body {
+    font-size: var(--t-lead);
+    line-height: 1.45;
+    color: var(--c-ink);
+  }
+}
+
+#title-block-header + .callout.callout-style-default:not(:has(.callout-body p)) {
+  .callout-title-container {
+    font-size: var(--t-lead);
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--c-ink);
+  }
+
+  .callout-title-container em {
+    font-size: var(--t-small);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    margin-right: var(--s-1);
+  }
+}
+
+// Older posts use top-level headings for sections; keep them at section size
+body.post-page main.content section > h1 {
+  font-size: var(--t-h2);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-top: var(--s-12);
+  margin-bottom: var(--s-4);
+}
+
+// Posts use an empty paragraph as a spacer; the scale handles spacing now
+main.content p:has(> br:only-child) {
+  display: none;
+}
+
+// Note added to archived posts by posts/archive-note.lua
+.archive-note {
+  padding: var(--s-3) var(--s-4);
+  margin-bottom: var(--s-8);
+  border-radius: var(--radius);
+  background: var(--c-surface);
+  color: var(--c-muted);
+  font-size: var(--t-ui);
+
+  p {
+    margin: 0;
+  }
+}
+
+// ---------- Code ----------
+
+// Printed output has no highlighting to colour it, so it would take
+// Bootstrap's black and disappear on the dark page
+pre {
+  color: var(--c-text);
+}
+
+pre code,
+div.sourceCode code {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+p code:not(.sourceCode),
+li code:not(.sourceCode),
+td code:not(.sourceCode) {
+  font-size: 0.875em;
+  color: var(--c-ink);
+  background: var(--c-surface-strong);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+div.sourceCode,
+pre.sourceCode {
+  background: var(--c-code-bg);
+  border: 0;
+  border-radius: var(--radius);
+}
+
+div.sourceCode {
+  border: 1px solid var(--c-border);
+}
+
+details.code-fold > summary {
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--c-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color var(--ease);
+
+  &:hover {
+    color: var(--c-primary);
+  }
+}
+
+// R / Python tabsets
+.panel-tabset {
+  margin-block: var(--s-4);
+
+  > .nav-tabs {
+    border-bottom-color: var(--c-border);
+
+    .nav-link {
+      padding: var(--s-2) var(--s-3);
+      border-color: transparent;
+      opacity: 0.55;
+      filter: grayscale(1);
+      transition: opacity var(--ease), filter var(--ease);
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      // The chosen language is in colour; the other is greyed back
+      &.active {
+        opacity: 1;
+        filter: none;
+        background: transparent;
+        border-color: var(--c-border) var(--c-border) var(--c-bg);
+      }
+
+      // The logos are sized inline in the posts; bring them to text height
+      img {
+        height: 1.125rem;
+        width: auto;
+        display: block;
+      }
+    }
+  }
+
+  > .tab-content {
+    border-color: var(--c-border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: var(--s-4);
+  }
+}
+
+// Quiet code: when the visible pane is nothing but a closed code fold, the
+// whole tabset collapses to one muted line ("▸ Code" plus the language
+// switch). Opening the fold brings the bordered panel back.
+.panel-tabset:has(> .tab-content > .tab-pane.active > .cell:only-child > details.code-fold:not([open]):only-child) {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--s-2);
+  margin-block: var(--s-2) var(--s-4);
+
+  > .nav-tabs {
+    border: 0;
+    margin: 0;
+
+    .nav-link,
+    .nav-link.active {
+      padding: var(--s-1) var(--s-1);
+      border: 0;
+    }
+
+    .nav-link img {
+      height: 0.9375rem;
+    }
+  }
+
+  > .tab-content {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cell,
+  details.code-fold {
+    margin: 0;
+  }
+}
+
+// ---------- Figures and tables ----------
+
+// Charts and gt tables are drawn for a white page; they keep that surface
+// in every theme and scroll sideways on narrow screens.
 .cell-output-display {
   max-width: 100%;
   overflow-x: auto;
+  margin-block: var(--s-4) var(--s-6);
+}
+
+// The box owns the space around a chart. Quarto and Bootstrap each add a
+// margin under the image, and an inline image leaves a gap for descenders;
+// together they left a deep empty strip below every chart.
+.cell-output-display {
+  .quarto-figure,
+  figure,
+  figure > p {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .gt_table {
   max-width: 100% !important;
 }
 
-// ---------- Post listings ----------
-
-// Quarto's markup order is thumbnail, body, metadata (flipped visually with
-// row-reverse). A named grid lets the date sit above the title instead of in
-// its own wide column, and the same structure works on phones.
-.list.quarto-listing-default div.quarto-post {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 14rem;
-  grid-template-areas:
-    "meta  thumb"
-    "body  thumb";
-  // A fixed date row: with an auto row, Chrome hands the tall thumbnail's
-  // spare height to the date and pushes the title down.
-  grid-template-rows: 1.75rem auto;
-  align-content: start;
-  // Quarto's `gap: 2em` also sets a row gap above md; only columns need one
-  row-gap: 0;
-  column-gap: 2rem;
-  padding-block: 1.75rem;
-  margin-bottom: 0;
-  border-bottom: 1px solid $rule;
-
-  &:last-of-type {
-    border-bottom: 0;
-  }
-
-  .metadata {
-    grid-area: meta;
-    margin: 0 0 0.35rem;
-    padding: 0;
-    font-family: $font-family-sans-serif;
-  }
-
-  .body {
-    grid-area: body;
-  }
-
-  .thumbnail {
-    grid-area: thumb;
-  }
-
-  .listing-date {
-    font-size: 0.85rem;
-    color: $muted;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .body h3.listing-title {
-    font-family: $font-family-sans-serif;
-    font-weight: 600;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
-    text-wrap: balance;
-
-    // The title link carries its own font-weight: 400
-    a {
-      font-weight: inherit;
-    }
-  }
-
-  .listing-description,
-  .listing-description a,
-  .listing-description p {
-    font-family: $font-family-serif;
-    color: $muted;
-    font-size: 1rem;
-    line-height: 1.55;
-    margin-bottom: 0;
-  }
-
-  // Thumbnails are a mix of charts, tables and logos. A fixed 3:2 frame
-  // stops a tall table stretching its row to 800px; centring suits the
-  // logos, while very tall images opt in to a top anchor below.
-  .thumbnail img {
-    margin-top: 0;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-    border: 1px solid $rule;
-    border-radius: 6px;
-    background: #fff;
-  }
-
-  // Tall images whose headline sits at the top: a centre crop would show
-  // only unlabelled middle rows. Add filenames here as needed.
-  .thumbnail img[src$="nrl_finals_probs.png"],
-  .thumbnail img[src$="1rm_curve_thumbnail.png"] {
-    object-position: top;
-  }
-
-  &:hover .listing-title a {
-    color: $accent;
-  }
+// gt hides sideways overflow in each cell, which makes the browser treat the
+// cell as a scroll box. The text is a pixel taller than the cell, so every
+// cell could be scrolled and caught the wheel on the way down the page.
+// Clipping keeps gt's intent without creating anything to scroll.
+.gt_table .gt_row {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
 }
 
-@include media-breakpoint-down(md) {
-  .list.quarto-listing-default div.quarto-post {
-    grid-template-columns: minmax(0, 1fr) 5.5rem;
-    column-gap: 1rem;
-    padding-block: 1.25rem;
-
-    .body h3.listing-title {
-      font-size: 1.1rem;
-    }
-
-    .listing-description,
-    .listing-description p {
-      font-size: 0.95rem;
-    }
-
-    .thumbnail img {
-      aspect-ratio: 1;
-    }
-  }
+// A gt table is only as wide as its columns need. Its box shrinks to match
+// and centres, so a narrow table is not left sitting in a wide empty sheet.
+.cell-output-display:has(.gt_table) {
+  width: fit-content;
+  margin-inline: auto;
 }
 
-// ---------- Home page ----------
+// Charts and tables in posts (marked by posts/reading-layout.lua) run wider
+// than the text where the screen has room. The contents list moves out by the
+// same amount, so a figure never slides underneath it.
+@include media-breakpoint-up(xxl) {
+  body.post-page {
+    --figure-outset: var(--s-16);
 
-.home-intro {
-  display: grid;
-  grid-template-columns: 14rem minmax(0, 1fr);
-  column-gap: 2.25rem;
-  align-items: start;
-  margin-top: 2.5rem;
+    .wide-output {
+      max-width: none;
+      margin-inline: calc(var(--figure-outset) * -1);
 
-  @include media-breakpoint-down(md) {
-    grid-template-columns: 1fr;
-    row-gap: 1.25rem;
-    margin-top: 1.5rem;
-  }
-}
+      // knitr stamps a fixed width on each chart; let it fill the wider box.
+      // Every figure is rendered at twice that width, so it stays sharp.
+      img {
+        width: 100%;
+      }
 
-.home-portrait {
-  width: 14rem;
-  height: 14rem;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: 50% 20%;
-
-  @include media-breakpoint-down(md) {
-    width: 10rem;
-    height: 10rem;
-  }
-}
-
-h1.home-name {
-  font-family: "Raleway", $font-family-sans-serif;
-  font-weight: 100;
-  font-size: clamp(1.75rem, 1.3rem + 2vw, 40px);
-  margin: 0.25rem 0 0.75rem;
-}
-
-.home-lede p {
-  font-family: $font-family-sans-serif;
-  font-size: 1.3rem;
-  line-height: 1.4;
-  font-weight: 500;
-  color: $ink;
-  text-wrap: pretty;
-  margin-bottom: 1rem;
-}
-
-.home-text > p {
-  color: lighten($ink, 12%);
-}
-
-.home-links p {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  margin-top: 1.25rem;
-  font-family: $font-family-sans-serif;
-  font-size: 0.95rem;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: $ink;
-    text-decoration: none;
-
-    .bi {
-      color: $muted;
-    }
-
-    // Litera's bright blue, as the original homepage buttons used on hover
-    &:hover {
-      color: $link-hover-bright;
-
-      .bi {
-        color: $link-hover-bright;
+      // A table's box may be narrower than the outset allows, so it is
+      // centred on the text column. Auto margins cannot centre a box wider
+      // than its container; an offset of half the column and half itself can.
+      &:has(.gt_table) {
+        position: relative;
+        left: calc(50% + var(--figure-outset));
+        translate: -50% 0;
       }
     }
+
+    #quarto-margin-sidebar {
+      translate: var(--figure-outset) 0;
+    }
   }
 }
 
-h2.home-section-title {
-  margin-top: 3.5rem;
-  margin-bottom: 0;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: $muted;
-  border-bottom: 1px solid $rule;
-  padding-bottom: 0.6rem;
+// Long printed output scrolls in its own box instead of pushing the text away
+.cell-output-stdout pre {
+  max-height: 28rem;
+  overflow: auto;
 }
 
-.home-all-posts {
-  font-family: $font-family-sans-serif;
-  font-weight: 500;
-  text-decoration: none;
+// A figure opens full size when clicked
+a.lightbox {
+  cursor: zoom-in;
+}
+
+// When a table is wider than the screen, its cut-off edge fades out to show
+// there is more to scroll to. The fade follows the scroll position, so it
+// only appears on the side with hidden content. Browsers without
+// scroll-driven animations show the plain scrolling box.
+@property --fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@supports (animation-timeline: scroll()) {
+  .cell-output-display {
+    mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
+    animation: scroll-edge-fade linear both;
+    animation-timeline: scroll(self inline);
+  }
+}
+
+@keyframes scroll-edge-fade {
+  from {
+    --fade-start: 0px;
+    --fade-end: 2.5rem;
+  }
+
+  to {
+    --fade-start: 2.5rem;
+    --fade-end: 0px;
+  }
+}
+
+.cell-output-display table td {
+  line-height: 1.35;
+}
+
+figcaption,
+.figure-caption {
+  color: var(--c-muted);
+  font-size: var(--t-small);
 }
 
 // ---------- Footer ----------
 
 .nav-footer {
-  border-top: 1px solid $rule;
-  font-family: $font-family-sans-serif;
-  font-size: 0.85rem;
+  border-top: 1px solid var(--c-border);
+  font-size: var(--t-small);
+  color: var(--c-muted);
+  padding-block: var(--s-6);
+
+  .nav-link,
+  a {
+    color: var(--c-muted);
+    padding: var(--s-2) var(--s-3);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: color var(--ease), background-color var(--ease);
+
+    &:hover {
+      color: var(--c-primary);
+      background: var(--c-surface);
+    }
+  }
 }

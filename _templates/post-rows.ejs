@@ -1,0 +1,12 @@
+```{=html}
+<ul class="row-list list">
+<% for (const item of items) { %>
+  <li <%= metadataAttrs(item) %>>
+    <a href="<%- item.path %>">
+      <span class="row-date listing-date"><%= item.date %></span>
+      <span class="listing-title"><%- item.title.replace(/\s*\|?\s*<br\s*\/?>\s*/gi, " · ") %></span>
+    </a>
+  </li>
+<% } %>
+</ul>
+```

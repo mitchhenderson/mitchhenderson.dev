@@ -11,7 +11,7 @@
 <meta name="keywords" content="tech">
 <meta name="description" content="Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.">
 
-<title>Visualising Apple Health data | Guest post by Heidi Thornton – mitchhenderson.dev</title>
+<title>Visualising Apple Health data | Guest post by Heidi Thornton – Mitch Henderson</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -65,36 +65,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-nav/quarto-nav.js" defer></script>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/clipboard/clipboard.min.js" defer></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js" defer></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js" defer></script>
+<script src="../site_libs/quarto-html/anchor.min.js" defer></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-238635b79ede54fe729691291bcb9680.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-7c1847c4e21797cdc6957db0dbd7ab52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js" defer></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-54457bcf991aa3badc978a53db4b4559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c3efe1f1447a344ae9268062811eabb4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-05b3a7ff07d0dc5a247813436a61b416.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c3efe1f1447a344ae9268062811eabb4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -109,36 +100,209 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link rel="preload" href="../fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@id":"https://www.mitchhenderson.dev/#person","@type":"Person","name":"Mitch Henderson","url":"https://www.mitchhenderson.dev"},"datePublished":"2020-05-19","description":"Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.","headline":"Visualising Apple Health data | Guest post by Heidi Thornton","image":"https://www.mitchhenderson.dev/img/Heart.png","inLanguage":"en-AU","mainEntityOfPage":"https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html","url":"https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html"}</script>
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Visualising Apple Health data |Guest post by Heidi Thornton – mitchhenderson.dev">
+<meta property="og:title" content="Visualising Apple Health data |Guest post by Heidi Thornton – Mitch Henderson">
 <meta property="og:description" content="Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.">
 <meta property="og:image" content="https://www.mitchhenderson.dev/img/Heart.png">
-<meta property="og:site_name" content="mitchhenderson.dev">
+<meta property="og:site_name" content="Mitch Henderson">
 <meta property="og:image:height" content="450">
 <meta property="og:image:width" content="800">
-<meta name="twitter:title" content="Visualising Apple Health data |Guest post by Heidi Thornton – mitchhenderson.dev">
+<meta name="twitter:title" content="Visualising Apple Health data |Guest post by Heidi Thornton – Mitch Henderson">
 <meta name="twitter:description" content="Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.">
 <meta name="twitter:image" content="https://www.mitchhenderson.dev/img/Heart.png">
 <meta name="twitter:image-height" content="450">
 <meta name="twitter:image-width" content="800">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed post-page quarto-light"><a class="skip-link" href="#quarto-document-content">Skip to content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">mitchhenderson.dev</span>
+    <span class="navbar-title">Mitch Henderson</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -148,64 +312,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../posts.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-<span class="menu-text"></span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Visualising Apple Health data |<br>Guest post by Heidi Thornton</h1>
-                  <div>
-        <div class="description">
-          Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Heidi Thornton </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">May 19, 2020</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-
-  <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>tech</p>
-    </div>
-  </div>
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#accessing-apple-health-data" id="toc-accessing-apple-health-data" class="nav-link active" data-scroll-target="#accessing-apple-health-data">Accessing Apple Health data</a>
@@ -235,19 +360,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code">Full code</a></li>
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Visualising Apple Health data |<br>Guest post by Heidi Thornton</h1>
+</div>
+
+<div>
+  <div class="description">
+    Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
-<p><img src="../img/Applehealth.jpg" class="img-fluid"></p>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heidi Thornton </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 19, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>tech</p>
+  </div>
+<div><div class="quarto-title-meta-heading">Reading time</div><div class="quarto-title-meta-contents"><p class="reading-time">4 min read</p></div></div></div>
+
+<div class="language-switch" role="group" aria-label="Code language"><span class="language-switch-label">Code in</span><button type="button" data-language="r" aria-pressed="true">R</button><button type="button" data-language="python" aria-pressed="false">Python</button></div></header><details class="toc-inline"><summary>On this page</summary><ul>
+  <li><a href="#accessing-apple-health-data">Accessing Apple Health data</a>
+  <ul>
+  <li><a href="#step-1">Step 1</a></li>
+  <li><a href="#step-2">Step 2</a></li>
+  <li><a href="#step-3">Step 3</a></li>
+  </ul></li>
+  <li><a href="#opening-apple-health-data">Opening Apple Health data</a></li>
+  <li><a href="#why-do-this-in-r">Why do this in R?</a>
+  <ul>
+  <li><a href="#r-is-reproducible-microsoft-excel-is-not">R is reproducible | Microsoft Excel is not</a></li>
+  </ul></li>
+  <li><a href="#import-the-data-into-r">Import the data into R</a></li>
+  <li><a href="#view-the-data">View the data</a></li>
+  <li><a href="#plotting-data">Plotting data</a>
+  <ul>
+  <li><a href="#daily-running-sessions">Daily running sessions</a></li>
+  <li><a href="#weekly-running-volume">Weekly running volume</a></li>
+  <li><a href="#energy-consumption">Energy consumption</a></li>
+  <li><a href="#general-activity-data">General activity data</a></li>
+  <li><a href="#step-data-manipulation">Step data manipulation</a></li>
+  <li><a href="#heart-rate-data">Heart rate data</a></li>
+  </ul></li>
+  <li><a href="#access-more-apple-health-info">Access more Apple Health info</a></li>
+  <li><a href="#thanks-for-looking">Thanks for looking! 😊</a></li>
+  <li><a href="#full-code">Full code</a></li>
+  </ul></details>
+
+
+<div class="archive-note">
+<p>Written in 2020. Kept for reference; it doesn't reflect how I work now.</p>
+</div>
+<p><a href="../img/Applehealth.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><picture><source type="image/webp" srcset="../img/Applehealth.webp"><img src="../img/Applehealth.jpg" class="img-fluid" width="1600" height="800" decoding="async"></picture></a></p>
 <p>As sports scientists during the COVID-19 shutdown, we have limited ways of determining adherence to training programs (completed within govenment guidelines of course!).</p>
 <p>Data from smart watches provide practitioners with <em>basic measures</em> that can be used as a <em>rough guide</em> to quantify training over this period (when using the more sophisticated technologies isn’t possible).</p>
 <p>Although the reliability and validity data of these devices aren’t widely available, they provide basic metrics such as total distance, duration, heart rate, and energy burnt etc.</p>
@@ -261,7 +450,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 <section id="accessing-apple-health-data" class="level1">
 <h1>Accessing Apple Health data</h1>
-<p><img src="../img/Steps.png" class="img-fluid"></p>
+<p><a href="../img/Steps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><picture><source type="image/webp" srcset="../img/Steps.webp"><img src="../img/Steps.png" class="img-fluid" width="1312" height="648" loading="lazy" decoding="async"></picture></a></p>
 <section id="step-1" class="level2">
 <h2 class="anchored" data-anchor-id="step-1">Step 1</h2>
 <p>Open the Apple Health app on your phone, then <strong>summary page</strong> at the top right, then tap the circle showing the first letter of your first name on the top right (left figure above).</p>
@@ -291,7 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="why-do-this-in-r" class="level1">
 <h1>Why do this in R?</h1>
-<p><img src="../img/R.png" class="img-fluid"></p>
+<p><a href="../img/R.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="../img/R.png" class="img-fluid" width="225" height="225" loading="lazy" decoding="async"></a></p>
 <p><br></p>
 <section id="r-is-reproducible-microsoft-excel-is-not" class="level3">
 <h3 class="anchored" data-anchor-id="r-is-reproducible-microsoft-excel-is-not">R is reproducible | Microsoft Excel is not</h3>
@@ -384,10 +573,10 @@ $numNodes
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>),</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="2020-05-19_heidi-post_files/figure-html/Distance Graph ouput-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><a href="2020-05-19_heidi-post_files/figure-html/Distance Graph ouput-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><picture><source type="image/webp" srcset="2020-05-19_heidi-post_files/figure-html/Distance%20Graph%20ouput-1.webp"><img src="2020-05-19_heidi-post_files/figure-html/Distance Graph ouput-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672" height="480" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -425,10 +614,10 @@ $numNodes
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>),</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="2020-05-19_heidi-post_files/figure-html/Weekly volume-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><a href="2020-05-19_heidi-post_files/figure-html/Weekly volume-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><picture><source type="image/webp" srcset="2020-05-19_heidi-post_files/figure-html/Weekly%20volume-1.webp"><img src="2020-05-19_heidi-post_files/figure-html/Weekly volume-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672" height="480" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -474,10 +663,10 @@ $numNodes
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="2020-05-19_heidi-post_files/figure-html/energy graph-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><a href="2020-05-19_heidi-post_files/figure-html/energy graph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><picture><source type="image/webp" srcset="2020-05-19_heidi-post_files/figure-html/energy%20graph-1.webp"><img src="2020-05-19_heidi-post_files/figure-html/energy graph-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672" height="480" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -561,10 +750,10 @@ $numNodes
 <span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="2020-05-19_heidi-post_files/figure-html/Step count plot by hour-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><a href="2020-05-19_heidi-post_files/figure-html/Step count plot by hour-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><picture><source type="image/webp" srcset="2020-05-19_heidi-post_files/figure-html/Step%20count%20plot%20by%20hour-1.webp"><img src="2020-05-19_heidi-post_files/figure-html/Step count plot by hour-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672" height="480" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -596,10 +785,10 @@ $numNodes
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-05-19_heidi-post_files/figure-html/HR Graph-1.png" class="img-fluid figure-img" width="672"></p>
+<p><a href="2020-05-19_heidi-post_files/figure-html/HR Graph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><picture><source type="image/webp" srcset="2020-05-19_heidi-post_files/figure-html/HR%20Graph-1.webp"><img src="2020-05-19_heidi-post_files/figure-html/HR Graph-1.png" class="img-fluid figure-img" width="672" height="480" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -863,8 +1052,137 @@ df_location &lt;- XML:::xmlAttrsToDataFrame(xml["//Location"])</code></pre>
 </section>
 
 </main> <!-- /main -->
+<script>
+// Quarto 1.9.x wraps folded code in an extra .code-copy-outer-scaffold div,
+// which breaks the built-in "Show All Code" / "Hide All Code" toggle (its
+// selector expects .sourceCode to be a direct child of <details>). This
+// re-implements the toggle against details.code-fold directly so it keeps
+// working regardless of the internal wrapper structure.
+document.addEventListener("DOMContentLoaded", function () {
+  function setAllCodeOpen(show) {
+    document.querySelectorAll(".cell > details.code-fold").forEach(function (details) {
+      if (show) {
+        details.setAttribute("open", "");
+      } else {
+        details.removeAttribute("open");
+      }
+    });
+  }
+
+  var hideAllCode = document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", function () {
+      setAllCodeOpen(false);
+    });
+  }
+
+  var showAllCode = document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", function () {
+      setAllCodeOpen(true);
+    });
+  }
+});
+</script>
+<script>
+// Behaviour for two controls that tools/post-render.mjs writes into each
+// post (they are in the page from the start, so nothing shifts on load):
+//   1. The R / Python switch under the title. Each code block keeps its own
+//      tabs; the switch sets them all at once and remembers the choice
+//      between visits.
+//   2. The collapsible "On this page" list shown on narrow screens.
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- Language switch ----------
+
+  var STORAGE_KEY = "site-code-language";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".language-switch button"));
+  var tabsets = Array.prototype.slice.call(
+    document.querySelectorAll('.panel-tabset[data-group="language"]')
+  );
+
+  function languageOf(tab) {
+    var image = tab.querySelector("img");
+    var label = image ? (image.getAttribute("alt") || image.getAttribute("src") || "") : tab.textContent;
+    return /python/i.test(label) ? "python" : "r";
+  }
+
+  function remember(language) {
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // Private browsing: the switch still works for this visit
+    }
+  }
+
+  function recall() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function showLanguage(language) {
+    tabsets.forEach(function (tabset) {
+      var tabs = tabset.querySelectorAll(":scope > .nav-tabs .nav-link");
+      Array.prototype.forEach.call(tabs, function (tab) {
+        if (languageOf(tab) === language && !tab.classList.contains("active")) {
+          bootstrap.Tab.getOrCreateInstance(tab).show();
+        }
+      });
+    });
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.dataset.language === language ? "true" : "false");
+    });
+  }
+
+  if (buttons.length > 0 && tabsets.length > 0) {
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showLanguage(button.dataset.language);
+        remember(button.dataset.language);
+      });
+    });
+
+    // Choosing a language on any one code block moves the whole page with it
+    document.addEventListener("shown.bs.tab", function (event) {
+      if (event.target.closest && event.target.closest('.panel-tabset[data-group="language"]')) {
+        var language = languageOf(event.target);
+        showLanguage(language);
+        remember(language);
+      }
+    });
+
+    if (recall() === "python") showLanguage("python");
+  }
+
+  // ---------- Contents on small screens ----------
+
+  var contents = document.querySelector(".toc-inline");
+  if (contents) {
+    Array.prototype.forEach.call(contents.querySelectorAll("a"), function (link) {
+      link.addEventListener("click", function () {
+        contents.removeAttribute("open");
+      });
+    });
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1263,14 +1581,33 @@ df_location &lt;- XML:::xmlAttrsToDataFrame(xml["//Location"])</code></pre>
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="light">
+<section class="more-work"><h2 class="section-title">More work</h2><div class="work-grid"><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/1rm_curve_thumbnail.webp"><img src="/img/1rm_curve_thumbnail.png" alt="" loading="lazy" width="2100" height="1500" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2026-01-04-e1rm-modelling/index.html">Making 1 rep max estimates more accurate and honest</a></h3>
+    <p class="listing-description">Use more of the information you have.
+</p>
+    <p class="work-meta listing-date">January 2026</p>
+  </div><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/nrl_wins_dot_plot.webp"><img src="/img/nrl_wins_dot_plot.png" alt="" loading="lazy" width="1344" height="921" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html">How many wins do NRL teams need to make the finals?</a></h3>
+    <p class="listing-description">It depends, but Monte Carlo simulations give us a pretty good idea
+</p>
+    <p class="work-meta listing-date">January 2025</p>
+  </div></div></section><input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class
     const getTheme = () => {
       let baseTheme = document.getElementById('giscus-base-theme').value;
       let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
       return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
     };
     const script = document.createElement("script");
@@ -1296,41 +1633,69 @@ df_location &lt;- XML:::xmlAttrsToDataFrame(xml["//Location"])</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Mitch Henderson · Sport, science, data</p>
+<p>Mitch Henderson · Data science in sport</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/mitchjameshenderson/">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
     <a class="nav-link" href="https://github.com/mitchhenderson">
-      <i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
-    </a>
+<p>GitHub</p>
+</a>
   </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/mitch-henderson-9761b8114/">
-      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/mitchhenderson.bsky.social">
-      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
-</i> 
-    </a>
+<p>Bluesky</p>
+</a>
   </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="../posts.xml">
-      <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-    </a>
+<p>RSS</p>
+</a>
   </li>  
 </ul>
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

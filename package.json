@@ -1,0 +1,11 @@
+{
+  "name": "mitchhenderson.dev",
+  "private": true,
+  "type": "module",
+  "description": "Build tooling for the site's post-render step. The site itself is built with Quarto.",
+  "devDependencies": {
+    "purgecss": "^7.0.2",
+    "sharp": "^0.34.0",
+    "subset-font": "^2.4.0"
+  }
+}

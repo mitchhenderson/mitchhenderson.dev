@@ -4,13 +4,26 @@
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
 
-# Enable banner style title blocks
-title-block-banner: true
+# Hook for post-only styles (reading progress line)
+body-classes: post-page
 
-# Default for table of contents
+# Table of contents sits in the right margin so the text stays centred
 toc: true
-toc-title: Table of contents
-toc-location: left
+toc-title: On this page
+toc-location: right
+
+# Flags pre-2024 posts as archived, lets figures and tables run wider than
+# the text, and names the R / Python logos used as tab labels
+filters:
+  - archive-note.lua
+  - reading-layout.lua
+  - alt-text.lua
+
+# Click a figure to see it full size
+lightbox: true
+
+# Page-level R / Python switch and the small-screen contents list
+include-after-body: post-enhancements.html
 
 # Giscus comments
 comments:
@@ -23,4 +36,6 @@ comments:
     reactions-enabled: true
     loading: lazy
     input-position: "bottom"
-    theme: "light"
+    theme:
+      light: light
+      dark: dark_dimmed

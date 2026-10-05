@@ -1,12 +1,43 @@
 ---
 title: "Posts"
+description: "Worked analyses of practical questions in sport, with data and code in R and Python."
+page-layout: full
+toc: false
+body-classes: own-title
+anchor-sections: false
 listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  fields: [date, title, description, image]
-  categories: false
-  sort-ui: false
-  filter-ui: false
-  feed: true
+  - id: recent-posts
+    contents: "posts/*/index.qmd"
+    sort: "date desc"
+    template: _templates/post-cards.ejs
+    date-format: "MMMM YYYY"
+    feed:
+      type: partial
+  - id: earlier-posts
+    contents:
+      - "posts/2020-*.qmd"
+      - "posts/2021-*.qmd"
+    sort: "date desc"
+    template: _templates/post-rows.ejs
+    date-format: "MMM YYYY"
 ---
+
+:::::: wrap
+::: page-head
+```{=html}
+<h1>Posts</h1>
+```
+:::
+
+::: {#recent-posts}
+:::
+
+## Earlier writing {#earlier-writing .section-title .unnumbered .unlisted}
+
+::: section-intro
+Tutorials from 2020 and 2021, kept for reference. They don't reflect how I work now.
+:::
+
+::: {#earlier-posts}
+:::
+::::::

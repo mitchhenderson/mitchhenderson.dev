@@ -34,6 +34,11 @@ $code-color: #c9d2df;
   // The band steps up from the page instead of switching to full navy
   --c-hero-bg: #16294a;
   --c-hero-text: #c3d2e8;
+  --c-hero-deep: #101d35;
+  --c-hero-glow: #264a80;
+  --c-hero-line: rgba(195, 210, 232, 0.17);
+  --c-hero-line-strong: rgba(195, 210, 232, 0.5);
+  --c-hero-band: rgba(195, 210, 232, 0.045);
 }
 
 // Charts and tables were drawn for a white page, so they sit on a sheet of

@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-04-22">
 <meta name="description" content="Great visualisations help communicate your message more clearly. This post shows you an example of my process.">
 
-<title>Making better visualisations using ggplot2 in R – mitchhenderson.dev</title>
+<title>Making better visualisations using ggplot2 in R – Mitch Henderson</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,36 +64,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-nav/quarto-nav.js" defer></script>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/clipboard/clipboard.min.js" defer></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js" defer></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js" defer></script>
+<script src="../site_libs/quarto-html/anchor.min.js" defer></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-238635b79ede54fe729691291bcb9680.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-7c1847c4e21797cdc6957db0dbd7ab52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js" defer></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-54457bcf991aa3badc978a53db4b4559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3972dd460300e4a50d31eaa6c7d64ce2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-92da28ae18cc22c8a46e025007540866.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-3972dd460300e4a50d31eaa6c7d64ce2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,36 +101,209 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link rel="preload" href="../fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@id":"https://www.mitchhenderson.dev/#person","@type":"Person","name":"Mitch Henderson","url":"https://www.mitchhenderson.dev"},"datePublished":"2020-04-22","description":"Great visualisations help communicate your message more clearly. This post shows you an example of my process.","headline":"Making better visualisations using ggplot2 in R","image":"https://www.mitchhenderson.dev/img/ggplot2.png","inLanguage":"en-AU","mainEntityOfPage":"https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html","url":"https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html"}</script>
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Making better visualisations using ggplot2 in R – mitchhenderson.dev">
+<meta property="og:title" content="Making better visualisations using ggplot2 in R – Mitch Henderson">
 <meta property="og:description" content="Great visualisations help communicate your message more clearly. This post shows you an example of my process.">
 <meta property="og:image" content="https://www.mitchhenderson.dev/img/ggplot2.png">
-<meta property="og:site_name" content="mitchhenderson.dev">
+<meta property="og:site_name" content="Mitch Henderson">
 <meta property="og:image:height" content="2784">
 <meta property="og:image:width" content="2656">
-<meta name="twitter:title" content="Making better visualisations using ggplot2 in R – mitchhenderson.dev">
+<meta name="twitter:title" content="Making better visualisations using ggplot2 in R – Mitch Henderson">
 <meta name="twitter:description" content="Great visualisations help communicate your message more clearly. This post shows you an example of my process.">
 <meta name="twitter:image" content="https://www.mitchhenderson.dev/img/ggplot2.png">
 <meta name="twitter:image-height" content="2784">
 <meta name="twitter:image-width" content="2656">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed post-page quarto-light"><a class="skip-link" href="#quarto-document-content">Skip to content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">mitchhenderson.dev</span>
+    <span class="navbar-title">Mitch Henderson</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -149,57 +313,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../posts.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-<span class="menu-text"></span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Making better visualisations using ggplot2 in R</h1>
-                  <div>
-        <div class="description">
-          Great visualisations help communicate your message more clearly. This post shows you an example of my process.
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Mitch Henderson </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">April 22, 2020</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#step-1-data-prep" id="toc-step-1-data-prep" class="nav-link active" data-scroll-target="#step-1-data-prep">Step 1 | Data prep</a>
@@ -226,18 +358,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#full-code" id="toc-full-code" class="nav-link" data-scroll-target="#full-code"><strong>Full code</strong></a></li>
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Making better visualisations using ggplot2 in R</h1>
+</div>
+
+<div>
+  <div class="description">
+    Great visualisations help communicate your message more clearly. This post shows you an example of my process.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mitch Henderson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2020</p>
+    </div>
+  </div>
+  
+    
+  <div><div class="quarto-title-meta-heading">Reading time</div><div class="quarto-title-meta-contents"><p class="reading-time">8 min read</p></div></div></div>
+  
+
+
+<div class="language-switch" role="group" aria-label="Code language"><span class="language-switch-label">Code in</span><button type="button" data-language="r" aria-pressed="true">R</button><button type="button" data-language="python" aria-pressed="false">Python</button></div></header><details class="toc-inline"><summary>On this page</summary><ul>
+  <li><a href="#step-1-data-prep">Step 1 | Data prep</a>
+  <ul>
+  <li><a href="#collate-the-data">Collate the data</a></li>
+  <li><a href="#find-a-logo">Find a logo</a></li>
+  </ul></li>
+  <li><a href="#step-2-load-packages-and-import-data">Step 2 | Load packages and import data</a>
+  <ul>
+  <li><a href="#r-packages">R packages</a></li>
+  <li><a href="#add-metadata">Add metadata</a></li>
+  <li><a href="#load-data">Load data</a></li>
+  </ul></li>
+  <li><a href="#step-3-create-plot">Step 3 | Create plot</a>
+  <ul>
+  <li><a href="#prep">Prep</a></li>
+  <li><a href="#plotting">Plotting</a></li>
+  </ul></li>
+  <li><a href="#step-4-saving-and-adding-the-logo">Step 4 | Saving and adding the logo</a>
+  <ul>
+  <li><a href="#saving-the-plot">Saving the plot</a></li>
+  <li><a href="#adding-the-logo">Adding the logo</a></li>
+  </ul></li>
+  <li><a href="#full-code"><strong>Full code</strong></a></li>
+  </ul></details>
+
+
+<div class="archive-note">
+<p>Written in 2020. Kept for reference; it doesn't reflect how I work now.</p>
+</div>
 <blockquote class="blockquote">
 <p>“The ability to take data—to be able to understand it, to process it, to extract value from it, to visualize it, to communicate it—that’s going to be a hugely important skill in the next decades, … because now we really do have essentially free and ubiquitous data. So the complimentary scarce factor is the ability to understand that data and extract value from it.”</p>
 <footer>
@@ -255,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>This post will take you through the process of how I generated this one:</p>
-<p><img src="../img/foxes_peak-years.png" class="img-fluid"></p>
+<p><a href="../img/foxes_peak-years.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><picture><source type="image/webp" srcset="../img/foxes_peak-years.webp"><img src="../img/foxes_peak-years.png" class="img-fluid" width="4400" height="3506" decoding="async"></picture></a></p>
 <p>The full code will be posted at the end, as throughout the post I’ll be going through parts of it bit by bit.</p>
 <p>If you’d prefer to watch me do it, this video shows me going through the whole process:</p>
 <p><br></p>
@@ -459,7 +646,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="find-a-logo">Find a logo</h3>
 <p>Find your team’s logo online (preferably high resolution <code>.png</code> image with a transparent background), and save it into your working directory. I found this one on <a href="https://en.wikipedia.org/wiki/Leicester_City_F.C.">Leicester City’s Wikipedia page</a>.</p>
 <div style="width:200px; height:200px">
-<p><img src="../img/leicester_logo.png" class="img-fluid" width="200"></p>
+<p><a href="../img/leicester_logo.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><picture><source type="image/webp" srcset="../img/leicester_logo.webp"><img src="../img/leicester_logo.png" class="img-fluid" width="200" height="200" loading="lazy" decoding="async"></picture></a></p>
 </div>
 <p><br></p>
 </section>
@@ -552,10 +739,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’ll start by using the <code>ggplot</code> function and telling it that the data we’re using is from the <code>data</code> object we created earlier. The <code>aes()</code> function is used to specify what parts of our data are going to be used in the plot, so we say the x-axis will be our <code>age</code> column and the y-axis will be our <code>percent_involvement</code> column.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> percent_involvement))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot1-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot1-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot1-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -566,10 +753,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> percent_involvement)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> time_with_team), <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot2-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot2-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot2-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -584,10 +771,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste0</span>(league, <span class="st">" | Season "</span>, season),</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">paste0</span>(social_media_handle, <span class="st">" | Data: "</span>, data_source),</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="fu">paste0</span>(<span class="st">"Time at "</span>, short_name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot3-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot3-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot3-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -604,10 +791,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Share of minutes played"</span>, </span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">accuracy =</span> <span class="dv">1</span>), </span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot4-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot4-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot4-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -626,10 +813,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">40</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">16</span>, <span class="dv">40</span>, <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot5-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot5-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot5-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -648,10 +835,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">40</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> year_colours)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot6-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot6-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot6-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -672,10 +859,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">40</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> year_colours) <span class="sc">+</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot7-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot7-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot7-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -734,10 +921,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>, </span>
 <span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"URWGeometricW03-Light"</span>, </span>
 <span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot8-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot8-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot8-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -800,10 +987,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>, </span>
 <span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"URWGeometricW03-Light"</span>, </span>
 <span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot9-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot9-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot9-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -872,10 +1059,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>, </span>
 <span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"URWGeometricW03-Light"</span>, </span>
 <span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot10-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot10-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot10-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -959,10 +1146,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>, </span>
 <span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="st">"URWGeometricW03-Light"</span>, </span>
 <span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
+<div class="cell-output-display wide-output">
 <div>
 <figure class="figure">
-<p><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot11-1.png" class="img-fluid figure-img" width="696"></p>
+<p><a href="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><picture><source type="image/webp" srcset="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot11-1.webp"><img src="2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz_files/figure-html/plot11-1.png" class="img-fluid figure-img" width="696" height="552" loading="lazy" decoding="async"></picture></a></p>
 </figure>
 </div>
 </div>
@@ -1057,7 +1244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>magick<span class="sc">::</span><span class="fu">image_write</span>(plot_with_logo, <span class="fu">paste0</span>(<span class="fu">Sys.Date</span>(), <span class="st">"_"</span>, short_name, <span class="st">"_peak-years.png"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This’ll save over the file we created with a new file that’s the plot image with the logo added like this:</p>
-<p><img src="../img/foxes_peak-years.png" class="img-fluid"></p>
+<p><a href="../img/foxes_peak-years.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><picture><source type="image/webp" srcset="../img/foxes_peak-years.webp"><img src="../img/foxes_peak-years.png" class="img-fluid" width="4400" height="3506" loading="lazy" decoding="async"></picture></a></p>
 <p>And that’s it! Let me know if you have any questions or want me to clarify anything.</p>
 <p><strong>Keep up to date with anything new from me on <a href="https://twitter.com/mitchhendo_">my Twitter</a>.</strong></p>
 <p>Cheers,</p>
@@ -1271,8 +1458,137 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<script>
+// Quarto 1.9.x wraps folded code in an extra .code-copy-outer-scaffold div,
+// which breaks the built-in "Show All Code" / "Hide All Code" toggle (its
+// selector expects .sourceCode to be a direct child of <details>). This
+// re-implements the toggle against details.code-fold directly so it keeps
+// working regardless of the internal wrapper structure.
+document.addEventListener("DOMContentLoaded", function () {
+  function setAllCodeOpen(show) {
+    document.querySelectorAll(".cell > details.code-fold").forEach(function (details) {
+      if (show) {
+        details.setAttribute("open", "");
+      } else {
+        details.removeAttribute("open");
+      }
+    });
+  }
+
+  var hideAllCode = document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", function () {
+      setAllCodeOpen(false);
+    });
+  }
+
+  var showAllCode = document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", function () {
+      setAllCodeOpen(true);
+    });
+  }
+});
+</script>
+<script>
+// Behaviour for two controls that tools/post-render.mjs writes into each
+// post (they are in the page from the start, so nothing shifts on load):
+//   1. The R / Python switch under the title. Each code block keeps its own
+//      tabs; the switch sets them all at once and remembers the choice
+//      between visits.
+//   2. The collapsible "On this page" list shown on narrow screens.
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- Language switch ----------
+
+  var STORAGE_KEY = "site-code-language";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".language-switch button"));
+  var tabsets = Array.prototype.slice.call(
+    document.querySelectorAll('.panel-tabset[data-group="language"]')
+  );
+
+  function languageOf(tab) {
+    var image = tab.querySelector("img");
+    var label = image ? (image.getAttribute("alt") || image.getAttribute("src") || "") : tab.textContent;
+    return /python/i.test(label) ? "python" : "r";
+  }
+
+  function remember(language) {
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // Private browsing: the switch still works for this visit
+    }
+  }
+
+  function recall() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function showLanguage(language) {
+    tabsets.forEach(function (tabset) {
+      var tabs = tabset.querySelectorAll(":scope > .nav-tabs .nav-link");
+      Array.prototype.forEach.call(tabs, function (tab) {
+        if (languageOf(tab) === language && !tab.classList.contains("active")) {
+          bootstrap.Tab.getOrCreateInstance(tab).show();
+        }
+      });
+    });
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.dataset.language === language ? "true" : "false");
+    });
+  }
+
+  if (buttons.length > 0 && tabsets.length > 0) {
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showLanguage(button.dataset.language);
+        remember(button.dataset.language);
+      });
+    });
+
+    // Choosing a language on any one code block moves the whole page with it
+    document.addEventListener("shown.bs.tab", function (event) {
+      if (event.target.closest && event.target.closest('.panel-tabset[data-group="language"]')) {
+        var language = languageOf(event.target);
+        showLanguage(language);
+        remember(language);
+      }
+    });
+
+    if (recall() === "python") showLanguage("python");
+  }
+
+  // ---------- Contents on small screens ----------
+
+  var contents = document.querySelector(".toc-inline");
+  if (contents) {
+    Array.prototype.forEach.call(contents.querySelectorAll("a"), function (link) {
+      link.addEventListener("click", function () {
+        contents.removeAttribute("open");
+      });
+    });
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1671,14 +1987,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="light">
+<section class="more-work"><h2 class="section-title">More work</h2><div class="work-grid"><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/1rm_curve_thumbnail.webp"><img src="/img/1rm_curve_thumbnail.png" alt="" loading="lazy" width="2100" height="1500" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2026-01-04-e1rm-modelling/index.html">Making 1 rep max estimates more accurate and honest</a></h3>
+    <p class="listing-description">Use more of the information you have.
+</p>
+    <p class="work-meta listing-date">January 2026</p>
+  </div><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/nrl_wins_dot_plot.webp"><img src="/img/nrl_wins_dot_plot.png" alt="" loading="lazy" width="1344" height="921" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html">How many wins do NRL teams need to make the finals?</a></h3>
+    <p class="listing-description">It depends, but Monte Carlo simulations give us a pretty good idea
+</p>
+    <p class="work-meta listing-date">January 2025</p>
+  </div></div></section><input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class
     const getTheme = () => {
       let baseTheme = document.getElementById('giscus-base-theme').value;
       let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
       return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
     };
     const script = document.createElement("script");
@@ -1704,41 +2039,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Mitch Henderson · Sport, science, data</p>
+<p>Mitch Henderson · Data science in sport</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/mitchjameshenderson/">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
     <a class="nav-link" href="https://github.com/mitchhenderson">
-      <i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
-    </a>
+<p>GitHub</p>
+</a>
   </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/mitch-henderson-9761b8114/">
-      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/mitchhenderson.bsky.social">
-      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
-</i> 
-    </a>
+<p>Bluesky</p>
+</a>
   </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="../posts.xml">
-      <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-    </a>
+<p>RSS</p>
+</a>
   </li>  
 </ul>
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

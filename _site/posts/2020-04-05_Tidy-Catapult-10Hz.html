@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2020-04-05">
 <meta name="description" content="The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.">
 
-<title>Tidying Catapult 10Hz export data – mitchhenderson.dev</title>
+<title>Tidying Catapult 10Hz export data – Mitch Henderson</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,36 +64,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-nav/quarto-nav.js" defer></script>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/clipboard/clipboard.min.js" defer></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js" defer></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js" defer></script>
+<script src="../site_libs/quarto-html/anchor.min.js" defer></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-238635b79ede54fe729691291bcb9680.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-7c1847c4e21797cdc6957db0dbd7ab52.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-41754c165a40a179b78cf4298f208fa1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js" defer></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-54457bcf991aa3badc978a53db4b4559.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3972dd460300e4a50d31eaa6c7d64ce2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-92da28ae18cc22c8a46e025007540866.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-3972dd460300e4a50d31eaa6c7d64ce2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -108,32 +99,205 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link rel="preload" href="../fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@id":"https://www.mitchhenderson.dev/#person","@type":"Person","name":"Mitch Henderson","url":"https://www.mitchhenderson.dev"},"datePublished":"2020-04-05","description":"The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.","headline":"Tidying Catapult 10Hz export data","image":"https://www.mitchhenderson.dev/img/catapult_square.jpg","inLanguage":"en-AU","mainEntityOfPage":"https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html","url":"https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html"}</script>
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Tidying Catapult 10Hz export data – mitchhenderson.dev">
+<meta property="og:title" content="Tidying Catapult 10Hz export data – Mitch Henderson">
 <meta property="og:description" content="The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.">
 <meta property="og:image" content="https://www.mitchhenderson.dev/img/catapult_square.jpg">
-<meta property="og:site_name" content="mitchhenderson.dev">
-<meta name="twitter:title" content="Tidying Catapult 10Hz export data – mitchhenderson.dev">
+<meta property="og:site_name" content="Mitch Henderson">
+<meta name="twitter:title" content="Tidying Catapult 10Hz export data – Mitch Henderson">
 <meta name="twitter:description" content="The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.">
 <meta name="twitter:image" content="https://www.mitchhenderson.dev/img/catapult_square.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed post-page quarto-light"><a class="skip-link" href="#quarto-document-content">Skip to content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">mitchhenderson.dev</span>
+    <span class="navbar-title">Mitch Henderson</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -143,57 +307,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="../posts.xml"> <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-<span class="menu-text"></span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Tidying Catapult 10Hz export data</h1>
-                  <div>
-        <div class="description">
-          The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Mitch Henderson </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">April 5, 2020</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#youtube-tutorial" id="toc-youtube-tutorial" class="nav-link active" data-scroll-target="#youtube-tutorial">YouTube tutorial</a></li>
@@ -208,18 +340,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tidying Catapult 10Hz export data</h1>
+</div>
+
+<div>
+  <div class="description">
+    The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mitch Henderson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 5, 2020</p>
+    </div>
+  </div>
+  
+    
+  <div><div class="quarto-title-meta-heading">Reading time</div><div class="quarto-title-meta-contents"><p class="reading-time">4 min read</p></div></div></div>
+  
+
+
+<div class="language-switch" role="group" aria-label="Code language"><span class="language-switch-label">Code in</span><button type="button" data-language="r" aria-pressed="true">R</button><button type="button" data-language="python" aria-pressed="false">Python</button></div></header><details class="toc-inline"><summary>On this page</summary><ul>
+  <li><a href="#youtube-tutorial">YouTube tutorial</a></li>
+  <li><a href="#tidy-data">Tidy data</a></li>
+  <li><a href="#catapult-data">Catapult data</a></li>
+  <li><a href="#solution">Solution</a>
+  <ul>
+  <li><a href="#step-1">Step 1</a></li>
+  <li><a href="#step-2">Step 2</a></li>
+  <li><a href="#step-3">Step 3</a></li>
+  <li><a href="#step-4">Step 4</a></li>
+  </ul></li>
+  </ul></details>
+
+
+<div class="archive-note">
+<p>Written in 2020. Kept for reference; it doesn't reflect how I work now.</p>
+</div>
 <section id="youtube-tutorial" class="level1">
 <h1>YouTube tutorial</h1>
 <p>You can see me going through all the steps outlined here in this video with some dummy data (note that I’ve simplified the file structure in the post since recording this video so it will be a little different; both work though):</p>
@@ -233,13 +408,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Each observation must have its own row.</li>
 <li>Each value must have it’s own cell.</li>
 </ol>
-<p><img src="../img/tidy_data.png" class="img-fluid"> <em>Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells. Image from <a href="https://r4ds.had.co.nz/index.html">R for Data Science</a> by Hadley Wickham &amp; Garrett Grolemund.</em></p>
+<p><picture><source type="image/webp" srcset="../img/tidy_data.webp"><img src="../img/tidy_data.png" class="img-fluid" width="1920" height="600" decoding="async"></picture> <em>Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells. Image from <a href="https://r4ds.had.co.nz/index.html">R for Data Science</a> by Hadley Wickham &amp; Garrett Grolemund.</em></p>
 </section>
 <section id="catapult-data" class="level1">
 <h1>Catapult data</h1>
 <p>When you export 10Hz GPS data from Catapult’s Openfield software, the <code>.csv</code> file produced from each unit looks like this:</p>
-<p><img src="../img/untidy.png" class="img-fluid"></p>
-<p><img src="../img/batman_facepalm.gif" class="img-fluid"></p>
+<p><a href="../img/untidy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><picture><source type="image/webp" srcset="../img/untidy.webp"><img src="../img/untidy.png" class="img-fluid" width="982" height="672" loading="lazy" decoding="async"></picture></a></p>
+<p><a href="../img/batman_facepalm.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><picture><source media="(prefers-reduced-motion: reduce)" type="image/webp" srcset="../img/batman_facepalm.still.webp"><source type="image/webp" srcset="../img/batman_facepalm.webp"><img src="../img/batman_facepalm.gif" class="img-fluid" width="498" height="347" loading="lazy" decoding="async"></picture></a></p>
 <p>It isn’t great because:</p>
 <ol type="1">
 <li>Each unit has produced it’s own <code>.csv</code> file, meaning to do any analysis using all players’ data we need to find a way to combine the files.</li>
@@ -250,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="solution" class="level1">
 <h1>Solution</h1>
 <p>Thankfully for us, we don’t need to manually go through each file, deleting the top 8 rows, creating new columns for the metadata like player name and match, and then copy pasting them all into the one file. The <code>tidyverse</code> suite of R packages can help us to largely automate these manual tasks!</p>
-<p><img src="../img/batman_thinking.gif" class="img-fluid"></p>
+<p><a href="../img/batman_thinking.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><picture><source media="(prefers-reduced-motion: reduce)" type="image/webp" srcset="../img/batman_thinking.still.webp"><source type="image/webp" srcset="../img/batman_thinking.webp"><img src="../img/batman_thinking.gif" class="img-fluid" width="498" height="342" loading="lazy" decoding="async"></picture></a></p>
 <p>I’ll explain how to do it here (and provide you with the R code), and a working example is in <a href="https://www.youtube.com/watch?v=N0DCRqqSKPw&amp;t=11s">the YouTube video above</a>.</p>
 <p>This process will:</p>
 <ol type="1">
@@ -260,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Combine all files into one <em>dataframe</em>.</li>
 <li>Export this dataframe into a new <code>.csv</code> called “<code>folder_name</code>_tidy.csv” in your working directory. Where the <code>folder_name</code> part of the new file name is a folder in your working directory where your exports are stored (e.g., the name of my file below is “combine_tidy.csv” because I have my <code>.csv</code> files in a folder called “combine”). You will type in the name of this folder into the code.</li>
 </ol>
-<p><img src="../img/batcomputer.gif" class="img-fluid"></p>
+<p><a href="../img/batcomputer.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><picture><source media="(prefers-reduced-motion: reduce)" type="image/webp" srcset="../img/batcomputer.still.webp"><source type="image/webp" srcset="../img/batcomputer.webp"><img src="../img/batcomputer.gif" class="img-fluid" width="480" height="360" loading="lazy" decoding="async"></picture></a></p>
 <section id="step-1" class="level2">
 <h2 class="anchored" data-anchor-id="step-1">Step 1</h2>
 <p>Create a folder that will contain all your folders of Openfield 10Hz exports. Name this anything you like.</p>
@@ -325,8 +500,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Highlight the entire code and press Ctrl + Enter on PC or Cmd + Return on a Mac. This will run the code and produce the output <code>.csv</code> file in your working directory.</p>
 <p><strong>Done!</strong></p>
 <p>Now the data is in <em>tidy</em> format and is easy to manipulate and analyse!</p>
-<p><img src="../img/tidy_gps.png" class="img-fluid"></p>
-<p><img src="../img/batman_thumbsup.gif" class="img-fluid"></p>
+<p><a href="../img/tidy_gps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><picture><source type="image/webp" srcset="../img/tidy_gps.webp"><img src="../img/tidy_gps.png" class="img-fluid" width="1477" height="669" loading="lazy" decoding="async"></picture></a></p>
+<p><a href="../img/batman_thumbsup.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><picture><source media="(prefers-reduced-motion: reduce)" type="image/webp" srcset="../img/batman_thumbsup.still.webp"><source type="image/webp" srcset="../img/batman_thumbsup.webp"><img src="../img/batman_thumbsup.gif" class="img-fluid" width="640" height="538" loading="lazy" decoding="async"></picture></a></p>
 <p>Let me know if this post has helped you or if there’s anything else you’re interested in learning that I can help with. I’m keen to hear!</p>
 <p><strong>Keep up to date with anything new from me on <a href="https://twitter.com/mitchhendo_">my Twitter</a>.</strong></p>
 <p>Cheers,</p>
@@ -338,8 +513,137 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<script>
+// Quarto 1.9.x wraps folded code in an extra .code-copy-outer-scaffold div,
+// which breaks the built-in "Show All Code" / "Hide All Code" toggle (its
+// selector expects .sourceCode to be a direct child of <details>). This
+// re-implements the toggle against details.code-fold directly so it keeps
+// working regardless of the internal wrapper structure.
+document.addEventListener("DOMContentLoaded", function () {
+  function setAllCodeOpen(show) {
+    document.querySelectorAll(".cell > details.code-fold").forEach(function (details) {
+      if (show) {
+        details.setAttribute("open", "");
+      } else {
+        details.removeAttribute("open");
+      }
+    });
+  }
+
+  var hideAllCode = document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", function () {
+      setAllCodeOpen(false);
+    });
+  }
+
+  var showAllCode = document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", function () {
+      setAllCodeOpen(true);
+    });
+  }
+});
+</script>
+<script>
+// Behaviour for two controls that tools/post-render.mjs writes into each
+// post (they are in the page from the start, so nothing shifts on load):
+//   1. The R / Python switch under the title. Each code block keeps its own
+//      tabs; the switch sets them all at once and remembers the choice
+//      between visits.
+//   2. The collapsible "On this page" list shown on narrow screens.
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- Language switch ----------
+
+  var STORAGE_KEY = "site-code-language";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".language-switch button"));
+  var tabsets = Array.prototype.slice.call(
+    document.querySelectorAll('.panel-tabset[data-group="language"]')
+  );
+
+  function languageOf(tab) {
+    var image = tab.querySelector("img");
+    var label = image ? (image.getAttribute("alt") || image.getAttribute("src") || "") : tab.textContent;
+    return /python/i.test(label) ? "python" : "r";
+  }
+
+  function remember(language) {
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // Private browsing: the switch still works for this visit
+    }
+  }
+
+  function recall() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function showLanguage(language) {
+    tabsets.forEach(function (tabset) {
+      var tabs = tabset.querySelectorAll(":scope > .nav-tabs .nav-link");
+      Array.prototype.forEach.call(tabs, function (tab) {
+        if (languageOf(tab) === language && !tab.classList.contains("active")) {
+          bootstrap.Tab.getOrCreateInstance(tab).show();
+        }
+      });
+    });
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.dataset.language === language ? "true" : "false");
+    });
+  }
+
+  if (buttons.length > 0 && tabsets.length > 0) {
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showLanguage(button.dataset.language);
+        remember(button.dataset.language);
+      });
+    });
+
+    // Choosing a language on any one code block moves the whole page with it
+    document.addEventListener("shown.bs.tab", function (event) {
+      if (event.target.closest && event.target.closest('.panel-tabset[data-group="language"]')) {
+        var language = languageOf(event.target);
+        showLanguage(language);
+        remember(language);
+      }
+    });
+
+    if (recall() === "python") showLanguage("python");
+  }
+
+  // ---------- Contents on small screens ----------
+
+  var contents = document.querySelector(".toc-inline");
+  if (contents) {
+    Array.prototype.forEach.call(contents.querySelectorAll("a"), function (link) {
+      link.addEventListener("click", function () {
+        contents.removeAttribute("open");
+      });
+    });
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -738,14 +1042,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="light">
+<section class="more-work"><h2 class="section-title">More work</h2><div class="work-grid"><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/1rm_curve_thumbnail.webp"><img src="/img/1rm_curve_thumbnail.png" alt="" loading="lazy" width="2100" height="1500" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2026-01-04-e1rm-modelling/index.html">Making 1 rep max estimates more accurate and honest</a></h3>
+    <p class="listing-description">Use more of the information you have.
+</p>
+    <p class="work-meta listing-date">January 2026</p>
+  </div><div class="work-card">
+    
+    <p><picture><source type="image/webp" srcset="/img/nrl_wins_dot_plot.webp"><img src="/img/nrl_wins_dot_plot.png" alt="" loading="lazy" width="1344" height="921" decoding="async"></picture></p>
+    
+    <h3 class="listing-title"><a href="/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/index.html">How many wins do NRL teams need to make the finals?</a></h3>
+    <p class="listing-description">It depends, but Monte Carlo simulations give us a pretty good idea
+</p>
+    <p class="work-meta listing-date">January 2025</p>
+  </div></div></section><input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class
     const getTheme = () => {
       let baseTheme = document.getElementById('giscus-base-theme').value;
       let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
       return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
     };
     const script = document.createElement("script");
@@ -771,41 +1094,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Mitch Henderson · Sport, science, data</p>
+<p>Mitch Henderson · Data science in sport</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/mitchjameshenderson/">
+<p>LinkedIn</p>
+</a>
+  </li>  
+    <li class="nav-item">
     <a class="nav-link" href="https://github.com/mitchhenderson">
-      <i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
-    </a>
+<p>GitHub</p>
+</a>
   </li>  
-    <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/mitch-henderson-9761b8114/">
-      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
-</i> 
-    </a>
-  </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/mitchhenderson.bsky.social">
-      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
-</i> 
-    </a>
+<p>Bluesky</p>
+</a>
   </li>  
-    <li class="nav-item compact">
+    <li class="nav-item">
     <a class="nav-link" href="../posts.xml">
-      <i class="bi bi-rss" role="img" aria-label="RSS feed">
-</i> 
-    </a>
+<p>RSS</p>
+</a>
   </li>  
 </ul>
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

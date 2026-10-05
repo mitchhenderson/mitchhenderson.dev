@@ -1,0 +1,84 @@
+<script>
+// Behaviour for two controls that tools/post-render.mjs writes into each
+// post (they are in the page from the start, so nothing shifts on load):
+//   1. The R / Python switch under the title. Each code block keeps its own
+//      tabs; the switch sets them all at once and remembers the choice
+//      between visits.
+//   2. The collapsible "On this page" list shown on narrow screens.
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- Language switch ----------
+
+  var STORAGE_KEY = "site-code-language";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".language-switch button"));
+  var tabsets = Array.prototype.slice.call(
+    document.querySelectorAll('.panel-tabset[data-group="language"]')
+  );
+
+  function languageOf(tab) {
+    var image = tab.querySelector("img");
+    var label = image ? (image.getAttribute("alt") || image.getAttribute("src") || "") : tab.textContent;
+    return /python/i.test(label) ? "python" : "r";
+  }
+
+  function remember(language) {
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      // Private browsing: the switch still works for this visit
+    }
+  }
+
+  function recall() {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function showLanguage(language) {
+    tabsets.forEach(function (tabset) {
+      var tabs = tabset.querySelectorAll(":scope > .nav-tabs .nav-link");
+      Array.prototype.forEach.call(tabs, function (tab) {
+        if (languageOf(tab) === language && !tab.classList.contains("active")) {
+          bootstrap.Tab.getOrCreateInstance(tab).show();
+        }
+      });
+    });
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.dataset.language === language ? "true" : "false");
+    });
+  }
+
+  if (buttons.length > 0 && tabsets.length > 0) {
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        showLanguage(button.dataset.language);
+        remember(button.dataset.language);
+      });
+    });
+
+    // Choosing a language on any one code block moves the whole page with it
+    document.addEventListener("shown.bs.tab", function (event) {
+      if (event.target.closest && event.target.closest('.panel-tabset[data-group="language"]')) {
+        var language = languageOf(event.target);
+        showLanguage(language);
+        remember(language);
+      }
+    });
+
+    if (recall() === "python") showLanguage("python");
+  }
+
+  // ---------- Contents on small screens ----------
+
+  var contents = document.querySelector(".toc-inline");
+  if (contents) {
+    Array.prototype.forEach.call(contents.querySelectorAll("a"), function (link) {
+      link.addEventListener("click", function () {
+        contents.removeAttribute("open");
+      });
+    });
+  }
+});
+</script>

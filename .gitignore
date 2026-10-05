@@ -1,4 +1,5 @@
 .Rproj.user
+node_modules/
 
 /.quarto/
 /posts/_2025-04-30-nrl-crowd-predictions/data/
@@ -7,3 +8,12 @@
 /posts/_2025-06-29-ingame-win-probability-in-rugby-league/*.RData
 
 **/*.quarto_ipynb
+
+# Reference documents with personal details; never commit
+/*.pdf
+
+# Private product brief for design work; the repository is public
+/PRODUCT.md
+
+# Working notes for coding agents; kept local
+/AGENTS.md

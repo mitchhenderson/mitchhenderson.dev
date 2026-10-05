@@ -1,0 +1,19 @@
+---
+title: "Page not found"
+page-layout: full
+toc: false
+body-classes: own-title
+anchor-sections: false
+---
+
+:::: wrap
+::: page-head
+```{=html}
+<h1>Page not found</h1>
+```
+
+That page doesn't exist, or it has moved.
+:::
+
+[Go to the home page](index.qmd){.btn-solid} [Read the posts](posts.qmd){.btn-ghost}
+::::

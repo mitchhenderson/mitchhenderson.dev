@@ -1,0 +1,14 @@
+```{=html}
+<div class="work-grid list">
+<% for (const item of items) { %>
+  <div class="work-card" <%= metadataAttrs(item) %>>
+    <% if (item.image) { %>
+    <p><img src="<%- item.image %>" alt="" loading="lazy"></p>
+    <% } %>
+    <h3 class="listing-title"><a href="<%- item.path %>"><%= item.title %></a></h3>
+    <p class="listing-description"><%= item.description %></p>
+    <p class="work-meta listing-date"><%= item.date %></p>
+  </div>
+<% } %>
+</div>
+```

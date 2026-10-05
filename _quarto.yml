@@ -1,48 +1,70 @@
 project:
   type: website
+  # Only pages are rendered; notes and tooling at the root are not published
+  render:
+    - "*.qmd"
+    - "posts/"
+  resources:
+    - "fonts/*.woff2"
+    # Named only in a srcset, which Quarto does not scan for files to copy
+    - "img/headshot-*.jpg"
+  # Trims unused CSS, optimises images and adds the skip link in the built site
+  post-render: node tools/post-render.mjs
 
 website:
-  title: "mitchhenderson.dev"
+  title: "Mitch Henderson"
   site-url: https://www.mitchhenderson.dev
-  description: "Sports data science and statistical modelling, with worked examples in R and Python."
+  description: "Data science for better decisions in sport. Statistical modelling, simulation and decision support, explained in plain language with code in R and Python."
   favicon: favicon.svg
+  image: img/og-default.png
   open-graph: true
   twitter-card: true
+  # A handful of posts are quicker to scan than to search
+  search: false
   navbar:
     pinned: true
     right:
       - text: "Posts"
         file: posts.qmd
-      - icon: rss
-        href: posts.xml
-        aria-label: "RSS feed"
+      - text: "About"
+        file: about.qmd
   page-footer:
-    left: "Mitch Henderson · Sport, science, data"
+    left: "Mitch Henderson · Data science in sport"
     right:
-      - icon: github
+      - text: "LinkedIn"
+        href: https://www.linkedin.com/in/mitchjameshenderson/
+      - text: "GitHub"
         href: https://github.com/mitchhenderson
-        aria-label: GitHub
-      - icon: linkedin
-        href: https://www.linkedin.com/in/mitch-henderson-9761b8114/
-        aria-label: LinkedIn
-      - icon: bluesky
+      - text: "Bluesky"
         href: https://bsky.app/profile/mitchhenderson.bsky.social
-        aria-label: Bluesky
-      - icon: rss
+      - text: "RSS"
         href: posts.xml
-        aria-label: "RSS feed"
 format:
   html:
     theme:
-      light: [litera, theme.scss]
+      light: [default, theme.scss]
+      dark: [default, theme.scss, theme-dark.scss]
+    respect-user-color-scheme: true
     css: styles.css
     highlight-style: arrow
-    # iOS home-screen icon (it ignores SVG favicons)
+    grid:
+      body-width: 700px
+      margin-width: 240px
+      sidebar-width: 240px
+      gutter-width: 2rem
+    # Font preloads avoid a flash of fallback text; the touch icon is for
+    # iOS home screens (it ignores SVG favicons)
     include-in-header:
-      text: '<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">'
+      text: |
+        <link rel="preload" href="/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    canonical-url: true
     # Works around a Quarto 1.9.x bug where the built-in Show/Hide All Code
     # toggle can't find folded code because of an extra copy-button wrapper div
     include-after-body: code-tools-fix.html
 
-editor: visual
+# Structured data for search engines
+filters:
+  - tools/jsonld.lua
 
+editor: visual

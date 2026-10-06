@@ -2,23 +2,6 @@
 # requires-python = ">=3.11"
 # dependencies = ["numpy>=2.0", "polars>=1.0"]
 # ///
-"""The forecast fan behind the Home hero, in Python.
-
-The artwork on the site is made by tools/hero-fan.R. This is the same model
-and layout, step for step, for readers who would rather read Python. NumPy and
-R generate different random numbers, so the individual lines it draws differ
-from the ones on the site, while the shape of the fan is the same.
-
-It prints the SVG, so it never overwrites the site's artwork:
-
-    uv run tools/hero-fan.py > fan.svg
-
-A Gaussian process is conditioned on nine simulated observations on the left
-of the band. Its posterior is tight where there is data and widens where there
-is none, so draws from it run together along the history and fan out after the
-last observation ("now"). Coordinates are pixels in a 1440 x 870 band, with y
-measured downwards as in SVG.
-"""
 
 import sys
 
@@ -122,6 +105,49 @@ bands = (
     )
 )
 
+# ---- Layouts ----
+
+now_y = history["y"].last()
+
+# The wide layout is the drawing as computed above. The compact one, for
+# phones, is the same draws around a gentler trend, scaled down about "now",
+# so the whole fan fits in the strip beside the small portrait.
+COMPACT_SCALE = 0.36
+COMPACT_RISE = 200
+COMPACT_WIDTH = 520
+COMPACT_HEIGHT = 200
+COMPACT_NOW_X = 280
+COMPACT_NOW_Y = 150
+
+
+def place_compact_x(x: pl.Expr) -> pl.Expr:
+    return COMPACT_NOW_X + COMPACT_SCALE * (x - NOW_X)
+
+
+def place_compact_y(x: pl.Expr, y: pl.Expr) -> pl.Expr:
+    trend_removed = (TOTAL_RISE - COMPACT_RISE) * (
+        (x / VIEW_WIDTH) ** 4 - (NOW_X / VIEW_WIDTH) ** 4
+    )
+    return COMPACT_NOW_Y + COMPACT_SCALE * (y + trend_removed - now_y)
+
+
+LAYOUTS = {
+    "wide": {
+        "class": "hero-fan hero-fan-wide",
+        "width": VIEW_WIDTH,
+        "height": VIEW_HEIGHT,
+        "place_x": lambda x: x,
+        "place_y": lambda x, y: y,
+    },
+    "compact": {
+        "class": "hero-fan hero-fan-compact",
+        "width": COMPACT_WIDTH,
+        "height": COMPACT_HEIGHT,
+        "place_x": place_compact_x,
+        "place_y": place_compact_y,
+    },
+}
+
 # ---- SVG ----
 
 
@@ -134,9 +160,9 @@ def build_line_path(frame: pl.DataFrame, y: str) -> str:
     return "M" + frame.select(format_points("x", y)).item()
 
 
-def build_band_path(lower: str, upper: str) -> str:
-    there = bands.select(format_points("x", lower)).item()
-    back = bands.reverse().select(format_points("x", upper)).item()
+def build_band_path(frame: pl.DataFrame, lower: str, upper: str) -> str:
+    there = frame.select(format_points("x", lower)).item()
+    back = frame.reverse().select(format_points("x", upper)).item()
     return f"M{there}L{back}Z"
 
 
@@ -146,79 +172,107 @@ HISTORY_DELAY = 100
 HISTORY_DURATION = 650
 FUTURES_START = HISTORY_DELAY + HISTORY_DURATION - 50
 
-draw_elements = (
-    futures_shown.group_by("draw", maintain_order=True)
-    .agg(d=pl.lit("M") + format_points("x", "y"))
-    .with_columns(
-        delay=pl.Series(FUTURES_START + rng.uniform(0, 420, N_DRAWS_SHOWN)).round().cast(pl.Int32),
-        duration=pl.Series(rng.uniform(900, 1400, N_DRAWS_SHOWN)).round().cast(pl.Int32),
-    )
-    .select(
-        pl.format(
-            '<path class="hero-fan-stroke hero-fan-draw" pathLength="1" '
-            'style="--d:{}ms;--t:{}ms" d="{}"/>',
-            "delay",
-            "duration",
-            "d",
-        )
-    )
-    .to_series()
+draw_timings = pl.DataFrame(
+    {
+        "draw": np.arange(N_DRAWS_SHOWN),
+        "delay": (FUTURES_START + rng.uniform(0, 420, N_DRAWS_SHOWN)).round().astype(int),
+        "duration": rng.uniform(900, 1400, N_DRAWS_SHOWN).round().astype(int),
+    }
 )
 
 first_x = observations["x"].min()
 
-observation_elements = (
-    observations.filter(pl.col("x") < NOW_X)
-    .with_columns(
-        delay=(HISTORY_DELAY + HISTORY_DURATION * (pl.col("x") - first_x) / (NOW_X - first_x))
-        .round()
-        .cast(pl.Int32)
-    )
-    .select(
-        pl.format(
-            '<circle class="hero-fan-point" style="--d:{}ms" cx="{}" cy="{}" r="2.5"/>',
-            "delay",
-            pl.col("x").round(1),
-            pl.col("y").round(1),
-        )
-    )
-    .to_series()
+observation_timings = observations.filter(pl.col("x") < NOW_X).with_columns(
+    delay=(HISTORY_DELAY + HISTORY_DURATION * (pl.col("x") - first_x) / (NOW_X - first_x))
+    .round()
+    .cast(pl.Int32)
 )
 
-now_y = history["y"].last()
 
-svg = [
-    (
-        f'<svg class="hero-fan" viewBox="0 0 {VIEW_WIDTH} {VIEW_HEIGHT}" '
-        'preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">'
-    ),
-    f'<path class="hero-fan-band" d="{build_band_path("lower_90", "upper_90")}"/>',
-    f'<path class="hero-fan-band" d="{build_band_path("lower_50", "upper_50")}"/>',
-    *draw_elements,
-    (
-        '<path class="hero-fan-stroke hero-fan-median" pathLength="1" '
-        f'style="--d:{FUTURES_START}ms;--t:1100ms" d="{build_line_path(bands, "median")}"/>'
-    ),
-    (
-        '<path class="hero-fan-stroke hero-fan-history" pathLength="1" '
-        f'style="--d:{HISTORY_DELAY}ms;--t:{HISTORY_DURATION}ms" '
-        f'd="{build_line_path(history, "y")}"/>'
-    ),
-    *observation_elements,
-    (
-        f'<circle class="hero-fan-now" style="--d:{FUTURES_START}ms" '
-        f'cx="{NOW_X}" cy="{now_y:.1f}" r="4"/>'
-    ),
-    "</svg>",
-]
+def build_fan_svg(layout: dict) -> list[str]:
+    place_x, place_y = layout["place_x"], layout["place_y"]
+
+    def place(frame: pl.DataFrame, y_columns: list[str]) -> pl.DataFrame:
+        """Move a frame's x and each of its y columns into the layout."""
+        return frame.with_columns(
+            *[place_y(pl.col("x"), pl.col(y)).alias(y) for y in y_columns],
+            place_x(pl.col("x")).alias("x"),
+        )
+
+    draw_elements = (
+        place(futures_shown, ["y"])
+        .group_by("draw", maintain_order=True)
+        .agg(d=pl.lit("M") + format_points("x", "y"))
+        .join(draw_timings, on="draw", maintain_order="left")
+        .select(
+            pl.format(
+                '<path class="hero-fan-stroke hero-fan-draw" pathLength="1" '
+                'style="--d:{}ms;--t:{}ms" d="{}"/>',
+                "delay",
+                "duration",
+                "d",
+            )
+        )
+        .to_series()
+    )
+
+    observation_elements = (
+        place(observation_timings, ["y"])
+        .select(
+            pl.format(
+                '<circle class="hero-fan-point" style="--d:{}ms" cx="{}" cy="{}" r="2.5"/>',
+                "delay",
+                pl.col("x").round(1),
+                pl.col("y").round(1),
+            )
+        )
+        .to_series()
+    )
+
+    placed_bands = place(bands, ["lower_90", "lower_50", "median", "upper_50", "upper_90"])
+    placed_history = place(history, ["y"])
+    placed_now = place(pl.DataFrame({"x": [float(NOW_X)], "y": [now_y]}), ["y"]).row(0)
+
+    return [
+        (
+            f'<svg class="{layout["class"]}" viewBox="0 0 {layout["width"]} {layout["height"]}" '
+            'preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">'
+        ),
+        f'<path class="hero-fan-band" d="{build_band_path(placed_bands, "lower_90", "upper_90")}"/>',
+        f'<path class="hero-fan-band" d="{build_band_path(placed_bands, "lower_50", "upper_50")}"/>',
+        *draw_elements,
+        (
+            '<path class="hero-fan-stroke hero-fan-median" pathLength="1" '
+            f'style="--d:{FUTURES_START}ms;--t:1100ms" '
+            f'd="{build_line_path(placed_bands, "median")}"/>'
+        ),
+        (
+            '<path class="hero-fan-stroke hero-fan-history" pathLength="1" '
+            f'style="--d:{HISTORY_DELAY}ms;--t:{HISTORY_DURATION}ms" '
+            f'd="{build_line_path(placed_history, "y")}"/>'
+        ),
+        *observation_elements,
+        (
+            f'<circle class="hero-fan-now" style="--d:{FUTURES_START}ms" '
+            f'cx="{round(placed_now[0], 1):g}" cy="{placed_now[1]:.1f}" r="4"/>'
+        ),
+        "</svg>",
+    ]
+
+
+svg = [line for layout in LAYOUTS.values() for line in build_fan_svg(layout)]
 
 print("\n".join(svg))
 
 right_edge = bands.tail(1).row(0, named=True)
+compact_y = futures_shown.select(y=place_compact_y(pl.col("x"), pl.col("y")))["y"]
 
 print(
     "Fan at the right edge, 5% / 50% / 95%: "
     f"{right_edge['lower_90']:.0f} / {right_edge['median']:.0f} / {right_edge['upper_90']:.0f}\n"
-    f"Lowest point of any shown draw: {futures_shown['y'].max():.0f}",
+    f"Lowest point of any shown draw: {futures_shown['y'].max():.0f}\n"
+    "Compact fan, highest / lowest point of any shown draw: "
+    f"{compact_y.min():.0f} / {compact_y.max():.0f} "
+    f'("now" at {COMPACT_NOW_Y} of {COMPACT_HEIGHT})',
     file=sys.stderr,
 )

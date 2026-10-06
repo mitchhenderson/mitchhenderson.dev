@@ -43,6 +43,8 @@ library(tidybayes)
 library(ggdist)
 library(colorspace)
 
+# Downloads the font for this session if it is not installed
+systemfonts::require_font("Source Sans 3")
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
 units <- "kg"

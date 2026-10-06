@@ -101,23 +101,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <link rel="preload" href="../../fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@id":"https://www.mitchhenderson.dev/#person","@type":"Person","name":"Mitch Henderson","url":"https://www.mitchhenderson.dev"},"datePublished":"2026-01-04","description":"Use more of the information you have.","headline":"Making 1 rep max estimates more accurate and honest","image":"https://www.mitchhenderson.dev/img/1rm_curve_thumbnail.png","inLanguage":"en-AU","mainEntityOfPage":"https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/","url":"https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@id":"https://mitchhenderson.dev/#person","@type":"Person","name":"Mitch Henderson","url":"https://mitchhenderson.dev"},"datePublished":"2026-01-04","description":"Use more of the information you have.","headline":"Making 1 rep max estimates more accurate and honest","image":"https://mitchhenderson.dev/img/1rm_curve_thumbnail.png","inLanguage":"en-AU","mainEntityOfPage":"https://mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/","url":"https://mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/"}</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Making 1 rep max estimates more accurate and honest – Mitch Henderson">
 <meta property="og:description" content="Use more of the information you have.">
-<meta property="og:image" content="https://www.mitchhenderson.dev/img/1rm_curve_thumbnail.png">
+<meta property="og:image" content="https://mitchhenderson.dev/img/1rm_curve_thumbnail.png">
 <meta property="og:site_name" content="Mitch Henderson">
 <meta property="og:image:height" content="1500">
 <meta property="og:image:width" content="2100">
 <meta name="twitter:title" content="Making 1 rep max estimates more accurate and honest – Mitch Henderson">
 <meta name="twitter:description" content="Use more of the information you have.">
-<meta name="twitter:image" content="https://www.mitchhenderson.dev/img/1rm_curve_thumbnail.png">
+<meta name="twitter:image" content="https://mitchhenderson.dev/img/1rm_curve_thumbnail.png">
 <meta name="twitter:image-height" content="1500">
 <meta name="twitter:image-width" content="2100">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/">
+<link rel="canonical" href="https://mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/">
 </head>
 
 <body class="nav-fixed post-page quarto-light"><a class="skip-link" href="#quarto-document-content">Skip to content</a><script id="quarto-html-before-body" type="application/javascript">
@@ -890,7 +890,7 @@ Note
 <p>I’m going light on simulation details here to keep this accessible. Expand the section below to get more statistical details on the parameters of the simulated data.</p>
 </div>
 </div>
-<details aria-label="Simulation technical details (optional)" id="details-1">
+<details id="details-1" aria-label="Simulation technical details (optional)">
 <summary>Simulation technical details (optional)</summary>
 <p>I’ve defined the “squad” (30 athletes) to have a mean 1RM of 140kg
 and standard deviation of 15kg drawn from a random normal distribution.
@@ -2032,7 +2032,7 @@ Note
 <p>The standard Epley is <code>weight * (1 + reps / 30)</code>.</p>
 <p>The modification I’m using just changes the <code>30</code> (fixed constant representing how quickly strength drops off with more reps; same for everyone) to a parameter the model will optimise based on the data for each athlete. Each athlete gets their own value for this based on how they handle high intensity sets or high volume sets.</p>
 <p>I’ll fit the model on all the simulated data <em>except the most recent set for each athlete</em>. I’ll keep these sets as a small holdout or test data for comparing predictive performance between my model and the standard Epley formula.</p>
-<details aria-label="Stats details about the model (optional)" id="details-2">
+<details id="details-2" aria-label="Stats details about the model (optional)">
 <summary>Stats details about the model (optional)</summary>
 <p>The standard Epley formula estimates 1RM from a submaximal lift, but
 this treats 1RM as the outcome (which we don’t observe directly). What
@@ -4681,7 +4681,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/www\.mitchhenderson\.dev");
+        var filterRegex = new RegExp("https:\/\/mitchhenderson\.dev");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

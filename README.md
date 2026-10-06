@@ -42,7 +42,7 @@ Use `--depth 1`. The history has a large data file in it that has since been rem
 
 To re-run a post (`quarto render posts/<post>/index.qmd`) you also need R, the packages loaded at the top of that post, and:
 
-- my helper package, for the chart captions and font setup: `remotes::install_github("mitchhenderson/mitchhenderson-R-package")`
+- my helper package, for the chart captions: `remotes::install_github("mitchhenderson/mitchhenderson-R-package")`
 - CmdStan (through cmdstanr) for the 1RM post
 - Myriad Pro if you want the charts to match. Without it they still render, just in a fallback font.
 

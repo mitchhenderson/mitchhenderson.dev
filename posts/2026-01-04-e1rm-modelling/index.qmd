@@ -43,7 +43,15 @@ library(tidybayes)
 library(ggdist)
 library(colorspace)
 
-mitchhenderson::font_hoist("Myriad Pro")
+# Register the regular style of Myriad Pro as a family of its own. Without
+# the font installed the charts fall back to the default typeface.
+if ("Myriad Pro" %in% systemfonts::system_fonts()$family) {
+  systemfonts::register_variant(
+    name = "Myriad Pro Regular",
+    family = "Myriad Pro",
+    weight = "normal"
+  )
+}
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
 units <- "kg"
@@ -198,7 +206,7 @@ animated_plot <- e1rm_data_animated |>
   ) +
   theme(
     # gganimate measures the layout on the base png device, which can't see
-    # the hoisted "Myriad Pro Regular" family and would size all text as zero.
+    # the registered "Myriad Pro Regular" family and would size all text as zero.
     # The font's own name is understood by that device and by ragg.
     text = element_text(family = "MyriadPro-Regular"),
     plot.title = element_markdown(family = "MyriadPro-Regular", face = "plain"),

@@ -158,6 +158,8 @@ e1rm_data_animated <- e1rm_data |>
     line_size = if_else(is_highlighted, 2, 0.5)
   )
 
+# gganimate needs Source Sans 3 installed on your system to lay this chart out
+# properly. The copy that require_font() downloads is not enough here.
 animated_plot <- e1rm_data_animated |>
   ggplot(aes(x = reps, y = percent_1rm, group = formula)) +
   coord_cartesian(xlim = c(1, 20), clip = "off") +

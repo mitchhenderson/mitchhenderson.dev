@@ -1,7 +1,7 @@
 -- Adds schema.org structured data to each page's <head>: the person on the
 -- home and About pages, and an article record on posts. It reads metadata
 -- only, so frozen posts are not re-executed.
-local site_url = "https://www.mitchhenderson.dev"
+local site_url = "https://mitchhenderson.dev"
 
 local person = {
   ["@type"] = "Person",

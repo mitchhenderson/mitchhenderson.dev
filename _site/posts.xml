@@ -6,13 +6,13 @@
       version="2.0">
 <channel>
 <title>Mitch Henderson</title>
-<link>https://www.mitchhenderson.dev/posts.html</link>
-<atom:link href="https://www.mitchhenderson.dev/posts.xml" rel="self" type="application/rss+xml"/>
+<link>https://mitchhenderson.dev/posts.html</link>
+<atom:link href="https://mitchhenderson.dev/posts.xml" rel="self" type="application/rss+xml"/>
 <description>Worked analyses of practical questions in sport, with data and code in R and Python.</description>
 <image>
-<url>https://www.mitchhenderson.dev/img/og-default.png</url>
+<url>https://mitchhenderson.dev/img/og-default.png</url>
 <title>Mitch Henderson</title>
-<link>https://www.mitchhenderson.dev/posts.html</link>
+<link>https://mitchhenderson.dev/posts.html</link>
 <height>76</height>
 <width>144</width>
 </image>
@@ -21,56 +21,56 @@
 <item>
   <title>Making 1 rep max estimates more accurate and honest</title>
   <dc:creator>Mitch Henderson</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/</link>
+  <link>https://mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/</link>
   <description><![CDATA[ Use more of the information you have. ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/</guid>
+  <guid>https://mitchhenderson.dev/posts/2026-01-04-e1rm-modelling/</guid>
   <pubDate>Sat, 03 Jan 2026 13:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/1rm_curve_thumbnail.png" medium="image" type="image/png" height="103" width="144"/>
+  <media:content url="https://mitchhenderson.dev/img/1rm_curve_thumbnail.png" medium="image" type="image/png" height="103" width="144"/>
 </item>
 <item>
   <title>How many wins do NRL teams need to make the finals?</title>
   <dc:creator>Mitch Henderson</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/</link>
+  <link>https://mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/</link>
   <description><![CDATA[ It depends, but Monte Carlo simulations give us a pretty good idea ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/</guid>
+  <guid>https://mitchhenderson.dev/posts/2025-01-18-how-many-wins-do-nrl-teams-need-to-make-the-finals/</guid>
   <pubDate>Sun, 26 Jan 2025 13:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/nrl_wins_dot_plot.png" medium="image" type="image/png" height="99" width="144"/>
+  <media:content url="https://mitchhenderson.dev/img/nrl_wins_dot_plot.png" medium="image" type="image/png" height="99" width="144"/>
 </item>
 <item>
   <title>Exploring Catapult’s running imbalance data</title>
   <dc:creator>Mitch Henderson</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</link>
+  <link>https://mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</link>
   <description><![CDATA[ This post shows how running symmetry data can be exported from Catapult Openfield, then imported and visualised in R. ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</guid>
+  <guid>https://mitchhenderson.dev/posts/2021-02-04-exploring-catapults-running-symmetry-data.html</guid>
   <pubDate>Tue, 09 Feb 2021 13:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/OF.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://mitchhenderson.dev/img/OF.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Visualising Apple Health data |Guest post by Heidi Thornton</title>
   <dc:creator>Heidi Thornton</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</link>
+  <link>https://mitchhenderson.dev/posts/2020-05-19_heidi-post.html</link>
   <description><![CDATA[ Tracking data from your Apple watch doesn’t have to stay in an app. This post shows you how it can be exported, manipulated, and visualised using R. ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2020-05-19_heidi-post.html</guid>
+  <guid>https://mitchhenderson.dev/posts/2020-05-19_heidi-post.html</guid>
   <pubDate>Mon, 18 May 2020 14:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/Heart.png" medium="image" type="image/png" height="81" width="144"/>
+  <media:content url="https://mitchhenderson.dev/img/Heart.png" medium="image" type="image/png" height="81" width="144"/>
 </item>
 <item>
   <title>Making better visualisations using ggplot2 in R</title>
   <dc:creator>Mitch Henderson</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</link>
+  <link>https://mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</link>
   <description><![CDATA[ Great visualisations help communicate your message more clearly. This post shows you an example of my process. ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</guid>
+  <guid>https://mitchhenderson.dev/posts/2020-04-22-how-a-sports-scientist-can-use-ggplot2-to-make-a-stunning-dataviz.html</guid>
   <pubDate>Tue, 21 Apr 2020 14:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/ggplot2.png" medium="image" type="image/png" height="151" width="144"/>
+  <media:content url="https://mitchhenderson.dev/img/ggplot2.png" medium="image" type="image/png" height="151" width="144"/>
 </item>
 <item>
   <title>Tidying Catapult 10Hz export data</title>
   <dc:creator>Mitch Henderson</dc:creator>
-  <link>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</link>
+  <link>https://mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</link>
   <description><![CDATA[ The export format of Catapult’s 10Hz GPS data isn’t ideal for analysis. This post shows you how to tidy it using R. ]]></description>
-  <guid>https://www.mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</guid>
+  <guid>https://mitchhenderson.dev/posts/2020-04-05_Tidy-Catapult-10Hz.html</guid>
   <pubDate>Sat, 04 Apr 2020 13:00:00 GMT</pubDate>
-  <media:content url="https://www.mitchhenderson.dev/img/catapult_square.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://mitchhenderson.dev/img/catapult_square.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

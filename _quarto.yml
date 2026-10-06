@@ -13,7 +13,7 @@ project:
 
 website:
   title: "Mitch Henderson"
-  site-url: https://www.mitchhenderson.dev
+  site-url: https://mitchhenderson.dev
   description: "Data science for better decisions in sport. Statistical modelling, simulation and decision support, explained in plain language with code in R and Python."
   favicon: favicon.svg
   image: img/og-default.png

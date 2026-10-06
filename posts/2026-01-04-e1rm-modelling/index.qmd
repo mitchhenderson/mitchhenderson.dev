@@ -43,26 +43,17 @@ library(tidybayes)
 library(ggdist)
 library(colorspace)
 
-# Register the regular style of Myriad Pro as a family of its own. Without
-# the font installed the charts fall back to the default typeface.
-if ("Myriad Pro" %in% systemfonts::system_fonts()$family) {
-  systemfonts::register_variant(
-    name = "Myriad Pro Regular",
-    family = "Myriad Pro",
-    weight = "normal"
-  )
-}
 socials <- mitchhenderson::social_caption(icon_colour = "dodgerblue")
 
 units <- "kg"
 colours <- c("#E31937", "#134A8E", "#16A34A")
 
 theme_set(
-  theme_classic(base_size = 16, base_family = "Myriad Pro Regular") +
+  theme_classic(base_size = 16, base_family = "Source Sans 3") +
     theme(
-      plot.title = element_markdown(face = "bold"),
-      plot.subtitle = element_text(size = 14, color = "grey40", face = "bold"),
-      axis.title.x = element_text(size = 14, color = "grey40", face = "bold"),
+      plot.title = element_markdown(),
+      plot.subtitle = element_text(size = 14, color = "grey40"),
+      axis.title.x = element_text(size = 14, color = "grey40"),
       # Set the social caption apart from the axis title above it
       plot.caption = element_markdown(
         color = "grey50",
@@ -181,11 +172,10 @@ animated_plot <- e1rm_data_animated |>
   geom_text(
     aes(label = label),
     colour = "#E31937",
-    family = "Myriad Pro Regular",
+    family = "Source Sans 3",
     hjust = 0,
     nudge_x = 0.5,
     size = 6,
-    fontface = "bold",
     show.legend = FALSE
   ) +
   scale_linewidth_identity() +
@@ -205,11 +195,10 @@ animated_plot <- e1rm_data_animated |>
     caption = socials
   ) +
   theme(
-    # gganimate measures the layout on the base png device, which can't see
-    # the registered "Myriad Pro Regular" family and would size all text as zero.
-    # The font's own name is understood by that device and by ragg.
-    text = element_text(family = "MyriadPro-Regular"),
-    plot.title = element_markdown(family = "MyriadPro-Regular", face = "plain"),
+    # gganimate measures the layout on the base png device, so the font is
+    # given by its own name, which that device and ragg both understand.
+    text = element_text(family = "SourceSans3-Regular"),
+    plot.title = element_markdown(family = "SourceSans3-Regular", face = "plain"),
     plot.margin = margin(10, 100, 10, 10),
     legend.position = "none"
   ) +
@@ -838,7 +827,7 @@ example_dist <- example_predictions |>
     label = "1RM estimate\n(median)",
     hjust = 0.5,
     colour = "grey35",
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   annotate(
     "text",
@@ -847,7 +836,7 @@ example_dist <- example_predictions |>
     label = "Lower end of\nestimates",
     hjust = 0.5,
     colour = "grey35",
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   annotate(
     "text",
@@ -856,7 +845,7 @@ example_dist <- example_predictions |>
     label = "Upper end of\nestimates",
     hjust = 0.5,
     colour = "grey35",
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   labs(
     x = "Estimated 1RM",
@@ -1321,7 +1310,7 @@ predicted_curves_plot <- endurance_profiles |>
     aes(label = label),
     hjust = 0.8,
     size = 5,
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   scale_y_continuous(labels = label_percent(scale = 1)) +
   scale_x_continuous(limits = c(1, 15), breaks = seq(1, 15, 1)) +
@@ -1464,7 +1453,7 @@ historical_data_plot <- data_varying_obs |>
     hjust = 0.5,
     label.color = NA,
     size = 4,
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   scale_x_continuous(
     labels = label_number(suffix = units),
@@ -1482,7 +1471,7 @@ historical_data_plot <- data_varying_obs |>
     axis.title.y = element_blank(),
     axis.line = element_blank(),
     strip.background = element_blank(),
-    strip.text = element_markdown(family = "Myriad Pro Regular", hjust = 0)
+    strip.text = element_markdown(family = "Source Sans 3", hjust = 0)
   )
 
 historical_data_plot
@@ -1655,7 +1644,7 @@ rep_count_plot <- rep_count_plot_data |>
     colour = colours[1],
     label.color = NA,
     hjust = 1,
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   geom_richtext(
     data = rep_count_plot_annotations,
@@ -1664,7 +1653,7 @@ rep_count_plot <- rep_count_plot_data |>
     size = 4.5,
     colour = "grey35",
     label.color = NA,
-    family = "Myriad Pro Regular"
+    family = "Source Sans 3"
   ) +
   labs(
     x = "Estimated 1RM (kg)",
@@ -1686,7 +1675,7 @@ rep_count_plot <- rep_count_plot_data |>
     axis.title.y = element_blank(),
     axis.line = element_blank(),
     strip.background = element_blank(),
-    strip.text = element_markdown(family = "Myriad Pro Regular", hjust = 0)
+    strip.text = element_markdown(family = "Source Sans 3", hjust = 0)
   )
 
 rep_count_plot

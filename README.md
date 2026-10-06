@@ -44,7 +44,7 @@ To re-run a post (`quarto render posts/<post>/index.qmd`) you also need R, the p
 
 - my helper package, for the chart captions: `remotes::install_github("mitchhenderson/mitchhenderson-R-package")`
 - CmdStan (through cmdstanr) for the 1RM post
-- Myriad Pro if you want the charts to match. Without it they still render, just in a fallback font.
+- Source Sans 3 for the 1RM post's charts and Myriad Pro for the NRL post's. Without them the charts still render, just in a fallback font.
 
 Only the R code runs when a post is rendered. The Python is there to read and copy. The 2020 Apple Health post can't be re-run because its data export is no longer in the repo.
 

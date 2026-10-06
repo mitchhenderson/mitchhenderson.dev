@@ -1,16 +1,3 @@
-# Generate the forecast fan behind the Home hero.
-#
-# Run from the project root after changing anything here, then render the site:
-#   Rscript tools/hero-fan.R
-# It writes _includes/hero-fan.svg, which index.qmd includes.
-# tools/hero-fan.py is the same model in Python, for readers who prefer it.
-
-# A Gaussian process is conditioned on nine simulated observations on the left
-# of the band. Its posterior is tight where there is data and widens where there
-# is none, so draws from it run together along the history and fan out after the
-# last observation ("now"). Coordinates are pixels in a 1440 x 870 band, with y
-# measured downwards as in SVG.
-
 library(tidyverse)
 
 set.seed(2534)
@@ -109,6 +96,41 @@ bands <- sample_futures(n_draws_bands) |>
     .by = x
   )
 
+# ---- Layouts ----
+
+now_y <- last(history$y)
+
+# The wide layout is the drawing as computed above. The compact one, for
+# phones, is the same draws around a gentler trend, scaled down about "now",
+# so the whole fan fits in the strip beside the small portrait.
+compact_scale <- 0.36
+compact_rise <- 200
+compact_width <- 520
+compact_height <- 200
+compact_now_x <- 280
+compact_now_y <- 150
+
+layouts <- list(
+  wide = list(
+    class = "hero-fan hero-fan-wide",
+    width = view_width,
+    height = view_height,
+    place_x = \(x) x,
+    place_y = \(x, y) y
+  ),
+  compact = list(
+    class = "hero-fan hero-fan-compact",
+    width = compact_width,
+    height = compact_height,
+    place_x = \(x) compact_now_x + compact_scale * (x - now_x),
+    place_y = \(x, y) {
+      trend_removed <- (total_rise - compact_rise) *
+        ((x / view_width)^4 - (now_x / view_width)^4)
+      compact_now_y + compact_scale * (y + trend_removed - now_y)
+    }
+  )
+)
+
 # ---- SVG ----
 
 format_points <- function(x, y) {
@@ -135,68 +157,106 @@ history_delay <- 100
 history_duration <- 650
 futures_start <- history_delay + history_duration - 50
 
-draw_elements <- futures_shown |>
-  summarise(d = build_line_path(x, y), .by = draw) |>
+draw_timings <- futures_shown |>
+  distinct(draw) |>
   mutate(
     delay = round(futures_start + runif(n(), 0, 420)),
-    duration = round(runif(n(), 900, 1400)),
-    element = str_glue(
-      '<path class="hero-fan-stroke hero-fan-draw" pathLength="1" ',
-      'style="--d:{delay}ms;--t:{duration}ms" d="{d}"/>'
-    )
+    duration = round(runif(n(), 900, 1400))
   )
 
-observation_elements <- observations |>
+observation_timings <- observations |>
   filter(x < now_x) |>
   mutate(
     delay = round(
       history_delay + history_duration * (x - min(x)) / (now_x - min(x))
-    ),
-    element = str_glue(
-      '<circle class="hero-fan-point" style="--d:{delay}ms" ',
-      'cx="{round(x, 1)}" cy="{round(y, 1)}" r="2.5"/>'
     )
   )
 
-band_90_d <- build_band_path(bands$x, bands$lower_90, bands$upper_90)
-band_50_d <- build_band_path(bands$x, bands$lower_50, bands$upper_50)
-median_d <- build_line_path(bands$x, bands$median)
-history_d <- build_line_path(history$x, history$y)
-now_y <- last(history$y)
+build_fan_svg <- function(layout) {
+  place_x <- layout$place_x
+  place_y <- layout$place_y
 
-svg <- c(
-  str_glue(
-    '<svg class="hero-fan" viewBox="0 0 {view_width} {view_height}" ',
-    'preserveAspectRatio="xMidYMax slice" aria-hidden="true" ',
-    'focusable="false">'
-  ),
-  str_glue('<path class="hero-fan-band" d="{band_90_d}"/>'),
-  str_glue('<path class="hero-fan-band" d="{band_50_d}"/>'),
-  draw_elements$element,
-  str_glue(
-    '<path class="hero-fan-stroke hero-fan-median" pathLength="1" ',
-    'style="--d:{futures_start}ms;--t:1100ms" d="{median_d}"/>'
-  ),
-  str_glue(
-    '<path class="hero-fan-stroke hero-fan-history" pathLength="1" ',
-    'style="--d:{history_delay}ms;--t:{history_duration}ms" d="{history_d}"/>'
-  ),
-  observation_elements$element,
-  str_glue(
-    '<circle class="hero-fan-now" style="--d:{futures_start}ms" ',
-    'cx="{now_x}" cy="{round(now_y, 1)}" r="4"/>'
-  ),
-  "</svg>"
-)
+  draw_elements <- futures_shown |>
+    summarise(d = build_line_path(place_x(x), place_y(x, y)), .by = draw) |>
+    left_join(draw_timings, by = join_by(draw)) |>
+    mutate(
+      element = str_glue(
+        '<path class="hero-fan-stroke hero-fan-draw" pathLength="1" ',
+        'style="--d:{delay}ms;--t:{duration}ms" d="{d}"/>'
+      )
+    )
+
+  observation_elements <- observation_timings |>
+    mutate(
+      element = str_glue(
+        '<circle class="hero-fan-point" style="--d:{delay}ms" ',
+        'cx="{round(place_x(x), 1)}" cy="{round(place_y(x, y), 1)}" r="2.5"/>'
+      )
+    )
+
+  placed_bands <- bands |>
+    mutate(across(-x, \(y) place_y(x, y)), x = place_x(x))
+
+  band_90_d <- build_band_path(
+    placed_bands$x,
+    placed_bands$lower_90,
+    placed_bands$upper_90
+  )
+  band_50_d <- build_band_path(
+    placed_bands$x,
+    placed_bands$lower_50,
+    placed_bands$upper_50
+  )
+  median_d <- build_line_path(placed_bands$x, placed_bands$median)
+  history_d <- build_line_path(
+    place_x(history$x),
+    place_y(history$x, history$y)
+  )
+
+  c(
+    str_glue(
+      '<svg class="{layout$class}" viewBox="0 0 {layout$width} ',
+      '{layout$height}" preserveAspectRatio="xMidYMax slice" ',
+      'aria-hidden="true" focusable="false">'
+    ),
+    str_glue('<path class="hero-fan-band" d="{band_90_d}"/>'),
+    str_glue('<path class="hero-fan-band" d="{band_50_d}"/>'),
+    draw_elements$element,
+    str_glue(
+      '<path class="hero-fan-stroke hero-fan-median" pathLength="1" ',
+      'style="--d:{futures_start}ms;--t:1100ms" d="{median_d}"/>'
+    ),
+    str_glue(
+      '<path class="hero-fan-stroke hero-fan-history" pathLength="1" ',
+      'style="--d:{history_delay}ms;--t:{history_duration}ms" ',
+      'd="{history_d}"/>'
+    ),
+    observation_elements$element,
+    str_glue(
+      '<circle class="hero-fan-now" style="--d:{futures_start}ms" ',
+      'cx="{round(place_x(now_x), 1)}" ',
+      'cy="{round(place_y(now_x, now_y), 1)}" r="4"/>'
+    ),
+    "</svg>"
+  )
+}
+
+svg <- layouts |>
+  map(build_fan_svg) |>
+  list_c()
 
 write_lines(svg, out_path)
 
 right_edge <- slice_tail(bands, n = 1)
+compact_y <- layouts$compact$place_y(futures_shown$x, futures_shown$y)
 
 message(str_glue(
   "Fan at the right edge, 5% / 50% / 95%: ",
   "{round(right_edge$lower_90)} / {round(right_edge$median)} / ",
   "{round(right_edge$upper_90)}\n",
   "Lowest point of any shown draw: {round(max(futures_shown$y))}\n",
+  "Compact fan, highest / lowest point of any shown draw: ",
+  "{round(min(compact_y))} / {round(max(compact_y))} ",
+  "(\"now\" at {compact_now_y} of {compact_height})\n",
   "Wrote {out_path} ({file.size(out_path)} bytes)"
 ))

@@ -602,19 +602,21 @@ h1.hero-title {
   overflow: hidden;
   pointer-events: none;
 
-  // On a phone the fan moves to the strip beside the small portrait. It fades
-  // out before the headline, and the stub of history that would show in the
-  // gutter to the left of the portrait is hidden.
+  // On a phone the fan moves to the strip above the headline, beside the
+  // small portrait. The observed line comes out from behind the portrait, so
+  // everything to the left of the portrait's right edge is hidden (the
+  // portrait fades in, and the line would show through it).
   @include media-breakpoint-down(md) {
     bottom: auto;
-    height: 11.5rem;
-    mask-image: linear-gradient(180deg, #000 55%, transparent 96%), linear-gradient(90deg, transparent 8.25rem, #000 8.5rem);
+    height: 10.5rem;
+    mask-image: linear-gradient(180deg, #000 86%, transparent), linear-gradient(90deg, transparent 7.75rem, #000 7.75rem);
     mask-composite: intersect;
   }
 }
 
-// Drawn for a 1440 x 870 band. It scales uniformly, anchored to the foot of
-// the band, so nothing is distorted.
+// Two drawings of the same draws, both from tools/hero-fan.R. The wide one
+// is drawn for a 1440 x 870 band. It scales uniformly, anchored to the foot
+// of the band, so nothing is distorted.
 .hero-fan {
   display: block;
   width: 100%;
@@ -624,17 +626,31 @@ h1.hero-title {
     fill: none;
     stroke-width: 1;
   }
+}
 
-  // "Now" sits just right of the portrait, so the futures leave from it
-  @include media-breakpoint-down(md) {
-    --fan-width: min(calc(225vw - 337px), 760px);
+.hero-fan-compact {
+  display: none;
+}
+
+// The compact one is drawn in a 520 x 200 box at about the size it is shown,
+// so its lines keep their weight on a phone. "Now" is at 280, 150 in the box
+// and the fan runs 225 units from there to the edge of the screen.
+@include media-breakpoint-down(md) {
+  .hero-fan-wide {
+    display: none;
+  }
+
+  .hero-fan-compact {
+    // "Now" sits just right of the portrait. On a wider screen it moves
+    // right instead of the fan growing, which shows more of the history.
+    --now-x: max(11rem, calc(100vw - 15.25rem));
+    --fan-width: clamp(23rem, calc((100vw - 11rem) * 520 / 225), 35.25rem);
+    display: block;
     position: absolute;
-    // "Now" is at 55.56% across and 57.1% down the drawing
-    left: calc(150px - var(--fan-width) * 0.5556);
-    top: calc(120px - var(--fan-width) * 0.571);
+    left: calc(var(--now-x) - var(--fan-width) * 280 / 520);
+    top: calc(8.1rem - var(--fan-width) * 150 / 520);
     width: var(--fan-width);
-    height: calc(var(--fan-width) * 870 / 1440);
-    mask-image: linear-gradient(90deg, #000 78%, transparent 99%);
+    height: calc(var(--fan-width) * 200 / 520);
   }
 }
 

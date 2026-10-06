@@ -804,6 +804,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (recall() === "python") showLanguage("python");
+
+    // Quarto remembers a clicked tab by its HTML and, on pageshow, switches
+    // off every tab that doesn't match. A value stored before the tab markup
+    // last changed matches nothing, which leaves every code block empty.
+    // This listener is added after Quarto's, so it runs second: it puts a
+    // language back and replaces the stale value.
+    window.addEventListener("pageshow", function () {
+      var empty = tabsets.some(function (tabset) {
+        return !tabset.querySelector(":scope > .nav-tabs .nav-link.active");
+      });
+      if (!empty) return;
+
+      var language = recall() === "python" ? "python" : "r";
+      showLanguage(language);
+      try {
+        var tabs = tabsets[0].querySelectorAll(":scope > .nav-tabs .nav-link");
+        var chosen = Array.prototype.filter.call(tabs, function (tab) {
+          return languageOf(tab) === language;
+        })[0];
+        var stored = JSON.parse(localStorage.getItem("quarto-persistent-tabsets-data") || "{}");
+        stored.language = chosen.innerHTML;
+        localStorage.setItem("quarto-persistent-tabsets-data", JSON.stringify(stored));
+      } catch (error) {
+        // Storage unavailable: the tabs are still shown for this visit
+      }
+    });
   }
 
   // ---------- Contents on small screens ----------

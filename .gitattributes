@@ -1,0 +1,7 @@
+# Built and frozen output is committed for deployment; keep it out of the
+# language statistics and collapse it in diffs
+_site/** linguist-generated
+_freeze/** linguist-generated
+
+# Third-party Quarto extensions
+_extensions/** linguist-vendored

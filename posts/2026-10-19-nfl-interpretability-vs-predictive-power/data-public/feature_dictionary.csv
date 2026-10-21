@@ -1,0 +1,10 @@
+feature,group,label,unit,description
+yards_needed,What the play needs,Yards needed,yards,"The yardage the play has to gain to count as a success: 40% of the distance to the sticks on 1st down, 60% on 2nd, all of it on 3rd and 4th."
+receiver_depth,How deep the receiver is,Receiver depth,yards,"Where the receiver is relative to the line of scrimmage, in yards. Negative values mean the receiver is still behind it."
+room_beyond_nearest,Space around the receiver,Extra room ahead,yards,"How much further away the nearest defender in front of the receiver is than the receiver's closest defender. Zero when the closest defender is the one in front."
+min_def_y_distance_to_rec,Space around the receiver,Closest defender across the field,yards,Smallest sideline-to-sideline gap between the receiver and any defender.
+nearest_def_cushion,Space around the receiver,Nearest defender's cushion,yards,How far downfield of the receiver the nearest defender is. Negative values mean the defender is trailing the receiver.
+def_y_spread,Shape of the defence,Defensive width,yards,How spread out the defenders are across the field (standard deviation).
+mean_top3_closing_speed,Who is arriving,Closing speed of the nearest three,yards per second,Average closing speed of the three defenders closest to the receiver.
+nearest_blocker_advantage,Help from blockers,Nearest defender's distance from a blocker,yards,Distance from the closest defender to the nearest offensive player (which may be the quarterback). Larger values mean nobody is near enough to block that defender.
+nearest_blocker_relative_speed,Help from blockers,Nearest defender getting free of a blocker,yards per second,How fast that offensive player and the closest defender are moving relative to each other. Low values mean they are locked together; high values mean the defender is getting free.

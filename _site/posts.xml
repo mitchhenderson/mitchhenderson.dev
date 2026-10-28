@@ -17,7 +17,16 @@
 <width>144</width>
 </image>
 <generator>quarto-1.9.36</generator>
-<lastBuildDate>Sat, 03 Jan 2026 13:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 27 Oct 2026 13:00:00 GMT</lastBuildDate>
+<item>
+  <title>Sometimes interpretability doesn’t cost predictive power</title>
+  <dc:creator>Mitch Henderson</dc:creator>
+  <link>https://mitchhenderson.dev/posts/2026-10-19-nfl-interpretability-vs-predictive-power/</link>
+  <description><![CDATA[ This was one of those times ]]></description>
+  <guid>https://mitchhenderson.dev/posts/2026-10-19-nfl-interpretability-vs-predictive-power/</guid>
+  <pubDate>Tue, 27 Oct 2026 13:00:00 GMT</pubDate>
+  <media:content url="https://mitchhenderson.dev/img/nfl_short_pass_thumbnail.png" medium="image" type="image/png" height="90" width="144"/>
+</item>
 <item>
   <title>Making 1 rep max estimates more accurate and honest</title>
   <dc:creator>Mitch Henderson</dc:creator>

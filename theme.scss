@@ -1749,6 +1749,61 @@ nav[role="doc-toc"] {
   }
 }
 
+// Optional detail: a collapsible callout. Closed, it is one quiet outlined
+// line, a step above the code folds and below the prose, so a reader can pass
+// it by. Open, the outline holds the content as a panel, so it is clear where
+// the detour ends.
+.callout.callout-style-default:has(> .callout-collapse) {
+  background: transparent;
+  margin-block: var(--s-4);
+
+  > .callout-header {
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-4);
+    font-size: var(--t-ui);
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--c-muted);
+    cursor: pointer;
+    transition: color var(--ease);
+
+    &:hover {
+      color: var(--c-primary);
+    }
+
+    &:not(.collapsed) {
+      color: var(--c-ink);
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    // The code folds' triangle, on the left and in the text colour
+    .callout-btn-toggle {
+      order: -1;
+      padding: 0 !important;
+    }
+
+    .callout-toggle::before {
+      width: 0;
+      height: 0;
+      margin: 0;
+      background: none;
+      border-block: 0.3em solid transparent;
+      border-left: 0.45em solid currentColor;
+      transform: rotate(90deg);
+    }
+
+    &.collapsed .callout-toggle::before {
+      transform: none;
+    }
+  }
+
+  > .callout-collapse > .callout-body {
+    padding: var(--s-2) var(--s-4) var(--s-4);
+  }
+}
+
 #title-block-header + .callout.callout-style-default {
   padding: var(--s-2) var(--s-2);
   margin-bottom: var(--s-8);
@@ -1829,6 +1884,13 @@ td code:not(.sourceCode) {
   background: var(--c-surface-strong);
   padding: 0.1em 0.35em;
   border-radius: 4px;
+  // Quarto stops inline code wrapping. A long call or path then runs past a
+  // phone's screen, widens the whole page and pushes the navbar's edge (and
+  // the colour switch) out of view. Let it break, keeping its box on each line.
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 div.sourceCode,
@@ -1945,6 +2007,14 @@ details.code-fold > summary {
   margin-block: var(--s-4) var(--s-6);
 }
 
+// Quarto zeroes the margin under the last child of any div in a callout,
+// which catches every chart (the last child of its cell). Give it back when
+// more follows the chart in the callout.
+.callout .callout-body > .cell:not(:last-child) > .cell-output-display:last-child {
+  margin-bottom: var(--s-6);
+  padding-bottom: 0;
+}
+
 // The box owns the space around a chart. Quarto and Bootstrap each add a
 // margin under the image, and an inline image leaves a gap for descenders;
 // together they left a deep empty strip below every chart.
@@ -1981,6 +2051,58 @@ details.code-fold > summary {
   margin-inline: auto;
 }
 
+// On a phone the text column leaves little room for a table, so tables run
+// to the screen edges, keeping a small gutter. A table in a callout stays
+// inside the callout's box.
+@include media-breakpoint-down(sm) {
+  .cell-output-display:has(.gt_table):not(.callout *) {
+    width: auto;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
+    padding-inline: var(--s-2);
+  }
+
+  // gt fixes column widths when a post sets them with cols_width(). At this
+  // width that clips long words and the scale above a dot strip. Letting
+  // columns grow to their longest word keeps everything readable; a table
+  // that still does not fit scrolls.
+  .gt_table {
+    table-layout: auto !important;
+  }
+
+  // gt's cell padding is set per table with an id, hence !important.
+  // Tighter sides let a five-column table fit a 390px phone.
+  .gt_table :is(.gt_row, .gt_col_heading, .gt_column_spanner_outer, .gt_stub_row_group, .gt_group_heading, .gt_sourcenote) {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+
+  // A scale written as a flex row under a heading (lowest, middle, highest)
+  // runs together once its column shrinks to fit the words
+  .gt_col_heading div[style*="space-between"] {
+    gap: 0.25em;
+  }
+}
+
+// Embeds (YouTube, Giphy, slides) are written with a fixed width, which would
+// widen the page on a phone and push the navbar's colour switch out of view.
+// Cap them at the text column; on a phone, videos and GIFs keep their shape.
+main.content iframe {
+  max-width: 100%;
+}
+
+@include media-breakpoint-down(sm) {
+  main.content iframe[src*="youtube.com/embed"] {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .giphy-embed {
+    height: auto;
+    aspect-ratio: 480 / 192;
+  }
+}
+
 // Charts and tables in posts (marked by posts/reading-layout.lua) run wider
 // than the text where the screen has room. The contents list moves out by the
 // same amount, so a figure never slides underneath it.
@@ -2006,6 +2128,12 @@ details.code-fold > summary {
         left: calc(50% + var(--figure-outset));
         translate: -50% 0;
       }
+    }
+
+    // A callout's box is only as wide as the text, so a figure inside it
+    // stays within the box. 0px, not 0: a bare 0 is not a length in calc().
+    .callout {
+      --figure-outset: 0px;
     }
 
     #quarto-margin-sidebar {
@@ -2041,8 +2169,11 @@ a.lightbox {
   initial-value: 0px;
 }
 
+// gt tables scroll inside gt's own wrapper rather than the output box, so the
+// wrapper gets the fade too.
 @supports (animation-timeline: scroll()) {
-  .cell-output-display {
+  .cell-output-display,
+  .cell-output-display div:has(> .gt_table) {
     mask-image: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent);
     animation: scroll-edge-fade linear both;
     animation-timeline: scroll(self inline);

@@ -15,3 +15,9 @@ node_modules/
 
 # Working notes for coding agents; kept local
 /AGENTS.md
+
+notes.md
+
+# Local knitr caches and duplicate figures; publish from _freeze/ and _site/
+/posts/**/*_cache/
+/posts/**/*_files/

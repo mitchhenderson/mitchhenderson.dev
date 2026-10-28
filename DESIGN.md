@@ -238,6 +238,10 @@ A small segmented control under the post title: "Code in R / Python". The chosen
 
 Folded by default behind a one-line summary that names the language and length ("R code · 24 lines"). When a tabset shows nothing but a closed fold, the whole tabset collapses to that single muted line.
 
+### Optional detail (posts)
+
+A collapsible callout holds detail that only some readers want, such as model checks. Closed, it is one muted line in a 1px outline with the code folds' triangle, quieter than the prose and a step above the code. Open, the outline becomes a panel around the content, so the reader can see where the detour ends. Callouts that are not collapsible keep their tinted surface.
+
 ### Navigation
 
 A white bar with the name at the left and two links at the right. The current page is filled with Strong Surface. On small screens the links collapse behind a menu button.
